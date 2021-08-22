@@ -618,8 +618,9 @@ CSharp-02 , start  06/03/21
     - - Right join
     - - Full join
 ### Resources
-- [.sql file ]()
+- [.sql file ](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/SQL/week12/week12.sql)
 
 ### Tasks
    - https://www.w3schools.com/sql/default.asp
+   - [week 12 task](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/SQL/week12/week12Task.txt)
 

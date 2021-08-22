@@ -179,7 +179,7 @@ CSharp-02 , start  06/03/21
 
     
 ### Tasks
-   - [Week3.Tasks](https://github.com/PragmatechEducation/CSharp_02/blob/main/Week3.Tasks/Program.cs)
+   - [Week3.Tasks](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/ConsoleApps/Week3/Week3.Tasks/Program.cs)
 
 
 
@@ -222,7 +222,7 @@ CSharp-02 , start  06/03/21
     - C# Jagged Arrays: An Array of Array
 
 ### Tasks
-   - [Week4.Tasks](https://github.com/PragmatechEducation/CSharp_02/blob/main/Week4.Tasks/Program.cs)
+   - [Week4.Tasks](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/ConsoleApps/Week4/Week4.Tasks/Program.cs)
 
 
 # Week05-Day01 10/04/21
@@ -273,7 +273,7 @@ CSharp-02 , start  06/03/21
 
 
 ### Tasks
-   - [Week5.Tasks](https://github.com/PragmatechEducation/CSharp_02/blob/main/Week5.Tasks/Program.cs)
+   - [Week5.Tasks](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/ConsoleApps/Week5/Week5.Tasks/Program.cs)
    - String haqqinda arasdirma edin.
    - Method haqqinda arasdirma edin.
    - Kecen hefte verilen tasklari yeniden analiz edin method-lari tetbiq etmeye calisin
@@ -342,7 +342,7 @@ CSharp-02 , start  06/03/21
     - - with methods
 
 ### Tasks
-   - [Week6 Tasks](https://github.com/PragmatechEducation/CSharp_02/blob/main/Week6.Tasks/Program.cs)
+   - [Week6 Tasks](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/ConsoleApps/Week6/Week6.Tasks/Program.cs)
    - Kecilen movzulari ciddi sekilde tekrar edin.
 
 
@@ -393,7 +393,7 @@ CSharp-02 , start  06/03/21
     - - C# 8.0 Default Implementations
 
    ### Tasks
-   - [Week7 Tasks](https://github.com/PragmatechEducation/CSharp_02/blob/main/Week7.Tasks/Program.cs)
+   - [Week7 Tasks](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/ConsoleApps/Week7/Week7.Tasks/Program.cs)
 
 # Week08-Day01 08/05/21
 
@@ -467,7 +467,7 @@ CSharp-02 , start  06/03/21
     - - - TextBox,Label,RichTextBox,Button,MessageBox() and other
 ### Tasks
    - 8 heftenin yekunu olaraq ilk taskiniz butun kecilenleri tekrarlamaq olacaq , novbeti gorusde etafli sual cavab olacaq hami hazir gelsin.
-   -[week 8 tasks](https://github.com/PragmatechEducation/CSharp_02/blob/main/WindowsFormsApps/Tasks/week8Tasks.txt.txt)
+   -[week 8 tasks](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/WindowsFormsApps/Tasks/week8Tasks.txt.txt)
 
 
 # Week09-Day01 29/05/21
@@ -554,7 +554,7 @@ CSharp-02 , start  06/03/21
 ### Tasks
    - SystemIO namespace, FileStream, StreamWriter, StreamReader arashdirilmasi.
    - Exception Handling haqqinda arashdirma
-   - [week 10 tasks](https://github.com/PragmatechEducation/CSharp_02/blob/main/WindowsFormsApps/Tasks/week10.text)
+   - [week 10 tasks](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/WindowsFormsApps/Tasks/week10.text)
 
 
 # Week11-Day01 03/07/21

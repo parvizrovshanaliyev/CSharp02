@@ -1,7 +1,7 @@
 # CSharp_02
 CSharp-02 , start  06/03/21
 
-### Pragmatech Həftəsonu Proqramı
+###
 
 |week1 - week10|
 | Gün  | Saat |

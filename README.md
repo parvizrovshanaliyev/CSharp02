@@ -16,10 +16,14 @@ CSharp-02 , start  06/03/21
 | Şənbə  | 18:00-22:00  | 
 | Bazar  |  18:00-22:00  |
 
+|week12 - todo|
+| Gün  | Saat |
+| ------------- | ------------- |
+| Şənbə  | 18:00-22:00  |
+
 ### Student list
-- [Fərid Məmmədli](https://github.com/Ferid-Memmedli/PragmatechCsharpProject)
+- [Fidan Xanlarova](https://github.com/fidan-xanlarovaa/PragmatechCsharpProject)
 - [Elcan Seyidov](https://github.com/Elcan-code/PragmatechCsharpProject.git)
-- [Kamran Hacılı](https://github.com/KHajili98/PragmatechCsharpProject)
 - [Rəşad Məmmədov](https://github.com/rashadmemmedov/PragmatechCsharpProject.git)
 
 
@@ -592,3 +596,8 @@ CSharp-02 , start  06/03/21
    - What is LINQ?.
    - Why LINQ?
    - [week 11 tasks](https://github.com/PragmatechEducation/CSharp_02/blob/main/WindowsFormsApps/Tasks/week10.text)
+
+# Week12  21/08/21
+### Topics
+
+### Tasks

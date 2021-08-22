@@ -1,0 +1,37 @@
+##tasks
+
+1. 
+Person classi yaratmalisiz 
+id, 
+name, 
+surname, 
+birthdate, 
+country , 
+city 
+dizayn elediyiniz formApp de bu propertilere uygun deyerler daxil edilecek ve gosterilecek formatlari
+saxlayan listbox olmalidir , info hissesinde yerlesen btn clik olunan zaman gosterilecek formatlar selectinden
+secilen formata gore Info hissesinde olan label-in textine person-un melumatlari yazilacaq.
+
+qeyd : Delegate istifade edilmelidir.
+
+format selectBox
+
+Name Surname
+Name Surname, Country: Country, 
+Name Surname, Country: Country, City: City,
+Name Surname, Country: Country, City: City, Birthdate : Birthdate
+
+
+2. Person classi yaratmalisiz 
+id, 
+name, 
+surname, 
+birthdate, 
+country , 
+city, 
+phone, 
+email,
+profession, Dizayn elediyiniz formApp de FakeData istifade ederek en az 1000 eded data yaradilib dataGride yerlesdirilecek (orderBY(profession)),
+dataGrid-in ust hissesinde olan searchTXTBox dan daxil edilen deyere gore ilk 3 herf daxil edildikden sonra cedvelde deyere sahib
+data gosterilmeli yoxdursa bu haqqda melumat verilmelidir 
+

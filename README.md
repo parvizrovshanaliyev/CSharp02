@@ -599,5 +599,27 @@ CSharp-02 , start  06/03/21
 
 # Week12  21/08/21
 ### Topics
+    - SQL
+    - - Introduction to SQL
+    - - Syntax
+    - - Select
+    - - Distinct
+    - - As
+    - - Top
+    - - Where, and, or 
+    - - Between 
+    - - Like 
+    - - In, not in 
+    - - Order by
+    - - Group by, having
+    - - Where vs having
+    - - Inner join
+    - - Left join
+    - - Right join
+    - - Full join
+### Resources
+- [.sql file ]()
 
 ### Tasks
+   - https://www.w3schools.com/sql/default.asp
+

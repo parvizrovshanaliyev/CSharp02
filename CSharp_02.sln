@@ -167,7 +167,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DelegatesConsoleApp", "Cons
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Week11", "Week11", "{FF996691-7B51-4AB9-A9D2-6DF428858561}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LINQConsoleApp", "ConsoleApps\Week11\LINQConsoleApp\LINQConsoleApp.csproj", "{6D95B6B7-E04E-429B-856F-29E76F412A9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LINQConsoleApp", "ConsoleApps\Week11\LINQConsoleApp\LINQConsoleApp.csproj", "{6D95B6B7-E04E-429B-856F-29E76F412A9D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

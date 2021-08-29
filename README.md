@@ -624,3 +624,25 @@ CSharp-02 , start  06/03/21
    - https://www.w3schools.com/sql/default.asp
    - [week 12 task](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/SQL/week12/week12Task.txt)
 
+# Week13  29/08/21
+### Topics
+    - SQL
+    - - CREATE,DROP,BACKUP DATABASE
+    - - CREATE,DROP,ALTER TABLE
+    - - INSERT,UPDATE,DELETE  STATEMENTS
+    - - Constraints
+    - - - NOT NULL
+    - - - UNIQUE
+    - - - PRIMARY KEY
+    - - - FOREIGN KEY
+    - - - CHECK
+    - - - DEFAULT
+    - - - AUTO INCREMENT
+
+
+### Tasks
+    - [week 13 task](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/SQL/week13/week13Task.txt)
+    - [SQL Views](https://www.w3schools.com/sql/sql_view.asp)
+    - [SQL Functions](https://www.tutorialsteacher.com/sql/avg-function)
+    - - linkde gosterilen system functionlarin her birine uc numune yazin.
+

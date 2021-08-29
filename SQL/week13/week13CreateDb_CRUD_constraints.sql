@@ -154,3 +154,6 @@ create table [Users]
  delete table_name
  where Id=1
  */
+
+ delete Students
+ where Id=1

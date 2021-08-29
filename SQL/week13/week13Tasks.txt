@@ -1,0 +1,16 @@
+ 
+1. --   Sales.SalesOrderHeader, Sales.SalesOrderDetail cedvellerinden istifade ederek 
+   --   '2011-05-31 00:00:00.000' tarixinde satis eden satis temsilcilerinin ad soyadini ve toplam lineTotal deyeri
+   --   getiren query yazin.
+
+
+ SalesPerson	        LineTotal
+DavidCampbell	        69472.996300
+GarrettVargas	        9109.168300
+JillianCarson	        46695.556400
+JoséSaraiva	            106251.727700
+LindaMitchell	        5475.948500
+MichaelBlythe	        63762.922800
+PamelaAnsman-Wolfe	    24432.608800
+ShuIto	                59708.320800
+TsviReiter	            104419.329100

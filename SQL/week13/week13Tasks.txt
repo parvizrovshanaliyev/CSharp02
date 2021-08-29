@@ -14,3 +14,49 @@ MichaelBlythe	        63762.922800
 PamelaAnsman-Wolfe	    24432.608800
 ShuIto	                59708.320800
 TsviReiter	            104419.329100
+
+2.
+ /*
+ Store procudure examples 
+
+ 2.a Person Cedveli yaradin (Id,Name,Surname,Status,Gender,CreateDate) 
+
+ 2.b Person cedveline AdventureWorks db-dan data insert eden proc yaradilmalidir.
+
+ 2.c PersonCedveli ucun asagidakilara uygun proc-lar yaradilmalidir.
+ Add (insert edilen row-un idsi output olaraq GetById proc-a oturulmelidir)
+ Update (update edilen row-un idsi output olaraq GetById proc-a oturulmelidir)
+ Delete
+
+ GetById (parametr olaraq id deyeri daxil edilecek)
+ GetAll (parametr almayacaq)
+ GetAll (Gender deyeri qebul ederse daxil edilen deyere esasen filter olacaq, daxil edilmezse 'M' ve ya 'F' olanlar getirilecek )
+ GetByEmail (parametr olaraq email deyeri daxil edilecek)
+ */
+
+ 3.
+ /*
+ Store procudure examples 
+
+ Person Cedveli yaradin (Id,Name,Surname,Status,CreateDate) 
+
+ PersonCedveli ucun asagidakilara uygun tek proc yaradilmalidir.
+ Yaradilan proc-a verilen uygun keyword-e gore Add,Update,Delete,GetAll emeliyyatlarini
+ yerine yetirmelidir.
+ Add (insert edilen row-un idsi output olaraq GetById proc-a oturulmelidir)
+ Update (update edilen row-un idsi output olaraq GetById proc-a oturulmelidir)
+ Delete
+ GetAll
+ */
+
+
+
+ 4.
+  /*
+ Dbdaki iscilerin 
+ Adini,Soyadini, Islediyi Departamenti , Ise baslama tarxini, mevacibinin cemini
+ getiren proc yazin
+
+ order by mevacibinin cemine gore desc
+ 
+ */

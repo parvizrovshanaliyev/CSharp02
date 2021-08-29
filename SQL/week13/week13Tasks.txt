@@ -58,5 +58,8 @@ TsviReiter	            104419.329100
  getiren proc yazin
 
  order by mevacibinin cemine gore desc
+
+ -- isteye gore en cox qazan en az qazan iscini
+ ---- hal hazirda isden cixan butun iscileri getiren query yaza bilersiz.
  
  */

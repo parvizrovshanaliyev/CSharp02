@@ -638,10 +638,15 @@ CSharp-02 , start  06/03/21
     - - - CHECK
     - - - DEFAULT
     - - - AUTO INCREMENT
+    - - Stored Procedures
+    - - Normalization 1`s form
+    - - One to many Relation
+    - - Subquery
+    - - Getdate()
 
 
 ### Tasks
-    - [week 13 task](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/SQL/week13/week13Task.txt)
+    - [week 13 task](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/SQL/week13/week13Tasks.txt)
     - [SQL Views](https://www.w3schools.com/sql/sql_view.asp)
     - [SQL Functions](https://www.tutorialsteacher.com/sql/avg-function)
     - - linkde gosterilen system functionlarin her birine uc numune yazin.

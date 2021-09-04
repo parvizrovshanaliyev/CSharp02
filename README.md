@@ -651,3 +651,11 @@ CSharp-02 , start  06/03/21
     - [SQL Functions](https://www.tutorialsteacher.com/sql/avg-function)
     - - linkde gosterilen system functionlarin her birine uc numune yazin.
 
+
+# Week14  04/09/21
+### Topics
+    - SQL
+
+### Tasks
+    - [week 14 task](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/SQL/week14/week14Tasks.txt)
+

@@ -681,10 +681,10 @@ CSharp-02 , start  06/03/21
     - - Design of database tables : Techizat 
 
 ### Tasks
-    - Design of database tables : Techizat
-      Record-da izah edilenlere uygun Techizat modulu ucun db ve cedvelllerin dizayn edilmesi.
-      Cedveller sql de hazir vasitelerden istifade edilmeden tek tek yazilmalidir.
-    - [week 14 task](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/SQL/week14/week14Tasks.txt)
-    - [sql_server/union](https://www.techonthenet.com/sql_server/union.php)
-    - [learn-sql-types-of-relations](https://www.sqlshack.com/learn-sql-types-of-relations/)
+   - Design of database tables : Techizat
+     Record-da izah edilenlere uygun Techizat modulu ucun db ve cedvelllerin dizayn edilmesi.
+     Cedveller sql de hazir vasitelerden istifade edilmeden tek tek yazilmalidir.
+   - [week 14 task](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/SQL/week14/week14Tasks.txt)
+   - [sql_server/union](https://www.techonthenet.com/sql_server/union.php)
+   - [learn-sql-types-of-relations](https://www.sqlshack.com/learn-sql-types-of-relations/)
 

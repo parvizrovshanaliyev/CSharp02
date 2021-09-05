@@ -655,7 +655,36 @@ CSharp-02 , start  06/03/21
 # Week14  04/09/21
 ### Topics
     - SQL
+    - - Views
+    - - Declare Variables
+    - - - Declare more than one variable
+    - - - Declare a variable with an initial value
+    - - - Declare more than one variable with an initial value
+    - - Conditions
+    - - - if else
+    - - - case when
+    - - Loop : while
+    - - Temp table
+    - - - Local temp table
+    - - - Global temp table
+    - - Try catch
+    - - User defined functions
+    - - - scalar-valued
+    - - - table-valued
+    - - - - table-valued : query
+    - - - - table-valued  : variable table
+    - - Triggers : insert | update | delete
+    - - - For
+    - - - After
+    - - - Inserted
+    - - - Deleted
+    - - Design of database tables : Techizat 
 
 ### Tasks
-    - [week 14 task](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/SQL/week14/week14Tasks.txt)
+    - Design of database tables : Techizat
+      Record-da izah edilenlere uygun Techizat modulu ucun db ve cedvelllerin dizayn edilmesi.
+      Cedveller sql de hazir vasitelerden istifade edilmeden tek tek yazilmalidir.
+    - [week 14 task : pending](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/SQL/week14/week14Tasks.txt)
+    - [sql_server/union](https://www.techonthenet.com/sql_server/union.php)
+    - [learn-sql-types-of-relations](https://www.sqlshack.com/learn-sql-types-of-relations/)
 

@@ -16,6 +16,7 @@ CSharp-02 , start  06/03/21
 | Şənbə  | 18:00-22:00  | 
 | Bazar  |  18:00-22:00  |
 
+21/08/21
 |week12 - todo|
 | Gün  | Saat |
 | ------------- | ------------- |
@@ -644,12 +645,11 @@ CSharp-02 , start  06/03/21
     - - Subquery
     - - Getdate()
 
-
 ### Tasks
-    - [week 13 task](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/SQL/week13/week13Tasks.txt)
-    - [SQL Views](https://www.w3schools.com/sql/sql_view.asp)
-    - [SQL Functions](https://www.tutorialsteacher.com/sql/avg-function)
-    - - linkde gosterilen system functionlarin her birine uc numune yazin.
+   - [week 13 task](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/SQL/week13/week13Tasks.txt)
+   - [SQL Views](https://www.w3schools.com/sql/sql_view.asp)
+   - [SQL Functions](https://www.tutorialsteacher.com/sql/avg-function)
+   - - - linkde gosterilen functionlarin her birine uc numune yazin.
 
 
 # Week14  04/09/21

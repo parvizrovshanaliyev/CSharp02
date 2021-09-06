@@ -27,6 +27,8 @@ qeyd : Sql week 14 icersinde screenshotlara nezer yetirin orada cedvellerde hans
   - Name
   - UserId
   - Username
+  1.b.a Doc level ucun mesul userin update edilmesi 
+    verilen username esasen dbdan user tapilir ve yeni responseUseridye assign edilir.
 1.c Document Get By Id proc
 1.d Document Comment Create proc 
 1.e GetAllDocumentCommentByDocId proc 
@@ -42,6 +44,9 @@ qeyd : Sql week 14 icersinde screenshotlara nezer yetirin orada cedvellerde hans
     tapilan evvelki ve ya novbeti levelId docLevelId-ye menimsedilir doc update olur 
     her bir halda DocApprovalRequest  ve DocHistory cedveline insert emeliyyati apariliacaq. 
 1.g GetAllHistoryByDocId proc 
+
+
+Umumi insert , delete , update emeliyyatlarindan sonra trigger islemeli ve elave edilen , redakte edilen ve ya silinen setr gosterilmelidir.
 
 
 

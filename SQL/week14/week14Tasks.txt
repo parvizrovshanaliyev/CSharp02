@@ -18,6 +18,9 @@ WaitingDocument Proc yaradilmalidir Senedin hazirki levelinde mesul user kimdirs
 qeyd : Sql week 14 icersinde screenshotlara nezer yetirin orada cedvellerde hansi datalar gosterilmelidir suutunlara baxin.
 
 1.a Userlerin insert edilmesi
+    CreateById yeni bu emeliyyati hansi user yerine yetiribse onun idsini menimsedmek ucun istifade edilir.
+    Buna gorede evvelceden cedvele insert edilen userleri dinamik sekilde hansi cedvelde creatBy varsa ora assign ede bilmelisiz,
+    GetCurrentUser func yaradaraq username ve passworda uygun eger dbda varsa onun idsin geri donderib istifade ede bilersiz createBylar ucun
 1.b Doc levellerin insert edilmesi
   - doclevelelleri getiren view yaradilmalidir.
   - doclevelId

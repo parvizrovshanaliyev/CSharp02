@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<DataBase>
+  <Persons>
+    <Person Id="1001">
+      <Name>qwqwq</Name>
+      <Surname>wqwq</Surname>
+      <Email>wqqwqw</Email>
+    </Person>
+  </Persons>
+</DataBase>

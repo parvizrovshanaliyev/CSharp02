@@ -5,4 +5,10 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="FakeData">
+      <HintPath>..\SystemXML\bin\Debug\net5.0\FakeData.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

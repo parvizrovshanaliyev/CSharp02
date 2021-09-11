@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Xml;
 
 namespace SystemXML
 {
@@ -41,6 +42,46 @@ namespace SystemXML
             bu sizi manual qaydada dbya insert emeliyyatlarindan xilas edir. 
              
              */
+
+            // write
+            string appRoot = AppRoot();
+
+
+            // read
+            XmlReader xmlReader =  XmlReader.Create(appRoot + "/persons.xml");
+
+            while (xmlReader.Read())
+            {
+                Console.WriteLine($"{xmlReader.Name.ToString()}{xmlReader.Value}\n");
+            }
+
+            Console.ReadLine();
+
+            //CreateXmlFile(appRoot);
+        }
+
+        private static void CreateXmlFile(string appRoot)
+        {
+            XmlTextWriter xmlTextWriter = new XmlTextWriter(appRoot + "/persons.xml", System.Text.UTF8Encoding.UTF8);
+
+            xmlTextWriter.WriteStartElement("Persons");
+
+            xmlTextWriter.Formatting = Formatting.Indented;
+            xmlTextWriter.Indentation = 4;
+
+            for (int i = 1; i <= 100; i++)
+            {
+                xmlTextWriter.WriteStartElement("Person");
+                xmlTextWriter.WriteElementString("Id", i.ToString());
+                xmlTextWriter.WriteElementString("Name", FakeData.NameData.GetFirstName());
+                xmlTextWriter.WriteElementString("Surname", FakeData.NameData.GetSurname());
+                xmlTextWriter.WriteElementString("Email",
+                    $"{FakeData.NameData.GetFirstName()}.{FakeData.NameData.GetSurname()}@{FakeData.NetworkData.GetDomain()}");
+                xmlTextWriter.WriteEndElement();
+            }
+
+            xmlTextWriter.WriteEndElement();
+            xmlTextWriter.Close();
         }
 
         private static string AppRoot()

@@ -688,3 +688,8 @@ CSharp-02 , start  06/03/21
     - [sql_server/union](https://www.techonthenet.com/sql_server/union.php)
     - [learn-sql-types-of-relations](https://www.sqlshack.com/learn-sql-types-of-relations/)
 
+
+# Week15  11/09/21
+### Topics
+    - System.XML
+

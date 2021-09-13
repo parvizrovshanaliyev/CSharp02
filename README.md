@@ -709,5 +709,5 @@ CSharp-02 , start  06/03/21
 
 
 ### Tasks
-    - [week 15 task](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/SQL/week14/week14Tasks.txt)
+   - [week 15 task](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/ConsoleApps/week15/tasks/week15Tasks.txt)
 

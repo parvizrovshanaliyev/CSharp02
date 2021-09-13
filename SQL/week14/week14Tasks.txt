@@ -18,12 +18,17 @@ WaitingDocument Proc yaradilmalidir Senedin hazirki levelinde mesul user kimdirs
 qeyd : Sql week 14 icersinde screenshotlara nezer yetirin orada cedvellerde hansi datalar gosterilmelidir suutunlara baxin.
 
 1.a Userlerin insert edilmesi
+    CreateById yeni bu emeliyyati hansi user yerine yetiribse onun idsini menimsedmek ucun istifade edilir.
+    Buna gorede evvelceden cedvele insert edilen userleri dinamik sekilde hansi cedvelde creatBy varsa ora assign ede bilmelisiz,
+    GetCurrentUser func yaradaraq username ve passworda uygun eger dbda varsa onun idsin geri donderib istifade ede bilersiz createBylar ucun
 1.b Doc levellerin insert edilmesi
   - doclevelelleri getiren view yaradilmalidir.
   - doclevelId
   - Name
   - UserId
   - Username
+  1.b.a Doc level ucun mesul userin update edilmesi 
+    verilen username esasen dbdan user tapilir ve yeni responseUseridye assign edilir.
 1.c Document Get By Id proc
 1.d Document Comment Create proc 
 1.e GetAllDocumentCommentByDocId proc 
@@ -39,6 +44,9 @@ qeyd : Sql week 14 icersinde screenshotlara nezer yetirin orada cedvellerde hans
     tapilan evvelki ve ya novbeti levelId docLevelId-ye menimsedilir doc update olur 
     her bir halda DocApprovalRequest  ve DocHistory cedveline insert emeliyyati apariliacaq. 
 1.g GetAllHistoryByDocId proc 
+
+
+Umumi insert , delete , update emeliyyatlarindan sonra trigger islemeli ve elave edilen , redakte edilen ve ya silinen setr gosterilmelidir.
 
 
 

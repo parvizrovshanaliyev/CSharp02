@@ -1,6 +1,47 @@
 
-
-
 tasks:
 
 1. Phone book app
+
+* Windows Form Application
+* Istifadeci adi ve sifre ile app-e login olunacaq.
+* N layer architecture: Arxitektura ucun diagram hazilamisam ona baxa bilersiz.
+* Database olaraq json file istifade edilmelidir.
+* Application icerisinde olan datalar xml, csv formatinda hem qebul ede bilmeli
+hem de geri donus olaraq vere bilmelidir, xml csv file-dan oxuyub yazmaq.
+
+
+core - layer
+1.a Create database
+Phone book app-e login ede bilmek ucun json dbimiz evvelceden yaradilmalidir, 
+ve icerisinde default olaraq bir user olmalidir ki app-e kecid mumkun olsun.
+Json db file olduqundan fiziki olaraq siline bileceyini nezere almalisiz eger fiziki olaraq silinerse
+sistem ozu yeniden yaratmalidir ve icerisinede default user elave etmelidir.
+
+1.b Login
+
+1.c
+   a Get All contact : elave olaraq Contact Count-da listin asagisinda qeyd edilmelidir.
+   b Get Contact info
+   c Create contact
+  yaradilacaq yeni contact-da Ad, soyad , 3 eded telefon nomresi , Adres, email, varsa website link ve description saxlana bilmelidir.
+   d Update
+   e delete
+
+1. d Muvafiq formatda olan file-lardan datanin oxunub dbya yazilmasi ve dbdan datanin oxunub muvafiq formatda file olaraq save edilmesi
+
+
+Tasks folderinde App ucun UI-hissesine baxmalisiz izahlar orada qeyd edilib.
+
+Umumi CRUD emeliyyatlarinin success ve ya fail olmasi baresinde istifadeciye mesaj gosterilmelidir.
+
+
+2. Techizat 
+* Windows Form Application
+* Istifadeci adi ve sifre ile app-e login olunacaq.
+* N layer architecture: Arxitektura ucun diagram hazilamisam ona baxa bilersiz.
+* Database olaraq json file istifade edilmelidir.
+
+Evvelki heftenin screen shotlarindan istifade ederek UI hissesin hazirlaya bilersiz ui-da her hansisa deyisklik serbestdir.
+esas mesele sql hissesinde yazdiqimiz taskin burada tetbiq edilmesidir.
+

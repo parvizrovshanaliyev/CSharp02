@@ -3,6 +3,7 @@
     public static class GlobalConstants
     {
         public const string Required = "Username and password required!";
+        public const string ModelStateNotValid = "Model State Not Valid!";
         public const string InvalidAttempt = "Invalid username or password!";
         public const string CaptionInfo = "Information";
         public const string CaptionQuestion = "Question";

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PhoneBook.Business.Enums;
 using PhoneBook.Core.Repository;
 using PhoneBook.Entities;
 
@@ -29,7 +30,7 @@ namespace PhoneBook.Business.Services
             }
             else
             {
-                result = -100;
+                result = (int)ResultCodeEnums.ModelStateNoValid;
             }
 
             return result;

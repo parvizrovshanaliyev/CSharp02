@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -15,14 +16,17 @@ namespace PhoneBook.Core.Context
         {
             var appRoot = AppRoot();
             _path = appRoot + "/" + "Context";
+            
             ExistDatabase();
             DeserializeObject();
+            _contacts ??= new List<Contact>();
+            _users ??= new List<User>();
         }
-        private static List<Contact> _cotacts;
+        private static List<Contact> _contacts;
         public List<Contact> Contacts
         {
-            get => _cotacts;
-            set => _cotacts = value;
+            get => _contacts;
+            set => _contacts = value;
         }
 
         private static List<User> _users;
@@ -57,21 +61,32 @@ namespace PhoneBook.Core.Context
                 // install nuget Newtonsoft.Json;
                 string userJson = JsonConvert.SerializeObject(users);
                 File.WriteAllText($"{_path}/users.json", userJson);
+
+                bool control = Exists($"{_path}/contacts.json");
+                if (!control) CreateFile($"{_path}/contacts.json");
             }
         }
-
+        static void CreateFile(string path)
+        {
+            FileStream fileStream = File.Create(path);
+            fileStream.Close();
+        }
+        static bool Exists(string path)
+        {
+            return File.Exists(path);
+        }
         private void DeserializeObject()
         {
-            if (File.Exists(_path + "/users.json"))
+            if (Exists($"{_path}/users.json"))
             {
                 string jsonData = File.ReadAllText(_path + "/users.json");
                 _users = JsonConvert.DeserializeObject<List<User>>(jsonData);
             }
 
-            if (File.Exists(_path + "/contacts.json"))
+            if (Exists($"{_path}/contacts.json"))
             {
                 string jsonData = File.ReadAllText(_path + "/contacts.json");
-                _cotacts = JsonConvert.DeserializeObject<List<Contact>>(jsonData);
+                _contacts = JsonConvert.DeserializeObject<List<Contact>>(jsonData);
             }
 
             
@@ -80,7 +95,7 @@ namespace PhoneBook.Core.Context
         {
             if (Contacts.Any() && Contacts != null)
             {
-                string jsonData = JsonConvert.SerializeObject(_cotacts);
+                string jsonData = JsonConvert.SerializeObject(_contacts);
                 File.WriteAllText(_path + "contacts.json",jsonData);
             }
         }

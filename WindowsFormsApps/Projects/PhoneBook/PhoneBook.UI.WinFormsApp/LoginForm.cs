@@ -47,7 +47,6 @@ namespace PhoneBook.UI.WinFormsApp
                     case > 0:
                         PhoneBookForm form = new PhoneBookForm();
                         form.Show();
-                        //this.Close();
                         break;
                     case (int)ResultCodeEnums.ModelStateNoValid:
                         MessageBox.Show(GlobalConstants.Required, GlobalConstants.CaptionInfo, MessageBoxButtons.OK, MessageBoxIcon.Information);

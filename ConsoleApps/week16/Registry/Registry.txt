@@ -1,0 +1,24 @@
+
+
+
+
+/*
+** Registry 
+
+- Emeliyyat sisteminin ve ya emeliyyat sistemi icerisine qurulan applicationlarin settings/tenzimlemeler 
+-in saxlandigi yerdir.
+
+- Applicationlarin lisence/lisenziyalasdirilmasi zamani tez -tez istifade edilir.
+
+- C# ile Registry emeliyyatlarini Registry class vasitesile ile ede bilerik.
+- Registry class-i Microsoft.Win32 icerisinde yerslesmekdedir.
+
+
+  windows > run > regedit
+
+  --- yeni key value elave edilmesi
+  --- elave edilen ve ya var olan deyerin oxunmasi
+  --- folder ve subFolder yaradilmasi
+  --- yaradilan folder ve subFolder icerisinde deyerlerin oxunmasi
+
+*/

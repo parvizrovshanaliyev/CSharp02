@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using PhoneBook.Entities;
 
 namespace PhoneBook.Core.Context
@@ -65,7 +67,7 @@ namespace PhoneBook.Core.Context
             Assembly assembly = Assembly.LoadFile(coreDLL);
 
             Type type = assembly.GetType("PhoneBook.Core.Context.PhoneBookDbContext");
-
+            //DataSeeder();
             if (type is not null)
             {
                 // get props
@@ -78,8 +80,26 @@ namespace PhoneBook.Core.Context
                     if (!Exists(filePath))
                     {
                         CreateFile(filePath);
-                        //SerializeObjToJson(_path + usersJson, users);
                     }
+                    PropertyInfo prop = i;
+                    string jsonData = File.ReadAllText(filePath);
+
+                    dynamic config = JsonConvert.DeserializeObject<List<ExpandoObject>>(jsonData, new ExpandoObjectConverter());
+
+                    if (config != null)
+                    {
+                        foreach (var enabledEndpoint in ((IEnumerable<dynamic>)config))
+                        {
+                            var x = enabledEndpoint;
+                        }
+                        //List<User> x = (List<User>)config;
+                    }
+                    //prop.SetValue(type,Activator.CreateInstance(prop.PropertyType));
+                    //i.SetValue(type,Activator.CreateInstance(i.PropertyType),null);
+
+                    //object objInstance = Activator.CreateInstance(i.);
+                    //var x = i.GetMethod().ReturnType;
+                    //SerializeObjToJson(_path + filePath, Activator.CreateInstance(i.PropertyType));
                 });
             }
 

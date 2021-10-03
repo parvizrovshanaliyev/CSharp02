@@ -5,8 +5,9 @@ namespace ReflectionLateBindingConsoleApp
     class Program
     {
         static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
+        {   // GetExecutingAssembly() cari appi assembly olaraq verir.
+
+            Console.ReadLine();
         }
     }
 }

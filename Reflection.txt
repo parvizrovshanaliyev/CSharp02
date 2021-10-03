@@ -1,0 +1,22 @@
+/*
+Reflection
+
+Application-nin runtime vaxtinda assembly icerisinde olan class, metod kimi tipler 
+haqqinda melumat ala bilmeyimizi ve ondan istifade ede bilmeyimiz temin eden mexanizmdir.
+
+Reflection object-ni istifade ede bilmek ucun System.Reflection lib-den istifade ede bilerik.
+
+App icerisinde olan  class ve ya metod-u runtime zamani istifade ede bildiyimiz kimi 
+her hanssisa bir dll-de appe runtime zamani yukleyib istifade ede bilerik .
+
+
+Class
+--- Ctor-larin oxunmasi list sekilinde
+--- Class daxilinde prop-larin oxunmasi
+--- Class daxilinde metodlarin oxunmasi
+WinFormda yazilan class-in melumatlarini gosteren appin yazilmasi
+Runtime da bir class yukleyib istifade etmek
+
+https://www.tutorialspoint.com/csharp/csharp_reflection.htm
+
+*/

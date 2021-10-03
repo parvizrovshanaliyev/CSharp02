@@ -184,30 +184,35 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "week16", "week16", "{1BBB3880-309B-4F4E-82D3-C59472558A6B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reflection", "Reflection", "{0C3E898D-57A8-4D84-941C-AEFAC294C55F}"
+	ProjectSection(SolutionItems) = preProject
+		Reflection.txt = Reflection.txt
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Registry", "Registry", "{A9A6B045-E8C5-4091-BDE8-CC1178CBE762}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistryConsoleApp", "ConsoleApps\week16\Registry\RegistryConsoleApp\RegistryConsoleApp.csproj", "{1CD01B0F-BCB8-4493-BD2B-EDEEDE099C20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RegistryConsoleApp", "ConsoleApps\week16\Registry\RegistryConsoleApp\RegistryConsoleApp.csproj", "{1CD01B0F-BCB8-4493-BD2B-EDEEDE099C20}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistryWMIConsoleAppNetFramework", "ConsoleApps\week16\Registry\RegistryWMIConsoleAppNetFramework\RegistryWMIConsoleAppNetFramework.csproj", "{CF9773F3-355E-4AEE-9EC2-1099EEDD5C46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionConsoleApp", "ConsoleApps\week16\Reflection\ReflectionConsoleApp\ReflectionConsoleApp.csproj", "{FE38A189-40E9-446E-83FF-BE44A0E63DB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReflectionConsoleApp", "ConsoleApps\week16\Reflection\ReflectionConsoleApp\ReflectionConsoleApp.csproj", "{FE38A189-40E9-446E-83FF-BE44A0E63DB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionLibConsoleApp", "ConsoleApps\week16\Reflection\ReflectionLibConsoleApp\ReflectionLibConsoleApp.csproj", "{E2916D33-1B66-4F51-A296-682681F7D7EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReflectionLateBindingConsoleApp", "ConsoleApps\week16\Reflection\ReflectionLateBindingConsoleApp\ReflectionLateBindingConsoleApp.csproj", "{A9A3EF69-C9AC-41BB-A95D-14BDE31680EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionLateBindingConsoleApp", "ConsoleApps\week16\Reflection\ReflectionLateBindingConsoleApp\ReflectionLateBindingConsoleApp.csproj", "{A9A3EF69-C9AC-41BB-A95D-14BDE31680EE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "week16.ReflectionWinFormsApp", "WindowsFormsApps\Projects\week16.ReflectionWinFormsApp\week16.ReflectionWinFormsApp.csproj", "{C205F730-E78D-4A35-8C2E-53E6B9B0EC12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "week16.ReflectionWinFormsApp", "WindowsFormsApps\Projects\week16.ReflectionWinFormsApp\week16.ReflectionWinFormsApp.csproj", "{C205F730-E78D-4A35-8C2E-53E6B9B0EC12}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PhoneBook", "PhoneBook", "{5FB718E8-3518-40FB-8362-31362B399E90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.UI.WinFormsApp", "WindowsFormsApps\Projects\PhoneBook\PhoneBook.UI.WinFormsApp\PhoneBook.UI.WinFormsApp.csproj", "{A22E8BCC-57B0-4D9A-AF35-E7E9E48C9953}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.UI.WinFormsApp", "WindowsFormsApps\Projects\PhoneBook\PhoneBook.UI.WinFormsApp\PhoneBook.UI.WinFormsApp.csproj", "{A22E8BCC-57B0-4D9A-AF35-E7E9E48C9953}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.Core", "WindowsFormsApps\Projects\PhoneBook\PhoneBook.Core\PhoneBook.Core.csproj", "{788A6540-CED9-41C5-816A-EE493FA10216}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.Core", "WindowsFormsApps\Projects\PhoneBook\PhoneBook.Core\PhoneBook.Core.csproj", "{788A6540-CED9-41C5-816A-EE493FA10216}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.Business", "WindowsFormsApps\Projects\PhoneBook\PhoneBook.Business\PhoneBook.Business.csproj", "{AC5324E4-A0DB-4943-8F17-C5E4694BCFDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.Business", "WindowsFormsApps\Projects\PhoneBook\PhoneBook.Business\PhoneBook.Business.csproj", "{AC5324E4-A0DB-4943-8F17-C5E4694BCFDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.Entities", "WindowsFormsApps\Projects\PhoneBook\PhoneBook.Entities\PhoneBook.Entities.csproj", "{2C9909BE-CD3D-426E-9594-B0B200C95F3E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.Entities", "WindowsFormsApps\Projects\PhoneBook\PhoneBook.Entities\PhoneBook.Entities.csproj", "{2C9909BE-CD3D-426E-9594-B0B200C95F3E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionLib", "ConsoleApps\week16\Reflection\ReflectionLib\ReflectionLib.csproj", "{12911B9D-100B-494F-A03D-4CDC7FC19085}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionWinForm", "ConsoleApps\week16\Reflection\ReflectionLibConsoleApp\ReflectionWinForm\ReflectionWinForm.csproj", "{3FF16685-9624-49D1-A337-BFDBDFD79795}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -495,10 +500,6 @@ Global
 		{FE38A189-40E9-446E-83FF-BE44A0E63DB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE38A189-40E9-446E-83FF-BE44A0E63DB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE38A189-40E9-446E-83FF-BE44A0E63DB5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E2916D33-1B66-4F51-A296-682681F7D7EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E2916D33-1B66-4F51-A296-682681F7D7EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E2916D33-1B66-4F51-A296-682681F7D7EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E2916D33-1B66-4F51-A296-682681F7D7EE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A9A3EF69-C9AC-41BB-A95D-14BDE31680EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A9A3EF69-C9AC-41BB-A95D-14BDE31680EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9A3EF69-C9AC-41BB-A95D-14BDE31680EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -523,6 +524,14 @@ Global
 		{2C9909BE-CD3D-426E-9594-B0B200C95F3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C9909BE-CD3D-426E-9594-B0B200C95F3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C9909BE-CD3D-426E-9594-B0B200C95F3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12911B9D-100B-494F-A03D-4CDC7FC19085}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12911B9D-100B-494F-A03D-4CDC7FC19085}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12911B9D-100B-494F-A03D-4CDC7FC19085}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12911B9D-100B-494F-A03D-4CDC7FC19085}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FF16685-9624-49D1-A337-BFDBDFD79795}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FF16685-9624-49D1-A337-BFDBDFD79795}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FF16685-9624-49D1-A337-BFDBDFD79795}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FF16685-9624-49D1-A337-BFDBDFD79795}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -614,7 +623,6 @@ Global
 		{1CD01B0F-BCB8-4493-BD2B-EDEEDE099C20} = {A9A6B045-E8C5-4091-BDE8-CC1178CBE762}
 		{CF9773F3-355E-4AEE-9EC2-1099EEDD5C46} = {A9A6B045-E8C5-4091-BDE8-CC1178CBE762}
 		{FE38A189-40E9-446E-83FF-BE44A0E63DB5} = {0C3E898D-57A8-4D84-941C-AEFAC294C55F}
-		{E2916D33-1B66-4F51-A296-682681F7D7EE} = {0C3E898D-57A8-4D84-941C-AEFAC294C55F}
 		{A9A3EF69-C9AC-41BB-A95D-14BDE31680EE} = {0C3E898D-57A8-4D84-941C-AEFAC294C55F}
 		{C205F730-E78D-4A35-8C2E-53E6B9B0EC12} = {2F30E6B1-813B-4254-A022-D84E6FD09833}
 		{5FB718E8-3518-40FB-8362-31362B399E90} = {2F30E6B1-813B-4254-A022-D84E6FD09833}
@@ -622,6 +630,8 @@ Global
 		{788A6540-CED9-41C5-816A-EE493FA10216} = {5FB718E8-3518-40FB-8362-31362B399E90}
 		{AC5324E4-A0DB-4943-8F17-C5E4694BCFDB} = {5FB718E8-3518-40FB-8362-31362B399E90}
 		{2C9909BE-CD3D-426E-9594-B0B200C95F3E} = {5FB718E8-3518-40FB-8362-31362B399E90}
+		{12911B9D-100B-494F-A03D-4CDC7FC19085} = {0C3E898D-57A8-4D84-941C-AEFAC294C55F}
+		{3FF16685-9624-49D1-A337-BFDBDFD79795} = {0C3E898D-57A8-4D84-941C-AEFAC294C55F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D6E9931C-7C85-426B-8D58-D5D7B19EC5EB}

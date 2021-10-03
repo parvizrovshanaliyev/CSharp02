@@ -7,10 +7,16 @@ namespace PhoneBook.Core.Repository
     public class ContactRepository : IContactRepository
     {
         private readonly PhoneBookDbContext _context;
-        public ContactRepository()
+
+        public ContactRepository(PhoneBookDbContext context)
         {
-            _context = new PhoneBookDbContext();
+            _context = context;
         }
+
+        //public ContactRepository()
+        //{
+        //    _context = new PhoneBookDbContext();
+        //}
         #region Implementation of IContactRepository
 
         public int Add(Contact entity)

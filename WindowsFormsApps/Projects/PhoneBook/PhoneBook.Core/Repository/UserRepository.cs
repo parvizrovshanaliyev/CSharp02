@@ -7,10 +7,16 @@ namespace PhoneBook.Core.Repository
     public class UserRepository : IUserRepository
     {
         private readonly PhoneBookDbContext _context;
-        public UserRepository()
+
+        public UserRepository(PhoneBookDbContext context)
         {
-            _context = new PhoneBookDbContext();
+            _context = context;
         }
+
+        //public UserRepository()
+        //{
+        //    _context = new PhoneBookDbContext();
+        //}
         #region Implementation of IUserRepository
 
         public int Login(User entity)

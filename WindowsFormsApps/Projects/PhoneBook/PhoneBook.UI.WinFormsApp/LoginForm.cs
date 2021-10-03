@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Microsoft.Extensions.Logging;
 using PhoneBook.Business.Constants;
 using PhoneBook.Business.Enums;
 using PhoneBook.Business.Services;
@@ -11,8 +12,17 @@ namespace PhoneBook.UI.WinFormsApp
 {
     public partial class LoginForm : Form
     {
-        public LoginForm()
+        private readonly IUserService _userService;
+
+        private readonly ILogger _logger;
+        //public LoginForm(IUserService userService):this()
+        //{
+        //    _userService = userService;
+        //}
+        public LoginForm(IUserService userService, ILogger logger)
         {
+            _userService = userService;
+            _logger = logger;
             InitializeComponent();
         }
 
@@ -33,14 +43,12 @@ namespace PhoneBook.UI.WinFormsApp
             if (!string.IsNullOrEmpty(txtBoxUsername.Text)&& !string.IsNullOrEmpty(txtBoxPassword.Text))
             {
 
-                IUserService userService = new UserService(new UserRepository());
-
                 var user = new User()
                 {
                     Username = txtBoxUsername.Text,
                     Password = txtBoxPassword.Text
                 };
-                var result = userService.Login(user);
+                var result = _userService.Login(user);
 
                 switch (result)
                 {

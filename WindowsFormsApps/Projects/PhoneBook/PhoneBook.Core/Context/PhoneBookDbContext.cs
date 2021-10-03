@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -12,7 +13,7 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace PhoneBook.Core.Context
 {
-    public class PhoneBookDbContext
+    public class PhoneBookDbContext : IPhoneBookDbContext
     {
         #region .::ctor::.
 
@@ -154,6 +155,43 @@ namespace PhoneBook.Core.Context
         /// </summary>
         public void SaveChanges()
         {
+            /*
+            * Core dll icerisinde PhoneBookDbContext classinin entity-lere
+            * uygun gelen collection type olan proplarina uygun json file yaradilir.
+            * Bunlar Db-daki cedvellerimizi evez edecek.
+            */
+            var path = Directory.GetParent(_approot)?.FullName;
+            var coreDLL = $@"{path}\PhoneBook.Core\bin\Debug\net5.0\PhoneBook.Core.dll";
+
+            var assembly = Assembly.LoadFile(coreDLL);
+            var type = assembly.GetType("PhoneBook.Core.Context.PhoneBookDbContext");
+
+            if (type is not null)
+            {
+                // get props
+                var propList = type.GetProperties().ToList();
+
+                //Get propertyValues for properties that are enumerable (i.e. lists,arrays etc)
+                //var collectionProperties = request.GetType()
+                //    .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                //    .Where(propertInfo => propertInfo.PropertyType.GetInterfaces().Any(x => x == typeof(IEnumerable)))
+                //    .Select(p => p.GetValue(request, null))
+                //    .Cast<IEnumerable<object>>().ToList();
+
+                var x = propList
+                    .Where(i => i.PropertyType.GetInterfaces()
+                        .Any(x => x == typeof(IEnumerable)))
+                    .Select(i => i.GetValue(null))
+                    .Cast<IEnumerable<object>>().ToList();
+                propList.ForEach(i =>
+                {
+                    var propInfo = i;
+                });
+
+
+            }
+
+
             if (Contacts.Any() && Contacts != null)
                 // new generic
                 SerializeObjToJson(_path + contactsJson, _contacts);

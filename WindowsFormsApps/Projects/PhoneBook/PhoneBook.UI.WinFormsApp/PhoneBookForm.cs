@@ -11,9 +11,15 @@ namespace PhoneBook.UI.WinFormsApp
     public partial class PhoneBookForm : Form
     {
         private readonly IContactService _contactService;
+
+        public PhoneBookForm(IContactService contactService):this()
+        {
+            _contactService = contactService;
+        }
         public PhoneBookForm()
         {
-            _contactService = new ContactService(new ContactRepository());
+            //_contactService = contactService;
+            //_contactService = new ContactService(new ContactRepository());
             InitializeComponent();
         }
 

@@ -20,10 +20,9 @@ namespace PhoneBook.Core.Context
         {
             _approot = AppRoot();
             _path = Directory.GetParent(_approot)?.FullName + "/PhoneBook.Core/Context";
+            EnsureOrCreateDatabase();
             _contacts ??= new List<Contact>();
             _users ??= new List<User>();
-            EnsureOrCreateDatabase();
-            DeserializeObject();
         }
         #endregion
         #region .::fields and properties::.
@@ -67,7 +66,6 @@ namespace PhoneBook.Core.Context
             Assembly assembly = Assembly.LoadFile(coreDLL);
 
             Type type = assembly.GetType("PhoneBook.Core.Context.PhoneBookDbContext");
-            //DataSeeder();
             if (type is not null)
             {
                 // get props
@@ -81,30 +79,11 @@ namespace PhoneBook.Core.Context
                     {
                         CreateFile(filePath);
                     }
-                    PropertyInfo prop = i;
-                    string jsonData = File.ReadAllText(filePath);
-
-                    dynamic config = JsonConvert.DeserializeObject<List<ExpandoObject>>(jsonData, new ExpandoObjectConverter());
-
-                    if (config != null)
-                    {
-                        foreach (var enabledEndpoint in ((IEnumerable<dynamic>)config))
-                        {
-                            var x = enabledEndpoint;
-                        }
-                        //List<User> x = (List<User>)config;
-                    }
-                    //prop.SetValue(type,Activator.CreateInstance(prop.PropertyType));
-                    //i.SetValue(type,Activator.CreateInstance(i.PropertyType),null);
-
-                    //object objInstance = Activator.CreateInstance(i.);
-                    //var x = i.GetMethod().ReturnType;
-                    //SerializeObjToJson(_path + filePath, Activator.CreateInstance(i.PropertyType));
                 });
             }
 
             // new version
-            //DataSeeder();
+            DataSeeder();
 
             // old version
             // install nuget Newtonsoft.Json;
@@ -120,15 +99,20 @@ namespace PhoneBook.Core.Context
         /// </summary>
         private void DataSeeder()
         {
-            var user = new User
+            DeserializeObject();
+            if (!_users.Any() || _users == null)
             {
-                Username = "admin",
-                Password = "admin123!"
-            };
+                var user = new User
+                {
+                    Username = "admin",
+                    Password = "admin123!"
+                };
 
-            var users = new List<User> { user };
-            // new version
-            SerializeObjToJson(_path + usersJson, users);
+                var users = new List<User> { user };
+                // new version
+                SerializeObjToJson(_path + usersJson, users);
+            }
+           
         }
 
         static void CreateFile(string path)
@@ -184,7 +168,7 @@ namespace PhoneBook.Core.Context
                 WriteIndented = true
             });
 
-            AppendAllText(path, json);
+            WriteAllText(path, json);
         }
 
         /// <summary>
@@ -192,9 +176,9 @@ namespace PhoneBook.Core.Context
         /// </summary>
         /// <param name="path"></param>
         /// <param name="data"></param>
-        static void AppendAllText(string path, string data)
+        static void WriteAllText(string path, string data)
         {
-            File.AppendAllText(path, data);
+            File.WriteAllText(path, data);
         }
 
         /// <summary>

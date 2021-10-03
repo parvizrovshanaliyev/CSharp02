@@ -21,6 +21,7 @@ namespace PhoneBook.Core.Context
             _approot = AppRoot();
             _path = Directory.GetParent(_approot)?.FullName + "/PhoneBook.Core/Context";
             EnsureOrCreateDatabase();
+            //DeserializeObject();
             _contacts ??= new List<Contact>();
             _users ??= new List<User>();
         }
@@ -66,6 +67,7 @@ namespace PhoneBook.Core.Context
             Assembly assembly = Assembly.LoadFile(coreDLL);
 
             Type type = assembly.GetType("PhoneBook.Core.Context.PhoneBookDbContext");
+            
             if (type is not null)
             {
                 // get props
@@ -100,7 +102,7 @@ namespace PhoneBook.Core.Context
         private void DataSeeder()
         {
             DeserializeObject();
-            if (!_users.Any() || _users == null)
+            if (_users == null)
             {
                 var user = new User
                 {

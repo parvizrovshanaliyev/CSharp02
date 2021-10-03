@@ -20,7 +20,7 @@ namespace PhoneBook.Business.Services
 
             if (LoginValidations(entity))
             {
-                result = _userRepository.Login(entity); ;
+                result = _userRepository.Login(entity);
             }
             else
             {

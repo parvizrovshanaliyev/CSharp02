@@ -713,7 +713,7 @@ CSharp-02 , start  06/03/21
 
 
 
-# Week16  09/10/21
+# Week16  03/10/21
 ### Topics
     - Reflection
     - - LoadFile
@@ -725,4 +725,11 @@ CSharp-02 , start  06/03/21
     - - Reflection Example : 'creation of json files linked to entities in phonebook app'.
 ### Tasks
    - [week 15 task](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/ConsoleApps/week15/tasks/week15Tasks.txt)
+
+
+# Week17  10/10/21
+### Topics
+    - 
+### Tasks
+   - [week 17 task](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/ConsoleApps/week15/tasks/week15Tasks.txt)
 

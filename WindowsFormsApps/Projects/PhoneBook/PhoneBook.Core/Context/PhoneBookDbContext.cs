@@ -92,14 +92,6 @@ namespace PhoneBook.Core.Context
 
             // new version
             DataSeeder();
-
-            // old version
-            // install nuget Newtonsoft.Json;
-            //string userJson = JsonConvert.SerializeObject(users);
-            //File.WriteAllText($"{_path}/users.json", userJson);
-
-            //bool control = Exists($"{_path}/contacts.json");
-            //if (!control) CreateFile($"{_path}/contacts.json");
         }
 
         /// <summary>
@@ -115,7 +107,7 @@ namespace PhoneBook.Core.Context
                 var user = new User { Username = "admin", Password = "admin123!" };
 
                 var users = new List<User> { user };
-                // new version
+
                 SerializeObjToJson(_path + usersJson, users);
             }
         }
@@ -155,13 +147,8 @@ namespace PhoneBook.Core.Context
         public void SaveChanges()
         {
             if (Contacts.Any() && Contacts != null)
-                // new generic
                 SerializeObjToJson(_path + contactsJson, _contacts);
 
-            
-            // old
-            //string jsonData = JsonConvert.SerializeObject(_contacts);
-            //File.WriteAllText(_path + "/contacts.json",jsonData);
         }
 
         /// <summary>

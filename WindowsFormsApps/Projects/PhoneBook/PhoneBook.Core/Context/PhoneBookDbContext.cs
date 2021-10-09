@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -144,11 +146,10 @@ namespace PhoneBook.Core.Context
         /// <summary>
         /// Collection-larda olan deyiskliklerin yeniden json-a yazilmasi
         /// </summary>
-        public void SaveChanges()
+        public void SaveChanges<T>(string entityJsonName,List<T> data)
         {
-            if (Contacts.Any() && Contacts != null)
-                SerializeObjToJson(_path + contactsJson, _contacts);
-
+            if (data.Any() && string.IsNullOrEmpty(entityJsonName))
+                SerializeObjToJson(_path + entityJsonName, data); 
         }
 
         /// <summary>

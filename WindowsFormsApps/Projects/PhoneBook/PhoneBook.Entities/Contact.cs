@@ -21,9 +21,14 @@ namespace PhoneBook.Entities
 
         #region Overrides of Object
 
-        public override string ToString()
+        public override string? ToString()
         {
             return $"{Name} {Surname}";
+        }
+        
+        public  string GetEntityName()
+        {
+            return "Contacts.json";
         }
 
         #endregion

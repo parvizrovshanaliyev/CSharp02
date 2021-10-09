@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using PhoneBook.Core.Context;
 using PhoneBook.Entities;
 
@@ -19,7 +20,8 @@ namespace PhoneBook.Core.Repository
             try
             {
                 _context.Contacts.Add(entity);
-                _context.SaveChanges();
+                _context.SaveChanges(_context.Contacts.First().GetEntityName(), _context.Contacts);
+
                 result = 1;
             }
             catch (Exception e)

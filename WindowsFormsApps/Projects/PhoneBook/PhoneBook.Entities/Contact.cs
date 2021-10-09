@@ -28,7 +28,7 @@ namespace PhoneBook.Entities
         
         public  string GetEntityName()
         {
-            return "Contacts.json";
+            return "Contact.json";
         }
 
         #endregion

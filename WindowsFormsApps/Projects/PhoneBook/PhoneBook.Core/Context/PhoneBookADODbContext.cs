@@ -53,7 +53,7 @@ namespace PhoneBook.Core.Context
         public PhoneBookADODbContext()
         {
             // Burada connection string elave edilir ve cari melumatlar uzerinden sql serverdeki db ile elaqe yaradilir.
-            _connection = new SqlConnection("DataSource=.;Initial Catalog=PhoneBook;User Id=sa;Password=1");
+            _connection = new SqlConnection("Data Source=.;Initial Catalog=PhoneBook;Integrated Security=True");
         }
 
         /// <summary>

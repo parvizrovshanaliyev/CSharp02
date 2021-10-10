@@ -43,5 +43,30 @@ namespace PhoneBook.UI.WinFormsApp
                     break;
             }
         }
+
+        private void buttonExportXml_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonExportJson_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonExportCSV_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonImportJson_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

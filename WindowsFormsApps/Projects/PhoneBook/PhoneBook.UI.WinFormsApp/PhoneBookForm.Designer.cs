@@ -54,6 +54,11 @@ namespace PhoneBook.UI.WinFormsApp
             this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.buttonCreate = new System.Windows.Forms.Button();
+            this.buttonExportXml = new System.Windows.Forms.Button();
+            this.buttonExportCSV = new System.Windows.Forms.Button();
+            this.buttonExportJson = new System.Windows.Forms.Button();
+            this.buttonImportJson = new System.Windows.Forms.Button();
+            this.buttonUpdate = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -67,10 +72,8 @@ namespace PhoneBook.UI.WinFormsApp
             this.groupBox1.Controls.Add(this.listBoxContact);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(248, 562);
+            this.groupBox1.Size = new System.Drawing.Size(283, 749);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Contacts";
@@ -79,22 +82,19 @@ namespace PhoneBook.UI.WinFormsApp
             // 
             this.listBoxContact.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBoxContact.FormattingEnabled = true;
-            this.listBoxContact.ItemHeight = 15;
-            this.listBoxContact.Location = new System.Drawing.Point(3, 18);
-            this.listBoxContact.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.listBoxContact.ItemHeight = 20;
+            this.listBoxContact.Location = new System.Drawing.Point(3, 23);
             this.listBoxContact.Name = "listBoxContact";
-            this.listBoxContact.Size = new System.Drawing.Size(242, 542);
+            this.listBoxContact.Size = new System.Drawing.Size(277, 723);
             this.listBoxContact.TabIndex = 0;
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.tabControl1);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(248, 0);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox2.Location = new System.Drawing.Point(283, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox2.Size = new System.Drawing.Size(946, 404);
+            this.groupBox2.Size = new System.Drawing.Size(1082, 538);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "groupBox2";
@@ -104,11 +104,10 @@ namespace PhoneBook.UI.WinFormsApp
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(3, 18);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabControl1.Location = new System.Drawing.Point(3, 23);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(940, 384);
+            this.tabControl1.Size = new System.Drawing.Size(1076, 512);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -129,182 +128,174 @@ namespace PhoneBook.UI.WinFormsApp
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.textBoxName);
             this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 24);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage1.Size = new System.Drawing.Size(932, 356);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Size = new System.Drawing.Size(1068, 479);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Contact";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // textBoxAddress
             // 
-            this.textBoxAddress.Location = new System.Drawing.Point(73, 226);
-            this.textBoxAddress.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxAddress.Location = new System.Drawing.Point(83, 301);
             this.textBoxAddress.Multiline = true;
             this.textBoxAddress.Name = "textBoxAddress";
-            this.textBoxAddress.Size = new System.Drawing.Size(840, 126);
+            this.textBoxAddress.Size = new System.Drawing.Size(954, 150);
             this.textBoxAddress.TabIndex = 15;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(13, 233);
+            this.label8.Location = new System.Drawing.Point(15, 311);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(49, 15);
+            this.label8.Size = new System.Drawing.Size(62, 20);
             this.label8.TabIndex = 14;
             this.label8.Text = "Address\r\n";
             // 
             // textBoxNumber3
             // 
-            this.textBoxNumber3.Location = new System.Drawing.Point(602, 125);
-            this.textBoxNumber3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxNumber3.Location = new System.Drawing.Point(688, 167);
             this.textBoxNumber3.Name = "textBoxNumber3";
-            this.textBoxNumber3.Size = new System.Drawing.Size(306, 23);
+            this.textBoxNumber3.Size = new System.Drawing.Size(349, 27);
             this.textBoxNumber3.TabIndex = 13;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(513, 130);
+            this.label7.Location = new System.Drawing.Point(586, 173);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(60, 15);
+            this.label7.Size = new System.Drawing.Size(75, 20);
             this.label7.TabIndex = 12;
             this.label7.Text = "Number 3\r\n";
             // 
             // textBoxNumber2
             // 
-            this.textBoxNumber2.Location = new System.Drawing.Point(602, 77);
-            this.textBoxNumber2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxNumber2.Location = new System.Drawing.Point(688, 103);
             this.textBoxNumber2.Name = "textBoxNumber2";
-            this.textBoxNumber2.Size = new System.Drawing.Size(306, 23);
+            this.textBoxNumber2.Size = new System.Drawing.Size(349, 27);
             this.textBoxNumber2.TabIndex = 11;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(513, 82);
+            this.label6.Location = new System.Drawing.Point(586, 109);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(60, 15);
+            this.label6.Size = new System.Drawing.Size(75, 20);
             this.label6.TabIndex = 10;
             this.label6.Text = "Number 2";
             // 
             // textBoxNumber1
             // 
-            this.textBoxNumber1.Location = new System.Drawing.Point(602, 27);
-            this.textBoxNumber1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxNumber1.Location = new System.Drawing.Point(688, 36);
             this.textBoxNumber1.Name = "textBoxNumber1";
-            this.textBoxNumber1.Size = new System.Drawing.Size(306, 23);
+            this.textBoxNumber1.Size = new System.Drawing.Size(349, 27);
             this.textBoxNumber1.TabIndex = 9;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(513, 32);
+            this.label5.Location = new System.Drawing.Point(586, 43);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(60, 15);
+            this.label5.Size = new System.Drawing.Size(75, 20);
             this.label5.TabIndex = 8;
             this.label5.Text = "Number 1\r\n";
             // 
             // textBoxWebSite
             // 
-            this.textBoxWebSite.Location = new System.Drawing.Point(73, 172);
-            this.textBoxWebSite.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxWebSite.Location = new System.Drawing.Point(83, 229);
             this.textBoxWebSite.Name = "textBoxWebSite";
-            this.textBoxWebSite.Size = new System.Drawing.Size(306, 23);
+            this.textBoxWebSite.Size = new System.Drawing.Size(349, 27);
             this.textBoxWebSite.TabIndex = 7;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(13, 175);
+            this.label4.Location = new System.Drawing.Point(15, 233);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(49, 15);
+            this.label4.Size = new System.Drawing.Size(62, 20);
             this.label4.TabIndex = 6;
             this.label4.Text = "Website\r\n";
             // 
             // textBoxEmail
             // 
-            this.textBoxEmail.Location = new System.Drawing.Point(73, 128);
-            this.textBoxEmail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxEmail.Location = new System.Drawing.Point(83, 171);
             this.textBoxEmail.Name = "textBoxEmail";
-            this.textBoxEmail.Size = new System.Drawing.Size(306, 23);
+            this.textBoxEmail.Size = new System.Drawing.Size(349, 27);
             this.textBoxEmail.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 130);
+            this.label3.Location = new System.Drawing.Point(31, 173);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(36, 15);
+            this.label3.Size = new System.Drawing.Size(46, 20);
             this.label3.TabIndex = 4;
             this.label3.Text = "Email";
             // 
             // textBoxSurname
             // 
-            this.textBoxSurname.Location = new System.Drawing.Point(73, 80);
-            this.textBoxSurname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxSurname.Location = new System.Drawing.Point(83, 107);
             this.textBoxSurname.Name = "textBoxSurname";
-            this.textBoxSurname.Size = new System.Drawing.Size(306, 23);
+            this.textBoxSurname.Size = new System.Drawing.Size(349, 27);
             this.textBoxSurname.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 82);
+            this.label2.Location = new System.Drawing.Point(10, 109);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 15);
+            this.label2.Size = new System.Drawing.Size(67, 20);
             this.label2.TabIndex = 2;
             this.label2.Text = "Surname\r\n";
             // 
             // textBoxName
             // 
-            this.textBoxName.Location = new System.Drawing.Point(73, 30);
-            this.textBoxName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxName.Location = new System.Drawing.Point(83, 40);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(306, 23);
+            this.textBoxName.Size = new System.Drawing.Size(349, 27);
             this.textBoxName.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 32);
+            this.label1.Location = new System.Drawing.Point(27, 43);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 15);
+            this.label1.Size = new System.Drawing.Size(49, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Name\r\n";
             // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.textBoxDescription);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(933, 376);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Size = new System.Drawing.Size(1066, 474);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Description";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // textBoxDescription
             // 
-            this.textBoxDescription.Location = new System.Drawing.Point(13, 14);
-            this.textBoxDescription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxDescription.Location = new System.Drawing.Point(15, 19);
             this.textBoxDescription.Multiline = true;
             this.textBoxDescription.Name = "textBoxDescription";
-            this.textBoxDescription.Size = new System.Drawing.Size(911, 352);
+            this.textBoxDescription.Size = new System.Drawing.Size(1041, 468);
             this.textBoxDescription.TabIndex = 0;
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.buttonUpdate);
+            this.groupBox3.Controls.Add(this.buttonImportJson);
+            this.groupBox3.Controls.Add(this.buttonExportJson);
+            this.groupBox3.Controls.Add(this.buttonExportCSV);
+            this.groupBox3.Controls.Add(this.buttonExportXml);
             this.groupBox3.Controls.Add(this.buttonCreate);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox3.Location = new System.Drawing.Point(248, 404);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox3.Location = new System.Drawing.Point(283, 538);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox3.Size = new System.Drawing.Size(946, 158);
+            this.groupBox3.Size = new System.Drawing.Size(1082, 211);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "groupBox3";
@@ -312,24 +303,73 @@ namespace PhoneBook.UI.WinFormsApp
             // buttonCreate
             // 
             this.buttonCreate.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonCreate.Location = new System.Drawing.Point(3, 18);
-            this.buttonCreate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonCreate.Location = new System.Drawing.Point(3, 23);
             this.buttonCreate.Name = "buttonCreate";
-            this.buttonCreate.Size = new System.Drawing.Size(940, 22);
+            this.buttonCreate.Size = new System.Drawing.Size(1076, 44);
             this.buttonCreate.TabIndex = 16;
-            this.buttonCreate.Text = "New Contact";
+            this.buttonCreate.Text = "Create";
             this.buttonCreate.UseVisualStyleBackColor = true;
             this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
             // 
+            // buttonExportXml
+            // 
+            this.buttonExportXml.Location = new System.Drawing.Point(2, 135);
+            this.buttonExportXml.Name = "buttonExportXml";
+            this.buttonExportXml.Size = new System.Drawing.Size(261, 64);
+            this.buttonExportXml.TabIndex = 17;
+            this.buttonExportXml.Text = "Export XML";
+            this.buttonExportXml.UseVisualStyleBackColor = true;
+            this.buttonExportXml.Click += new System.EventHandler(this.buttonExportXml_Click);
+            // 
+            // buttonExportCSV
+            // 
+            this.buttonExportCSV.Location = new System.Drawing.Point(269, 135);
+            this.buttonExportCSV.Name = "buttonExportCSV";
+            this.buttonExportCSV.Size = new System.Drawing.Size(289, 64);
+            this.buttonExportCSV.TabIndex = 18;
+            this.buttonExportCSV.Text = "Export CSV";
+            this.buttonExportCSV.UseVisualStyleBackColor = true;
+            this.buttonExportCSV.Click += new System.EventHandler(this.buttonExportCSV_Click);
+            // 
+            // buttonExportJson
+            // 
+            this.buttonExportJson.Location = new System.Drawing.Point(564, 135);
+            this.buttonExportJson.Name = "buttonExportJson";
+            this.buttonExportJson.Size = new System.Drawing.Size(270, 64);
+            this.buttonExportJson.TabIndex = 19;
+            this.buttonExportJson.Text = "Export JSON";
+            this.buttonExportJson.UseVisualStyleBackColor = true;
+            this.buttonExportJson.Click += new System.EventHandler(this.buttonExportJson_Click);
+            // 
+            // buttonImportJson
+            // 
+            this.buttonImportJson.Location = new System.Drawing.Point(840, 135);
+            this.buttonImportJson.Name = "buttonImportJson";
+            this.buttonImportJson.Size = new System.Drawing.Size(237, 64);
+            this.buttonImportJson.TabIndex = 20;
+            this.buttonImportJson.Text = "ImportJSON";
+            this.buttonImportJson.UseVisualStyleBackColor = true;
+            this.buttonImportJson.Click += new System.EventHandler(this.buttonImportJson_Click);
+            // 
+            // buttonUpdate
+            // 
+            this.buttonUpdate.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonUpdate.Location = new System.Drawing.Point(3, 67);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(1076, 44);
+            this.buttonUpdate.TabIndex = 21;
+            this.buttonUpdate.Text = "Update";
+            this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
+            // 
             // PhoneBookForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1194, 562);
+            this.ClientSize = new System.Drawing.Size(1365, 749);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "PhoneBookForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PhoneBookForm";
@@ -372,6 +412,11 @@ namespace PhoneBook.UI.WinFormsApp
         private System.Windows.Forms.TextBox textBoxAddress;
         private System.Windows.Forms.Button buttonCreate;
         private System.Windows.Forms.TextBox textBoxDescription;
+        private System.Windows.Forms.Button buttonExportJson;
+        private System.Windows.Forms.Button buttonExportCSV;
+        private System.Windows.Forms.Button buttonExportXml;
+        private System.Windows.Forms.Button buttonUpdate;
+        private System.Windows.Forms.Button buttonImportJson;
     }
 }
 

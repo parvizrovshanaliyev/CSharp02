@@ -45,6 +45,7 @@ namespace PhoneBook.UI.WinFormsApp
                 switch (result)
                 {
                     case > 0:
+                        this.Close();
                         PhoneBookForm form = new PhoneBookForm();
                         form.Show();
                         break;

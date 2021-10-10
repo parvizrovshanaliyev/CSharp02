@@ -8,6 +8,8 @@
         public const string CaptionInfo = "Information";
         public const string CaptionQuestion = "Question";
         public const string AddSuccess = "Add to success";
+        public const string Success = "The operation is successful";
+        public const string Fail = "The operation is failed";
         public const string UpdateSuccess = "Update to success";
         public const string DeleteSuccess = "Delete to success";
         public const string AddOperationAgain = " add operation again ? ";

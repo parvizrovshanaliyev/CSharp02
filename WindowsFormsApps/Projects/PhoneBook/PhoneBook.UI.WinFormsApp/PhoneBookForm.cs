@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Unicode;
 using System.Windows.Forms;
 using PhoneBook.Business.Constants;
 using PhoneBook.Business.Enums;
@@ -17,6 +21,12 @@ namespace PhoneBook.UI.WinFormsApp
             _contactService = new ContactService(new ContactRepository());
             InitializeComponent();
         }
+        private void PhoneBookForm_Load(object sender, EventArgs e)
+        {
+            FillContactListBox();
+        }
+
+        #region add, update and delete
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
@@ -81,29 +91,80 @@ namespace PhoneBook.UI.WinFormsApp
                     break;
             }
         }
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            var selectedItem = (Contact)listBoxContact.SelectedItem;
+
+            if (selectedItem != null)
+            {
+                var result = _contactService.Delete(selectedItem.Id);
+
+                switch (result)
+                {
+                    case > 0:
+                        FillContactListBox();
+                        MessageBox.Show(GlobalConstants.DeleteSuccess, GlobalConstants.DeleteSuccess, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    case (int)ResultCodeEnums.ModelStateNoValid:
+                        MessageBox.Show(GlobalConstants.ModelStateNotValid, GlobalConstants.CaptionInfo, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                }
+            }
+        }
+
+        #endregion
+
+        #region file operations
         private void buttonExportXml_Click(object sender, EventArgs e)
         {
+            var result = _contactService.ExportXML();
 
+            switch (result)
+            {
+                case > 0:
+                    MessageBox.Show(GlobalConstants.Success, GlobalConstants.Success, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
+                case 0:
+                    MessageBox.Show(GlobalConstants.Fail, GlobalConstants.CaptionInfo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+            }
         }
 
         private void buttonExportJson_Click(object sender, EventArgs e)
         {
+            var result = _contactService.ExportJSON();
 
+            switch (result)
+            {
+                case > 0:
+                    MessageBox.Show(GlobalConstants.Success, GlobalConstants.Success, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
+                case 0:
+                    MessageBox.Show(GlobalConstants.Fail, GlobalConstants.CaptionInfo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+            }
         }
 
         private void buttonExportCSV_Click(object sender, EventArgs e)
         {
+            var result = _contactService.ExportCSV();
 
+            switch (result)
+            {
+                case > 0:
+                    MessageBox.Show(GlobalConstants.Success, GlobalConstants.Success, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    break;
+                case 0:
+                    MessageBox.Show(GlobalConstants.Fail, GlobalConstants.CaptionInfo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+            }
         }
 
         private void buttonImportJson_Click(object sender, EventArgs e)
         {
 
         }
-        private void PhoneBookForm_Load(object sender, EventArgs e)
-        {
-            FillContactListBox();
-        }
+        #endregion
 
         private void listBoxContact_DoubleClick(object sender, EventArgs e)
         {
@@ -134,25 +195,9 @@ namespace PhoneBook.UI.WinFormsApp
             
         }
 
-        private void buttonDelete_Click(object sender, EventArgs e)
-        {
-            var selectedItem = (Contact)listBoxContact.SelectedItem;
 
-            if (selectedItem != null)
-            {
-                var result = _contactService.Delete(selectedItem.Id);
 
-                switch (result)
-                {
-                    case > 0:
-                        FillContactListBox();
-                        MessageBox.Show(GlobalConstants.DeleteSuccess, GlobalConstants.DeleteSuccess, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        break;
-                    case (int)ResultCodeEnums.ModelStateNoValid:
-                        MessageBox.Show(GlobalConstants.ModelStateNotValid, GlobalConstants.CaptionInfo, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        break;
-                }
-            }
-        }
+        
+
     }
 }

@@ -45,7 +45,7 @@ namespace PhoneBook.Core.Repository
             int result;
             try
             {
-                var entity = _context.Contacts.Find(i=>i.Id== request.Id);
+                var entity = _context.Contacts.Find(i=>i.Id == request.Id);
 
                 if (entity == null)
                 {

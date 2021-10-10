@@ -188,6 +188,7 @@ namespace PhoneBook.Core.Context
             var user = new User { Username = "admin", Password = "admin123!" };
             _users.Add(user);
             var fileName = user.GetType().Name + ".json";
+
             SerializeObjToJson(fileName, _users);
         }
 

@@ -10,5 +10,7 @@ namespace PhoneBook.Business.Services
     public interface IContactService
     {
         int Add(Contact entity);
+        int Update(Contact entity);
+        List<Contact> GetAll();
     }
 }

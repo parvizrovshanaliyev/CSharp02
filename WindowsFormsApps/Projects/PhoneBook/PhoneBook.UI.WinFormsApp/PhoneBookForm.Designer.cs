@@ -31,7 +31,7 @@ namespace PhoneBook.UI.WinFormsApp
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listBoxContact = new System.Windows.Forms.ListBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBoxCreateOrUpdate = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.textBoxAddress = new System.Windows.Forms.TextBox();
@@ -53,14 +53,14 @@ namespace PhoneBook.UI.WinFormsApp
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.buttonCreate = new System.Windows.Forms.Button();
-            this.buttonExportXml = new System.Windows.Forms.Button();
-            this.buttonExportCSV = new System.Windows.Forms.Button();
-            this.buttonExportJson = new System.Windows.Forms.Button();
-            this.buttonImportJson = new System.Windows.Forms.Button();
             this.buttonUpdate = new System.Windows.Forms.Button();
+            this.buttonImportJson = new System.Windows.Forms.Button();
+            this.buttonExportJson = new System.Windows.Forms.Button();
+            this.buttonExportCSV = new System.Windows.Forms.Button();
+            this.buttonExportXml = new System.Windows.Forms.Button();
+            this.buttonCreate = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.groupBoxCreateOrUpdate.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -87,17 +87,18 @@ namespace PhoneBook.UI.WinFormsApp
             this.listBoxContact.Name = "listBoxContact";
             this.listBoxContact.Size = new System.Drawing.Size(277, 723);
             this.listBoxContact.TabIndex = 0;
+            this.listBoxContact.DoubleClick += new System.EventHandler(this.listBoxContact_DoubleClick);
             // 
-            // groupBox2
+            // groupBoxCreateOrUpdate
             // 
-            this.groupBox2.Controls.Add(this.tabControl1);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(283, 0);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1082, 538);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
+            this.groupBoxCreateOrUpdate.Controls.Add(this.tabControl1);
+            this.groupBoxCreateOrUpdate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxCreateOrUpdate.Location = new System.Drawing.Point(283, 0);
+            this.groupBoxCreateOrUpdate.Name = "groupBoxCreateOrUpdate";
+            this.groupBoxCreateOrUpdate.Size = new System.Drawing.Size(1082, 538);
+            this.groupBoxCreateOrUpdate.TabIndex = 1;
+            this.groupBoxCreateOrUpdate.TabStop = false;
+            this.groupBoxCreateOrUpdate.Text = "New Contact";
             // 
             // tabControl1
             // 
@@ -130,7 +131,7 @@ namespace PhoneBook.UI.WinFormsApp
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(1068, 479);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Contact";
@@ -270,8 +271,8 @@ namespace PhoneBook.UI.WinFormsApp
             this.tabPage2.Controls.Add(this.textBoxDescription);
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tabPage2.Size = new System.Drawing.Size(1066, 474);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1068, 479);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Description";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -300,57 +301,6 @@ namespace PhoneBook.UI.WinFormsApp
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "groupBox3";
             // 
-            // buttonCreate
-            // 
-            this.buttonCreate.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonCreate.Location = new System.Drawing.Point(3, 23);
-            this.buttonCreate.Name = "buttonCreate";
-            this.buttonCreate.Size = new System.Drawing.Size(1076, 44);
-            this.buttonCreate.TabIndex = 16;
-            this.buttonCreate.Text = "Create";
-            this.buttonCreate.UseVisualStyleBackColor = true;
-            this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
-            // 
-            // buttonExportXml
-            // 
-            this.buttonExportXml.Location = new System.Drawing.Point(2, 135);
-            this.buttonExportXml.Name = "buttonExportXml";
-            this.buttonExportXml.Size = new System.Drawing.Size(261, 64);
-            this.buttonExportXml.TabIndex = 17;
-            this.buttonExportXml.Text = "Export XML";
-            this.buttonExportXml.UseVisualStyleBackColor = true;
-            this.buttonExportXml.Click += new System.EventHandler(this.buttonExportXml_Click);
-            // 
-            // buttonExportCSV
-            // 
-            this.buttonExportCSV.Location = new System.Drawing.Point(269, 135);
-            this.buttonExportCSV.Name = "buttonExportCSV";
-            this.buttonExportCSV.Size = new System.Drawing.Size(289, 64);
-            this.buttonExportCSV.TabIndex = 18;
-            this.buttonExportCSV.Text = "Export CSV";
-            this.buttonExportCSV.UseVisualStyleBackColor = true;
-            this.buttonExportCSV.Click += new System.EventHandler(this.buttonExportCSV_Click);
-            // 
-            // buttonExportJson
-            // 
-            this.buttonExportJson.Location = new System.Drawing.Point(564, 135);
-            this.buttonExportJson.Name = "buttonExportJson";
-            this.buttonExportJson.Size = new System.Drawing.Size(270, 64);
-            this.buttonExportJson.TabIndex = 19;
-            this.buttonExportJson.Text = "Export JSON";
-            this.buttonExportJson.UseVisualStyleBackColor = true;
-            this.buttonExportJson.Click += new System.EventHandler(this.buttonExportJson_Click);
-            // 
-            // buttonImportJson
-            // 
-            this.buttonImportJson.Location = new System.Drawing.Point(840, 135);
-            this.buttonImportJson.Name = "buttonImportJson";
-            this.buttonImportJson.Size = new System.Drawing.Size(237, 64);
-            this.buttonImportJson.TabIndex = 20;
-            this.buttonImportJson.Text = "ImportJSON";
-            this.buttonImportJson.UseVisualStyleBackColor = true;
-            this.buttonImportJson.Click += new System.EventHandler(this.buttonImportJson_Click);
-            // 
             // buttonUpdate
             // 
             this.buttonUpdate.Dock = System.Windows.Forms.DockStyle.Top;
@@ -362,19 +312,71 @@ namespace PhoneBook.UI.WinFormsApp
             this.buttonUpdate.UseVisualStyleBackColor = true;
             this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
+            // buttonImportJson
+            // 
+            this.buttonImportJson.Location = new System.Drawing.Point(840, 135);
+            this.buttonImportJson.Name = "buttonImportJson";
+            this.buttonImportJson.Size = new System.Drawing.Size(237, 64);
+            this.buttonImportJson.TabIndex = 20;
+            this.buttonImportJson.Text = "ImportJSON";
+            this.buttonImportJson.UseVisualStyleBackColor = true;
+            this.buttonImportJson.Click += new System.EventHandler(this.buttonImportJson_Click);
+            // 
+            // buttonExportJson
+            // 
+            this.buttonExportJson.Location = new System.Drawing.Point(564, 135);
+            this.buttonExportJson.Name = "buttonExportJson";
+            this.buttonExportJson.Size = new System.Drawing.Size(270, 64);
+            this.buttonExportJson.TabIndex = 19;
+            this.buttonExportJson.Text = "Export JSON";
+            this.buttonExportJson.UseVisualStyleBackColor = true;
+            this.buttonExportJson.Click += new System.EventHandler(this.buttonExportJson_Click);
+            // 
+            // buttonExportCSV
+            // 
+            this.buttonExportCSV.Location = new System.Drawing.Point(269, 135);
+            this.buttonExportCSV.Name = "buttonExportCSV";
+            this.buttonExportCSV.Size = new System.Drawing.Size(289, 64);
+            this.buttonExportCSV.TabIndex = 18;
+            this.buttonExportCSV.Text = "Export CSV";
+            this.buttonExportCSV.UseVisualStyleBackColor = true;
+            this.buttonExportCSV.Click += new System.EventHandler(this.buttonExportCSV_Click);
+            // 
+            // buttonExportXml
+            // 
+            this.buttonExportXml.Location = new System.Drawing.Point(2, 135);
+            this.buttonExportXml.Name = "buttonExportXml";
+            this.buttonExportXml.Size = new System.Drawing.Size(261, 64);
+            this.buttonExportXml.TabIndex = 17;
+            this.buttonExportXml.Text = "Export XML";
+            this.buttonExportXml.UseVisualStyleBackColor = true;
+            this.buttonExportXml.Click += new System.EventHandler(this.buttonExportXml_Click);
+            // 
+            // buttonCreate
+            // 
+            this.buttonCreate.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonCreate.Location = new System.Drawing.Point(3, 23);
+            this.buttonCreate.Name = "buttonCreate";
+            this.buttonCreate.Size = new System.Drawing.Size(1076, 44);
+            this.buttonCreate.TabIndex = 16;
+            this.buttonCreate.Text = "Create";
+            this.buttonCreate.UseVisualStyleBackColor = true;
+            this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
+            // 
             // PhoneBookForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1365, 749);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBoxCreateOrUpdate);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Name = "PhoneBookForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PhoneBookForm";
+            this.Load += new System.EventHandler(this.PhoneBookForm_Load);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
+            this.groupBoxCreateOrUpdate.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -388,7 +390,7 @@ namespace PhoneBook.UI.WinFormsApp
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBoxCreateOrUpdate;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.ListBox listBoxContact;
         private System.Windows.Forms.TabControl tabControl1;

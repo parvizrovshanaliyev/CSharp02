@@ -52,7 +52,6 @@ namespace PhoneBook.UI.WinFormsApp
                         form.ShowDialog();
                         //Close the form
                         this.Close();
-
                         break;
                     case (int)ResultCodeEnums.ModelStateNoValid:
                         MessageBox.Show(GlobalConstants.Required, GlobalConstants.CaptionInfo, MessageBoxButtons.OK, MessageBoxIcon.Information);

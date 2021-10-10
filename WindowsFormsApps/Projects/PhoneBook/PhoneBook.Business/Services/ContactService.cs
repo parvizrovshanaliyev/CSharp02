@@ -20,6 +20,26 @@ namespace PhoneBook.Business.Services
 
         #region Implementation of IContactService
 
+        public int Update(Contact request)
+        {
+            int result = 0;
+
+            if (UpdateContactValidations(request))
+            {
+                result = _contactRepository.Update(request);
+            }
+            else
+            {
+                result = (int)ResultCodeEnums.ModelStateNoValid;
+            }
+
+            return result;
+        }
+
+        public List<Contact> GetAll()
+        {
+            return _contactRepository.GetAll();
+        }
         public int Add(Contact entity)
         {
             int result = 0;
@@ -36,9 +56,19 @@ namespace PhoneBook.Business.Services
             return result;
         }
 
+        
+
         private bool ContactValidations(Contact entity)
         {
             return !string.IsNullOrEmpty(entity.Name)
+                   && !string.IsNullOrEmpty(entity.Surname)
+                   && !string.IsNullOrEmpty(entity.Number1);
+        }
+
+        private bool UpdateContactValidations(Contact entity)
+        {
+            return entity.Id != Guid.Empty
+                && !string.IsNullOrEmpty(entity.Name)
                    && !string.IsNullOrEmpty(entity.Surname)
                    && !string.IsNullOrEmpty(entity.Number1);
         }

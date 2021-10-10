@@ -1,0 +1,5 @@
+
+
+1. https://marketplace.visualstudio.com/items?itemName=VisualStudioClient.MicrosoftVisualStudio2017InstallerProjects
+   Bu linkdeki extension yuklenmelidir.
+2. add new project > Setup axtarilir ve yaradilir.

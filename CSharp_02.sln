@@ -201,6 +201,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "week16.ReflectionWinFormsApp", "WindowsFormsApps\Projects\week16.ReflectionWinFormsApp\week16.ReflectionWinFormsApp.csproj", "{C205F730-E78D-4A35-8C2E-53E6B9B0EC12}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PhoneBook", "PhoneBook", "{5FB718E8-3518-40FB-8362-31362B399E90}"
+	ProjectSection(SolutionItems) = preProject
+		PhoneBookSetup.txt = PhoneBookSetup.txt
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.UI.WinFormsApp", "WindowsFormsApps\Projects\PhoneBook\PhoneBook.UI.WinFormsApp\PhoneBook.UI.WinFormsApp.csproj", "{A22E8BCC-57B0-4D9A-AF35-E7E9E48C9953}"
 EndProject
@@ -210,9 +213,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.Business", "Windo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.Entities", "WindowsFormsApps\Projects\PhoneBook\PhoneBook.Entities\PhoneBook.Entities.csproj", "{2C9909BE-CD3D-426E-9594-B0B200C95F3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionLib", "ConsoleApps\week16\Reflection\ReflectionLib\ReflectionLib.csproj", "{12911B9D-100B-494F-A03D-4CDC7FC19085}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReflectionLib", "ConsoleApps\week16\Reflection\ReflectionLib\ReflectionLib.csproj", "{12911B9D-100B-494F-A03D-4CDC7FC19085}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionWinForm", "ConsoleApps\week16\Reflection\ReflectionLibConsoleApp\ReflectionWinForm\ReflectionWinForm.csproj", "{3FF16685-9624-49D1-A337-BFDBDFD79795}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReflectionWinForm", "ConsoleApps\week16\Reflection\ReflectionLibConsoleApp\ReflectionWinForm\ReflectionWinForm.csproj", "{3FF16685-9624-49D1-A337-BFDBDFD79795}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "PhoneBookSetup", "WindowsFormsApps\Projects\PhoneBook\PhoneBookSetup\PhoneBookSetup.vdproj", "{5CDA2739-9FAF-466F-8F1E-C8BBD394CAFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -532,6 +537,8 @@ Global
 		{3FF16685-9624-49D1-A337-BFDBDFD79795}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FF16685-9624-49D1-A337-BFDBDFD79795}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FF16685-9624-49D1-A337-BFDBDFD79795}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CDA2739-9FAF-466F-8F1E-C8BBD394CAFD}.Debug|Any CPU.ActiveCfg = Debug
+		{5CDA2739-9FAF-466F-8F1E-C8BBD394CAFD}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -632,6 +639,7 @@ Global
 		{2C9909BE-CD3D-426E-9594-B0B200C95F3E} = {5FB718E8-3518-40FB-8362-31362B399E90}
 		{12911B9D-100B-494F-A03D-4CDC7FC19085} = {0C3E898D-57A8-4D84-941C-AEFAC294C55F}
 		{3FF16685-9624-49D1-A337-BFDBDFD79795} = {0C3E898D-57A8-4D84-941C-AEFAC294C55F}
+		{5CDA2739-9FAF-466F-8F1E-C8BBD394CAFD} = {5FB718E8-3518-40FB-8362-31362B399E90}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D6E9931C-7C85-426B-8D58-D5D7B19EC5EB}

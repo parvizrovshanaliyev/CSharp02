@@ -201,6 +201,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "week16.ReflectionWinFormsApp", "WindowsFormsApps\Projects\week16.ReflectionWinFormsApp\week16.ReflectionWinFormsApp.csproj", "{C205F730-E78D-4A35-8C2E-53E6B9B0EC12}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PhoneBook", "PhoneBook", "{5FB718E8-3518-40FB-8362-31362B399E90}"
+	ProjectSection(SolutionItems) = preProject
+		Ado_intro.txt = Ado_intro.txt
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.UI.WinFormsApp", "WindowsFormsApps\Projects\PhoneBook\PhoneBook.UI.WinFormsApp\PhoneBook.UI.WinFormsApp.csproj", "{A22E8BCC-57B0-4D9A-AF35-E7E9E48C9953}"
 EndProject
@@ -210,9 +213,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.Business", "Windo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.Entities", "WindowsFormsApps\Projects\PhoneBook\PhoneBook.Entities\PhoneBook.Entities.csproj", "{2C9909BE-CD3D-426E-9594-B0B200C95F3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionLib", "ConsoleApps\week16\Reflection\ReflectionLib\ReflectionLib.csproj", "{12911B9D-100B-494F-A03D-4CDC7FC19085}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReflectionLib", "ConsoleApps\week16\Reflection\ReflectionLib\ReflectionLib.csproj", "{12911B9D-100B-494F-A03D-4CDC7FC19085}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionWinForm", "ConsoleApps\week16\Reflection\ReflectionLibConsoleApp\ReflectionWinForm\ReflectionWinForm.csproj", "{3FF16685-9624-49D1-A337-BFDBDFD79795}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReflectionWinForm", "ConsoleApps\week16\Reflection\ReflectionLibConsoleApp\ReflectionWinForm\ReflectionWinForm.csproj", "{3FF16685-9624-49D1-A337-BFDBDFD79795}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

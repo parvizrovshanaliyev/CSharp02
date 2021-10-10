@@ -1,0 +1,24 @@
+
+
+
+
+
+
+* Connection string 
+
+Connection string vasitesile sql server ve application arasinda elaqe yaradilir yeni app hansi db-ya qosulacagini connection string uzerinden,
+basa dusur.
+
+** DataSource=.;
+hansi servere qosulacagimizi burada qeyd edirik , local-da olan sql server adini(DESKTOP-3PQRKF1\SQLEXPRESS) yazmaq yerine cox vaxt . qoymaq kifayet edir.
+
+** Initial Catalog=PhoneBook; 
+
+burada qosuldugumuz serverde movcud olan ve ya yaradilacaq Database adi yazilir.
+
+** User Id=sa ;
+
+Sql server-e qosula bilmek ucun User Id eger tayin edilibse yazilir, sa system-admin ucun default evvelceden movcud olur
+
+** Password= ;
+Sql server-e qosula bilmek ucun

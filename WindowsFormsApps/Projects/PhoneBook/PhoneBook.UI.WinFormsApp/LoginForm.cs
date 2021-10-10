@@ -45,9 +45,14 @@ namespace PhoneBook.UI.WinFormsApp
                 switch (result)
                 {
                     case > 0:
-                        this.Close();
+                        //Hide the 'current' form
+                        this.Hide();
+                        //show another form 
                         PhoneBookForm form = new PhoneBookForm();
-                        form.Show();
+                        form.ShowDialog();
+                        //Close the form
+                        this.Close();
+
                         break;
                     case (int)ResultCodeEnums.ModelStateNoValid:
                         MessageBox.Show(GlobalConstants.Required, GlobalConstants.CaptionInfo, MessageBoxButtons.OK, MessageBoxIcon.Information);

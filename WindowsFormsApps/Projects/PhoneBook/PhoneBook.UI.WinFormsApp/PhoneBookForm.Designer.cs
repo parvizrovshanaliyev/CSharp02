@@ -59,6 +59,7 @@ namespace PhoneBook.UI.WinFormsApp
             this.buttonExportCSV = new System.Windows.Forms.Button();
             this.buttonExportXml = new System.Windows.Forms.Button();
             this.buttonCreate = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBoxCreateOrUpdate.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -287,6 +288,7 @@ namespace PhoneBook.UI.WinFormsApp
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.buttonDelete);
             this.groupBox3.Controls.Add(this.buttonUpdate);
             this.groupBox3.Controls.Add(this.buttonImportJson);
             this.groupBox3.Controls.Add(this.buttonExportJson);
@@ -303,10 +305,9 @@ namespace PhoneBook.UI.WinFormsApp
             // 
             // buttonUpdate
             // 
-            this.buttonUpdate.Dock = System.Windows.Forms.DockStyle.Top;
             this.buttonUpdate.Location = new System.Drawing.Point(3, 67);
             this.buttonUpdate.Name = "buttonUpdate";
-            this.buttonUpdate.Size = new System.Drawing.Size(1076, 44);
+            this.buttonUpdate.Size = new System.Drawing.Size(537, 46);
             this.buttonUpdate.TabIndex = 21;
             this.buttonUpdate.Text = "Update";
             this.buttonUpdate.UseVisualStyleBackColor = true;
@@ -362,6 +363,16 @@ namespace PhoneBook.UI.WinFormsApp
             this.buttonCreate.Text = "Create";
             this.buttonCreate.UseVisualStyleBackColor = true;
             this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
+            // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Location = new System.Drawing.Point(542, 67);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(537, 46);
+            this.buttonDelete.TabIndex = 22;
+            this.buttonDelete.Text = "Delete";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // PhoneBookForm
             // 
@@ -419,6 +430,7 @@ namespace PhoneBook.UI.WinFormsApp
         private System.Windows.Forms.Button buttonExportXml;
         private System.Windows.Forms.Button buttonUpdate;
         private System.Windows.Forms.Button buttonImportJson;
+        private System.Windows.Forms.Button buttonDelete;
     }
 }
 

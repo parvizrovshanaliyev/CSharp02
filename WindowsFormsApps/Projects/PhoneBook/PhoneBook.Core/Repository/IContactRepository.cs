@@ -12,5 +12,6 @@ namespace PhoneBook.Core.Repository
         List<Contact> GetAll();
         int Add(Contact entity);
         int Update(Contact entity);
+        int Delete(Guid id);
     }
 }

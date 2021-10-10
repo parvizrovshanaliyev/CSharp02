@@ -9,6 +9,7 @@
         public const string CaptionQuestion = "Question";
         public const string AddSuccess = "Add to success";
         public const string UpdateSuccess = "Update to success";
+        public const string DeleteSuccess = "Delete to success";
         public const string AddOperationAgain = " add operation again ? ";
         public const string AddError = "Excepction: add operation error!!";
         public const string EmptyList = "Data yoxdu qedesh";

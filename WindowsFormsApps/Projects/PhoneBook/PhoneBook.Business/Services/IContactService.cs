@@ -11,6 +11,8 @@ namespace PhoneBook.Business.Services
     {
         int Add(Contact entity);
         int Update(Contact entity);
+        int Delete(Guid id);
+
         List<Contact> GetAll();
     }
 }

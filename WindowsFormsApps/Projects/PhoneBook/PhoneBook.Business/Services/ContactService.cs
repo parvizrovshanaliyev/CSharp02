@@ -36,6 +36,24 @@ namespace PhoneBook.Business.Services
             return result;
         }
 
+        public int Delete(Guid id)
+        {
+            int result = 0;
+
+            if (DeleteContactValidations(id))
+            {
+                result = _contactRepository.Delete(id);
+            }
+            else
+            {
+                result = (int)ResultCodeEnums.ModelStateNoValid;
+            }
+
+            return result;
+        }
+
+       
+
         public List<Contact> GetAll()
         {
             return _contactRepository.GetAll();
@@ -71,6 +89,10 @@ namespace PhoneBook.Business.Services
                 && !string.IsNullOrEmpty(entity.Name)
                    && !string.IsNullOrEmpty(entity.Surname)
                    && !string.IsNullOrEmpty(entity.Number1);
+        }
+        private bool DeleteContactValidations(Guid id)
+        {
+            return id != Guid.Empty;
         }
         #endregion
     }

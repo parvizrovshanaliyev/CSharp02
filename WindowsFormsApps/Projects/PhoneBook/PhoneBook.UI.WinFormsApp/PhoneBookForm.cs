@@ -37,6 +37,7 @@ namespace PhoneBook.UI.WinFormsApp
             switch (result)
             {
                 case > 0:
+                    FillContactListBox();
                     MessageBox.Show(GlobalConstants.AddSuccess, GlobalConstants.AddSuccess, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 case (int)ResultCodeEnums.ModelStateNoValid:
@@ -47,6 +48,11 @@ namespace PhoneBook.UI.WinFormsApp
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
             var selectedItem = (Contact)listBoxContact.SelectedItem;
+
+            if (selectedItem == null)
+            {
+                MessageBox.Show(GlobalConstants.ModelStateNotValid, GlobalConstants.CaptionInfo, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
             var entity = new Contact()
             {
@@ -126,6 +132,27 @@ namespace PhoneBook.UI.WinFormsApp
                 listBoxContact.DataSource = entities;
             }
             
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            var selectedItem = (Contact)listBoxContact.SelectedItem;
+
+            if (selectedItem != null)
+            {
+                var result = _contactService.Delete(selectedItem.Id);
+
+                switch (result)
+                {
+                    case > 0:
+                        FillContactListBox();
+                        MessageBox.Show(GlobalConstants.DeleteSuccess, GlobalConstants.DeleteSuccess, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    case (int)ResultCodeEnums.ModelStateNoValid:
+                        MessageBox.Show(GlobalConstants.ModelStateNotValid, GlobalConstants.CaptionInfo, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                }
+            }
         }
     }
 }

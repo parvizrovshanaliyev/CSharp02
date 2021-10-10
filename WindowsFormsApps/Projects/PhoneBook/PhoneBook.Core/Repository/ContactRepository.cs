@@ -76,6 +76,32 @@ namespace PhoneBook.Core.Repository
             return result;
         }
 
+        public int Delete(Guid id)
+        {
+            int result;
+            try
+            {
+                var entity = _context.Contacts.Find(i => i.Id == id);
+
+                if (entity == null)
+                {
+                    return result = 0;
+                }
+
+                _context.Contacts.Remove(entity);
+                _context.SaveChanges(_context.Contacts);
+
+                result = 1;
+            }
+            catch (Exception e)
+            {
+                result = 0;
+                throw;
+            }
+
+            return result;
+        }
+
         #endregion
     }
 }

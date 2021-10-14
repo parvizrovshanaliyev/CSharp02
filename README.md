@@ -711,8 +711,6 @@ CSharp-02 , start  06/03/21
 ### Tasks
    - [week 15 task](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/ConsoleApps/week15/tasks/week15Tasks.txt)
 
-
-
 # Week16  03/10/21
 ### Topics
     - Reflection
@@ -729,7 +727,13 @@ CSharp-02 , start  06/03/21
 
 # Week17  10/10/21
 ### Topics
-    - 
+    - Phonebook application
+    - - Create,Update,Delete
+    - - Get All Contacts
+    - - Export : CSV,JSON, XML
+    - - v2 Reflection Example : 'creation of json files linked to entities in phonebook app'.
 ### Tasks
    - [week 17 task](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/ConsoleApps/week15/tasks/week15Tasks.txt)
+   - Reflection
+   - SOLID principles
 

@@ -209,6 +209,8 @@ namespace PhoneBook.Core.Repository
                 _context.SetConnection();
 
                 // command-daki tsql code excute edilir.
+                // ExecuteNonQuery sql-de  tsql code execute olduqdan sonra '1 rows affected' query-den sonra 
+                // nece setr de deyisklik oldu ve ya olmadi neticesini bize vermekdedir.
                 _context.ReturnValues = _context.Command.ExecuteNonQuery();
             }
             catch (Exception e)

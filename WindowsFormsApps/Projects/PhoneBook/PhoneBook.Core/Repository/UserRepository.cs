@@ -27,6 +27,11 @@ namespace PhoneBook.Core.Repository
                 _context.Command.Parameters.Add("@Username", SqlDbType.NVarChar).Value = entity.Username;
                 _context.Command.Parameters.Add("@Password", SqlDbType.NVarChar).Value = entity.Password;
                 _context.SetConnection();
+
+                /*
+                 * ExecuteScalar query-den donen result-i object tipinde vermekdedir.
+                 * yeni tapilan user count gelir bize.
+                 */
                 _context.ReturnValues = (int)_context.Command.ExecuteScalar();
             }
             catch (Exception e)

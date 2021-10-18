@@ -736,4 +736,26 @@ CSharp-02 , start  06/03/21
    - [week 17 task](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/ConsoleApps/week15/tasks/week15Tasks.txt)
    - Reflection
    - SOLID principles
+ 
+ 
+# Week18  17/10/21
+### Topics
+    - SOLID principles
+    - ADO.NET Overview 
+    - How to Connect to a Database using ADO.NET 
+    - - ADO.NET data provider : SqlClient (System.Data.SqlClient)
+    - - SqlCommand Class
+    - - - ExecuteNonQuery
+    - - - ExecuteScalar
+    - - SqlParameter Class
+    - - SqlConnection Class
+    - - - Connection string
+    - - SqlDataReader Class
+    - Changing database with ado.net for phone book app
+
+### Resources
+   - [Basics of ADO.NET](https://www.c-sharpcorner.com/UploadFile/18fc30/understanding-the-basics-of-ado-net/)
+   - [ADO.NET code examples](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/ado-net-code-examples)
+   - [ADO.NET Introduction](https://www.javatpoint.com/ado-net-introduction)
+   - [ADO.NET Introduction](https://dotnettutorials.net/lesson/what-is-ado-net/)
 

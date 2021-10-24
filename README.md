@@ -759,3 +759,14 @@ CSharp-02 , start  06/03/21
    - [ADO.NET Introduction](https://www.javatpoint.com/ado-net-introduction)
    - [ADO.NET Introduction](https://dotnettutorials.net/lesson/what-is-ado-net/)
 
+
+
+# Week19  24/10/21
+### Topics
+    - 
+
+### Resources
+- [Choose an ASP.NET Core web UI](https://docs.microsoft.com/en-us/aspnet/core/tutorials/choose-web-ui?view=aspnetcore-5.0)
+- [Introduction to ASP.NET Core Framework](https://dotnettutorials.net/lesson/introduction-to-asp-net-core/)
+- [ASP.NET Core Tutorial](https://www.tutorialspoint.com/asp.net_core/index.htm)
+

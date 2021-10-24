@@ -763,7 +763,16 @@ CSharp-02 , start  06/03/21
 
 # Week19  24/10/21
 ### Topics
-    - 
+    - Introduction to ASP.NET Core
+    - - Project Creation and File Structure (MVC)
+    - - Program.cs
+    - - Startup.cs
+    - - - Service Container
+    - - - PipeLine - middleware
+    - - appsettings.json
+    - - Properties
+        -launchsettings.json
+    - - Dependencies
 
 ### Resources
 - [Choose an ASP.NET Core web UI](https://docs.microsoft.com/en-us/aspnet/core/tutorials/choose-web-ui?view=aspnetcore-5.0)

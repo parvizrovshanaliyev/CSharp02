@@ -89,6 +89,16 @@
      *Easy Maintenance,
      *Razor Pages
 
+* Asp.NET Core  - Project Creation and File Structure
+-Program.cs
+-Startup.cs
+    -Service Container
+    -PipeLine - middleware
+    -appsettings.json
+    -Properties
+        -launchsettings.json
+    -Dependencies
+
 ### Resources
 - [Choose an ASP.NET Core web UI](https://docs.microsoft.com/en-us/aspnet/core/tutorials/choose-web-ui?view=aspnetcore-5.0)
 - [Introduction to ASP.NET Core Framework](https://dotnettutorials.net/lesson/introduction-to-asp-net-core/)

@@ -210,9 +210,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.Business", "Windo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.Entities", "WindowsFormsApps\Projects\PhoneBook\PhoneBook.Entities\PhoneBook.Entities.csproj", "{2C9909BE-CD3D-426E-9594-B0B200C95F3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionLib", "ConsoleApps\week16\Reflection\ReflectionLib\ReflectionLib.csproj", "{12911B9D-100B-494F-A03D-4CDC7FC19085}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReflectionLib", "ConsoleApps\week16\Reflection\ReflectionLib\ReflectionLib.csproj", "{12911B9D-100B-494F-A03D-4CDC7FC19085}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectionWinForm", "ConsoleApps\week16\Reflection\ReflectionLibConsoleApp\ReflectionWinForm\ReflectionWinForm.csproj", "{3FF16685-9624-49D1-A337-BFDBDFD79795}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReflectionWinForm", "ConsoleApps\week16\Reflection\ReflectionLibConsoleApp\ReflectionWinForm\ReflectionWinForm.csproj", "{3FF16685-9624-49D1-A337-BFDBDFD79795}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApplications", "WebApplications", "{3DB29465-5F89-4BBF-A7D5-6FA941E53868}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Week19", "Week19", "{2C8E4721-E03D-47D2-BA0F-5C3601B82E30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationIntro", "WebApplicationApps\Week19\WebApplicationIntro\WebApplicationIntro.csproj", "{1EE6160E-110F-448C-81D1-0BA4A962B549}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationEmpty", "WebApplicationApps\Week19\WebApplication1\WebApplicationEmpty.csproj", "{2CD91F92-8525-4A20-A148-95F70294C1EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -532,6 +540,14 @@ Global
 		{3FF16685-9624-49D1-A337-BFDBDFD79795}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FF16685-9624-49D1-A337-BFDBDFD79795}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FF16685-9624-49D1-A337-BFDBDFD79795}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EE6160E-110F-448C-81D1-0BA4A962B549}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EE6160E-110F-448C-81D1-0BA4A962B549}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EE6160E-110F-448C-81D1-0BA4A962B549}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EE6160E-110F-448C-81D1-0BA4A962B549}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CD91F92-8525-4A20-A148-95F70294C1EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CD91F92-8525-4A20-A148-95F70294C1EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CD91F92-8525-4A20-A148-95F70294C1EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CD91F92-8525-4A20-A148-95F70294C1EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -632,6 +648,9 @@ Global
 		{2C9909BE-CD3D-426E-9594-B0B200C95F3E} = {5FB718E8-3518-40FB-8362-31362B399E90}
 		{12911B9D-100B-494F-A03D-4CDC7FC19085} = {0C3E898D-57A8-4D84-941C-AEFAC294C55F}
 		{3FF16685-9624-49D1-A337-BFDBDFD79795} = {0C3E898D-57A8-4D84-941C-AEFAC294C55F}
+		{2C8E4721-E03D-47D2-BA0F-5C3601B82E30} = {3DB29465-5F89-4BBF-A7D5-6FA941E53868}
+		{1EE6160E-110F-448C-81D1-0BA4A962B549} = {2C8E4721-E03D-47D2-BA0F-5C3601B82E30}
+		{2CD91F92-8525-4A20-A148-95F70294C1EE} = {2C8E4721-E03D-47D2-BA0F-5C3601B82E30}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D6E9931C-7C85-426B-8D58-D5D7B19EC5EB}

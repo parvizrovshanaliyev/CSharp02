@@ -1,19 +1,18 @@
 # Week19-24/10/21
 
  * Network nedir ?
- *
- * 2 ve ya daha artiq device-in bir biri ile resource-larini
- * paylasmaq meqsedile birbirine baglanmasidir.
- *
- * Device-lar arasinda network  Ethernet, Fiber ve ya Wireless vasitesile temin edile biler.
- *
+ 2 ve ya daha artiq device-in bir biri ile resource-larini
+ paylasmaq meqsedile birbirine baglanmasidir.
+
+ Device-lar arasinda network  Ethernet, Fiber ve ya Wireless vasitesile temin edile biler.
+
  
  * Network Protocol-u nedir ?
- *
- * yuxarida sadalanan device-lar arasinda elaqe vasitelerinden elave olaraq,
- * birbirine baglanan devicelar hemcinin bir birini basa duse bilmelidir,
- * bu ise network protocol/ standartlari vasitesile temin edilir.
- *
+
+ yuxarida sadalanan device-lar arasinda elaqe vasitelerinden elave olaraq,
+ birbirine baglanan devicelar hemcinin bir birini basa duse bilmelidir,
+ bu ise network protocol/ standartlari vasitesile temin edilir.
+
  *  OSI - Open system interconnection
  
 
@@ -38,19 +37,19 @@
 
 
  * DNS nedir ?
- *
- * Domain name system
- *
- * www.google.com : 172.217.17.164
- * www.facebook.com : 185.60.216.35
- *
- * yuxarida gosterilen www.google.com addressi device-in basa duse bileceyi formaya
- * yeni IP-ye ceviren protokol-dur.
- *
- * Ip address 2 yere bolunur network ve host
- *
- * host ip addressin sonuncu hissesine deyilir . 
- *  
+
+ Domain name system
+
+ www.google.com : 172.217.17.164
+ www.facebook.com : 185.60.216.35
+
+ yuxarida gosterilen www.google.com addressi device-in basa duse bileceyi formaya
+ yeni IP-ye ceviren protokol-dur.
+
+ Ip address 2 yere bolunur network ve host
+
+ host ip addressin sonuncu hissesine deyilir . 
+  
 
  * Request,
  * Response,

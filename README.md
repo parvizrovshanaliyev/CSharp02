@@ -803,9 +803,9 @@ CSharp-02 , start  06/03/21
     - - if , ternary operator
     - - loop
     - - scope
+              
 
 ### Resources
-- [Choose an ASP.NET Core web UI](https://docs.microsoft.com/en-us/aspnet/core/tutorials/choose-web-ui?view=aspnetcore-5.0)
-- [Introduction to ASP.NET Core Framework](https://dotnettutorials.net/lesson/introduction-to-asp-net-core/)
-- [ASP.NET Core Tutorial](https://www.tutorialspoint.com/asp.net_core/index.htm)
+- [first-mvc-app/start-mvc](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc?view=aspnetcore-5.0&tabs=visual-studio)
+- [model-binding](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/model-binding?view=aspnetcore-5.0)
 

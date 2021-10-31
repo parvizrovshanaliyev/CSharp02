@@ -707,7 +707,6 @@ CSharp-02 , start  06/03/21
     - Csv
     - - What is csv?
 
-
 ### Tasks
    - [week 15 task](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/ConsoleApps/week15/tasks/week15Tasks.txt)
 
@@ -773,6 +772,37 @@ CSharp-02 , start  06/03/21
     - - Properties
         -launchsettings.json
     - - Dependencies
+
+### Resources
+- [Choose an ASP.NET Core web UI](https://docs.microsoft.com/en-us/aspnet/core/tutorials/choose-web-ui?view=aspnetcore-5.0)
+- [Introduction to ASP.NET Core Framework](https://dotnettutorials.net/lesson/introduction-to-asp-net-core/)
+- [ASP.NET Core Tutorial](https://www.tutorialspoint.com/asp.net_core/index.htm)
+
+# Week20  31/10/21
+### Topics
+    - Controller : Action Types
+    - - - IActionResult
+    - - - ActionResult
+    - - - ViewResult
+    - - - PartialViewResult
+    - - - JsonResult
+    - - - EmptyResult
+    - - - ContentResult
+    - - - ContentResult
+    - - NonAction & NonController Attribute
+    - Controller : Scaffolding
+    - Controller <--> View Data Migration
+    - - - ViewData
+    - - - ViewBag
+    - - - TemData
+    - - - Tuple
+    - - - ViewModel
+    - Razor View
+    - - Create View : Scaffolding
+    - - operator : @
+    - - if , ternary operator
+    - - loop
+    - - scope
 
 ### Resources
 - [Choose an ASP.NET Core web UI](https://docs.microsoft.com/en-us/aspnet/core/tutorials/choose-web-ui?view=aspnetcore-5.0)

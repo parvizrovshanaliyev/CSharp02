@@ -1,0 +1,46 @@
+﻿@using WebApplication.Models
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    List<Product> products = ViewData["products"] as List<Product> ?? new List<Product>();
+
+    //var products = ViewData["products"] as List<Product> ?? new List<Product>();
+}
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            Id
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Quantity
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @if (products.Any())
+    {
+        foreach (var item in products)
+        {
+            <tr>
+                <td>
+                    @item.Id
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Quantity
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>

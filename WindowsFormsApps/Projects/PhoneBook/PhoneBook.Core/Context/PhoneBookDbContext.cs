@@ -64,7 +64,6 @@ namespace PhoneBook.Core.Context
 
         #endregion
 
-
         #region EnsureOrCreateDatabaseV2
         public static List<T> Deserialize<T>(string SerializedJSONString)
         {
@@ -166,7 +165,6 @@ namespace PhoneBook.Core.Context
         #endregion
 
         #endregion
-
 
         #region GetGenericListProperties
 

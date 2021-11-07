@@ -1,0 +1,97 @@
+﻿@model WebApplication.Models.Book
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Book</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @*@Html.BeginForm("Create","Book")*@
+        <form  asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                @*<input name="Status" class="form-control" />*@
+                @*<input type="number" id="Id" name="Id" value="" />*@
+                @*@Html.TextBox("Id")*@
+                @*<input type="number"id="Id" name="Id" value="" />*@
+
+                <span asp-validation-for="Id" class="text-danger"></span>
+                @*@Html.ValidationMessage()*@
+            </div>
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control"/>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" class="control-label"></label>
+            <input asp-for="Description" class="form-control"/>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary"/>
+        </div>
+        </form>
+        
+        @* html result*@
+        @*<form action="/Book/Create" method="post" novalidate="novalidate">
+            <div class="form-group">
+                <label class="control-label" for="Id">Id</label>
+                <input class="form-control valid" type="number" data-val="true" data-val-required="The Id field is required." id="Id" name="Id" value="" aria-describedby="Id-error" aria-invalid="false">
+                <span class="text-danger field-validation-valid" data-valmsg-for="Id" data-valmsg-replace="true"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="Name">Name</label>
+                <input class="form-control valid" type="text" id="Name" name="Name" value="" aria-invalid="false">
+                <span class="text-danger field-validation-valid" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="Description">Description</label>
+                <input class="form-control valid" type="text" id="Description" name="Description" value="" aria-invalid="false">
+                <span class="text-danger field-validation-valid" data-valmsg-for="Description" data-valmsg-replace="true"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary">
+            </div>
+            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8Hb8fHA2DPVOhQ6L3Tqqr15nx2bbwU_CX-nVfkC-ls0QKulI1rJsICoHwBFvkSiboGLXcGwfiUw--AaeHFkIzGgfsSrscpFionvWcsvx5b1b_nzwIEE7aE6fn6JP4j5DtOQG8yCU_ZK9yWq_zx3_KB8">
+        </form>*@
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<script type="text/javascript">
+    function AjaxFormSubmit() {
+        //Set the URL.
+        var url = $("#myForm").attr("action");
+ 
+        //Add the Field values to FormData object.
+        var formData = new FormData();
+        formData.append("firstName", $("#txtFirstName").val());
+        formData.append("lastName", $("#txtLastName").val());
+ 
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: formData,
+            processData: false,
+            contentType: false
+        }).done(function (response) {
+            if (response.Status === "success") {
+                $("#lblName").html(response.Name);
+            }
+        });
+    }
+</script>

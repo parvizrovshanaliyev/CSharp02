@@ -69,6 +69,24 @@
 
 *Model Binding
 
+Model Binding dediyimiz anlayis view-dan ve ya her hansisa bir apiden gelen datanin 
+geldiyi route-a uygun yeni home/index ve sair controllerdeki action-da model binder mexanizmi
+vasitesile bizim yazdigimiz modellere cevrilmesidir. Net Core texnologiyasi bunu arxa terefde 
+gelen data tipine ve gonderilen data icerisindeki property name-e gore basa duserek cevirmekdedir, xususi
+hallarda gelen data uzerinde xususi validation ve sair le birlikde cevrilmeni temin etmek ucun custom model binder
+yaza bilerik.
+
+-Form
+-QueryString
+    Request.QueryString
+    Request.Query
+-Route
+    Request.RouteValues
+    Tag Helper : asp-route
+-Header
+    Request.Headers
+-Ajax
+
 
 
 https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc?view=aspnetcore-5.0&tabs=visual-studio

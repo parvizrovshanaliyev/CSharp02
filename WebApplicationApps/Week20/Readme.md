@@ -33,7 +33,6 @@ Bu attr-ler vasitesile Conttrolle ve Action-a requestin qarshisini ala bilirik.
 
 # View Data Migration
   
-
     -ViewBag
     -ViewData
     -TempData

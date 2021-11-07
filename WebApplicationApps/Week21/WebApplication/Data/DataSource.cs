@@ -10,10 +10,10 @@ namespace WebApplication.Data
         {
             Books = new List<Book>()
             {
-                new Book {Id = 1,Name ="Book 1",Description = "Book 1 Description" },
-                new Book {Id = 2,Name ="Book 2",Description = "Book 2 Description" },
-                new Book {Id = 3,Name ="Book 3",Description = "Book 3 Description" },
-                new Book {Id = 4,Name ="Book 4",Description = "Book 4 Description" }
+                new() {Name ="Book 1",Description = "Book 1 Description" },
+                new() {Name ="Book 2",Description = "Book 2 Description" },
+                new() {Name ="Book 3",Description = "Book 3 Description" },
+                new() {Name ="Book 4",Description = "Book 4 Description" }
             };
         }
     }

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Books</h1>
 @*<a href="/Book/Create">Salam</a>*@
 <p>
     <a asp-controller="Book" asp-action="Create">Create New</a>
@@ -12,28 +12,29 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
+    <tr>
+        @* Id normalda cedvelde gosterilmir *@
+        @*<th>
                 @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th></th>
-        </tr>
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
 @if (Model.Any())
 {
     @foreach (var item in Model) {
         <tr>
-            <td>
-                @item.Id
+            <!--<td>
+                @item.Id-->
                 @*@Html.DisplayFor(modelItem => item.Id)*@
-            </td>
+            <!--</td>-->
             <td>
                 @item.Name
                 @*@Html.DisplayFor(modelItem => item.Name)*@

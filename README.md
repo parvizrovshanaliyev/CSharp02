@@ -814,12 +814,56 @@ CSharp-02 , start  06/03/21
 
 # Week21  07/11/21
 ### Topics
-    - 
-
-
-
+        * Heplers
+            -UrlHelper
+                - Action
+                - ActionLink
+                - Content
+                - RouteUrl
+                - prop: ActionContext
+            -HtmlHelper
+                methods:
+                - Html.Partial
+                - Html.RenderPartial
+                - Html.ActionLink
+                - Html Form
+                    @Html.BeginForm()
+                    @Html.CheckBox("checkBox")
+                    @Html.TextBox("textBox")
+                    @Html.Display("display")
+                    @Html.Password("password")
+                    @Html.TextArea("area")
+                    @Html.ValidationMessage("validationMessage")
+                properties:
+                - ViewContext
+                - TemData
+                - ViewData
+                - ViewBag
+            -TagHelper
+                
+                @addTagHelper * ,Microsoft.AspNetCore.MVC.TagHelpers
+                -asp-action
+                -asp-controller
+                -asp-for
+                -asp-append-version="true"
+                -partial
+            
+        *Model Binding
+               -Form
+               -QueryString
+                   Request.QueryString
+                   Request.Query
+               -Route
+                   Request.RouteValues
+                   Tag Helper : asp-route
+               -Header
+                   Request.Headers
+               -Ajax
 
 ### Resources
-- [first-mvc-app/start-mvc](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc?view=aspnetcore-5.0&tabs=visual-studio)
-- [model-binding](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/model-binding?view=aspnetcore-5.0)
+-[tag helpers](https://dotnettutorials.net/lesson/tag-helpers-in-asp-net-core-mvc/)
+-[html helpers](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.htmlhelper?view=aspnetcore-6.0)
+-[custom html helpers](https://www.youtube.com/watch?v=69k9sVVs1WU&list=PLQVXoXFVVtp33KHoTkWklAo72l5bcjPVL&index=21)
+-[custom tag helpers](https://www.youtube.com/watch?v=I08ukyY5zLk&list=PLQVXoXFVVtp33KHoTkWklAo72l5bcjPVL&index=23)
+-[model binding](https://www.yogihosting.com/aspnet-core-model-binding/)
 

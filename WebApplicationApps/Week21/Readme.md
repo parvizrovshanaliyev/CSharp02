@@ -87,7 +87,8 @@ yaza bilerik.
     Request.Headers
 -Ajax
 
-
-
-https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc?view=aspnetcore-5.0&tabs=visual-studio
-https://docs.microsoft.com/en-us/aspnet/core/mvc/models/model-binding?view=aspnetcore-5.0
+-[tag helpers](https://dotnettutorials.net/lesson/tag-helpers-in-asp-net-core-mvc/)
+-[html helpers](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.htmlhelper?view=aspnetcore-6.0)
+-[custom html helpers](https://www.youtube.com/watch?v=69k9sVVs1WU&list=PLQVXoXFVVtp33KHoTkWklAo72l5bcjPVL&index=21)
+-[custom tag helpers](https://www.youtube.com/watch?v=I08ukyY5zLk&list=PLQVXoXFVVtp33KHoTkWklAo72l5bcjPVL&index=23)
+-[model binding](https://www.yogihosting.com/aspnet-core-model-binding/)

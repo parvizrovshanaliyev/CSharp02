@@ -225,12 +225,18 @@ namespace WebApplication.Controllers
             var bookName = Request.Query["name"];
             var bookDescription = Request.Query["description"];
 
+            var foundedBook = DataSource.Books.SingleOrDefault(i => i.Id == bookId);
+
             var book = new Book
             {
                 Id = bookId,
                 Name = bookName,
                 Description = bookDescription
             };
+
+            //return View(foundedBook);
+            //return Json(foundedBook);
+
             return new JsonResult(new
             {
                 queryString,

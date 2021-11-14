@@ -230,7 +230,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Projects", "Projects", "{9C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Week21", "Week21", "{A92C080C-6DE3-41D6-8B12-7225B59FA9EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "WebApplicationApps\Week21\WebApplication\WebApplication.csproj", "{F9E5111A-A314-4137-B1FC-A09F9B7D993F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication", "WebApplicationApps\Week21\WebApplication\WebApplication.csproj", "{F9E5111A-A314-4137-B1FC-A09F9B7D993F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

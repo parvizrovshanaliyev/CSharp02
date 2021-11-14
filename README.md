@@ -862,8 +862,71 @@ CSharp-02 , start  06/03/21
 
 ### Resources
 -[tag helpers](https://dotnettutorials.net/lesson/tag-helpers-in-asp-net-core-mvc/)
+<br>
 -[html helpers](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.htmlhelper?view=aspnetcore-6.0)
+<br>
 -[custom html helpers](https://www.youtube.com/watch?v=69k9sVVs1WU&list=PLQVXoXFVVtp33KHoTkWklAo72l5bcjPVL&index=21)
+<br>
 -[custom tag helpers](https://www.youtube.com/watch?v=I08ukyY5zLk&list=PLQVXoXFVVtp33KHoTkWklAo72l5bcjPVL&index=23)
+<br>
 -[model binding](https://www.yogihosting.com/aspnet-core-model-binding/)
+<br>
+
+
+
+# Week22  14/11/21
+### Topics
+    - Blog application : 
+      -Project structure . Developing a Project with N-Tier Architecture
+          * Data
+          * Entities
+          * Services
+          * Shared
+          * Web UI MVC (Asp.Net Core MVC)
+      * Shared
+         - Data 
+            - Generic Repository Design Pattern
+              * IEntityRepository<T>
+                  - GetAllAsync
+                  - GetAsync
+                  - AddAsync
+                  - UpdateAsync
+                  - DeleteAsync
+                  - AnyAsync
+                  - CountAsync
+                  - Entities
+              * EfRepository<TEntity>
+                  - DbContext
+                  - DbSet<T>
+                  - Implementation of IEntityRepository<TEntity>
+              * install Microsoft.EntityFrameworkCore 
+         - Entities
+            - EntityBase abstract
+            - IEntity interface
+         - Extensions 
+            - PasswordHasher : HashPassword Extension method 
+      * Entities
+          * User,
+          * Role,
+          * Post,
+          * Category,
+          * Comment
+
+
+### Resources
+-[What is an N-tier architecture?](https://docs.microsoft.com/en-us/learn/modules/n-tier-architecture/2-what-is-n-tier-architecture)
+<br>
+-[Entity Framework Core](https://www.entityframeworktutorial.net/efcore/entity-framework-core.aspx)
+<br>
+-[Extension Methods (C# Programming Guide)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods)
+<br>
+-[Generic Repository Pattern in C#](https://dotnettutorials.net/lesson/generic-repository-pattern-csharp-mvc/)
+<br>
+-[Asynchronous programming](https://docs.microsoft.com/en-us/dotnet/csharp/async)
+<br>
+-[Async and Await In C#](https://www.c-sharpcorner.com/article/async-and-await-in-c-sharp/)
+<br>
+-[Asenkron (Asynchronous) Programlama Nedir?](https://atarikguney.medium.com/asenkron-asynchronous-programlama-nedir-296230121f9d)
+
+
 

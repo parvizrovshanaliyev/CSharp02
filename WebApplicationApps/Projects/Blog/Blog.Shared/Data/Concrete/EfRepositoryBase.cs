@@ -43,7 +43,6 @@ namespace Blog.Shared.Data.Concrete
                 }
             }
 
-
             return await query.SingleOrDefaultAsync();
         }
 

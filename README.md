@@ -932,8 +932,6 @@ CSharp-02 , start  06/03/21
 
 # Week23  05/12/21
 ### Topics
-[resource: Asynchronous Programming](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/WindowsFormsApps/Week23/Readme.md)
-<br>
     - Asynchronous Programming   
         - Process
         - Thread
@@ -1044,6 +1042,7 @@ CSharp-02 , start  06/03/21
             * [DisplayFormat(ApplyFormatInEditMode = true)]
             * [DisplayFormat(ApplyFormatInEditMode = true,DataFormatString = "{0:dd/MM/yyyy}")]
 
+    
 
 ### Tasks
     * `Services `
@@ -1071,3 +1070,6 @@ CSharp-02 , start  06/03/21
 -[Configurations in Entity Framework Core](https://www.entityframeworktutorial.net/efcore/configuration-in-entity-framework-core.aspx)
 <br>
 -[Fluent API in Entity Framework Core](https://www.entityframeworktutorial.net/efcore/fluent-api-in-entity-framework-core.aspx)
+<br>
+[resource: Asynchronous Programming](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/WindowsFormsApps/Week23/Readme.md)
+<br>

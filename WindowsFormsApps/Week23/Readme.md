@@ -48,3 +48,4 @@ Kernel tthread ise emeliyyeat sistemi terefinden idare edilir.
 ise bit thread bloklansa bele process daxilinde diger threadler isine davam edir 
 
 https://youtu.be/mRISF16ao-0
+[resource: Multithreading in C#](https://dotnettutorials.net/lesson/multithreading-in-csharp/)

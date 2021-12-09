@@ -1,5 +1,8 @@
 #Asynchronous Programming
 
+![thread](https://user-images.githubusercontent.com/44087592/145332099-b4c689ca-7831-4fbb-af12-ba9455de9faf.png)
+
+
 #Single Thread vs MultiThreading
 - Process :
 - Isleyen programlara process deyilir. word , excel ve sair. Process her zaman tek bir main thread ile baslayir.

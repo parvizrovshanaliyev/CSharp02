@@ -95,18 +95,18 @@ Developing a Project with N-Tier Architecture
     ![UnitOfWork](https://user-images.githubusercontent.com/44087592/145341493-9c120be7-e264-4e07-9ad2-a67cb4b01151.png)
 
  6. * `EF CORE CLI` 
-    * Powershell : `dotnet tool install --global dotnet-ef --version 5.0.0-preview.7.20365.15`
-    * Powershell last version : `dotnet tool install --global dotnet-ef`
-    * 
-    * create initial migration 
-      * `dotnet ef migrations add InitialCreate`
-      * `dotnet ef database update`
-    * `Package Manager Console : visual studio` 
-    * install : `Microsoft.EntityFrameworkCore.Tools`
-    * 
-    * create initial migration 
-      * `Add-Migration InitialCreate`
-      * `Update-Database`
+        * Powershell : `dotnet tool install --global dotnet-ef --version 5.0.0-preview.7.20365.15`
+        * Powershell last version : `dotnet tool install --global dotnet-ef`
+        * 
+        * create initial migration 
+          * `dotnet ef migrations add InitialCreate`
+          * `dotnet ef database update`
+        * `Package Manager Console : visual studio` 
+        * install : `Microsoft.EntityFrameworkCore.Tools`
+        * 
+        * create initial migration 
+        * `Add-Migration InitialCreate`
+        * `Update-Database`
  
  7. * `Result` : Shared/Utilities/Results
       * IResult 
@@ -136,7 +136,19 @@ Developing a Project with N-Tier Architecture
       * Concrete
         * CategoryManager
         * PostManager
-     
+
+      * Dependencies
+        * install AutoMapper lib
+      * AutoMapper / Profiles
+        * Profile
+          * CreateMap<>
+      * Extensions
+        * ServiceCollectionExtensions
+          * method : LoadMyServices
+            *  services.AddDbContext<BlogContext>();
+            *  services.AddScoped<IUnitOfWork, UnitOfWork>();
+            *  services.AddScoped<ICategoryService, CategoryManager>();
+            *  services.AddScoped<IPostService, PostManager>();
    * `Shared` / Entities / Abstract
       * GetBaseDto 
    * `Entities`

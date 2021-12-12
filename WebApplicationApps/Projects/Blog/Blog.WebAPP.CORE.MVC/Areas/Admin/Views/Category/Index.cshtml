@@ -1,0 +1,86 @@
+﻿@using Blog.Shared.Utilities.Results.ComplexTypes
+@model CategoryListDto
+<div class="card mb-4 mt-4">
+    <div class="card-header">
+        <i class="fas fa-table mr-1"></i>
+        Categories
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="entitiesDataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Is Active?</th>
+                        <th>Is Deleted?</th>
+                        <th>Created Date</th>
+                        <th>Created By Name</th>
+                        <th>Modified Date</th>
+                        <th>Modified By Name</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Is Active?</th>
+                        <th>Is Deleted?</th>
+                        <th>Created Date</th>
+                        <th>Created By Name</th>
+                        <th>Modified Date</th>
+                        <th>Modified By Name</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @if (Model.ResultStatus == ResultStatus.Success)
+                    {
+                        foreach (var item in Model.Entities)
+                        {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.Description</td>
+                                <td>@item.IsActive</td>
+                                <td>@item.IsDeleted</td>
+                                <td>@item.CreatedDate</td>
+                                <td>@item.CreatedByName</td>
+                                <td>@item.ModifiedDate</td>
+                                <td>@item.ModifiedByName</td>
+                            </tr> 
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function() {
+            $('#entitiesDataTable').DataTable( {
+                dom:
+                    "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+                buttons: [
+                    {
+                        text: 'Create',
+                        className:'btn',
+                        action: function ( e, dt, node, config ) {
+                            alert( 'Button create' );
+                        }
+                    },
+                    {
+                        text: 'Refresh',
+                        className:'btn btn-warning',
+                        action: function ( e, dt, node, config ) {
+                            alert( 'Button refresh' );
+                        }
+                    }
+                ] 
+            } );
+        } );
+    </script>
+}

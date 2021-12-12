@@ -1,13 +1,14 @@
+using Blog.Data.Abstract;
+using Blog.Data.Concrete;
+using Blog.Data.Concrete.EntityFramework.Context;
+using Blog.Services.Abstract;
+using Blog.Services.Concrete;
+using Blog.Services.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Blog.WebAPP.CORE.MVC
 {
@@ -24,7 +25,12 @@ namespace Blog.WebAPP.CORE.MVC
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation();
+            
+            services.LoadServices();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,14 +51,14 @@ namespace Blog.WebAPP.CORE.MVC
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-            });
+                endpoints.MapAreaControllerRoute(
+                    name: "Admin",
+                    areaName: "Admin",
+                    pattern: "Admin/{controller}/{action=Index}/{id?}");
+
+                endpoints.MapDefaultControllerRoute();});
         }
     }
 }

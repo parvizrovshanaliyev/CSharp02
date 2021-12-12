@@ -1073,7 +1073,6 @@ CSharp-02 , start  06/03/21
 [resource: Asynchronous Programming](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/WindowsFormsApps/Week23/Readme.md)
 <br>
 
-
 # Week24  12/12/21
 ### Topics
     - Blog application :
@@ -1204,7 +1203,7 @@ CSharp-02 , start  06/03/21
                             *` @await Html.PartialAsync("_LayoutStylesPartial");`
                             * `<partial name="_LayoutLeftSideBarNavPartial" />`
                               * NavBar Icons:
-                                * Categories : `fas-fa-th-list`
+                                * Categories : `fas fa-th-list`
                                 * Posts : `fas fa-file-alt`
                                 * Comments : `fas fa-comments`
                                 * Roles : `fas fa-user-shield`

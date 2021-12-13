@@ -1077,37 +1077,12 @@ CSharp-02 , start  06/03/21
 ### Topics
     - Blog application :
         - 8.  * `Services `
-                * Abstract 
-                    * IPostService
-                      * GetAsync
-                      * GetAllAsync
-                      * GetAllByNonDeletedAsync
-                      * GetAllByNonDeletedAndActiveAsync
-                      * GetAllByCategoryAsync
-                      * AddAsync
-                      * UpdateAsync
-                      * DeleteAsync
-                      * HardAsync
-                    * Concrete
-                      * PostManager
-                * Dependencies
-                  * install AutoMapper lib
-                * AutoMapper / Profiles
-                  * Profile
-                    * CreateMap<>
                 * Extensions
                   * ServiceCollectionExtensions
                     * method : LoadMyServices
                       *  services.AddDbContext<BlogContext>();
                       *  services.AddScoped<IUnitOfWork, UnitOfWork>();
                       *  services.AddScoped<ICategoryService, CategoryManager>();
-                      *  services.AddScoped<IPostService, PostManager>();
-                * Refactoring :
-                    * IEntityRepository   
-                      * return : Task<T> , add, update
-                    * Services 
-                      *  Task<IDataResult<TDto>> AddAsync
-                      *  Task<IDataResult<TDto>> UpdateAsync
         - 9.  * `MVC`
                 * add reference Service layer
                 * `install  AutoMapper.Extensions.Microsoft.DependencyInjection`
@@ -1116,7 +1091,6 @@ CSharp-02 , start  06/03/21
                   * `ContainerService`
                     * method: ConfigureService
                       * `services.LoadMyService();`
-                      * `services.AddAutoMapper(typeof(CategoryProfile), typeof(PostProfile);`
                       * `services.AddControllersWithViews().AddRazorRuntimeCompilation();`
                   * `Pipeline`
                     * method : `Configure`
@@ -1222,6 +1196,80 @@ CSharp-02 , start  06/03/21
                     * assets
                     * js
                     * css
+### Tasks
+    * `Services `
+        * Abstract
+          * IPostService
+            * GetAsync
+            * GetAllAsync
+            * GetAllByNonDeletedAsync
+            * GetAllByNonDeletedAndActiveAsync
+            * GetAllByCategoryAsync
+            * AddAsync
+            * UpdateAsync
+            * DeleteAsync
+            * HardAsync
+        * Concrete
+          * PostManager
+    * `MVC`
+        * Controllers
+            * PostController
+        * Views    
+            * Post/Index.cshtml 
+    * Category service uygun olaraq Post service yazilmasi ve UI -da db-da olan postlarin gosterilmesi.        
+
+### Resources
+-[Dependency injection in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-6.0)
+<br>
+-[ASP.NET Core - Dependency Injection](https://www.tutorialsteacher.com/core/dependency-injection-in-aspnet-core)
+<br>
+-[Layout in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/layout?view=aspnetcore-6.0)
+<br>
+-[Razor file compilation in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/view-compilation?view=aspnetcore-6.0&tabs=visual-studio)
+<br>
+-[ASP.NET CORE DEPENDENCY INJECTION: WHAT IS THE ISERVICECOLLECTION?](https://www.stevejgordon.co.uk/aspnet-core-dependency-injection-what-is-the-iservicecollection)
+<br>
 
 
-        
+
+
+# Week25  19/12/21
+### Topics
+    - Blog application :
+        - 8.  * `Services `
+                * Abstract 
+                    * IPostService
+                      * GetAsync
+                      * GetAllAsync
+                      * GetAllByNonDeletedAsync
+                      * GetAllByNonDeletedAndActiveAsync
+                      * GetAllByCategoryAsync
+                      * AddAsync
+                      * UpdateAsync
+                      * DeleteAsync
+                      * HardAsync
+                    * Concrete
+                      * PostManager
+                * Dependencies
+                  * install AutoMapper lib
+                * AutoMapper / Profiles
+                  * Profile
+                    * CreateMap<>
+                * Extensions
+                  * ServiceCollectionExtensions
+                    * method : LoadMyServices
+                      *  services.AddScoped<IPostService, PostManager>();
+                * Refactoring :
+                    * IEntityRepository   
+                      * return : Task<T> , add, update
+                    * Services 
+                      *  Task<IDataResult<TDto>> AddAsync
+                      *  Task<IDataResult<TDto>> UpdateAsync
+        - 9.  * `MVC`
+                * add reference Service layer
+                * `install  AutoMapper.Extensions.Microsoft.DependencyInjection`
+                * `Startup`
+                    * `ContainerService`
+                      * method: ConfigureService
+                        * `services.AddAutoMapper(typeof(CategoryProfile), typeof(PostProfile);
+

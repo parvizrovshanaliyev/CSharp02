@@ -14,6 +14,7 @@ namespace Blog.Services.Extensions
             services.AddDbContext<BlogDbContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ICategoryService, CategoryManager>();
+            services.AddScoped<IPostService, PostManager>();
             return services;
         }
 

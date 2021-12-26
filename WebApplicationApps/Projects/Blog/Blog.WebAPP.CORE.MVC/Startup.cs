@@ -1,14 +1,13 @@
-using Blog.Data.Abstract;
-using Blog.Data.Concrete;
-using Blog.Data.Concrete.EntityFramework.Context;
-using Blog.Services.Abstract;
-using Blog.Services.Concrete;
+using System.Text.Json.Serialization;
+using Blog.Services.AutoMapper.Profiles;
 using Blog.Services.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace Blog.WebAPP.CORE.MVC
 {
@@ -26,10 +25,22 @@ namespace Blog.WebAPP.CORE.MVC
         {
 
             services.AddControllersWithViews()
-                .AddRazorRuntimeCompilation();
+                .AddRazorRuntimeCompilation()
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                })
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                });
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            }; ;
             
             services.LoadServices();
-
+            services.AddAutoMapper(typeof(CategoryProfile), typeof(PostProfile));
 
         }
 

@@ -6,7 +6,7 @@ using Blog.Shared.Utilities.Results.Abstract;
 
 namespace Blog.Services.Concrete
 {
-    public class PostManager : ICategoryService
+    public class PostManager :  IPostService
     {
         #region fields
 

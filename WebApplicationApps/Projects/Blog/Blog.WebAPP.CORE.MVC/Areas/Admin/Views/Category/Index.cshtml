@@ -1,86 +1,74 @@
 ﻿@using Blog.Shared.Utilities.Results.ComplexTypes
 @model CategoryListDto
-<div class="card mb-4 mt-4">
-    <div class="card-header">
-        <i class="fas fa-table mr-1"></i>
-        Categories
-    </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="entitiesDataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Is Active?</th>
-                        <th>Is Deleted?</th>
-                        <th>Created Date</th>
-                        <th>Created By Name</th>
-                        <th>Modified Date</th>
-                        <th>Modified By Name</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Is Active?</th>
-                        <th>Is Deleted?</th>
-                        <th>Created Date</th>
-                        <th>Created By Name</th>
-                        <th>Modified Date</th>
-                        <th>Modified By Name</th>
-                    </tr>
-                </tfoot>
-                <tbody>
-                    @if (Model.ResultStatus == ResultStatus.Success)
-                    {
-                        foreach (var item in Model.Entities)
-                        {
-                            <tr>
-                                <td>@item.Name</td>
-                                <td>@item.Description</td>
-                                <td>@item.IsActive</td>
-                                <td>@item.IsDeleted</td>
-                                <td>@item.CreatedDate</td>
-                                <td>@item.CreatedByName</td>
-                                <td>@item.ModifiedDate</td>
-                                <td>@item.ModifiedByName</td>
-                            </tr> 
-                        }
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
 
+@if (Model is { ResultStatus: ResultStatus.Success })
+{
+    <!-- Modal  -->
+    <div id="modalPlaceHolder" class="" aria-hidden="true">
+    </div>
+    <!-- Modal  -->
 
+    <div class="table-responsive mt-4">
+        <table class="table table-bordered" id="entitiesDataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Actions</th>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Is Deleted?</th>
+                    <th>Is Active?</th>
+                    <th>Recorded Date</th>
+                    <th>Created By name</th>
+                    <th>Modified Date</th>
+                    <th>Modified By Name</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Actions</th>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Is Deleted?</th>
+                    <th>Is Active?</th>
+                    <th>Created Date</th>
+                    <th>Created By name</th>
+                    <th>Modified Date</th>
+                    <th>Modified By Name</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var item in Model.Entities)
+                {
+                    <tr name="@item.Id">
+                        <td>
+                            <a class='btn text-primary btn-sm btn-update' data-id="@item.Id"><i class='fa fa-edit'></i></a>
+                            <a class="btn text-danger btn-sm btn-delete" data-id="@item.Id"><i class="fa fa-trash"></i></a>
+                        </td>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@item.Description</td>
+                        <td>@item.IsDeleted</td>
+                        <td>@item.IsActive</td>
+                        <td>@item.CreatedDate</td>
+                        <td>@item.CreatedByName</td>
+                        <td>@item.ModifiedDate</td>
+                        <td>@item.ModifiedByName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else if (Model == null || Model.ResultStatus == ResultStatus.Error)
+{
+    <div class="alert alert-danger mt-4">
+        @Model.Message
+        <br />
+        <a class="alert-link" asp-area="Admin" asp-controller="Home" asp-action="Index">Go to Home</a>
+    </div>
+}
 @section Scripts{
-    <script>
-        $(document).ready(function() {
-            $('#entitiesDataTable').DataTable( {
-                dom:
-                    "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
-                        "<'row'<'col-sm-12'tr>>" +
-                        "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-                buttons: [
-                    {
-                        text: 'Create',
-                        className:'btn',
-                        action: function ( e, dt, node, config ) {
-                            alert( 'Button create' );
-                        }
-                    },
-                    {
-                        text: 'Refresh',
-                        className:'btn btn-warning',
-                        action: function ( e, dt, node, config ) {
-                            alert( 'Button refresh' );
-                        }
-                    }
-                ] 
-            } );
-        } );
-    </script>
+    <script src="~/js/admin/category.js" asp-append-version="true"></script>
 }

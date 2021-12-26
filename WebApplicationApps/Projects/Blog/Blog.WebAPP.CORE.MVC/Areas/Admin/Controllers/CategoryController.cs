@@ -1,5 +1,9 @@
 ﻿using System.Threading.Tasks;
+using Blog.Entities.Dtos;
 using Blog.Services.Abstract;
+using Blog.Shared.Extensions;
+using Blog.Shared.Utilities.Results.ComplexTypes;
+using Blog.WebAPP.CORE.MVC.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
@@ -9,7 +13,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
     {
         #region .::fields::.
 
-        private readonly ICategoryService _categoryService;
+        private readonly ICategoryService _service;
 
         #endregion
 
@@ -17,16 +21,112 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
         public CategoryController(ICategoryService categoryService)
         {
-            _categoryService = categoryService;
+            _service = categoryService;
         }
 
         #endregion
-
-         public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            var result = await _categoryService.GetAllAsync();
+            var result = await _service.GetAllByNonDeletedAsync();
 
             return View(result.Data);
         }
+        #region refresh
+
+        [HttpGet]
+        public async Task<JsonResult> Refresh()
+        {
+            var result = await _service.GetAllByNonDeletedAsync();
+
+            return Json(result.Data);
+        }
+
+        #endregion
+        #region create
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return PartialView("_CreatePartial");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CategoryAddDto request)
+        {
+            if (ModelState.IsValid) //== true
+            {
+                var result = await _service.AddAsync(request, "Admin");
+
+                if (result.ResultStatus == ResultStatus.Success)
+                {
+                    var successViewModel = new CategoryCreateAjaxViewModel()
+                    {
+                        Dto = result.Data,
+                        Partial = await this.RenderViewToStringAsync("_CreatePartial", request)
+                    };
+                    return Json(successViewModel);
+                }
+            }
+            var errorViewModel = new CategoryCreateAjaxViewModel()
+            {
+                Partial = await this.RenderViewToStringAsync("_CreatePartial", request)
+            };
+
+            return Json(errorViewModel);
+        }
+        #endregion
+
+        #region update
+        [HttpGet]
+        public async Task<IActionResult> Update(int id)
+        {
+            var result = await _service.GetUpdateDtoAsync(id);
+
+            if (result.ResultStatus != ResultStatus.Success)
+                return NotFound();
+
+            return PartialView("_UpdatePartial", result.Data);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Update(CategoryUpdateDto request)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _service.UpdateAsync(request, "Admin");
+
+                if (result.ResultStatus == ResultStatus.Success)
+                {
+                    var successViewModel = new CategoryUpdateAjaxViewModel()
+                    {
+                        Dto = result.Data,
+                        Partial = await this.RenderViewToStringAsync("_UpdatePartial", request)
+                    };
+                    return Json(successViewModel);
+                }
+            }
+
+            var errorViewModel = new CategoryUpdateAjaxViewModel()
+            {
+                Partial = await this.RenderViewToStringAsync("_UpdatePartial", request)
+            };
+
+            return Json(errorViewModel);
+        }
+
+
+        #endregion
+        #region delete
+        [HttpPost]
+        public async Task<JsonResult> Delete(int id)
+        {
+            var result = await _service.DeleteAsync(id, "Admin");
+
+            return Json(result);
+        }
+        #endregion
+
+       
     }
 }

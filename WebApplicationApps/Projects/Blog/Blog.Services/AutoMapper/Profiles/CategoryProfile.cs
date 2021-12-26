@@ -10,6 +10,7 @@ namespace Blog.Services.AutoMapper.Profiles
         {
             CreateMap<CategoryAddDto, Category>();
             CreateMap<CategoryUpdateDto, Category>();
+            CreateMap<Category, CategoryUpdateDto>();
             //.ReverseMap();
             CreateMap<Category, CategoryAddDto>();
             //.ForMember(dest=>dest.Description,opt=>opt.MapFrom(src=>src.Description2));

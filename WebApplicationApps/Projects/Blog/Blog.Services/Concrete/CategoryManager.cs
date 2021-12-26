@@ -96,7 +96,6 @@ namespace Blog.Services.Concrete
         public async Task<IDataResult<CategoryDto>> AddAsync(CategoryAddDto dto, string createdByName)
         {
             var entity = _mapper.Map<Category>(dto);
-            entity.SetIsActive(dto.IsActive);
             entity.SetCreatedByName(createdByName);
             
             var addedEntity = await _unitOfWork.Categories.AddAsync(entity);
@@ -108,6 +107,20 @@ namespace Blog.Services.Concrete
                 Message = GlobalConstants.CreatedSuccessfully
             };
             return new DataResult<CategoryDto>(ResultStatus.Success, GlobalConstants.CreatedSuccessfully, resultDto);
+        }
+
+        public async Task<IDataResult<CategoryUpdateDto>> GetUpdateDtoAsync(int id)
+        {
+            var entity = await _unitOfWork.Categories.GetAsync(i => i.Id == id);
+
+            if (entity == null)
+            {
+                return new DataResult<CategoryUpdateDto>(resultStatus: ResultStatus.Error, GlobalConstants.NoDataAvailableOnRequest);
+            }
+
+            var dto = _mapper.Map<CategoryUpdateDto>(entity);
+
+            return new DataResult<CategoryUpdateDto>(resultStatus: ResultStatus.Success, dto);
         }
 
         public async Task<IDataResult<CategoryDto>> UpdateAsync(CategoryUpdateDto dto, string createdByName)
@@ -125,9 +138,24 @@ namespace Blog.Services.Concrete
             return new DataResult<CategoryDto>(ResultStatus.Success, resultDto);
         }
 
-        public Task<IDataResult<CategoryDto>> DeleteAsync(int id, string modifiedByName)
+        public async Task<IDataResult<CategoryDto>> DeleteAsync(int id, string modifiedByName)
         {
-            throw new System.NotImplementedException();
+            var entity = await _unitOfWork.Categories.GetAsync(c => c.Id == id);
+
+            if (entity == null)
+            {
+                return new DataResult<CategoryDto>(ResultStatus.Error, GlobalConstants.NoDataAvailableOnRequest);
+            }
+            entity.SetIsDeleted(true);
+            entity.SetModifiedByName(modifiedByName);
+            var deletedEntity = await _unitOfWork.Categories.UpdateAsync(entity);
+            await _unitOfWork.SaveChangesAsync();
+            var resultDto = new CategoryDto()
+            {
+                Entity = deletedEntity,
+                ResultStatus = ResultStatus.Success
+            };
+            return new DataResult<CategoryDto>(ResultStatus.Success, GlobalConstants.DeletedSuccessfully, resultDto);
         }
 
         //public async Task<IResult> AddAsync(CategoryAddDto dto, string createdByName)

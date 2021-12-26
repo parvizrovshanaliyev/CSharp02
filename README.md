@@ -1231,45 +1231,75 @@ CSharp-02 , start  06/03/21
 <br>
 
 
-
-
 # Week25  19/12/21
 ### Topics
     - Blog application :
-        - 8.  * `Services `
-                * Abstract 
-                    * IPostService
-                      * GetAsync
-                      * GetAllAsync
-                      * GetAllByNonDeletedAsync
-                      * GetAllByNonDeletedAndActiveAsync
-                      * GetAllByCategoryAsync
-                      * AddAsync
-                      * UpdateAsync
-                      * DeleteAsync
-                      * HardAsync
-                    * Concrete
-                      * PostManager
-                * Dependencies
-                  * install AutoMapper lib
-                * AutoMapper / Profiles
-                  * Profile
-                    * CreateMap<>
-                * Extensions
-                  * ServiceCollectionExtensions
-                    * method : LoadMyServices
-                      *  services.AddScoped<IPostService, PostManager>();
-                * Refactoring :
-                    * IEntityRepository   
-                      * return : Task<T> , add, update
-                    * Services 
-                      *  Task<IDataResult<TDto>> AddAsync
-                      *  Task<IDataResult<TDto>> UpdateAsync
-        - 9.  * `MVC`
-                * add reference Service layer
-                * `install  AutoMapper.Extensions.Microsoft.DependencyInjection`
-                * `Startup`
-                    * `ContainerService`
-                      * method: ConfigureService
-                        * `services.AddAutoMapper(typeof(CategoryProfile), typeof(PostProfile);
+       * `Services 
+         * Refactoring :
+          * IEntityRepository   
+            * return : Task<T> , add, update, delete
+            * `CategoryManager`
+                * `public async Task<IDataResult<CategoryDto>> AddAsync(CategoryAddDto dto, string createdByName)`
+                * `public async Task<IDataResult<CategoryDto>> UpdateAsync(CategoryUpdateDto dto, string modifiedByName)`
+                * `public async Task<IDataResult<CategoryDto>> DeleteAsync(int id, string modifiedByName)`
+         * inject automapper to categoryManager
+          * Dependencies
+            * install AutoMapper lib
+          * AutoMapper / Profiles
+            * Profile
+              * CreateMap<>
+       * `MVC`
+          * `install  AutoMapper.Extensions.Microsoft.DependencyInjection`
+          * `Startup`
+              * `ContainerService`
+                * method: ConfigureService
+                  * `services.AddAutoMapper(typeof(CategoryProfile));`
+                  * `AddNewtonsoftJson`
+                    * Install-Package Microsoft.AspNetCore.Mvc.NewtonsoftJson
+                  * `AddJsonOptions
 
+       * `Insert, Refresh, Update and Delete with Ajax and JQuery
+        * `admin`: CategoryController : Actions
+            * Index
+            * Refresh
+            * Create
+            * Update
+            * Delete
+        * `admin`: Views : Actions
+            * Category
+                * _CreatePartial
+                * _UpdatePartial
+                * Modal :`https://getbootstrap.com/docs/4.5/components/modal/`
+        * `Ajax` :
+             * `toastr https://github.com/CodeSeven/toastr`        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" crossorigin="anonymous"></script>
+             * `sweetalert package https://sweetalert2.github.io/  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>`
+             * DataTable
+             * Create
+             * Update
+             * Refresh
+             * Delete                     
+             * helper method
+
+### Resources
+-[Using Auto-Mapper In An ASP.NET Core MVC Application](https://www.c-sharpcorner.com/article/using-auto-mapper-in-an-asp-net-core-mvc-application/)
+<br>
+-[Using Newtonsoft.Json In .NET](https://dotnetcoretutorials.com/2019/12/19/using-newtonsoft-json-in-net-core-3-projects/)
+<br>
+-[ASP.NET Core – How to make the controllers use Newtonsoft](https://makolyte.com/aspdotnet-how-to-make-the-controllers-use-newtonsoft/)
+<br>
+-[Fixing JSON Self Referencing Loop Exceptions](https://dotnetcoretutorials.com/2020/03/15/fixing-json-self-referencing-loop-exceptions/)
+<br>
+-[JavaScript Tutorial](https://www.w3schools.com/js/default.asp)
+<br>
+-[jQuery Tutorial](https://www.w3schools.com/jquery/default.asp)
+<br>
+-[jQuery - AJAX Introduction](https://www.w3schools.com/jquery/default.asp)
+<br>
+-[jQuery ajax() Method](https://www.tutorialsteacher.com/jquery/jquery-ajax-method)
+<br>
+-[jQuery.ajax()](https://api.jquery.com/jquery.ajax/)
+<br>
+-[jQuery Ajax CRUD in ASP.NET Core MVC using Popup Dialog](https://www.youtube.com/watch?v=3r6RfShv8m8)
+<br>
+-[jQuery Ajax CRUD in ASP.NET Core MVC with Modal Popup](https://www.codaffection.com/asp-net-core-article/jquery-ajax-crud-in-asp-net-core-mvc/#Add_Loading_Spinner)
+<br>

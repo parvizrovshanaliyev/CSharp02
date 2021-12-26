@@ -281,7 +281,7 @@ Developing a Project with N-Tier Architecture
  10. * `Insert, Refresh, Update and Delete with Ajax and JQuery`
         * Refactoring :
           * IEntityRepository   
-            * return : Task<T> , add, update
+            * return : Task<T> , add, update, delete
           * Services 
             * `CategoryManager`
                 * `public async Task<IDataResult<CategoryDto>> AddAsync(CategoryAddDto dto, string createdByName)`
@@ -428,21 +428,7 @@ Developing a Project with N-Tier Architecture
                                                     const entity = viewModel.dto.entity;
                                                     // template literals
                                                     const newTableRowString = createNewRowStringTemplate(entity);
-                                                    //const newTableRowString = `<tr>
-                                                    //                                <td name="${entity.id}">
-                                                    //                                     <a class="btn text-primary btn-sm btn-update" data-id="${entity.id}" ><i class='fa fa-edit'></i></a>
-                                                    //                                     <a class="btn text-danger btn-sm btn-delete" data-id="${entity.id}"><i class="fa fa-trash"></i></a>
-                                                    //                                </td>
-                                                    //                                <td>${entity.id}</td>
-                                                    //                                <td>${entity.name}</td>
-                                                    //                                <td>${entity.description}</td>
-                                                    //                                <td>${convertFirstLetterToUpperCase(entity.isDeleted.toString())}</td>
-                                                    //                                <td>${convertFirstLetterToUpperCase(entity.isActive.toString())}</td>
-                                                    //                                <td>${convertToShortDate(entity.createdDate)}</td>
-                                                    //                                <td>${entity.createdByName}</td>
-                                                    //                                <td>${convertToShortDate(entity.modifiedDate)}</td>
-                                                    //                                <td>${entity.modifiedByName}</td>
-                                                    //                            </tr>`;
+                                                   
                                                     const newTableRowObject = $(newTableRowString);
                                                     console.log(`newRow`);
                                                     console.log(newTableRowObject);
@@ -493,21 +479,7 @@ Developing a Project with N-Tier Architecture
                                              $.each(data.entities,
                                                  function (index, entity) {
                                                      tableBody += createNewRowStringTemplate(entity);
-                                                     //tableBody += `<tr name="${entity.id}">
-                                                     //                 <td>
-                                                     //                    <a class="btn text-primary btn-sm btn-update" data-id="${entity.id}"><i class='fa fa-edit'></i></a>
-                                                     //                    <a class="btn text-danger btn-sm btn-delete" data-id="${entity.id}"><i class="fa fa-trash"></i></a>
-                                                     //                 </td>
-                                                     //                 <td>${entity.id}</td>
-                                                     //                 <td>${entity.name}</td>
-                                                     //                 <td>${entity.description}</td>
-                                                     //                 <td>${convertFirstLetterToUpperCase(entity.isDeleted.toString())}</td>
-                                                     //                 <td>${convertFirstLetterToUpperCase(entity.isActive.toString())}</td>
-                                                     //                 <td>${convertToShortDate(entity.createdDate)}</td>
-                                                     //                 <td>${entity.createdByName}</td>
-                                                     //                 <td>${convertToShortDate(item.modifiedDate)}</td>
-                                                     //                 <td>${entity.modifiedByName}</td>
-                                                     //              </tr>`;
+                                                    
                                                  });
 
                                              $('#entitiesDataTable > tbody').replaceWith(tableBody);

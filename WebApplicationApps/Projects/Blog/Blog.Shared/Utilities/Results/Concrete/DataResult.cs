@@ -11,6 +11,12 @@ namespace Blog.Shared.Utilities.Results.Concrete
             ResultStatus = resultStatus;
             Data = data;
         }
+        public DataResult(ResultStatus resultStatus, string message, T data)
+        {
+            Message = message;
+            ResultStatus = resultStatus;
+            Data = data;
+        }
 
         public DataResult(ResultStatus resultStatus,T data, string message)
         {

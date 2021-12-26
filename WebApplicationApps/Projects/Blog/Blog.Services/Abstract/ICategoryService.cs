@@ -9,9 +9,9 @@ namespace Blog.Services.Abstract
         Task<IDataResult<CategoryDto>> GetAsync(int id);
         Task<IDataResult<CategoryListDto>> GetAllAsync();
         Task<IDataResult<CategoryListDto>> GetAllByNonDeletedAsync();
-        Task<IResult> AddAsync(CategoryAddDto dto, string createdByName);
-        Task<IResult> UpdateAsync(CategoryUpdateDto dto, string createdByName);
-        Task<IResult> DeleteAsync(int id, string modifiedByName);
+        Task<IDataResult<CategoryDto>> AddAsync(CategoryAddDto dto, string createdByName);
+        Task<IDataResult<CategoryDto>> UpdateAsync(CategoryUpdateDto dto, string createdByName);
+        Task<IDataResult<CategoryDto>> DeleteAsync(int id, string modifiedByName);
         Task<IResult> HardDeleteAsync(int id);
     }
 }

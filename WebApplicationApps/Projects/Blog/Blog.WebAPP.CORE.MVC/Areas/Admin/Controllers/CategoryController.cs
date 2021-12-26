@@ -22,7 +22,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
         #endregion
 
-         public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index()
         {
             var result = await _categoryService.GetAllAsync();
 

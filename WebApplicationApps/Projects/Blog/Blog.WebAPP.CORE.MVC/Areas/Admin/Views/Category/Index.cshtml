@@ -1,7 +1,6 @@
-﻿@using Blog.Shared.Utilities.Results.ComplexTypes
-@model CategoryListDto
+﻿@model IResult<IList<CategoryDto>>;
 
-@if (Model is { ResultStatus: ResultStatus.Success })
+@if (Model is { IsSuccess: true } && Model.Data.Any())
 {
     <!-- Modal  -->
     <div id="modalPlaceHolder" class="" aria-hidden="true">
@@ -39,7 +38,7 @@
                 </tr>
             </tfoot>
             <tbody>
-                @foreach (var item in Model.Entities)
+                @foreach (var item in Model.Data)
                 {
                     <tr name="@item.Id">
                         <td>
@@ -61,11 +60,17 @@
         </table>
     </div>
 }
-else if (Model == null || Model.ResultStatus == ResultStatus.Error)
+else
 {
     <div class="alert alert-danger mt-4">
-        @Model.Message
-        <br />
+        @if (Model is not null && Model.Errors.Any())
+        {
+            foreach (var error in Model.Errors)
+            {
+                @($"{error}")
+                <br/>
+            }
+        }
         <a class="alert-link" asp-area="Admin" asp-controller="Home" asp-action="Index">Go to Home</a>
     </div>
 }

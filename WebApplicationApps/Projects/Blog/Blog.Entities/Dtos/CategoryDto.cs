@@ -4,13 +4,9 @@ using Blog.Shared.Entities.Abstract;
 
 namespace Blog.Entities.Dtos
 {
-    public class CategoryDto:GetBaseDto
+    public class CategoryDto : BaseDto
     {
-        public Category Entity { get; set; } 
-    }
-    
-    public class CategoryListDto:GetBaseDto
-    {
-        public IList<Category> Entities { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
     }
 }

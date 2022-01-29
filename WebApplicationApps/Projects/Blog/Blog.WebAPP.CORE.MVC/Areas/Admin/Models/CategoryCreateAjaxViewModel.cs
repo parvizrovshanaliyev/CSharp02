@@ -1,4 +1,5 @@
 ﻿using Blog.Entities.Dtos;
+using Blog.Shared.Utilities.Results.Abstract;
 
 namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Models
 {
@@ -6,13 +7,13 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Models
     {
         public CategoryAddDto AddDto { get; set; }
         public string Partial { get; set; }
-        public CategoryDto Dto { get; set; }
+        public IResult<CategoryDto> Result { get; set; }
     }
 
     public class CategoryUpdateAjaxViewModel
     {
         public CategoryUpdateDto UpdateDto { get; set; }
         public string Partial { get; set; }
-        public CategoryDto Dto { get; set; }
+        public IResult<CategoryDto> Result { get; set; }
     }
 }

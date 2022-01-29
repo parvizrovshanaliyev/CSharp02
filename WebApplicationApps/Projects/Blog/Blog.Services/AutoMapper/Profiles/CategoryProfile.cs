@@ -8,6 +8,7 @@ namespace Blog.Services.AutoMapper.Profiles
     {
         public CategoryProfile()
         {
+            CreateMap<Category, CategoryDto>();
             CreateMap<CategoryAddDto, Category>();
             CreateMap<CategoryUpdateDto, Category>();
             CreateMap<Category, CategoryUpdateDto>();

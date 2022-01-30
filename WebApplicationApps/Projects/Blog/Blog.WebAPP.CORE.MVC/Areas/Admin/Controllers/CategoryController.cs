@@ -26,16 +26,19 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
         #endregion
 
+        #region methods
+
+
+        #region loadData
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             var result = await _service.GetAllByNonDeletedAsync();
             return View(result);
         }
-        #region refresh
 
         [HttpGet]
-        public async Task<JsonResult> Refresh()
+        public async Task<JsonResult> GetAll()
         {
             var result = await _service.GetAllByNonDeletedAsync();
 
@@ -43,6 +46,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         }
 
         #endregion
+
         #region create
         [HttpGet]
         public IActionResult Create()
@@ -51,6 +55,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CategoryAddDto request)
         {
             if (ModelState.IsValid) //== true
@@ -86,6 +91,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(CategoryUpdateDto request)
         {
             if (ModelState.IsValid)
@@ -115,11 +121,14 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         #endregion
         #region delete
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<JsonResult> Delete(int id)
         {
             var result = await _service.DeleteAsync(id, "Admin");
             return Json(result);
         }
+        #endregion
+
         #endregion
     }
 }

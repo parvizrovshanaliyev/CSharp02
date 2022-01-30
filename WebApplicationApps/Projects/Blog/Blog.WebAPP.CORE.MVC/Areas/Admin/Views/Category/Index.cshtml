@@ -3,7 +3,10 @@
 @if (Model is { IsSuccess: true } && Model.Data.Any())
 {
     <!-- Modal  -->
-    <div id="modalPlaceHolder" class="" aria-hidden="true">
+    <div class="modal fade" role="dialog" aria-hidden="true" tabindex="-1">
+        <div class="modal-dialog">
+        
+        </div>
     </div>
     <!-- Modal  -->
 
@@ -68,7 +71,7 @@ else
             foreach (var error in Model.Errors)
             {
                 @($"{error}")
-                <br/>
+                <br />
             }
         }
         <a class="alert-link" asp-area="Admin" asp-controller="Home" asp-action="Index">Go to Home</a>

@@ -2,11 +2,11 @@
 
 @if (Model is { IsSuccess: true } && Model.Data.Any())
 {
-    <!-- Modal  -->
+     <!-- Modal  -->
     <div id="modalPlaceHolder" class="" aria-hidden="true"></div>
     <!-- Modal  -->
 
-    <input type="button" class="btn btn-primary" id="addData" value="Add" onclick="AddModal();" />
+
     <div class="table-responsive mt-4">
         <table class="table table-bordered" id="entitiesDataTable" width="100%" cellspacing="0">
             <thead>
@@ -74,34 +74,6 @@ else
         <a class="alert-link" asp-area="Admin" asp-controller="Home" asp-action="Index">Go to Home</a>
     </div>
 }
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            
-        </div>
-    </div>
-</div>
 @section Scripts{
-    <script asp-append-version="true">
-        $(document).ready(function () {
-            const dataTable = $('#entitiesDataTable').DataTable();
-        })
-
-        function AddModal() {
-            $.get('Category/Create')
-                .done(function (response) {
-                    $('.modal-content').html(response);
-                });
-            $("#myModal").modal("show");
-        }
-
-        function AddData() {
-            $.post('Category/Create',
-                function (data) {
-                    $('.modal-body').html(data);
-                });
-            $("#myModal").modal("show");
-        }
-    </script>
-    @*<script src="~/js/admin/category.js" asp-append-version="true"></script>*@
+    <script src="~/js/admin/category.js" asp-append-version="true"></script>
 }

@@ -2,7 +2,7 @@
 using Blog.Entities.Dtos;
 using Blog.Services.Abstract;
 using Blog.Shared.Extensions;
-using Blog.Shared.Utilities.Results.ComplexTypes;
+using Blog.Shared.Utilities.Results.Concrete;
 using Blog.WebAPP.CORE.MVC.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -75,7 +75,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
             var errorViewModel = new CategoryCreateAjaxViewModel()
             {
                 AddDto = request,
-                Partial = await this.RenderViewToStringAsync("_CreatePartial", request)
+                Partial = await this.RenderViewToStringAsync("_CreatePartial", request),
             };
 
             return Json(errorViewModel);
@@ -111,6 +111,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
             var errorViewModel = new CategoryUpdateAjaxViewModel()
             {
+                UpdateDto = request,
                 Partial = await this.RenderViewToStringAsync("_UpdatePartial", request)
             };
 

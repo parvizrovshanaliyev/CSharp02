@@ -1,20 +1,17 @@
 ﻿@model IResult<IList<CategoryDto>>;
-@*<th>
-    <a onclick="showInPopup('@Url.Action("AddOrEdit","Transaction",null,Context.Request.Scheme)','New Transaction')" class="btn btn-success text-white"><i class="fas fa-random"></i> New Transaction</a>
-</th>*@
+
 @if (Model is { IsSuccess: true } && Model.Data.Any())
 {
-    <div class="card">
+    <div class="card mt-2 mb-2">
         <div class="card-header">
             <div style="display:flex" class="justify-content-end">
-                @*<a href="/Document/Create?docTypeId=@Model" class="btn btn-outline-secondary "><span class="ti-plus mr-2"></span>Yeni</a>*@
-                <a onclick="showInPopup('Category/Create')" class="btn btn-primary" >Create</a>
+                <a onclick="showInPopup('Category/Create','Create')" class="btn btn-primary">Create</a>
             </div>
         </div>
         <div class="card-body">
             <div class="single-table">
                 <div class="table-responsive">
-                    <table id="entitiesDataTable" style="width:100%" class="table table-hover progress-table text-center">
+                    <table id="dataTable" style="width:100%" class="table table-hover progress-table text-center">
                         <thead>
                             <tr>
                                 <th>Actions</th>
@@ -34,7 +31,7 @@
                             {
                                 <tr role="row" name="@item.Id">
                                     <td>
-                                        <a class='btn text-primary btn-sm btn-update' data-id="@item.Id"><i class='fa fa-edit'></i></a>
+                                        <a class='btn text-primary btn-sm btn-update' onclick="showInPopup('Category/Update?id=@item.Id','Update')" data-id="@item.Id"><i class='fa fa-edit'></i></a>
                                         <a class="btn text-danger btn-sm btn-delete" data-id="@item.Id"><i class="fa fa-trash"></i></a>
                                     </td>
                                     <td>@item.Id</td>
@@ -54,59 +51,6 @@
             </div>
         </div>
     </div>
-    @*<input type="button" class="btn btn-primary" id="addData" value="Add" onclick="AddModal();" />
-        <div class="table-responsive mt-4">
-            <table class="table table-bordered" id="entitiesDataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>Actions</th>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Is Deleted?</th>
-                        <th>Is Active?</th>
-                        <th>Recorded Date</th>
-                        <th>Created By name</th>
-                        <th>Modified Date</th>
-                        <th>Modified By Name</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>Actions</th>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Is Deleted?</th>
-                        <th>Is Active?</th>
-                        <th>Created Date</th>
-                        <th>Created By name</th>
-                        <th>Modified Date</th>
-                        <th>Modified By Name</th>
-                    </tr>
-                </tfoot>
-                <tbody>
-                    @foreach (var item in Model.Data)
-                    {
-                        <tr name="@item.Id">
-                            <td>
-                                <a class='btn text-primary btn-sm btn-update' data-id="@item.Id"><i class='fa fa-edit'></i></a>
-                                <a class="btn text-danger btn-sm btn-delete" data-id="@item.Id"><i class="fa fa-trash"></i></a>
-                            </td>
-                            <td>@item.Id</td>
-                            <td>@item.Name</td>
-                            <td>@item.Description</td>
-                            <td>@item.IsDeleted</td>
-                            <td>@item.IsActive</td>
-                            <td>@item.CreatedDate</td>
-                            <td>@item.CreatedByName</td>
-                            <td>@item.ModifiedDate</td>
-                            <td>@item.ModifiedByName</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>*@
 }
 else
 {
@@ -134,30 +78,73 @@ else
             <div class="modal-body">
 
             </div>
+            @*<div class="modal-footer">
+                    <input type="submit" value="Save" class="btn btn-primary" onclick="AddData();" />
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>*@
         </div>
     </div>
 </div>
 @section Scripts{
-    <script asp-append-version="true">
-        $(document).ready(function () {
-            const dataTable = $('#entitiesDataTable').DataTable();
-        })
+    <script src="~/js/admin/category-jquery-modal-create-edit.js" asp-append-version="true"></script>
+    @*<script asp-append-version="true">
 
-        function AddModal() {
-            $.get('Category/Create')
-                .done(function (response) {
-                    $('.modal-content').html(response);
-                });
-            $("#myModal").modal("show");
+        showInPopup = (url, title) => {
+            $.ajax({
+                type: 'GET',
+                url: url,
+                success: function (response) {
+                    $('#form-modal .modal-body').html(response);
+                    $('#form-modal .modal-title').html(title);
+                    $('#form-modal').modal('show');
+                    // to make popup draggable
+                    //$('.modal').draggable();
+                    //$('.modal-dialog').draggable({
+                    //    handle: ".modal-header"
+                    //});
+                },
+                error: function (error) {
+
+                }
+            });
         }
 
-        function AddData() {
-            $.post('Category/Create',
-                function (data) {
-                    $('.modal-body').html(data);
+        jQueryAjaxPost = form => {
+            try {
+                $.ajax({
+                    type: 'POST',
+                    url: form.action,
+                    data: new FormData(form),
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        $('#form-modal .modal-body').html(response.partial);
+                        const isValid = $('#form-modal .modal-body').find('[name="IsValid"]').val() === 'True';
+                        if (isValid) {
+                            clearModal();
+                            const entity = response.result.data;
+                            alert(response.action);
+                            if (response.action) {
+                                insertedRowToDataTable(entity, makeDataTableRowObj(entity));
+                            } else {
+                                const currentRow = $(`[name="${entity.id}"]`);
+                                updatedDataTableRow(entity, currentRow, makeDataTableRowObj(entity));
+                            }
+                            toastr.success(`${response.result.message}`, 'Success');
+                        } else {
+                            validationSummary();
+                        }
+                    },
+                    error: function (err) {
+                        toastr.error(error.responseText, 'Fail!');
+                    }
                 });
-            $("#myModal").modal("show");
+                //to prevent default form submit event
+                return false;
+            } catch (ex) {
+                console.log(ex);
+            }
+            return false;
         }
-    </script>
-    @*<script src="~/js/admin/category.js" asp-append-version="true"></script>*@
+    </script>*@
 }

@@ -1,4 +1,7 @@
 ﻿@model IResult<IList<CategoryDto>>;
+@{
+    ViewData["Title"] = "Index";
+}
 
 @if (Model is { IsSuccess: true } && Model.Data.Any())
 {
@@ -78,10 +81,6 @@ else
             <div class="modal-body">
 
             </div>
-            @*<div class="modal-footer">
-                    <input type="submit" value="Save" class="btn btn-primary" onclick="AddData();" />
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>*@
         </div>
     </div>
 </div>
@@ -89,62 +88,62 @@ else
     <script src="~/js/admin/category-jquery-modal-create-edit.js" asp-append-version="true"></script>
     @*<script asp-append-version="true">
 
-        showInPopup = (url, title) => {
-            $.ajax({
-                type: 'GET',
-                url: url,
-                success: function (response) {
-                    $('#form-modal .modal-body').html(response);
-                    $('#form-modal .modal-title').html(title);
-                    $('#form-modal').modal('show');
-                    // to make popup draggable
-                    //$('.modal').draggable();
-                    //$('.modal-dialog').draggable({
-                    //    handle: ".modal-header"
-                    //});
-                },
-                error: function (error) {
-
-                }
-            });
-        }
-
-        jQueryAjaxPost = form => {
-            try {
+            showInPopup = (url, title) => {
                 $.ajax({
-                    type: 'POST',
-                    url: form.action,
-                    data: new FormData(form),
-                    contentType: false,
-                    processData: false,
+                    type: 'GET',
+                    url: url,
                     success: function (response) {
-                        $('#form-modal .modal-body').html(response.partial);
-                        const isValid = $('#form-modal .modal-body').find('[name="IsValid"]').val() === 'True';
-                        if (isValid) {
-                            clearModal();
-                            const entity = response.result.data;
-                            alert(response.action);
-                            if (response.action) {
-                                insertedRowToDataTable(entity, makeDataTableRowObj(entity));
-                            } else {
-                                const currentRow = $(`[name="${entity.id}"]`);
-                                updatedDataTableRow(entity, currentRow, makeDataTableRowObj(entity));
-                            }
-                            toastr.success(`${response.result.message}`, 'Success');
-                        } else {
-                            validationSummary();
-                        }
+                        $('#form-modal .modal-body').html(response);
+                        $('#form-modal .modal-title').html(title);
+                        $('#form-modal').modal('show');
+                        // to make popup draggable
+                        //$('.modal').draggable();
+                        //$('.modal-dialog').draggable({
+                        //    handle: ".modal-header"
+                        //});
                     },
-                    error: function (err) {
-                        toastr.error(error.responseText, 'Fail!');
+                    error: function (error) {
+
                     }
                 });
-                //to prevent default form submit event
-                return false;
-            } catch (ex) {
-                console.log(ex);
             }
-            return false;
-        }
-    </script>*@
+
+            jQueryAjaxPost = form => {
+                try {
+                    $.ajax({
+                        type: 'POST',
+                        url: form.action,
+                        data: new FormData(form),
+                        contentType: false,
+                        processData: false,
+                        success: function (response) {
+                            $('#form-modal .modal-body').html(response.partial);
+                            const isValid = $('#form-modal .modal-body').find('[name="IsValid"]').val() === 'True';
+                            if (isValid) {
+                                clearModal();
+                                const entity = response.result.data;
+                                alert(response.action);
+                                if (response.action) {
+                                    insertedRowToDataTable(entity, makeDataTableRowObj(entity));
+                                } else {
+                                    const currentRow = $(`[name="${entity.id}"]`);
+                                    updatedDataTableRow(entity, currentRow, makeDataTableRowObj(entity));
+                                }
+                                toastr.success(`${response.result.message}`, 'Success');
+                            } else {
+                                validationSummary();
+                            }
+                        },
+                        error: function (err) {
+                            toastr.error(error.responseText, 'Fail!');
+                        }
+                    });
+                    //to prevent default form submit event
+                    return false;
+                } catch (ex) {
+                    console.log(ex);
+                }
+                return false;
+            }
+        </script>*@
 }

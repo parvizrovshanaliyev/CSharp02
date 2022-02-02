@@ -7,6 +7,9 @@
             $('#form-modal .modal-title').html(title);
             $('#form-modal').modal('show');
             // to make popup draggable
+            $('.modal-dialog').draggable({
+                handle: ".modal-header"
+            });
             //$('.modal').draggable();
             //$('.modal-dialog').draggable({
             //    handle: ".modal-header"
@@ -60,7 +63,7 @@ jQueryAjaxPost = form => {
 function makeDataTableRowObj(entity) {
     return [
         `
-             <a class='btn text-primary btn-sm btn-update' onclick="showInPopup('Category/Update?id="${entity.id}"','Update')" data-id="${entity.id}"><i class='fa fa-edit'></i></a>
+             <a class='btn text-primary btn-sm btn-update' onclick="showInPopup('Category/Update?id=${entity.id}','Update')" data-id="${entity.id}"><i class='fa fa-edit'></i></a>
              <a class="btn text-danger btn-sm btn-delete" data-id="${entity.id}"><i class="fa fa-trash"></i></a>
              `,
         entity.id,

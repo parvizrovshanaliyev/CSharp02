@@ -6,11 +6,11 @@
             $('#form-modal .modal-body').html(response);
             $('#form-modal .modal-title').html(title);
             $('#form-modal').modal('show');
+            var container = document.getElementById("form-modal");
+            var forms = container.getElementsByTagName("form");
+            var newForm = forms[forms.length - 1];
+            $.validator.unobtrusive.parse(newForm);
             // to make popup draggable
-            $('.modal-dialog').draggable({
-                handle: ".modal-header"
-            });
-            //$('.modal').draggable();
             //$('.modal-dialog').draggable({
             //    handle: ".modal-header"
             //});
@@ -23,34 +23,37 @@
 
 jQueryAjaxPost = form => {
     try {
-        $.ajax({
-            type: 'POST',
-            url: form.action,
-            data: new FormData(form),
-            contentType: false,
-            processData: false,
-            success: function (response) {
-                $('#form-modal .modal-body').html(response.partial);
-                const isValid = $('#form-modal .modal-body').find('[name="IsValid"]').val() === 'True';
-                if (isValid) {
-                    clearModal();
-                    const entity = response.result.data;
-                    alert(response.action);
-                    if (response.action) {
-                        insertedRowToDataTable(entity, makeDataTableRowObj(entity));
+        const $form = $(form);
+        if ($form.valid()) {
+            $.ajax({
+                type: 'POST',
+                url: form.action,
+                data: new FormData(form),
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    $('#form-modal .modal-body').html(response.partial);
+                    const isValid = $('#form-modal .modal-body').find('[name="IsValid"]').val() === 'True';
+                    if (isValid) {
+                        clearModal();
+                        const entity = response.result.data;
+                        alert(response.action);
+                        if (response.action) {
+                            insertedRowToDataTable(entity, makeDataTableRowObj(entity));
+                        } else {
+                            const currentRow = $(`[name="${entity.id}"]`);
+                            updatedDataTableRow(entity, currentRow, makeDataTableRowObj(entity));
+                        }
+                        toastr.success(`${response.result.message}`, 'Success');
                     } else {
-                        const currentRow = $(`[name="${entity.id}"]`);
-                        updatedDataTableRow(entity, currentRow, makeDataTableRowObj(entity));
+                        validationSummary();
                     }
-                    toastr.success(`${response.result.message}`, 'Success');
-                } else {
-                    validationSummary();
+                },
+                error: function(err) {
+                    toastr.error(error.responseText, 'Fail!');
                 }
-            },
-            error: function (err) {
-                toastr.error(error.responseText, 'Fail!');
-            }
-        });
+            });
+        }
         //to prevent default form submit event
         return false;
     } catch (ex) {

@@ -25,32 +25,32 @@ namespace Blog.Data.Concrete.EntityFramework.Configurations
                 .IsRequired();
 
             // seed
-            var entities = new List<Category>()
-            {
-                new()
-                {
-                    Id = 1,
-                    Name = "C#",
-                    Description = "C#"
-                },
-                new()
-                {
-                    Id = 2,
-                    Name = "C++",
-                    Description = "C++"
-                },
-                new()
-                {
-                    Id = 3,
-                    Name = "JavaScript",
-                    Description = "JavaScript"
-                }
-            };
-            entities.ForEach(i => {
-                i.SetCreatedByName("InitialCreate");
-                i.SetModifiedByName("InitialCreate");
-            });
-            builder.HasData(entities);
+            //var entities = new List<Category>()
+            //{
+            //    new()
+            //    {
+            //        Id = 1,
+            //        Name = "C#",
+            //        Description = "C#"
+            //    },
+            //    new()
+            //    {
+            //        Id = 2,
+            //        Name = "C++",
+            //        Description = "C++"
+            //    },
+            //    new()
+            //    {
+            //        Id = 3,
+            //        Name = "JavaScript",
+            //        Description = "JavaScript"
+            //    }
+            //};
+            //entities.ForEach(i => {
+            //    i.SetCreatedByName("InitialCreate");
+            //    i.SetModifiedByName("InitialCreate");
+            //});
+            //builder.HasData(entities);
         }
 
         #endregion

@@ -1,29 +1,37 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Blog.Shared.Utilities.Results.Abstract;
 using Blog.Shared.Utilities.Results.ComplexTypes;
 
 namespace Blog.Shared.Utilities.Results.Concrete
 {
-    public class Result : IResult
+    public class Result<T> : IResult<T>
     {
-        public Result(ResultStatus resultStatus)
+        #region ctors
+        public Result(ServiceResultCode serviceResultCode, T data = default(T), params string[] errors)
         {
-            ResultStatus = resultStatus;
+            Data = data;
+            ServiceResultCode = serviceResultCode;
+            Errors = new List<string>(errors);
         }
-        public Result(ResultStatus resultStatus, string message)
+        public Result(ServiceResultCode serviceResultCode, string message, T data = default(T), params string[] errors)
         {
-            ResultStatus = resultStatus;
+            Data = data;
             Message = message;
+            ServiceResultCode = serviceResultCode;
+            Errors = new List<string>(errors);
         }
-        public Result(ResultStatus resultStatus, string message, Exception exception)
-        {
-            ResultStatus = resultStatus;
-            Message = message;
-            Exception = exception;
-        }
+        #endregion
+        #region Implementation of IResult<out T>
 
-        public ResultStatus ResultStatus { get;}
-        public string Message { get;}
-        public Exception Exception { get;}
+        public T Data { get; }
+        public ServiceResultCode ServiceResultCode { get; }
+        public string Message { get; }
+        public IList<string> Errors { get; }
+        public bool IsSuccess => !Errors.Any();
+        public Exception Exception { get; }
+
+        #endregion
     }
 }

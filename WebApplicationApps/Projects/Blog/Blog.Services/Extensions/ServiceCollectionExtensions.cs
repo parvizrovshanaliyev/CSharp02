@@ -13,7 +13,7 @@ namespace Blog.Services.Extensions
         public static IServiceCollection LoadServices(this IServiceCollection services)
         {
             services.AddDbContext<BlogDbContext>();
-            services.AddIdentity<IUserRepository, Role>();
+            services.AddIdentity<User, Role>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ICategoryService, CategoryManager>();
             //services.AddScoped<IPostService, PostManager>();

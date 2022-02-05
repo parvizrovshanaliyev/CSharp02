@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Data.Concrete.EntityFramework.Context
 {
-    public class BlogDbContext : IdentityDbContext<User,Role,int,UserClaim,UserRole,UserLogin,RoleClaim,UserToken>
+    public class BlogDbContext : IdentityDbContext<User, Role, int, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
     {
         public const string IDENTITY_SCHEMA = "Identity";
         public const string DEFAULT_SCHEMA = "dbo";

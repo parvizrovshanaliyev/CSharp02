@@ -81,6 +81,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
             return Json(errorViewModel);
         }
         #endregion
+
         #region update
         [HttpGet]
         public async Task<IActionResult> Update(int id)
@@ -119,9 +120,9 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
 
         #endregion
+
         #region delete
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<JsonResult> Delete(int id)
         {
             var result = await _service.DeleteAsync(id, "Admin");

@@ -33,6 +33,7 @@ namespace Blog.Shared.Data.Concrete
             if (predicate is not null)
             {
                 query = query.Where(predicate);
+
             }
 
             if (includeProperties is not null)

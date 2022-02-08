@@ -1,13 +1,20 @@
 # CSharp_02
 CSharp-02 , start  06/03/21
 
-* [Week02-Day01 13/03/22](#week02-day01-130322)
-
-
 ### Student list
 - [Fidan Xanlarova](https://github.com/fidan-xanlarovaa/PragmatechCsharpProject)
 - [Elcan Seyidov](https://github.com/Elcan-code/PragmatechCsharpProject.git)
 - [Rəşad Məmmədov](https://github.com/rashadmemmedov/PragmatechCsharpProject.git)
+
+
+
+
+* [Week01-Day01 06/03/21](#week01-day01-060321)
+* [Week01-Day02 06/03/22](#week01-day02-060322)
+* [Week02-Day01 13/03/22](#week02-day01-130322)
+
+
+
 
 
 # Week01-Day01 06/03/21

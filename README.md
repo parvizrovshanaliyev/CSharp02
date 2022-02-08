@@ -1,26 +1,8 @@
 # CSharp_02
 CSharp-02 , start  06/03/21
 
-###
+* [Week02-Day01 13/03/22](#week02-day01)
 
-|week1 - week10|
-| Gün  | Saat |
-| ------------- | ------------- |
-| Şənbə  | 10:30-14:30  | 
-| Bazar  | 10:30-14:30  |
-
-
-|week11 - todo|
-| Gün  | Saat |
-| ------------- | ------------- |
-| Şənbə  | 18:00-22:00  | 
-| Bazar  |  18:00-22:00  |
-
-21/08/21
-|week12 - todo|
-| Gün  | Saat |
-| ------------- | ------------- |
-| Şənbə  | 18:00-22:00  |
 
 ### Student list
 - [Fidan Xanlarova](https://github.com/fidan-xanlarovaa/PragmatechCsharpProject)

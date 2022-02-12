@@ -22,25 +22,4 @@ namespace Blog.Entities.Concrete
             }
         }
     }
-
-
-    public class UserClaim : IdentityUserClaim<int>
-    {
-
-    }
-
-    public class UserLogin : IdentityUserLogin<int>
-    {
-
-    }
-
-    public class UserRole : IdentityUserRole<int>
-    {
-
-    }
-
-    public class UserToken : IdentityUserToken<int>
-    {
-
-    }
 }

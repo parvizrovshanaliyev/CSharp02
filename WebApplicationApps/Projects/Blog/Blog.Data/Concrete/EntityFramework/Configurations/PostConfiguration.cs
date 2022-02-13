@@ -51,24 +51,24 @@ namespace Blog.Data.Concrete.EntityFramework.Configurations
                 .HasForeignKey(i => i.UserId);
             
             // seed
-            var entity = new Post()
-            {
-                Id = 1,
-                UserId = 1,
-                CategoryId = 1,
-                Title = "C# 9.0",
-                Content = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                Thumbnail = "Default.jpg",
-                SeoDescription = "C# 9.0",
-                SeoAuthor = "Admin",
-                SeoTags = "c#, C#, C# 9.0, .Net5, ",
-                Date = DateTime.Now,
-                ViewsCount = 100,
-                CommentCount = 1,
-            };
-            entity.SetCreatedByName("InitialCreate");
-            entity.SetModifiedByName("InitialCreate");
-            builder.HasData(entity);
+            //var entity = new Post()
+            //{
+            //    Id = 1,
+            //    UserId = 1,
+            //    CategoryId = 1,
+            //    Title = "C# 9.0",
+            //    Content = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+            //    Thumbnail = "Default.jpg",
+            //    SeoDescription = "C# 9.0",
+            //    SeoAuthor = "Admin",
+            //    SeoTags = "c#, C#, C# 9.0, .Net5, ",
+            //    Date = DateTime.Now,
+            //    ViewsCount = 100,
+            //    CommentCount = 1,
+            //};
+            //entity.SetCreatedByName("InitialCreate");
+            //entity.SetModifiedByName("InitialCreate");
+            //builder.HasData(entity);
         }
     }
 }

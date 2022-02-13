@@ -1292,3 +1292,8 @@ CSharp-02 , start  06/03/21
 <br>
 -[jQuery Ajax CRUD in ASP.NET Core MVC with Modal Popup](https://www.codaffection.com/asp-net-core-article/jquery-ajax-crud-in-asp-net-core-mvc/#Add_Loading_Spinner)
 <br>
+
+
+# Week27  13/02/22
+### Topics
+    -`Identity` : `https://docs.microsoft.com/en-us/aspnet/core/security/authentication/customize-identity-model?view=aspnetcore-6.0`

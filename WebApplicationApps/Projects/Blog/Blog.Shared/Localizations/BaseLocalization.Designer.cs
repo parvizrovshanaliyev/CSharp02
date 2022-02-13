@@ -61,6 +61,15 @@ namespace Blog.Shared.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed: Account already exists.
+        /// </summary>
+        public static string AlreadyExistUser {
+            get {
+                return ResourceManager.GetString("AlreadyExistUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Created Successfully..
         /// </summary>
         public static string CreatedSuccessfully {
@@ -75,6 +84,42 @@ namespace Blog.Shared.Localizations {
         public static string DeletedSuccessfully {
             get {
                 return ResourceManager.GetString("DeletedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image Uploaded Successfully..
+        /// </summary>
+        public static string ImageUploadedSuccessfully {
+            get {
+                return ResourceManager.GetString("ImageUploadedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} should not be larger than {1} characters..
+        /// </summary>
+        public static string MaxLengthErrorMessage {
+            get {
+                return ResourceManager.GetString("MaxLengthErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} must not be less than {1} characters..
+        /// </summary>
+        public static string MinLengthErrorMessage {
+            get {
+                return ResourceManager.GetString("MinLengthErrorMessage", resourceCulture);
             }
         }
         
@@ -102,6 +147,42 @@ namespace Blog.Shared.Localizations {
         public static string NotFoundCodeGeneralMessage {
             get {
                 return ResourceManager.GetString("NotFoundCodeGeneralMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone Number.
+        /// </summary>
+        public static string PhoneNumber {
+            get {
+                return ResourceManager.GetString("PhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;{0} is required.&quot;.
+        /// </summary>
+        public static string RequiredErrorMessage {
+            get {
+                return ResourceManager.GetString("RequiredErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UserName.
+        /// </summary>
+        public static string UserName {
+            get {
+                return ResourceManager.GetString("UserName", resourceCulture);
             }
         }
     }

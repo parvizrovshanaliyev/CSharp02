@@ -278,306 +278,266 @@ Developing a Project with N-Tier Architecture
             * js
             * css
       
- 10. * `Insert, Refresh, Update and Delete with Ajax and JQuery`
-        * Refactoring :
-          * IEntityRepository   
-            * return : Task<T> , add, update, delete
-          * Services 
-            * `CategoryManager`
-                * `public async Task<IDataResult<CategoryDto>> AddAsync(CategoryAddDto dto, string createdByName)`
-                * `public async Task<IDataResult<CategoryDto>> UpdateAsync(CategoryUpdateDto dto, string modifiedByName)`
-                * `public async Task<IDataResult<CategoryDto>> DeleteAsync(int id, string modifiedByName)`
-            * inject automapper to categoryManager
-        * `admin`: CategoryController : Actions
-            * Index
-            * Refresh
-            * Create
-            * Update
-            * Delete
-        * `admin`: Views : Actions
-            * Category
-                * _CreatePartial
-                * _UpdatePartial
-                * Modal :`https://getbootstrap.com/docs/4.5/components/modal/`
-        * `Ajax` :
-             * `toastr https://github.com/CodeSeven/toastr`
-             *  `sweetalert package https://sweetalert2.github.io/ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>`
-             * DataTable
+ 10. * `Insert, Update and Delete with Ajax and JQuery`
+ 11.* `Identity` : `https://docs.microsoft.com/en-us/aspnet/core/security/authentication/customize-identity-model?view=aspnetcore-6.0`
+ * Data :
+     * Dependecies : `<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.8" />`
+     * DbContext
+     * remove :  public DbSet<User> Users { get; set; }
+    public DbSet<Role> Roles { get; set; }
+     * Inherit : IdentityDbContext<User,Role,UserClaim,UserLogin,UserRole,UserLogin,RoleClaim,,UserToken,int>
+  * Entities :
+      * Dependecies : `<PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="5.0.8" />`
+      * User : IdetityUser<int>
+      * Role : IdetityRole<int>
+      * UserRole : IdetityUserRole<int>
+      * UserLogin : IdetityUserLogin<int>
+      * UserToken : IdetityUserToken<int>
+      * UserClaim : IdetityUserClaim<int>
+      * RoleClaim : IdetityRoleClaim<int>
+  * Data :
+    *Configurations
+      * User
+      * Role
+      * UserRole
+      * UserLogin
+      * UserToken
+      * UserClaim
+      * RoleClaim
+  * Services :
+      * Dependecies : `<PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />`
+      * ServicesCollectionExtensions : LoadMyServices
+          * services.AddIdentity<User, Role>();
+  * Data :
+      * Remove Database from SQL server
+      * Remove Migrations folder
+      * Commneted Seed Data
+      * Migrations :
+          * dotnet ef migrations add InitialCreate
+          * dotnet ef database update
+
+  * Services : IdentityOptions
+      * ServicesCollectionExtensions : LoadMyServices
 
 
-                                //#region datatable
-                                $('#entitiesDataTable').DataTable({
-                                    dom:
-                                        "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
-                                        "<'row'<'col-sm-12'tr>>" +
-                                        "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-                                    buttons: [
-                                        {
-                                            text: 'Create',
-                                            attr: {
-                                                id: "btnCreate"
-                                            },
-                                            className: 'btn',
-                                            action: function (e, dt, node, config) {
-                                            }
-                                        },
-                                        {
-                                            text: 'Refresh',
-                                            className: 'btn btn-warning',
-                                            action: function (e, dt, node, config) {
-                                                refreshData();
-                                            }
-                                        }
-                                    ]
-                                });
-                                //#endregion datatable
+                      // user password options
+                       ` options.Password.RequireDigit = true; // default true
+                         options.Password.RequiredLength = 6; // deafult 6
+                         options.Password.RequiredUniqueChars = 1; // default 1
+                         options.Password.RequireNonAlphanumeric = true; // default true
+                         options.Password.RequireLowercase = true; // default true
+                         options.Password.RequireUppercase = true; //default true
+                         // email options
+                         // https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity-configuration?view=aspnetcore-5.0
+                         options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                         options.User.RequireUniqueEmail = true;`
 
 
-
-             * Create
-
-
-                                //#region create modal
-                                $(function () {
-                                    const url = 'Category/Create';
-                                    const modalPlaceHolderDiv = $('#modalPlaceHolder');
-                                    $('#btnCreate').click(function () {
-
-                                        // ajax. getting partial view
-                                        $.get(url).done(function (response) {
-                                            modalPlaceHolderDiv.html(response);
-                                            modalPlaceHolderDiv.find('.modal').modal('show');
-                                        });
-                                    });
-                                    //#region create : ajax. post
-                                    modalPlaceHolderDiv.on('click',
-                                        '#btnSave',
-                                        function (event) {
-                                            event.preventDefault();
-                                            const form = $('#form');
-                                            const actionUrl = form.attr('action');
-                                            const data = form.serialize();
-                                            $.post(actionUrl, data)
-                                                .done(function (response) {
-                                                    const viewModel = response;
-                                                    const formBody = $('.modal-body', viewModel.partial);
-                                                    modalPlaceHolderDiv.find('.modal-body').replaceWith(formBody);
-                                                    const isValid = formBody.find('[name="IsValid"]').val() === 'True';
-                                                    if (isValid) {
-                                                        modalPlaceHolderDiv.find('.modal').modal('hide');
-                                                        const entity = viewModel.dto.entity;
-                                                        // template literals
-                                                        const newTableRowString = createNewRowStringTemplate(entity)
-                                                        const newTableRowObject = $(newTableRowString);
-                                                        newTableRowObject.hide();
-                                                        $('#entitiesDataTable').append(newTableRowObject);
-                                                        newTableRowObject.fadeIn(2500);
-                                                        toastr.success(`${viewModel.dto.message}`, 'Success');
-                                                    } else {
-                                                        let summaryText = '';
-                                                        $('#validationSummary > ul > li').each(function () {
-                                                            let text = $(this).text();
-                                                            summaryText = `* ${text}\n`;
-                                                        });
-                                                        toastr.warning(summaryText);
-                                                    }
-                                                });
-                                        });
-                                    //#endregion ajax. post
-                                });
-                                //#endregion create modal
+        * MVC :
+          * Middlewares :
+            * Authentication, // who are you ?
+            * Authorization,  // 403 permissions
+            * SessionMiddleware :app.UseSession();
+          * Service Container :
+            * services.AddSession();
+            * CoockieAuthentication :
 
 
 
-             * Update
+                       `services.ConfigureApplicationCookie(options =>
+                       {
+                           options.LoginPath = new PathString("/Admin/User/Login");
+                           options.LogoutPath = new PathString("/Admin/User/Logout");
+                           options.AccessDeniedPath = new PathString("/Admin/User/AccessDenied");
+                           options.Cookie = new CookieBuilder()
+                           {
                                
-                      
-                                //#region update
-                                $(function () {
-                                const url = 'Category/Update';
-                                const modalPlaceHolderDiv = $('#modalPlaceHolder');
-                                $(document).on('click', '.btn-update', function (event) {
-                                    event.preventDefault();
-                                    const id = $(this).attr('data-id');
-                                    // ajax. getting partial view
-                                    $.get(url, { id: id })
-                                        .done(function (response) {
-                                            modalPlaceHolderDiv.html(response);
-                                            modalPlaceHolderDiv.find('.modal').modal('show');
-                                        })
-                                        .fail(function() {
-                                            toastr.error('Error!');
-                                        });
-                                });
-                                //#region  : ajax. post
-                                modalPlaceHolderDiv.on('click',
-                                    '#btnUpdate',
-                                    function (event) {
-                                        event.preventDefault();
-                                        const form = $('#form');
-                                        const actionUrl = form.attr('action');
-                                        const data = form.serialize();
-                                        $.post(actionUrl, data)
-                                            .done(function (response) {
-                                                const viewModel = response;
-                                                const formBody = $('.modal-body', viewModel.partial);
-                                                modalPlaceHolderDiv.find('.modal-body').replaceWith(formBody);
-                                                const isValid = formBody.find('[name="IsValid"]').val() === 'True';
-                                                if (isValid) {
-                                                    modalPlaceHolderDiv.find('.modal').modal('hide');
-                                                    const entity = viewModel.dto.entity;
-                                                    // template literals
-                                                    const newTableRowString = createNewRowStringTemplate(entity);
-                                                   
-                                                    const newTableRowObject = $(newTableRowString);
-                                                    console.log(`newRow`);
-                                                    console.log(newTableRowObject);
-                                                    newTableRowObject.hide();
-                                                    const currentRow = $(`[name="${entity.id}"]`);
-                                                    console.log(`currentRow`);
-                                                    console.log(currentRow);
-                                                    currentRow.replaceWith(newTableRowObject);
-                                                    newTableRowObject.fadeIn(3500);
-                                                    toastr.success(`${viewModel.dto.message}`, 'Success');
-                                                } else {
-                                                    let summaryText = '';
-                                                    $('#validationSummary > ul > li').each(function () {
-                                                        let text = $(this).text();
-                                                        summaryText = `* ${text}\n`;
-                                                    });
-                                                    toastr.warning(summaryText);
-                                                }
-                                            })
-                                            .fail(function(response) {
-
-                                            });
-                                    });
-                                //#endregion ajax. post
-                                });
-                                //#endregion update`
+                               Name = "BlogProject",
+                               /*
+                                * Asagidaki js kodu ile web page uzerindeki cookie melumatlarini elde etmek mumkundur.
+                                *
+                                * {
+                                *  var cookie=document.cookie;
+                                *  window.alert(cookie);
+                                * }
+                                *
+                                * Lakin http-only cookie-lere bu qeder asan reach ede bilmirik.
+                                * bu tip attack-lar XSS (Cross Site Scripting) adlanir.
+                                */
+                               HttpOnly = true,
+                               /*
+                                * Cross site Request Forgery 'CSRF' attackinin qarshisini almaq ucun istifade edilir,
+                                * web app-e userlerden elave kiminse her hanssa bir appden her hansisa bir userin cookie
+                                * melumatindan istifade ederek request ata bilmesinin qarshisini alir.
+                                */
+                               SameSite = SameSiteMode.Strict,
+                               /*
+                                * sameAsRequest hem http hem https requestleri qebul edir .
+                                * Duzgun yeni productionda olan app-da  CookieSecurePolicy.Always olmalidir. her zaman https request.
+                                */
+                               SecurePolicy = CookieSecurePolicy.SameAsRequest,
+                           };
+                           options.SlidingExpiration = true;
+                           options.ExpireTimeSpan = System.TimeSpan.FromDays(7);
+                           
+                       });`  
 
 
-
-             * Refresh
-
-
-                                 //#region refresh load data
-                                 function refreshData() {
-                                 $.ajax({
-                                     type: 'GET',
-                                     url: 'Category/Refresh',
-                                     contentType: 'application/json',
-                                     beforeSend: function () {
-                                         $('#entitiesDataTable').hide();
-                                         $('.spinner-border').show(1000);
-                                     },
-                                     success: function (response) {
-                                         const data = response;
-                                         console.log(data);
-                                         if (data.resultStatus === 0) {
-                                             let tableBody = '';
-                                             $.each(data.entities,
-                                                 function (index, entity) {
-                                                     tableBody += createNewRowStringTemplate(entity);
-                                                    
-                                                 });
-
-                                             $('#entitiesDataTable > tbody').replaceWith(tableBody);
-                                             $('.spinner-border').hide();
-                                             $('#entitiesDataTable').fadeIn(1400);
-                                         } else {
-                                             toastr.error(data.message, 'Fail!');
-                                         }
-                                     },
-                                     error: function (error) {
-                                         console.log(error);
-                                         $('.spinner-border').hide();
-                                         $('#entitiesDataTable').fadeIn(1000);
-                                         toastr.error(error.responseText, 'Fail!');
-                                     }
-                                 });
-                                 }
-                                 //#endregion refresh load data
+          * `admin`
+            * Controllers
+              * UserController/Actions
+                * Inject IUserService to UserController
+                * Index
+                * Create
+                * Update
+                * Delete
+                * Refresh
+            * Views
+              * Index
+              * _CreatePartial
+              * _UpdatePartial
+            * wwwroot
+              * js/admin
+                * user.js
+        * Services
+          * IUserService
+            * GetAllAsync
+          * UserManager
+        * Shared
+          * Localization
+            * BaseLocalization
+              * properties -> Custom Tool : PublicResXFileCodeGenerator (Resource: https://stackoverflow.com/questions/1333356/changing-resource-files-resx-namespace-and-access-modifier)
+        * Entities
+          * Dtos
+            * GetBaseListDto<T>
+            * UserListDto : GetBaseListDto<T>
+            * CategoryListDto : GetBaseListDto<T>
+            * UserAddDto
+            * UserUpdateDto
+        
+        * `File Upload (resource : https://docs.microsoft.com/en-us/aspnet/core/mvc/models/file-uploads?view=aspnetcore-5.0)`
+          * Shared
 
 
-             * Delete
-             
+           ```<ItemGroup>
+		        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+	          </ItemGroup>```
 
 
-                        
-                                 //#region deleted 
-                                 $(document).on('click', '.btn-delete',
-                                 function () {
-                                     event.preventDefault();
-                                     const id = $(this).attr('data-id');
-                                     const tableRow = $(`[name=${id}]`);
-                                     Swal.fire({
-                                         title: 'Are you sure?',
-                                         text: "You won't be able to revert this!",
-                                         icon: 'warning',
-                                         showCancelButton: true,
-                                         confirmButtonColor: '#3085d6',
-                                         cancelButtonColor: '#d33',
-                                         confirmButtonText: 'Yes, delete it!'
-                                     }).then((result) => {
-                                         if (result.isConfirmed) {
-                                             $.ajax({
-                                                 type: 'POST',
-                                                 dataType: 'json',
-                                                 data: { id: id },
-                                                 url: 'Category/Delete',
-                                                 success: function (response) {
-                                                     if (response.resultStatus === 0) {
-                                                         Swal.fire(
-                                                             'Deleted!',
-                                                             `${response.message}`,
-                                                             'success'
-                                                         );
-                                                         tableRow.fadeOut(3000);
-                                                     } else {
-                                                         Swal.fire({
-                                                             icon: 'error',
-                                                             title: 'Error!',
-                                                             text: `${response.message}`
-                                                         });
-                                                     }
-                                                 },
-                                                 error: function (error) {
-                                                     console.log(error);
+            * Extensions
+              * DateTimeExtensions
+                * FullDateTimeStingWithUnderscore
+            * Helpers
+              * IImageHelper > ImageHelper > UploadedImageDto
+                * UploadImage
+            * ServiceCollectionExtensions
+              * services.AddSingleton<IImageHelper, ImageHelper>();
+          * Services
+            * UserService
+              * Inject IImageHelper to UserService
+        * Services
+          * UserProfile > CreateMap<UserAddDto, User>();  CreateMap<User, UserUpdateDto>(); CreateMap<UserUpdateDto, User>();
+        * Mvc
+          * StartUp > UserProfile
+          * UserController
+            * Create   [ValidateAntiForgeryToken] // CSRF
+            * Delete   
+            * Update  
+        * Refactoring
+          * EfRepositoryBase
+            * GetAsync : remove predicate condition
+            * Field : private Context >>> protected Context
 
-                                                 }
-                                             });
+        * Auth : Let's Complete Our Login Process with SignInManager and Authorize Attribute
+          * Entities
+            * Auth/LoginDto
+          * MVC
+            * Controllers
+              * BaseAdminController
 
-                                         }
-                                     });
-                                 });
-                                 //#endregion
 
-            
-                                   
-            * helper method
-                            
-                        
-                                 //#region helper
-                                 function createNewRowStringTemplate(entity)
-                                 {
-                                   const newTableRowString = `<tr name="${entity.id}">
-                                                                                      <td>
-                                                                                           <a class="btn text-primary btn-sm btn-update" data-id="${entity.id}"><i class='fa fa-edit'></i></a>
-                                                                                           <a class="btn text-danger btn-sm btn-delete" data-id="${entity.id}"><i class="fa fa-trash"></i></a>
-                                                                                      </td>
-                                                                                      <td>${entity.id}</td>
-                                                                                      <td>${entity.name}</td>
-                                                                                      <td>${entity.description}</td>
-                                                                                      <td>${convertFirstLetterToUpperCase(entity.isDeleted.toString())}</td>
-                                                                                      <td>${convertFirstLetterToUpperCase(entity.isActive.toString())}</td>
-                                                                                      <td>${convertToShortDate(entity.createdDate)}</td>
-                                                                                      <td>${entity.createdByName}</td>
-                                                                                      <td>${convertToShortDate(entity.modifiedDate)}</td>
-                                                                                      <td>${entity.modifiedByName}</td>
-                                                                                  </tr>`;
-                                   return newTableRowString;
-                                 }
-                                 //#endregion helper
+                            ```csharp
+                            /// <summary>
+                            /// All admin controllers inherit from this
+                            /// </summary>
+                            [Area("Admin")]
+                            [Authorize] // Auth attr
+                            public class BaseAdminController : Controller
+                            {
+                            }
+                            ```
+
+              * AuthController
+                * Login
+            * Views
+              * Shared
+                * _LoginLayout.cshtml (resource: assets/dist/login.html)
+              * Auth
+                * Login.cshtml
+          * Services
+            * IAuthService : AuthManager --> Injected SignManager
+              * Login
+
+        * Let's Add First Users While Creating Database With Fluent API Configuration
+          * Fluent api hasData ( admin, editor, member)
+            - User 
+            - Role 
+            - User Role 
+
+        * Let's Add Our New Configurations to the Database with Migration Operations
+            - remove Migrations
+            - remove DataBase
+            - dotnet ef migrations add InitialCreate
+            - dotnet ef databse update
+
+        * Let's Add and Activate Role Based Authorization in Our Application : role-based auth
+          - [Authorize(Roles="Admin")]
+          - [AllowAnonymous]
+            * Home/Category/User Controllers
+
+        * Let's Create Our Required Page for 403 - Access Denied Error
+          * AuthController
+            * AccessDenied
+
+        * Let's Make Our Admin Menu Dynamic by Refreshing it as a View Component
+          * MVC
+            * ViewComponents
+              * LeftSideBarViewComponent.cs - inherit ViewComponent - injected SignInManager<User>
+                * Method : InvokeAsync
+            * Models 
+              * UserWithRolesViewModel
+            * Views / Shared / Components
+              * LeftSideBar / Default.cshtml - @model UserWithRolesViewModel
+         
+        * Let's Revise User Menu on TopBar as a ViewComponent
+          * MVC
+            * ViewComponents
+              * DashboardUserTopBarViewComponent.cs - inherit ViewComponent - injected SignInManager<User>
+                * Method : InvokeAsync
+            * Models 
+              * UserViewModel
+            * Views / Shared / Components
+              * DashboardUserTopBar / Default.cshtml - @model UserViewModel
+
+        * Let's Complete Our Logout Process with SignInManager
+          * AuthController
+            * Logout => await _signInManager.SignOutAsync();
+
+        * Let's Create UpdateProfile View and Action
+          * UserController
+            * UpdateProfile
+
+        * Shared / Extensions / EnumExtensions : GetDisplayName
+        * Let's Create Our ChangePassword View and Action
+          * UserController
+            * ChangePassword
+          * DTO/ UserChangePasswordDto
+          * Services 
+            * ServiceCollectionExtensions
+              * services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            * UserService 
+              * Task<IResult> ChangePasswordAsync(UserChangePasswordDto dto);
+            * UserManager
+              * injected private readonly IHttpContextAccessor _httpContextAccessor;     
 
 

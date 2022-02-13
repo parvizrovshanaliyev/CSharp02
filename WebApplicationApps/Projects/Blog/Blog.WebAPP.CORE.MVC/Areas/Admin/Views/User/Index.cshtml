@@ -1,4 +1,4 @@
-﻿@model IResult<IList<CategoryDto>>;
+﻿@model IResult<IList<UserDto>>;
 
 
 @if (Model is { IsSuccess: true })
@@ -7,7 +7,7 @@
     <div class=" card mb-2 mt-2">
         <div class="card-header">
             <div style="display:flex" class="justify-content-end">
-                <a onclick="showInPopup('Category/Create','Create')" class="btn btn-primary">Create</a>
+                <a onclick="showInPopup('User/Create','Create')" class="btn btn-primary">Create</a>
             </div>
         </div>
         <div class="card-body">
@@ -15,38 +15,30 @@
                 <div class="table-responsive">
                     <table id="dataTable" style="width:100%" class=" table table-hover text-center">
                         <thead>
-                            <tr>
-                                <th>Actions</th>
-                                <th>Id</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Is Deleted?</th>
-                                <th>Is Active?</th>
-                                <th>Recorded Date</th>
-                                <th>Created By name</th>
-                                <th>Modified Date</th>
-                                <th>Modified By Name</th>
-                            </tr>
+                        <tr>
+                            <th>Actions</th>
+                            <th>Id</th>
+                            <th>UserName</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Avatar</th>
+                        </tr>
                         </thead>
                         <tbody>
                             @if (Model.Data.Any())
                             {
                                 @foreach (var item in Model.Data)
                                 {
-                                    <tr name="@item.Id">
+                                    <tr role="row" name="@item.Id">
                                         <td>
-                                            <a class='btn text-primary btn-sm btn-update' onclick="showInPopup('Category/Update?id=@item.Id','Update')" data-id="@item.Id"><i class='fa fa-edit'></i></a>
+                                            <a class='btn text-primary btn-sm btn-update' onclick="showInPopup('User/Update?id=@item.Id','Update')" data-id="@item.Id"><i class='fa fa-edit'></i></a>
                                             <a class="btn text-danger btn-sm btn-delete" onclick="jQueryAjaxDelete(this)" data-id="@item.Id"><i class="fa fa-trash"></i></a>
                                         </td>
                                         <td>@item.Id</td>
-                                        <td>@item.Name</td>
-                                        <td>@item.Description</td>
-                                        <td>@item.IsDeleted</td>
-                                        <td>@item.IsActive</td>
-                                        <td>@item.CreatedDate</td>
-                                        <td>@item.CreatedByName</td>
-                                        <td>@item.ModifiedDate</td>
-                                        <td>@item.ModifiedByName</td>
+                                        <td>@item.UserName</td>
+                                        <td>@item.Email</td>
+                                        <td>@item.PhoneNumber</td>
+                                        <td><img alt="@item.UserName" class="datatable-image" src="~/img/@item.Avatar" /></td>
                                     </tr>
                                 }
                             }
@@ -89,5 +81,5 @@ else
 @section Scripts{
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="~/js/admin/show-in-popup.js" asp-append-version="true"></script>
-    <script src="~/js/admin/category-crud.js" asp-append-version="true"></script>
+    <script src="~/js/admin/user-crud.js" asp-append-version="true"></script>
 }

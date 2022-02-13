@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\img\Posts\" />
+    <Folder Include="wwwroot\img\Users\" />
     <Folder Include="wwwroot\js\ui\" />
   </ItemGroup>
 

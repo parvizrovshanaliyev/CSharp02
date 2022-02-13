@@ -23,7 +23,7 @@ namespace Blog.Data.Concrete.EntityFramework.Configurations
             builder.Property(u => u.ConcurrencyStamp).IsConcurrencyToken();
 
             // Limit the size of columns to use efficient database types
-            builder.Property(u => u.UserName).HasMaxLength(50);
+            builder.Property(u => u.UserName).HasMaxLength(50); 
             builder.Property(u => u.NormalizedUserName).HasMaxLength(50);
             builder.Property(u => u.Email).HasMaxLength(50);
             builder.Property(u => u.NormalizedEmail).HasMaxLength(50);

@@ -28,5 +28,10 @@ namespace Blog.Shared.Utilities.Results.Abstract
         {
             return new Result<TResult>(ServiceResultCode.Deleted, BaseLocalization.DeletedSuccessfully, output);
         }
+
+        protected IResult<TResult> Error<TResult>(params string[] errors)
+        {
+            return new Result<TResult>(ServiceResultCode.Error, default(TResult),errors);
+        }
     }
 }

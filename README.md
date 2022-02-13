@@ -1296,4 +1296,59 @@ CSharp-02 , start  06/03/21
 
 # Week27  13/02/22
 ### Topics
-    -`Identity` : `https://docs.microsoft.com/en-us/aspnet/core/security/authentication/customize-identity-model?view=aspnetcore-6.0`
+    - Blog application :
+      * `Identity` :
+        * Customize the model
+          * `IdentityUser`
+          * `IdentityRole`
+          * `IdentityUserRole`
+          * `IdentityUserClaim`
+          * `IdentityUserLogin`
+          * `IdentityRoleClaim`
+          * `IdentityUserToken`
+        * Entity type relationships
+        * Change the primary key type
+        * Default model configuration
+          - This configuration is done using the EF Core Code First Fluent API in the OnModelCreating method of the context class.
+        *  Remove migrationa and create new migration
+        *  BlogDbContext :  Inheriting from the Identity Context class
+        
+      
+
+### Resources
+-[Identity model customization in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/customize-identity-model?view=aspnetcore-6.0)
+<br>
+
+# Week28  13/02/22
+### Topics
+    - Blog application :
+      * `Identity` :
+      * Services Containers
+        * Session
+        * Identity options
+          - Password options
+          - Email options
+          - Expiring
+        * ConfigureApplicationCookie
+      * Midlewares
+        - Authentication
+        - Authorization
+        - Session
+      * `Controllers` :
+        * UserController
+          - Index
+          - Create
+          - Update   
+          - Delete   
+      * IFileHelper > FileHelper
+        - UploadImage
+        - DeleteImage
+      * DateTimeExtensions
+        - GetFullDateWithUnderscore
+
+
+### Resources
+-[Identity model customization in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/customize-identity-model?view=aspnetcore-6.0)
+<br>
+-[Identity-configuration](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity-configuration?view=aspnetcore-5.0)
+<br>

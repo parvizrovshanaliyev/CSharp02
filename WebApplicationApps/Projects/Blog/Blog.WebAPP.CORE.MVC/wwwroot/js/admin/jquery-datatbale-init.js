@@ -12,6 +12,6 @@ function insertedRowToDataTable(entity, rowItem) {
 
 function updateDataTableRow(entity, currentRow, rowItem) {
     dataTable.row(currentRow).data(rowItem).node();
-    currentRow.attr('name', `${entity.Id}`);
+    currentRow.attr('name', `${entity.id}`);
     dataTable.row(currentRow).invalidate();
 }

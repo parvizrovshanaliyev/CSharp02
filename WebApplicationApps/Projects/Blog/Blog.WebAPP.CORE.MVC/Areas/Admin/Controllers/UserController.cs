@@ -74,6 +74,59 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
             return Json(errorViewModel);
         }
         #endregion
+        #region update
+        [HttpGet]
+        public async Task<IActionResult> Update(int id)
+        {
+            var result = await _service.GetUpdateDtoAsync(id);
+
+            return PartialView("_UpdatePartial",result.Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Update(UserUpdateDto request)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _service.UpdateAsync(request, "Admin");
+
+                if (result.Errors.Any())
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error);
+                    }
+                }
+
+                if (result.IsSuccess)
+                {
+                    var successViewModel = new UserUpdateAjaxViewModel()
+                    {
+                        Result = result,
+                        Partial = await this.RenderViewToStringAsync("_UpdatePartial", request)
+                    };
+                    return Json(successViewModel);
+                }
+            }
+            var errorViewModel = new UserUpdateAjaxViewModel()
+            {
+                UpdateDto = request,
+                Partial = await this.RenderViewToStringAsync("_UpdatePartial", request)
+            };
+
+            return Json(errorViewModel);
+        }
+        #endregion
+
+        #region delete
+        [HttpPost]
+        public async Task<JsonResult> Delete(int id)
+        {
+            var result = await _service.DeleteAsync(id, "Admin");
+            return Json(result);
+        }
+        #endregion
         #endregion
 
     }

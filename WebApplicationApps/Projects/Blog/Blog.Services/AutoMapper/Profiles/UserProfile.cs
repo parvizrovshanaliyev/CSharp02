@@ -9,7 +9,9 @@ namespace Blog.Services.AutoMapper.Profiles
         public UserProfile()
         {
             CreateMap<User, UserDto>();
+            CreateMap<User, UserUpdateDto>();
             CreateMap<UserAddDto, User>();
+            CreateMap<UserUpdateDto, User>();
         }
     }
 }

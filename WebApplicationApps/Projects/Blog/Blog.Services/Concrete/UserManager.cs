@@ -53,7 +53,17 @@ namespace Blog.Services.Concrete
             var outputDto = _mapper.Map<IList<UserDto>>(entities);
             return Ok(outputDto);
         }
+        #endregion
 
+        #region GetUpdateDtoAsync
+        public async Task<IResult<UserUpdateDto>> GetUpdateDtoAsync(int id)
+        {
+            var entity = await _identityUserManager.FindByIdAsync(id.ToString());
+            if (entity is null)
+                return NotFound<UserUpdateDto>(BaseLocalization.NotFoundCodeGeneralMessage);
+            var outputDto = _mapper.Map<UserUpdateDto>(entity);
+            return Ok(outputDto);
+        }
         #endregion
         #endregion
         #region CRUD
@@ -100,6 +110,81 @@ namespace Blog.Services.Concrete
             return Created(outputDto);
         }
 
+        #endregion
+
+        #region Update
+        public async Task<IResult<UserDto>> UpdateAsync(UserUpdateDto dto, string modifiedByName)
+        {
+            var foundedEntity = await _identityUserManager.FindByIdAsync(dto.Id.ToString());
+            if (foundedEntity is null)
+                return Error<UserDto>(BaseLocalization.NoDataAvailableOnRequest);
+            // id 2         id 3 
+            // admin
+            // dto.admin    entity.y
+            bool isAlreadyExistUser = await _unitOfWork.Users.AnyAsync(i => i.Id != foundedEntity.Id && i.NormalizedEmail == dto.Email.ToUpper()
+                                                                            || i.Id != foundedEntity.Id && i.PhoneNumber == dto.PhoneNumber
+                                                                            || i.Id != foundedEntity.Id && i.NormalizedUserName == dto.UserName.ToUpper());
+
+            if (isAlreadyExistUser)
+            {
+                return Error<UserDto>(BaseLocalization.AlreadyExistUser);
+            }
+
+            var oldFileName = foundedEntity.Avatar;
+            bool isNewFileUploaded = false;
+
+            if (dto.File is not null)
+            {
+                var uploadedResult = await _fileHelper.UploadImageAsync(dto.File, "Users", dto.UserName);
+
+                if (!uploadedResult.IsSuccess)
+                {
+                    return Error<UserDto>(uploadedResult.Errors.ToArray());
+                }
+
+                dto.Avatar = uploadedResult.Data.FullName;
+                if (!string.Equals(oldFileName, DefaultUserAvatarFileName))
+                {
+                    isNewFileUploaded = true;
+                }
+            }
+            var updatedEntity = _mapper.Map(dto, foundedEntity);
+            var identityResult = await _identityUserManager.UpdateAsync(updatedEntity);
+
+            if (!identityResult.Succeeded)
+            {
+                var identityErrors = identityResult.Errors.Select(i => i.Description).ToArray();
+                return Error<UserDto>(identityErrors);
+            }
+
+            if (isNewFileUploaded)
+            {
+                _fileHelper.DeleteImage(oldFileName);
+            }
+
+            var outputDto = _mapper.Map<UserDto>(updatedEntity);
+            return Updated(outputDto);
+        }
+        #endregion
+
+        #region DeleteAsync
+
+        public async Task<IResult<UserDto>> DeleteAsync(int id, string modifiedByName)
+        {
+
+            var entity = await _identityUserManager.FindByIdAsync(id.ToString());
+            if (entity is null)
+                return NotFound<UserDto>(BaseLocalization.NotFoundCodeGeneralMessage);
+
+            var identityResult = await _identityUserManager.DeleteAsync(entity);
+            if (!identityResult.Succeeded)
+            {
+                var identityErrors = identityResult.Errors.Select(i => i.Description).ToArray();
+                return Error<UserDto>(identityErrors);
+            }
+            var outputDto = _mapper.Map<UserDto>(entity);
+            return Deleted(outputDto);
+        }
 
         #endregion
         #endregion

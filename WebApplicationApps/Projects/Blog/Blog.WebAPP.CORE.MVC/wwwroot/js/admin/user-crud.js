@@ -102,7 +102,7 @@ function makeDataTableRowObj(entity) {
         entity.userName,
         entity.email,
         entity.phoneNumber,
-        `<img alt="${entity.username}" class="datatable-image" src="/img/${entity.avatar}"/>`
+        `<img alt="${entity.userName}" class="datatable-image" src="/img/${entity.avatar}"/>`
     ];
 }
 

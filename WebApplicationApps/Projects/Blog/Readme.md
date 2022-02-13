@@ -441,7 +441,6 @@ Developing a Project with N-Tier Architecture
           * StartUp > UserProfile
           * UserController
             * Create   [ValidateAntiForgeryToken] // CSRF
-            * GetAll   (for Refresh btn)
             * Delete   
             * Update  
         * Refactoring

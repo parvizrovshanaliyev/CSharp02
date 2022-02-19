@@ -106,6 +106,15 @@ namespace Blog.Shared.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your email address or password is incorrect..
+        /// </summary>
+        public static string LoginFailed {
+            get {
+                return ResourceManager.GetString("LoginFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} should not be larger than {1} characters..
         /// </summary>
         public static string MaxLengthErrorMessage {
@@ -165,6 +174,15 @@ namespace Blog.Shared.Localizations {
         public static string PhoneNumber {
             get {
                 return ResourceManager.GetString("PhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remember Me.
+        /// </summary>
+        public static string RememberMe {
+            get {
+                return ResourceManager.GetString("RememberMe", resourceCulture);
             }
         }
         

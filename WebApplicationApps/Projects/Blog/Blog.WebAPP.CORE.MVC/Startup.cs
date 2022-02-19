@@ -37,12 +37,17 @@ namespace Blog.WebAPP.CORE.MVC
                 {
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 });
+
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
             };
 
             services.AddSession();
+            services.LoadServices();
+            services.LoadSharedServices();
+            services.AddAutoMapper(typeof(CategoryProfile), typeof(PostProfile), typeof(UserProfile));
+
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = new PathString("/Admin/Auth/Login");
@@ -84,11 +89,7 @@ namespace Blog.WebAPP.CORE.MVC
                 options.ExpireTimeSpan = System.TimeSpan.FromDays(7);
             });
 
-            services.LoadServices();
-            services.LoadSharedServices();
-
-            services.AddAutoMapper(typeof(CategoryProfile), typeof(PostProfile), typeof(UserProfile));
-
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

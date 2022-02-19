@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blog.Data.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    [Migration("20220205183439_InitialCreate")]
+    [Migration("20220219173925_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -224,6 +224,29 @@ namespace Blog.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", "Identity");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ConcurrencyStamp = "e0edcc2c-9431-4f53-86c1-4b5658c8e5ca",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ConcurrencyStamp = "e7b40318-a7e8-47df-bd20-ef1f47e24014",
+                            Name = "Editor",
+                            NormalizedName = "EDITOR"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ConcurrencyStamp = "3ba48d26-2a63-44c3-8cca-b3ec5d6beeab",
+                            Name = "Member",
+                            NormalizedName = "MEMBER"
+                        });
                 });
 
             modelBuilder.Entity("Blog.Entities.Concrete.RoleClaim", b =>
@@ -319,6 +342,62 @@ namespace Blog.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", "Identity");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccessFailedCount = 0,
+                            Avatar = "Users/defaultUser.png",
+                            ConcurrencyStamp = "033c2698-ff0f-4c65-b752-89c96c5d53b3",
+                            Email = "adminUser@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMINUSER@GMAIL.COM",
+                            NormalizedUserName = "ADMINUSER",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF3of0cf6WFowXIk7AqOoggZ6xk4muiH8eLN66H9BrsK+/ALGN8bkR73ioDsrxIkEg==",
+                            PhoneNumber = "+9949999999",
+                            PhoneNumberConfirmed = true,
+                            SecurityStamp = "72c4a899-4ca0-4fb6-acb6-01faa05b2958",
+                            TwoFactorEnabled = false,
+                            UserName = "adminUser"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccessFailedCount = 0,
+                            Avatar = "Users/defaultUser.png",
+                            ConcurrencyStamp = "744d9fe5-f9a4-4904-8e3f-727c0a0bc65e",
+                            Email = "editorUser@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "EDITORUSER@GMAIL.COM",
+                            NormalizedUserName = "EDITORUSER",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAaNs7Kfp/ysj+UU8zOo5mMIMSL3BkUDq1AmbPy0ePpKnothsQzFWB0i/udY+UPKpA==",
+                            PhoneNumber = "+9949999999",
+                            PhoneNumberConfirmed = true,
+                            SecurityStamp = "3e750cb9-7191-4254-9efc-a3ad7784dabb",
+                            TwoFactorEnabled = false,
+                            UserName = "editorUser"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AccessFailedCount = 0,
+                            Avatar = "Users/defaultUser.png",
+                            ConcurrencyStamp = "70e8153b-d747-4b89-9671-a8f45a262c71",
+                            Email = "memberUser@gmail.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MEMBERUSER@GMAIL.COM",
+                            NormalizedUserName = "MEMBERUSER",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJe61goOiUzw24jmY7d6PFIPWrlr8HKFy40GnSxAlnaUIrCvkM6TlSYH2MZVMeCH1A==",
+                            PhoneNumber = "+9949999999",
+                            PhoneNumberConfirmed = true,
+                            SecurityStamp = "d2b9c897-386e-40cb-a006-a776e4eb9e7f",
+                            TwoFactorEnabled = false,
+                            UserName = "memberUser"
+                        });
                 });
 
             modelBuilder.Entity("Blog.Entities.Concrete.UserClaim", b =>
@@ -380,6 +459,23 @@ namespace Blog.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", "Identity");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            RoleId = 3
+                        });
                 });
 
             modelBuilder.Entity("Blog.Entities.Concrete.UserToken", b =>

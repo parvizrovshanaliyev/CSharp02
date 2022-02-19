@@ -1,5 +1,7 @@
-﻿using Blog.Data.Concrete.EntityFramework.Context;
+﻿using System;
+using Blog.Data.Concrete.EntityFramework.Context;
 using Blog.Entities.Concrete;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -46,6 +48,64 @@ namespace Blog.Data.Concrete.EntityFramework.Configurations
 
             // Each User can have many entries in the UserRole join table
             builder.HasMany<UserRole>().WithOne().HasForeignKey(ur => ur.UserId).IsRequired();
+
+            // seed 
+            var admin = new User()
+            {
+                Id = 1,
+                UserName = "adminUser",
+                NormalizedUserName = "ADMINUSER",
+                Email = "adminUser@gmail.com",
+                NormalizedEmail = "ADMINUSER@GMAIL.COM",
+                PhoneNumber = "+9949999999",
+                Avatar = "Users/defaultUser.png",
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString(),
+            };
+
+            admin.PasswordHash = CreatePasswordHash(admin, "Admin123!User");
+
+
+            var editor = new User()
+            {
+                Id = 2,
+                UserName = "editorUser",
+                NormalizedUserName = "EDITORUSER",
+                Email = "editorUser@gmail.com",
+                NormalizedEmail = "EDITORUSER@GMAIL.COM",
+                PhoneNumber = "+9949999999",
+                Avatar = "Users/defaultUser.png",
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString(),
+
+            };
+            editor.PasswordHash = CreatePasswordHash(editor, "Editor123!User");
+
+            var member = new User()
+            {
+                Id = 3,
+                UserName = "memberUser",
+                NormalizedUserName = "MEMBERUSER",
+                Email = "memberUser@gmail.com",
+                NormalizedEmail = "MEMBERUSER@GMAIL.COM",
+                PhoneNumber = "+9949999999",
+                Avatar = "Users/defaultUser.png",
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                SecurityStamp = Guid.NewGuid().ToString(),
+
+            };
+            member.PasswordHash = CreatePasswordHash(editor, "Member123!User");
+
+            builder.HasData(admin, editor, member);
+        }
+
+        private string CreatePasswordHash(User user, string password)
+        {
+            var passwordHasher = new PasswordHasher<User>();
+            return passwordHasher.HashPassword(user, password);
         }
     }
 }

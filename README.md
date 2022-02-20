@@ -1352,3 +1352,24 @@ CSharp-02 , start  06/03/21
 <br>
 -[Identity-configuration](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity-configuration?view=aspnetcore-5.0)
 <br>
+
+
+# Week29  19/02/22
+### Topics
+    - Git basics
+    - Blog application :
+      * Seed Data : User , Role , UserRole
+      * AuthController
+        * Login
+        * Access Denied
+      * ViewComponents
+        * LeftSideBarViewComponent
+### Resources
+-[Data Seeding](https://docs.microsoft.com/en-us/ef/core/modeling/data-seeding)
+<br>
+-[View components in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/view-components?view=aspnetcore-5.0)
+<br>
+
+### Tasks
+- AuthContoller : Logout
+- UserContoller : UpdateProfile and ChangePassword

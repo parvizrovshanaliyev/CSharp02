@@ -132,6 +132,9 @@
   <data name="ImageUploadedSuccessfully" xml:space="preserve">
     <value>Image Uploaded Successfully.</value>
   </data>
+  <data name="LoginFailed" xml:space="preserve">
+    <value>Your email address or password is incorrect.</value>
+  </data>
   <data name="MaxLengthErrorMessage" xml:space="preserve">
     <value>{0} should not be larger than {1} characters.</value>
   </data>
@@ -152,6 +155,9 @@
   </data>
   <data name="PhoneNumber" xml:space="preserve">
     <value>Phone Number</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Remember Me</value>
   </data>
   <data name="RequiredErrorMessage" xml:space="preserve">
     <value>"{0} is required."</value>

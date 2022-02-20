@@ -1,5 +1,8 @@
 ﻿@model IResult<IList<UserDto>>;
 
+@{
+    ViewBag.Title = "User";
+}
 
 @if (Model is { IsSuccess: true })
 {
@@ -15,14 +18,14 @@
                 <div class="table-responsive">
                     <table id="dataTable" style="width:100%" class=" table table-hover text-center">
                         <thead>
-                        <tr>
-                            <th>Actions</th>
-                            <th>Id</th>
-                            <th>UserName</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Avatar</th>
-                        </tr>
+                            <tr>
+                                <th>Actions</th>
+                                <th>Id</th>
+                                <th>UserName</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Avatar</th>
+                            </tr>
                         </thead>
                         <tbody>
                             @if (Model.Data.Any())

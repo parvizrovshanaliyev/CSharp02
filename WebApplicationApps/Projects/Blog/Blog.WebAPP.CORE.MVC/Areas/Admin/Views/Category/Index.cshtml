@@ -1,5 +1,7 @@
 ﻿@model IResult<IList<CategoryDto>>;
-
+@{
+    ViewBag.Title = "Category";
+}
 
 @if (Model is { IsSuccess: true })
 {

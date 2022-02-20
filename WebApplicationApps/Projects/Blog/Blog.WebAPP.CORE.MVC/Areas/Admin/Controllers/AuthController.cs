@@ -31,8 +31,6 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
             return View();
         }
 
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginDto request, string ReturnUrl)
@@ -55,6 +53,19 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
             return View(request);
         }
+
+
+
         #endregion
+
+        #region access denied
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+        #endregion
+
+
     }
 }

@@ -35,28 +35,28 @@
             </li>
         </ul>
     </nav>
-    <div id="layoutSidenav">
-        @await Html.PartialAsync("_LayoutSideNavPartial")
-        <div id="layoutSidenav_content">
-            <main>
-                <div class="container-fluid">
-                    @RenderBody()
-                </div>
-            </main>
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2021</div>
-                        <div>
-                            <a href="#">Privacy Policy</a>
-                            &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div>
+<div id="layoutSidenav">
+    <div id="layoutSidenav_content">
+        @await Component.InvokeAsync("LeftSideBar")
+        <main>
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+        </main>
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Copyright &copy; Your Website 2021</div>
+                    <div>
+                        <a href="#">Privacy Policy</a>
+                        &middot;
+                        <a href="#">Terms &amp; Conditions</a>
                     </div>
                 </div>
-            </footer>
-        </div>
+            </div>
+        </footer>
     </div>
+</div>
     @await Html.PartialAsync("_ScriptsPartial")
     @await RenderSectionAsync("Scripts", false)
 </body>

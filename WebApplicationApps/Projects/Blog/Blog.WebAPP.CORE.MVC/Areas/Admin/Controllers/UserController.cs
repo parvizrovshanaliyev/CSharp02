@@ -4,11 +4,13 @@ using Blog.Entities.Dtos.User;
 using Blog.Services.Abstract;
 using Blog.Shared.Extensions;
 using Blog.WebAPP.CORE.MVC.Areas.Admin.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class UserController : Controller
     {
         #region fields

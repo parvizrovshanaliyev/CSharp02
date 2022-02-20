@@ -4,8 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize]
-    //[Authorize(Roles = "Admin,Editor")]
+    [Authorize(Roles = "Admin,Editor")]
     public class HomeController : Controller
     {
         // [AllowAnonymous]

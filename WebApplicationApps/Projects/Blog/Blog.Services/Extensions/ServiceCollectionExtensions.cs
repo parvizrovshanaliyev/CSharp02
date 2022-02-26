@@ -34,6 +34,7 @@ namespace Blog.Services.Extensions
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ICategoryService, CategoryManager>();
+            services.AddScoped<IPostService, PostManager>();
             services.AddScoped<IUserService, UserManager>();
             services.AddScoped<IAuthService, AuthManager>();
 

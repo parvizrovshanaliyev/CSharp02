@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Blog.Entities.Concrete;
+using Blog.Entities.Dtos.Post;
 
 namespace Blog.Services.AutoMapper.Profiles
 {
@@ -12,7 +13,9 @@ namespace Blog.Services.AutoMapper.Profiles
     {
         public PostProfile()
         {
-            //CreateMap<PostAddDto, Post>();
+            CreateMap<Post, PostDto>()
+                .ForMember(dest=>dest.Category,
+                    opt=>opt.MapFrom(src=>src.Category.Name));
         }
     }
 }

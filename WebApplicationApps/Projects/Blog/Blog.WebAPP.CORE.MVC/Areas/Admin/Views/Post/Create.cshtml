@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "Create New Post";
+}
+
+<ol class="breadcrumb mt-4 mb-4">
+    <li class="breadcrumb-item">
+        <a asp-area="Admin" asp-controller="Home" asp-action="Index">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item">
+        <a asp-area="Admin" asp-controller="Post" asp-action="Index">Posts</a>
+    </li>
+    <li class="breadcrumb-item">
+        <a asp-area="Admin" asp-controller="Post" asp-action="Create">@ViewBag.Title</a>
+    </li>
+</ol>
+
+<form asp-controller="Post" asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="row mt-2">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <input type="text" placeholder="Title" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <textarea id="text-editor"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header"> Basic Configurations</div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select class="form-control">
+                            <option disabled="disabled">Please select a category ...</option>
+                            <option>C#</option>
+                            <option>Java</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Thumbnail</label>
+                        <input type="file" class="form-control-file" accept="image/*" />
+                    </div>
+
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" />
+                        <label>Is Active ?</label>
+                    </div>
+
+                    <div class="form-check">
+                        <button type="submit" class="btn btn-primary btn-block mt-4">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 mt-2">
+            <div class="card">
+                <div class="card-header"> SEO Optimization</div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Author Name</label>
+                            <input type="text" placeholder="Author Name" class="form-control" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Tags</label>
+                            <input type="text" placeholder="Tags" class="form-control" />
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label>Content</label>
+                            <textarea class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/trumbowyg.min.js" integrity="sha512-t4CFex/T+ioTF5y0QZnCY9r5fkE8bMf9uoNH2HNSwsiTaMQMO0C9KbKPMvwWNdVaEO51nDL3pAzg4ydjWXaqbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/plugins/colors/trumbowyg.colors.min.js" integrity="sha512-4QranVVhd9HLb3yDUL6q+zlHc5mEIcUrR5pfhdyyGzsqcH9vSROL0BgN8wW47mZ1tZ44tUvFkk/JXvhfNlzvHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/plugins/emoji/trumbowyg.emoji.min.js" integrity="sha512-PPEK09bmt7tQg/qdNokvbckNVB4EqXTu+qi4X/j9XoFag6YspjU5xO/FXXCEjBxo1+Z41oOFvIyz5QkjSuTNsQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/plugins/fontfamily/trumbowyg.fontfamily.min.js" integrity="sha512-ha/jXUX4sZMHEvpHLtYOIvMDK8/a8ncRhAPSmQVUx/to+04w+zUBWWZHaPQMPt6qjx94V/lbE9ZEsTsb7F+sTw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/plugins/fontsize/trumbowyg.fontsize.min.js" integrity="sha512-eYBhHjpFi6wk8wWyuXYYu54CRcXA3bCFSkcrco4SR1nGtGSedgAXbMbm3l5X4IVEWD8U7Pur9yNjzYu8n4aIMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/js/admin/post-create.js" asp-append-version="true"></script>
+}
+
+@section Styles{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/ui/trumbowyg.min.css" integrity="sha512-nwpMzLYxfwDnu68Rt9PqLqgVtHkIJxEPrlu3PfTfLQKVgBAlTKDmim1JvCGNyNRtyvCx1nNIVBfYm8UZotWd4Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/plugins/colors/ui/trumbowyg.colors.min.css" integrity="sha512-aE073TwNBnCl/Y99fSlH/29MS7CzKgrliM9rTVDURKiiGvapXN+hTmept74zsbcadVEzJ2RtfcyEyzySiYeJuA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/plugins/emoji/ui/trumbowyg.emoji.min.css" integrity="sha512-xpR3G7LZbpAnoUgES2Xu2Z/mK8NwejLjJpNHQtmdU36yGP2AS5kgpflPwv6vEurEeruDcghOtHkWNsOkwVx2ig==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+}

@@ -11,6 +11,7 @@ namespace Blog.Services.Abstract
         Task<IResult<UserUpdateDto>> GetUpdateDtoAsync(int id);
         Task<IResult<UserDto>> AddAsync(UserAddDto dto, string createdByName);
         Task<IResult<UserDto>> UpdateAsync(UserUpdateDto dto, string modifiedByName);
+        Task<IResult<bool>> ChangePasswordAsync(UserChangePasswordDto dto);
         Task<IResult<UserDto>> DeleteAsync(int id, string modifiedByName);
     }
 }

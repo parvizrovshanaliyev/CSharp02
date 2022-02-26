@@ -12,6 +12,7 @@ using Blog.Services.Abstract;
 using Blog.Shared.Helpers;
 using Blog.Shared.Localizations;
 using Blog.Shared.Utilities.Results.Abstract;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,17 +26,21 @@ namespace Blog.Services.Concrete
         private readonly IUnitOfWork _unitOfWork;
         private readonly IFileHelper _fileHelper;
         private const string DefaultUserAvatarFileName = "Users/defaultUser.png";
-
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly SignInManager<User> _signInManager;
         #endregion
 
         #region ctor
 
-        public UserManager(UserManager<User> identityUserManager, IMapper mapper, IUnitOfWork unitOfWork, IFileHelper fileHelper)
+        public UserManager(UserManager<User> identityUserManager, IMapper mapper, IUnitOfWork unitOfWork, IFileHelper fileHelper,
+            IHttpContextAccessor httpContextAccessor, SignInManager<User> signInManager)
         {
             _identityUserManager = identityUserManager;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
             _fileHelper = fileHelper;
+            _httpContextAccessor = httpContextAccessor;
+            _signInManager = signInManager;
         }
 
         #endregion
@@ -165,6 +170,9 @@ namespace Blog.Services.Concrete
             var outputDto = _mapper.Map<UserDto>(updatedEntity);
             return Updated(outputDto);
         }
+
+        
+
         #endregion
 
         #region DeleteAsync
@@ -186,6 +194,33 @@ namespace Blog.Services.Concrete
             return Deleted(outputDto);
         }
 
+        #endregion
+
+        #region ChangePasswordAsync
+        public async Task<IResult<bool>> ChangePasswordAsync(UserChangePasswordDto dto)
+        {
+            var user = await _identityUserManager.GetUserAsync(_httpContextAccessor.HttpContext?.User);
+
+            var isVerified = await _identityUserManager.CheckPasswordAsync(user, dto.CurrentPassword);
+
+            if (!isVerified)
+                return Error<bool>(BaseLocalization.ChangePasswordNotVerified);
+
+
+            var identityResult =
+                await _identityUserManager.ChangePasswordAsync(user, dto.CurrentPassword, dto.NewPassword);
+
+            if (!identityResult.Succeeded)
+            {
+                var identityErrors = identityResult.Errors.Select(i => i.Description).ToArray();
+                return Error<bool>(identityErrors);
+            }
+
+            await _identityUserManager.UpdateSecurityStampAsync(user);
+            await _signInManager.SignOutAsync();
+            await _signInManager.PasswordSignInAsync(user, dto.NewPassword, true, false);
+            return Updated(true, BaseLocalization.ChangePasswordSuccessfully);
+        }
         #endregion
         #endregion
         #endregion

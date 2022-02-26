@@ -1,0 +1,74 @@
+﻿@model UserUpdateDto
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Update Profile";
+}
+<ol class="breadcrumb mt-4 mb-4">
+    <li class="breadcrumb-item">
+        <a asp-area="Admin" asp-controller="Home" asp-action="Index">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">
+        <a asp-area="Admin" asp-controller="User" asp-action="UpdateProfile">@ViewBag.Title</a>
+    </li>
+</ol>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="card shadow-lg border-0 rounded-lg mt-4 mb-1">
+                <div class="card-header">
+                    <h3 class="text-center font-weight-light my-4">@ViewBag.Title</h3>
+                </div>
+                <div class="card-body">
+                    <form id="form" asp-action="UpdateProfile" method="post" autocomplete="off" enctype="multipart/form-data">
+                        <input type="hidden" name="IsValid" value="@ViewData.ModelState.IsValid.ToString()" />
+                        <input type="hidden" asp-for="Id" />
+                        <div asp-validation-summary="All" id="validationSummary" class="text-danger" aria-hidden="true" style="display:none;"></div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="UserName"></label>
+                                    <input asp-for="UserName" class="form-control" autocomplete="off" />
+                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Email"></label>
+                                    <input asp-for="Email" type="email" class="form-control" autocomplete="off" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PhoneNumber"></label>
+                            <input asp-for="PhoneNumber" type="text" class="form-control" autocomplete="off" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Avatar"></label>
+                                    <input type="hidden" asp-for="Avatar" />
+                                    <img src="~/img/@Model.Avatar" alt="@Model.UserName" class="image" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="File"></label>
+                                    <input asp-for="File" type="file" accept="image/*" class="form-control-file" autocomplete="off" />
+                                    <span asp-validation-for="File" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6 offset-md-3">
+                                <input type="submit" value="Submit" class="btn btn-primary btn-block" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

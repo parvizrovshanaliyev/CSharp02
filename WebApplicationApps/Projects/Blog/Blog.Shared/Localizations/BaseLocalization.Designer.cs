@@ -70,11 +70,56 @@ namespace Blog.Shared.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change Password Not Verified..
+        /// </summary>
+        public static string ChangePasswordNotVerified {
+            get {
+                return ResourceManager.GetString("ChangePasswordNotVerified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your password has been successfully changed..
+        /// </summary>
+        public static string ChangePasswordSuccessfully {
+            get {
+                return ResourceManager.GetString("ChangePasswordSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm Password.
+        /// </summary>
+        public static string ConfirmPassword {
+            get {
+                return ResourceManager.GetString("ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your password and confirmation password do not match..
+        /// </summary>
+        public static string ConfirmPasswordValidation {
+            get {
+                return ResourceManager.GetString("ConfirmPasswordValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Created Successfully..
         /// </summary>
         public static string CreatedSuccessfully {
             get {
                 return ResourceManager.GetString("CreatedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current Password.
+        /// </summary>
+        public static string CurrentPassword {
+            get {
+                return ResourceManager.GetString("CurrentPassword", resourceCulture);
             }
         }
         
@@ -138,6 +183,15 @@ namespace Blog.Shared.Localizations {
         public static string ModifiedSuccessfully {
             get {
                 return ResourceManager.GetString("ModifiedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Password.
+        /// </summary>
+        public static string NewPassword {
+            get {
+                return ResourceManager.GetString("NewPassword", resourceCulture);
             }
         }
         

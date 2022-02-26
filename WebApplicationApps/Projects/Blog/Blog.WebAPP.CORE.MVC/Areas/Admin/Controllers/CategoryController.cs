@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Blog.Entities.Dtos;
 using Blog.Services.Abstract;
+using Blog.Shared.Attributes;
+using Blog.Shared.Constants;
 using Blog.Shared.Extensions;
 using Blog.Shared.Utilities.Results.ComplexTypes;
 using Blog.WebAPP.CORE.MVC.Areas.Admin.Models;
@@ -9,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [AuthorizeRoles(RoleConstant.Admin, RoleConstant.Editor)]
     public class CategoryController : Controller
     {
         #region .::fields::.

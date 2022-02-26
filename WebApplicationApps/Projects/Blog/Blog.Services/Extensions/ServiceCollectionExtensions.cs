@@ -4,6 +4,7 @@ using Blog.Data.Concrete.EntityFramework.Context;
 using Blog.Entities.Concrete;
 using Blog.Services.Abstract;
 using Blog.Services.Concrete;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Blog.Services.Extensions
@@ -35,6 +36,8 @@ namespace Blog.Services.Extensions
             services.AddScoped<ICategoryService, CategoryManager>();
             services.AddScoped<IUserService, UserManager>();
             services.AddScoped<IAuthService, AuthManager>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             return services;
         }
 

@@ -1,9 +1,11 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Blog.Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using Blog.Entities.Dtos.Auth;
 using Blog.Services.Abstract;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 {
@@ -13,13 +15,15 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
     {
         #region fields
         private readonly IAuthService _authService;
+        private readonly SignInManager<User> _signInManager;
         #endregion
 
 
         #region ctor
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService, SignInManager<User> signInManager)
         {
             _authService = authService;
+            _signInManager = signInManager;
         }
         #endregion
 
@@ -54,7 +58,14 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
             return View(request);
         }
 
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
 
+            return RedirectToAction("Login", "Auth");
+        }
 
         #endregion
 

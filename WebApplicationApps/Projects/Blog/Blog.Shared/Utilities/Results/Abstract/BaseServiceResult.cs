@@ -15,7 +15,10 @@ namespace Blog.Shared.Utilities.Results.Abstract
         {
             return new Result<TResult>(ServiceResultCode.Created,BaseLocalization.CreatedSuccessfully, outPut);
         }
-
+        protected IResult<TResult> Updated<TResult>(TResult output, string message)
+        {
+            return new Result<TResult>(ServiceResultCode.Updated, message, output);
+        }
         protected IResult<TResult> Updated<TResult>(TResult outPut)
         {
             return new Result<TResult>(ServiceResultCode.Updated, BaseLocalization.ModifiedSuccessfully, outPut);

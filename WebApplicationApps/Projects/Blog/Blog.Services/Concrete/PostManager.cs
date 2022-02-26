@@ -1,61 +1,48 @@
-﻿//using System.Threading.Tasks;
-//using Blog.Data.Abstract;
-//using Blog.Entities.Dtos;
-//using Blog.Services.Abstract;
-//using Blog.Shared.Utilities.Results.Abstract;
+﻿
 
-//namespace Blog.Services.Concrete
-//{
-//    public class PostManager :  IPostService
-//    {
-//        #region fields
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using AutoMapper;
+using Blog.Data.Abstract;
+using Blog.Entities.Dtos.Post;
+using Blog.Services.Abstract;
+using Blog.Shared.Localizations;
+using Blog.Shared.Utilities.Results.Abstract;
 
-//        private readonly IUnitOfWork _unitOfWork;
-//        #endregion
-//        #region ctor
+namespace Blog.Services.Concrete
+{
+    public class PostManager : BaseServiceResult,IPostService
+    {
+        #region fields
 
-//        public PostManager(IUnitOfWork unitOfWork)
-//        {
-//            _unitOfWork = unitOfWork;
-//        }
-//        #endregion
-//        #region Implementation of ICategoryService
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
+        #endregion
+        #region ctor
 
-//        public Task<IDataResult<CategoryDto>> GetAsync(int id)
-//        {
-//            throw new System.NotImplementedException();
-//        }
+        public PostManager(IUnitOfWork unitOfWork, IMapper mapper)
+        {
+            _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
+        #endregion
+        #region methods
+        #region QUERY
 
-//        public Task<IDataResult<CategoryListDto>> GetAllAsync()
-//        {
-//            throw new System.NotImplementedException();
-//        }
+        #endregion
+        #region CRUD
+        #region GetAllByNonDeletedAsync
+        public async Task<IResult<IList<PostDto>>> GetAllByNonDeletedAsync()
+        {
+            var entities = await _unitOfWork.Posts.GetAllAsync(i => !i.IsDeleted,p=>p.Category);
+            if (entities is null)
+                return NotFound<IList<PostDto>>(BaseLocalization.NoDataAvailableOnRequest);
+            var outputDto = _mapper.Map<IList<PostDto>>(entities);
+            return Ok(outputDto);
+        }
+        #endregion
+        #endregion
 
-//        public Task<IDataResult<CategoryListDto>> GetAllByNonDeletedAsync()
-//        {
-//            throw new System.NotImplementedException();
-//        }
-
-//        public Task<IResult> AddAsync(CategoryAddDto dto, string createdByName)
-//        {
-//            throw new System.NotImplementedException();
-//        }
-
-//        public Task<IResult> UpdateAsync(CategoryUpdateDto dto, string createdByName)
-//        {
-//            throw new System.NotImplementedException();
-//        }
-
-//        public Task<IResult> DeleteAsync(int id, string modifiedByName)
-//        {
-//            throw new System.NotImplementedException();
-//        }
-
-//        public Task<IResult> HardDeleteAsync(int id)
-//        {
-//            throw new System.NotImplementedException();
-//        }
-
-//        #endregion
-//    }
-//}
+        #endregion
+    }
+}

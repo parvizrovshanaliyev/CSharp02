@@ -9,6 +9,8 @@
     <meta name="author" content="" />
     <title>Blog Project  Dashboard | @ViewBag.Title</title>
     @await Html.PartialAsync("_StylesPartial")
+    @await RenderSectionAsync("Styles", false)
+    <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">

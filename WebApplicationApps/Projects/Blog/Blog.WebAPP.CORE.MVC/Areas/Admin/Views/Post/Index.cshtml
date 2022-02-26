@@ -1,14 +1,14 @@
-﻿@model IResult<IList<UserDto>>;
-
+﻿@model IResult<IList<PostDto>>;
 @{
-    ViewBag.Title = "Users";
+    ViewBag.Title = "Posts";
+    Layout = "_Layout";
 }
 <ol class="breadcrumb mt-4 mb-4">
     <li class="breadcrumb-item">
         <a asp-area="Admin" asp-controller="Home" asp-action="Index">Dashboard</a>
     </li>
     <li class="breadcrumb-item active">
-        <a asp-area="Admin" asp-controller="User" asp-action="UpdateProfile">@ViewBag.Title</a>
+        <a asp-area="Admin" asp-controller="Post" asp-action="Index">@ViewBag.Title</a>
     </li>
 </ol>
 @if (Model is { IsSuccess: true })
@@ -17,7 +17,7 @@
     <div class=" card mb-2 mt-2">
         <div class="card-header">
             <div style="display:flex" class="justify-content-end">
-                <a onclick="showInPopup('User/Create','Create')" class="btn btn-primary">Create</a>
+                <a asp-area="Admin" asp-controller="Post" asp-action="Create" class="btn btn-primary">Create</a>
             </div>
         </div>
         <div class="card-body">
@@ -27,11 +27,14 @@
                         <thead>
                             <tr>
                                 <th>Actions</th>
-                                <th>Id</th>
-                                <th>UserName</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Avatar</th>
+                                <th>Category</th>
+                                <th>Title</th>
+                                <th>Is Deleted?</th>
+                                <th>Is Active?</th>
+                                <th>Recorded Date</th>
+                                <th>Views Count</th>
+                                <th>Comments Count</th>
+                                <th>Thumbnail</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,16 +42,21 @@
                             {
                                 @foreach (var item in Model.Data)
                                 {
-                                    <tr role="row" name="@item.Id">
+                                    <tr name="@item.Id">
                                         <td>
-                                            <a class='btn text-primary btn-sm btn-update' onclick="showInPopup('User/Update?id=@item.Id','Update')" data-id="@item.Id"><i class='fa fa-edit'></i></a>
+                                            <a class='btn text-primary btn-sm btn-update' data-id="@item.Id"><i class='fa fa-edit'></i></a>
                                             <a class="btn text-danger btn-sm btn-delete" onclick="jQueryAjaxDelete(this)" data-id="@item.Id"><i class="fa fa-trash"></i></a>
                                         </td>
-                                        <td>@item.Id</td>
-                                        <td>@item.UserName</td>
-                                        <td>@item.Email</td>
-                                        <td>@item.PhoneNumber</td>
-                                        <td><img alt="@item.UserName" class="datatable-image" src="~/img/@item.Avatar" /></td>
+                                        <td>@item.Category</td>
+                                        <td>@item.Title</td>
+                                        <td>@item.IsDeleted</td>
+                                        <td>@item.IsActive</td>
+                                        <td>@item.CreatedDate</td>
+                                        <td>@item.ViewsCount</td>
+                                        <td>@item.CommentCount</td>
+                                        <td>
+                                            <img alt="@item.Title" src="~/img/@item.Thumbnail"  />
+                                        </td>
                                     </tr>
                                 }
                             }
@@ -73,23 +81,8 @@ else
         <a class="alert-link" asp-area="Admin" asp-controller="Home" asp-action="Index">Go to Home</a>
     </div>
 }
-<div id="form-modal" class="modal fade" role="dialog" aria-hidden="true" tabindex="-1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
 
-            </div>
-        </div>
-    </div>
-</div>
 @section Scripts{
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script src="~/js/admin/show-in-popup.js" asp-append-version="true"></script>
-    <script src="~/js/admin/user-crud.js" asp-append-version="true"></script>
+    
 }
+

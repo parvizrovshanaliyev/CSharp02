@@ -1,8 +1,15 @@
 ﻿@model IResult<IList<CategoryDto>>;
 @{
-    ViewBag.Title = "Category";
+    ViewBag.Title = "Categories";
 }
-
+<ol class="breadcrumb mt-4 mb-4">
+    <li class="breadcrumb-item">
+        <a asp-area="Admin" asp-controller="Home" asp-action="Index">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">
+        <a asp-area="Admin" asp-controller="Category" asp-action="Index">@ViewBag.Title</a>
+    </li>
+</ol>
 @if (Model is { IsSuccess: true })
 {
 

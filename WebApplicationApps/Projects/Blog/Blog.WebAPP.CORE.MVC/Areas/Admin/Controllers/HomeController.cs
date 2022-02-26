@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Blog.Shared.Attributes;
+using Blog.Shared.Constants;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin,Editor")]
+    [AuthorizeRoles(RoleConstant.Admin, RoleConstant.Editor)]
     public class HomeController : Controller
     {
-        // [AllowAnonymous]
         public IActionResult Index()
         {
             return View();

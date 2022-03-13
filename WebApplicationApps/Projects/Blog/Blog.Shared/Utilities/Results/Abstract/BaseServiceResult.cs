@@ -4,7 +4,7 @@ using Blog.Shared.Utilities.Results.Concrete;
 
 namespace Blog.Shared.Utilities.Results.Abstract
 {
-    public abstract  class BaseServiceResult
+    public abstract class BaseServiceResult
     {
         protected IResult<TResult> Ok<TResult>(TResult outPut)
         {
@@ -13,7 +13,7 @@ namespace Blog.Shared.Utilities.Results.Abstract
 
         protected IResult<TResult> Created<TResult>(TResult outPut)
         {
-            return new Result<TResult>(ServiceResultCode.Created,BaseLocalization.CreatedSuccessfully, outPut);
+            return new Result<TResult>(ServiceResultCode.Created, BaseLocalization.CreatedSuccessfully, outPut);
         }
         protected IResult<TResult> Updated<TResult>(TResult output, string message)
         {
@@ -34,7 +34,12 @@ namespace Blog.Shared.Utilities.Results.Abstract
 
         protected IResult<TResult> Error<TResult>(params string[] errors)
         {
-            return new Result<TResult>(ServiceResultCode.Error, default(TResult),errors);
+            return new Result<TResult>(ServiceResultCode.Error, default(TResult), errors);
+        }
+
+        public IResult<TResult> Unauthorized<TResult>()
+        {
+            return new Result<TResult>(ServiceResultCode.Unauthorized, BaseLocalization.Unauthorized);
         }
     }
 }

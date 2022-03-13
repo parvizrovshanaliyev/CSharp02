@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Blog.Shared.Enums;
 using Blog.Shared.Extensions;
 using Blog.Shared.Localizations;
 using Blog.Shared.Utilities.Results.Abstract;
@@ -11,6 +6,9 @@ using Blog.Shared.Utilities.Results.ComplexTypes;
 using Blog.Shared.Utilities.Results.Concrete;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Blog.Shared.Helpers
 {
@@ -25,7 +23,7 @@ namespace Blog.Shared.Helpers
     }
     public interface IFileHelper
     {
-        Task<IResult<FileDto>> UploadImageAsync(IFormFile file, string subDirectory, string otherName = default);
+        Task<IResult<FileDto>> UploadImageAsync(IFormFile file, ImageSubDirectoryEnum subDirectoryEnum, string subDirectory = default, string otherName = default);
         IResult<FileDto> DeleteImage(string fileName);
     }
 
@@ -35,7 +33,7 @@ namespace Blog.Shared.Helpers
         #region fields
         private readonly IWebHostEnvironment _env;
         private readonly string _wwwroot;
-        private readonly string _imgFolder="img";
+        private readonly string _imgFolder = "img";
 
         #endregion
         #region ctor
@@ -48,8 +46,10 @@ namespace Blog.Shared.Helpers
         #endregion
         #region Implementation of IFileHelper
 
-        public async Task<IResult<FileDto>> UploadImageAsync(IFormFile file, string subDirectory, string otherName = default)
+        public async Task<IResult<FileDto>> UploadImageAsync(IFormFile file, ImageSubDirectoryEnum subDirectoryEnum, string subDirectory, string otherName = null)
         {
+            subDirectory ??= subDirectoryEnum.GetDisplayName();
+
             if (file.Length < 0)
             {
                 return new Result<FileDto>(ServiceResultCode.BadFile, null, BaseLocalization.NoDataAvailableOnRequest);
@@ -64,8 +64,8 @@ namespace Blog.Shared.Helpers
             otherName ??= string.Empty;
             string fileName = Path.GetFileNameWithoutExtension(file.FileName); // apple.jpeg ->> apple
             string fileExtension = Path.GetExtension(file.FileName);
-            DateTime dateTime=DateTime.Now;
-            string uniqueFileName = $"{otherName}_{dateTime.FullDateTimeStringWithUnderscore()}{fileExtension}";
+            DateTime dateTime = DateTime.Now;
+            string uniqueFileName = $"{dateTime.FullDateTimeStringWithUnderscore()}_{otherName.RemoveInvalidChars()}_{fileExtension}";
             var path = Path.Combine(directory, uniqueFileName);
 
             await using (var stream = new FileStream(path, FileMode.Create))

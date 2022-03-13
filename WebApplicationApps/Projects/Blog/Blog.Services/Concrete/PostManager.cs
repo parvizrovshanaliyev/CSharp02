@@ -1,48 +1,200 @@
 ﻿
 
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using AutoMapper;
 using Blog.Data.Abstract;
+using Blog.Entities.Concrete;
 using Blog.Entities.Dtos.Post;
 using Blog.Services.Abstract;
+using Blog.Shared.Enums;
+using Blog.Shared.Helpers;
 using Blog.Shared.Localizations;
 using Blog.Shared.Utilities.Results.Abstract;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Blog.Services.Concrete
 {
-    public class PostManager : BaseServiceResult,IPostService
+    public class PostManager : BaseServiceResult, IPostService
     {
         #region fields
-
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IFileHelper _fileHelper;
+        private readonly UserManager<User> _userManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private User CurrentUser => _userManager.GetUserAsync(_httpContextAccessor.HttpContext?.User).Result;
         #endregion
-        #region ctor
 
-        public PostManager(IUnitOfWork unitOfWork, IMapper mapper)
+        #region ctor
+        public PostManager(IServiceProvider serviceProvider)
         {
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
+            _unitOfWork = serviceProvider.GetService<IUnitOfWork>();
+            _mapper = serviceProvider.GetService<IMapper>();
+            _fileHelper = serviceProvider.GetService<IFileHelper>();
+            _userManager = serviceProvider.GetService<UserManager<User>>();
+            _httpContextAccessor = serviceProvider.GetService<IHttpContextAccessor>();
         }
         #endregion
         #region methods
         #region QUERY
-
-        #endregion
-        #region CRUD
-        #region GetAllByNonDeletedAsync
-        public async Task<IResult<IList<PostDto>>> GetAllByNonDeletedAsync()
+        public async Task<IResult<PostDto>> GetAsync(int id)
         {
-            var entities = await _unitOfWork.Posts.GetAllAsync(i => !i.IsDeleted,p=>p.Category);
-            if (entities is null)
+            var entity = await _unitOfWork.Posts.GetAsync(i => i.Id == id);
+            if (entity is null)
+                return NotFound<PostDto>(BaseLocalization.NotFoundCodeGeneralMessage);
+            var outputDto = _mapper.Map<PostDto>(entity);
+            return Ok(outputDto);
+        }
+        public async Task<IResult<PostUpdateDto>> GetUpdateDtoAsync(int id)
+        {
+            var entity = await _unitOfWork.Posts.GetAsync(i => i.Id == id);
+            if (entity is null)
+                return NotFound<PostUpdateDto>(BaseLocalization.NotFoundCodeGeneralMessage);
+            var outputDto = _mapper.Map<PostUpdateDto>(entity);
+            return Ok(outputDto);
+        }
+
+        public async Task<IResult<IList<PostDto>>> GetAllAsync()
+        {
+            var entities = await _unitOfWork.Posts.GetAllAsync(null, i => i.Category);
+
+            if (entities == null)
                 return NotFound<IList<PostDto>>(BaseLocalization.NoDataAvailableOnRequest);
             var outputDto = _mapper.Map<IList<PostDto>>(entities);
             return Ok(outputDto);
         }
-        #endregion
+
+        #region GetAllByNonDeletedAsync
+
+        public async Task<IResult<IList<PostDto>>> GetAllByNonDeletedAsync()
+        {
+            var entities = await _unitOfWork.Posts.GetAllAsync(c => !c.IsDeleted, i => i.Category);
+
+            if (entities == null)
+                return NotFound<IList<PostDto>>(BaseLocalization.NoDataAvailableOnRequest);
+            var outputDto = _mapper.Map<IList<PostDto>>(entities);
+            return Ok(outputDto);
+        }
+
         #endregion
 
+        public Task<IResult<IList<PostDto>>> GetAllByNonDeletedAndActiveAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IResult<IList<PostDto>>> GetAllByCategoryAsync(int categoryId)
+        {
+            throw new NotImplementedException();
+        }
+
+        #region CountAsync
+
+
+        public async Task<IResult<int>> CountAsync(bool isDeleted = false)
+        {
+            int count = await _unitOfWork.Posts.CountAsync(c => c.IsDeleted == isDeleted);
+            return count > -1 ? Ok(count) : NotFound<int>(BaseLocalization.NoDataAvailableOnRequest);
+        }
+
+        #endregion
+        #endregion
+        #region CRUD
+
+        #region AddAsync
+
+        public async Task<IResult<PostDto>> AddAsync(PostAddDto dto)
+        {
+            if (CurrentUser is null) return Unauthorized<PostDto>();
+
+            var entity = _mapper.Map<Post>(dto);
+
+            var uploadedResult = await _fileHelper.UploadImageAsync(dto.ThumbnailFile, ImageSubDirectoryEnum.Post, otherName: dto.Title);
+            if (!uploadedResult.IsSuccess) return Error<PostDto>(uploadedResult.Errors.ToArray());
+
+            entity.Thumbnail = uploadedResult.Data.FullName;
+            entity.UserId = CurrentUser.Id;
+            entity.SetCreatedByName(CurrentUser.UserName);
+
+            var createdEntity = await _unitOfWork.Posts.AddAsync(entity);
+            await _unitOfWork.SaveChangesAsync();
+            var outputDto = _mapper.Map<PostDto>(createdEntity);
+            return Created(outputDto);
+        }
+
+        #endregion
+
+
+        #region UpdateAsync
+
+        public async Task<IResult<PostDto>> UpdateAsync(PostUpdateDto dto)
+        {
+            bool isNewFileUploaded = false;
+            if (CurrentUser is null) return Unauthorized<PostDto>();
+
+            var foundedEntity = await _unitOfWork.Posts.GetAsync(i => i.Id == dto.Id);
+            if (foundedEntity is null)
+                return NotFound<PostDto>(BaseLocalization.NotFoundCodeGeneralMessage);
+
+            var oldFileName = foundedEntity.Thumbnail;
+
+            if (dto.ThumbnailFile is not null)
+            {
+
+                var uploadedResult = await _fileHelper.UploadImageAsync(dto.ThumbnailFile, ImageSubDirectoryEnum.Post, otherName: dto.Title);
+                if (!uploadedResult.IsSuccess)
+                    return Error<PostDto>(uploadedResult.Errors.ToArray());
+                isNewFileUploaded = true;
+                dto.Thumbnail = uploadedResult.Data.FullName;
+            }
+            var entity = _mapper.Map(dto, foundedEntity);
+            entity.SetModifiedByName(CurrentUser.UserName);
+            var updatedEntity = await _unitOfWork.Posts.UpdateAsync(entity);
+            await _unitOfWork.SaveChangesAsync();
+
+            if (isNewFileUploaded)
+            {
+                _fileHelper.DeleteImage(oldFileName);
+            }
+
+            var outputDto = _mapper.Map<PostDto>(updatedEntity);
+            return Updated(outputDto);
+        }
+
+        #endregion
+
+        #region DeleteAsync
+
+        public async Task<IResult<PostDto>> DeleteAsync(int id)
+        {
+            if (CurrentUser is null) return Unauthorized<PostDto>();
+
+            var entity = await _unitOfWork.Posts.GetAsync(c => c.Id == id);
+            if (entity is null)
+                return NotFound<PostDto>(BaseLocalization.NoDataAvailableOnRequest);
+
+            entity.SetIsDeleted(true);
+            entity.SetModifiedByName(CurrentUser.UserName);
+
+            var deletedEntity = await _unitOfWork.Posts.UpdateAsync(entity);
+            await _unitOfWork.SaveChangesAsync();
+
+            var outputDto = _mapper.Map<PostDto>(deletedEntity);
+            return Deleted(outputDto);
+        }
+        Task<IResult<bool>> IPostService.HardDeleteAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
+
+        #endregion
         #endregion
     }
 }

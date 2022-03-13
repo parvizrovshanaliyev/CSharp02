@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Blog.Data.Abstract;
 using Blog.Entities.Concrete;
 using Blog.Entities.Dtos.User;
 using Blog.Services.Abstract;
+using Blog.Shared.Enums;
 using Blog.Shared.Helpers;
 using Blog.Shared.Localizations;
 using Blog.Shared.Utilities.Results.Abstract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Blog.Services.Concrete
 {
@@ -88,7 +86,7 @@ namespace Blog.Services.Concrete
 
             if (dto.File is not null)
             {
-                var uploadedResult = await _fileHelper.UploadImageAsync(dto.File, "Users", dto.UserName);
+                var uploadedResult = await _fileHelper.UploadImageAsync(dto.File, ImageSubDirectoryEnum.User, otherName: dto.UserName);
                 if (!uploadedResult.IsSuccess)
                 {
                     return Error<UserDto>(uploadedResult.Errors.ToArray());
@@ -140,7 +138,7 @@ namespace Blog.Services.Concrete
 
             if (dto.File is not null)
             {
-                var uploadedResult = await _fileHelper.UploadImageAsync(dto.File, "Users", dto.UserName);
+                var uploadedResult = await _fileHelper.UploadImageAsync(dto.File, ImageSubDirectoryEnum.User, otherName: dto.UserName);
 
                 if (!uploadedResult.IsSuccess)
                 {
@@ -171,7 +169,7 @@ namespace Blog.Services.Concrete
             return Updated(outputDto);
         }
 
-        
+
 
         #endregion
 

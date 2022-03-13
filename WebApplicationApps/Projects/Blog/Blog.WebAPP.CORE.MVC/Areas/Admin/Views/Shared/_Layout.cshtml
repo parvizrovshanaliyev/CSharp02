@@ -1,5 +1,4 @@
-﻿@using Blog.Shared.Utilities.Results.ComplexTypes
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -33,13 +32,6 @@
         @await Component.InvokeAsync("LeftSideBar")
         <main>
             <div class="container-fluid">
-                
-                @if (TempData["Success"] is not null)
-                {
-                    <div class="alert alert-success mt-2" role="alert">
-                        @TempData["Success"]
-                    </div>
-                }
                 @RenderBody()
             </div>
         </main>
@@ -58,6 +50,7 @@
     </div>
 </div>
     @await Html.PartialAsync("_ScriptsPartial")
+    @await Component.InvokeAsync("NToastNotify")
     @await RenderSectionAsync("Scripts", false)
 </body>
 </html>

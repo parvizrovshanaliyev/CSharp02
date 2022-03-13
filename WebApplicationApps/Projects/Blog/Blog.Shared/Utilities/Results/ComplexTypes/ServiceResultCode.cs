@@ -12,6 +12,7 @@
         Conflict = 203,
         License = 204,
         Error = 300,
-        Redirect = 205
+        Redirect = 205,
+        Unauthorized = 401,
     }
 }

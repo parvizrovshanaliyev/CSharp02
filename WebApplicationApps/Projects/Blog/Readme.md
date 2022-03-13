@@ -704,3 +704,16 @@ Developing a Project with N-Tier Architecture
            _toastNotification.AddSuccessToast(result.Message);~~~~
          
           ```
+14. Let's complete the missing parts on Backend and Admin Area
+    * Comment Module CRUD
+      ******** Refactoring Comment entity, Configuration and add migration then database update
+        *
+        * Let's Create
+        * ICommentService Interface, CommentManager Class
+            * Dependency Injection : services.AddScoped<ICommentService, CommentManager>();
+        * CommentProfile Class
+            * Services / Extensions
+                - Install AutoMapper.Extensions.Microsoft.DependencyInjection :
+                  services.AddAutoMapper(typeof(CategoryProfile),typeof(CommentProfile), typeof(PostProfile), typeof(UserProfile));
+            * CommentDto, CommentAddDto, CommentUpdateDto
+        * Let's Create Our CommentController, Index View and comment-crud.js File

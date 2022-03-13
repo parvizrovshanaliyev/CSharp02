@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Blog.Entities.Concrete;
+﻿using Blog.Entities.Concrete;
 using Blog.Entities.Dtos.User;
 using Blog.Services.Abstract;
 using Blog.Shared.Attributes;
@@ -11,6 +8,9 @@ using Blog.WebAPP.CORE.MVC.Areas.Admin.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NToastNotify;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 {
@@ -21,12 +21,14 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
         private readonly IUserService _service;
         private readonly UserManager<User> _userManager;
+        private readonly IToastNotification _toastNotification;
         #endregion
         #region ctor
-        public UserController(IUserService service, UserManager<User> userManager)
+        public UserController(IUserService service, UserManager<User> userManager, IToastNotification toastNotification)
         {
             _service = service;
             _userManager = userManager;
+            _toastNotification = toastNotification;
         }
         #endregion
 
@@ -63,7 +65,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
                 {
                     foreach (var error in result.Errors)
                     {
-                        ModelState.AddModelError("",error);
+                        ModelState.AddModelError("", error);
                     }
                 }
 
@@ -92,7 +94,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         public async Task<IActionResult> Update(int id)
         {
             var result = await _service.GetUpdateDtoAsync(id);
-            return PartialView("_UpdatePartial",result.Data);
+            return PartialView("_UpdatePartial", result.Data);
         }
 
         [HttpPost]
@@ -134,7 +136,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
         #region update profile
         [HttpGet]
-        [AuthorizeRoles(RoleConstant.Admin,RoleConstant.Editor)]
+        [AuthorizeRoles(RoleConstant.Admin, RoleConstant.Editor)]
         public async Task<IActionResult> UpdateProfile()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
@@ -163,8 +165,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
             if (!result.IsSuccess) return View(request);
 
-
-            TempData.Add("Success",result.Message);
+            _toastNotification.AddSuccessToastMessage(result.Message);
             return View(request);
         }
         #endregion
@@ -198,8 +199,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
             if (!result.IsSuccess) return View(request);
 
-
-            TempData.Add("Success", result.Message);
+            _toastNotification.AddSuccessToastMessage(result.Message);
             return View(request);
         }
         #endregion

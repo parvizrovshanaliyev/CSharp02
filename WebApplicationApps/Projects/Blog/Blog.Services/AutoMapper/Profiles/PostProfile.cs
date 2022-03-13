@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Blog.Entities.Concrete;
 using Blog.Entities.Dtos.Post;
 
@@ -14,8 +9,13 @@ namespace Blog.Services.AutoMapper.Profiles
         public PostProfile()
         {
             CreateMap<Post, PostDto>()
-                .ForMember(dest=>dest.Category,
-                    opt=>opt.MapFrom(src=>src.Category.Name));
+                .ForMember(dest => dest.Category,
+                    opt => opt.MapFrom(src => src.Category.Name));
+
+
+            CreateMap<PostAddDto, Post>();
+            CreateMap<PostUpdateDto, Post>();
+            CreateMap<Post, PostUpdateDto>();
         }
     }
 }

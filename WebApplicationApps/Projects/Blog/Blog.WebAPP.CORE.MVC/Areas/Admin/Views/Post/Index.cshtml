@@ -44,7 +44,7 @@
                                 {
                                     <tr name="@item.Id">
                                         <td>
-                                            <a class='btn text-primary btn-sm btn-update' data-id="@item.Id"><i class='fa fa-edit'></i></a>
+                                            <a class='btn text-primary btn-sm btn-update'  data-id="@item.Id" asp-area="Admin" asp-controller="Post" asp-action="Update" asp-route-id="@item.Id"><i class='fa fa-edit'></i></a>
                                             <a class="btn text-danger btn-sm btn-delete" onclick="jQueryAjaxDelete(this)" data-id="@item.Id"><i class="fa fa-trash"></i></a>
                                         </td>
                                         <td>@item.Category</td>
@@ -55,7 +55,7 @@
                                         <td>@item.ViewsCount</td>
                                         <td>@item.CommentCount</td>
                                         <td>
-                                            <img alt="@item.Title" src="~/img/@item.Thumbnail"  />
+                                            <img alt="@item.Title" class="datatable-image" src="~/img/@item.Thumbnail"  />
                                         </td>
                                     </tr>
                                 }
@@ -81,8 +81,7 @@ else
         <a class="alert-link" asp-area="Admin" asp-controller="Home" asp-action="Index">Go to Home</a>
     </div>
 }
-
 @section Scripts{
-    
+    <script src="~/js/admin/post-delete.js" asp-append-version="true"></script>
 }
 

@@ -19,7 +19,7 @@ namespace Blog.Shared.Localizations {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class BaseLocalization {
@@ -61,6 +61,15 @@ namespace Blog.Shared.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About Me.
+        /// </summary>
+        public static string AboutMe {
+            get {
+                return ResourceManager.GetString("AboutMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed: Account already exists.
         /// </summary>
         public static string AlreadyExistUser {
@@ -70,7 +79,25 @@ namespace Blog.Shared.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change Password Not Verified..
+        ///   Looks up a localized string similar to BirthDate.
+        /// </summary>
+        public static string BirthDate {
+            get {
+                return ResourceManager.GetString("BirthDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        public static string Category {
+            get {
+                return ResourceManager.GetString("Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Password Not Verified.
         /// </summary>
         public static string ChangePasswordNotVerified {
             get {
@@ -84,6 +111,15 @@ namespace Blog.Shared.Localizations {
         public static string ChangePasswordSuccessfully {
             get {
                 return ResourceManager.GetString("ChangePasswordSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comment.
+        /// </summary>
+        public static string Comment {
+            get {
+                return ResourceManager.GetString("Comment", resourceCulture);
             }
         }
         
@@ -106,7 +142,16 @@ namespace Blog.Shared.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Created Successfully..
+        ///   Looks up a localized string similar to Content.
+        /// </summary>
+        public static string Content {
+            get {
+                return ResourceManager.GetString("Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created Successfully.
         /// </summary>
         public static string CreatedSuccessfully {
             get {
@@ -124,7 +169,43 @@ namespace Blog.Shared.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Deleted Successfully..
+        ///   Looks up a localized string similar to The Email field is not a valid e-mail address..
+        /// </summary>
+        public static string DataTypeEmailAddressErrorMessage {
+            get {
+                return ResourceManager.GetString("DataTypeEmailAddressErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string DataTypePasswordErrorMessage {
+            get {
+                return ResourceManager.GetString("DataTypePasswordErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string DataTypePhoneNumberErrorMessage {
+            get {
+                return ResourceManager.GetString("DataTypePhoneNumberErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string Date {
+            get {
+                return ResourceManager.GetString("Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleted Successfully.
         /// </summary>
         public static string DeletedSuccessfully {
             get {
@@ -142,11 +223,83 @@ namespace Blog.Shared.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to FacebookLink.
+        /// </summary>
+        public static string FacebookLink {
+            get {
+                return ResourceManager.GetString("FacebookLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FirstName.
+        /// </summary>
+        public static string FirstName {
+            get {
+                return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GithubLink.
+        /// </summary>
+        public static string GithubLink {
+            get {
+                return ResourceManager.GetString("GithubLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Image Uploaded Successfully..
         /// </summary>
         public static string ImageUploadedSuccessfully {
             get {
                 return ResourceManager.GetString("ImageUploadedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to InstagramLink.
+        /// </summary>
+        public static string InstagramLink {
+            get {
+                return ResourceManager.GetString("InstagramLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid file..
+        /// </summary>
+        public static string InvalidFile {
+            get {
+                return ResourceManager.GetString("InvalidFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is Active ?.
+        /// </summary>
+        public static string IsActive {
+            get {
+                return ResourceManager.GetString("IsActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LastName.
+        /// </summary>
+        public static string LastName {
+            get {
+                return ResourceManager.GetString("LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LinkedinLink.
+        /// </summary>
+        public static string LinkedinLink {
+            get {
+                return ResourceManager.GetString("LinkedinLink", resourceCulture);
             }
         }
         
@@ -178,11 +331,20 @@ namespace Blog.Shared.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Modified Successfully..
+        ///   Looks up a localized string similar to Modified Successfully.
         /// </summary>
         public static string ModifiedSuccessfully {
             get {
                 return ResourceManager.GetString("ModifiedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
             }
         }
         
@@ -205,6 +367,15 @@ namespace Blog.Shared.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not Found..
+        /// </summary>
+        public static string NotFound {
+            get {
+                return ResourceManager.GetString("NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The record not found! Perhaps it has been deleted by another user Try the reload data and repeat the..
         /// </summary>
         public static string NotFoundCodeGeneralMessage {
@@ -223,11 +394,20 @@ namespace Blog.Shared.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Phone Number.
+        ///   Looks up a localized string similar to PhoneNumber.
         /// </summary>
         public static string PhoneNumber {
             get {
                 return ResourceManager.GetString("PhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registered Successfully..
+        /// </summary>
+        public static string RegisteredSuccessfully {
+            get {
+                return ResourceManager.GetString("RegisteredSuccessfully", resourceCulture);
             }
         }
         
@@ -241,11 +421,74 @@ namespace Blog.Shared.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &quot;{0} is required.&quot;.
+        ///   Looks up a localized string similar to {0} is required..
         /// </summary>
         public static string RequiredErrorMessage {
             get {
                 return ResourceManager.GetString("RequiredErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seo Author.
+        /// </summary>
+        public static string SeoAuthor {
+            get {
+                return ResourceManager.GetString("SeoAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seo Description.
+        /// </summary>
+        public static string SeoDescription {
+            get {
+                return ResourceManager.GetString("SeoDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seo Tags.
+        /// </summary>
+        public static string SeoTags {
+            get {
+                return ResourceManager.GetString("SeoTags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thumbnail.
+        /// </summary>
+        public static string Thumbnail {
+            get {
+                return ResourceManager.GetString("Thumbnail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TwitterLink.
+        /// </summary>
+        public static string TwitterLink {
+            get {
+                return ResourceManager.GetString("TwitterLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unauthorized : 401.
+        /// </summary>
+        public static string Unauthorized {
+            get {
+                return ResourceManager.GetString("Unauthorized", resourceCulture);
             }
         }
         
@@ -255,6 +498,24 @@ namespace Blog.Shared.Localizations {
         public static string UserName {
             get {
                 return ResourceManager.GetString("UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WebsiteLink.
+        /// </summary>
+        public static string WebsiteLink {
+            get {
+                return ResourceManager.GetString("WebsiteLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to YoutubeLink.
+        /// </summary>
+        public static string YoutubeLink {
+            get {
+                return ResourceManager.GetString("YoutubeLink", resourceCulture);
             }
         }
     }

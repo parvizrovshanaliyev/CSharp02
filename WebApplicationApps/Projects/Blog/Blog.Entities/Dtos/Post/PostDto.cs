@@ -2,7 +2,7 @@
 
 namespace Blog.Entities.Dtos.Post
 {
-    public class PostDto:BaseDto
+    public class PostDto : BaseDto
     {
         public int UserId { get; set; }
         public int CategoryId { get; set; }

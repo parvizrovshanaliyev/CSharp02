@@ -1,5 +1,3 @@
-using System;
-using System.Text.Json.Serialization;
 using Blog.Services.AutoMapper.Profiles;
 using Blog.Services.Extensions;
 using Blog.Shared.Extensions;
@@ -11,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-
+using System.Text.Json.Serialization;
 namespace Blog.WebAPP.CORE.MVC
 {
     public class Startup
@@ -36,7 +34,8 @@ namespace Blog.WebAPP.CORE.MVC
                 .AddJsonOptions(options =>
                 {
                     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-                });
+                })
+                .AddNToastNotifyToastr();
 
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings
             {
@@ -89,7 +88,7 @@ namespace Blog.WebAPP.CORE.MVC
                 options.ExpireTimeSpan = System.TimeSpan.FromDays(7);
             });
 
-            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -115,6 +114,9 @@ namespace Blog.WebAPP.CORE.MVC
             app.UseAuthentication();
             app.UseAuthorization();
 
+
+            app.UseNToastNotify();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapAreaControllerRoute(
@@ -122,7 +124,8 @@ namespace Blog.WebAPP.CORE.MVC
                     areaName: "Admin",
                     pattern: "Admin/{controller}/{action=Index}/{id?}");
 
-                endpoints.MapDefaultControllerRoute();});
+                endpoints.MapDefaultControllerRoute();
+            });
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿$(document).ready(function() {
+
+    //#region initialize editor trumbowyg
     $('#text-editor').trumbowyg({
         btns: [
             ['viewHTML'],
@@ -28,6 +30,24 @@
             }
         }
     });
+
+    //#endregion initialize editor trumbowyg
+    
+    //#region initialize select2
+    $('.single-select-boxes').select2({
+        theme: "bootstrap4",
+        allowClear: true,
+        placeholder: 'Select a category',
+    });
+    //#endregion initialize select2
+
+    //#region initialize date-picker
+    $('#date-picker').datepicker({
+        dateFormat: 'yy-mm-dd',
+        autoclose: true
+    });
+    //#endregion initialize date-picker
+
 });
 
 

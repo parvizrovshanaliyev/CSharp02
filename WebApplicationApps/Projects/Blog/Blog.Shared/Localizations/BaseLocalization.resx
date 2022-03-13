@@ -120,8 +120,11 @@
   <data name="AlreadyExistUser" xml:space="preserve">
     <value>Failed: Account already exists</value>
   </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
   <data name="ChangePasswordNotVerified" xml:space="preserve">
-    <value>Change Password Not Verified.</value>
+    <value>Change Password Not Verified</value>
   </data>
   <data name="ChangePasswordSuccessfully" xml:space="preserve">
     <value>Your password has been successfully changed.</value>
@@ -132,20 +135,41 @@
   <data name="ConfirmPasswordValidation" xml:space="preserve">
     <value>Your password and confirmation password do not match.</value>
   </data>
+  <data name="Content" xml:space="preserve">
+    <value>Content</value>
+  </data>
   <data name="CreatedSuccessfully" xml:space="preserve">
-    <value>Created Successfully.</value>
+    <value>Created Successfully</value>
   </data>
   <data name="CurrentPassword" xml:space="preserve">
     <value>Current Password</value>
   </data>
+  <data name="DataTypeEmailAddressErrorMessage" xml:space="preserve">
+    <value>The Email field is not a valid e-mail address.</value>
+  </data>
+  <data name="DataTypePasswordErrorMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DataTypePhoneNumberErrorMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
   <data name="DeletedSuccessfully" xml:space="preserve">
-    <value>Deleted Successfully.</value>
+    <value>Deleted Successfully</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
   <data name="ImageUploadedSuccessfully" xml:space="preserve">
     <value>Image Uploaded Successfully.</value>
+  </data>
+  <data name="InvalidFile" xml:space="preserve">
+    <value>Invalid file.</value>
+  </data>
+  <data name="IsActive" xml:space="preserve">
+    <value>Is Active ?</value>
   </data>
   <data name="LoginFailed" xml:space="preserve">
     <value>Your email address or password is incorrect.</value>
@@ -157,13 +181,19 @@
     <value>{0} must not be less than {1} characters.</value>
   </data>
   <data name="ModifiedSuccessfully" xml:space="preserve">
-    <value>Modified Successfully.</value>
+    <value>Modified Successfully</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="NewPassword" xml:space="preserve">
     <value>New Password</value>
   </data>
   <data name="NoDataAvailableOnRequest" xml:space="preserve">
     <value>No Data Available on request.</value>
+  </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>Not Found.</value>
   </data>
   <data name="NotFoundCodeGeneralMessage" xml:space="preserve">
     <value>The record not found! Perhaps it has been deleted by another user Try the reload data and repeat the.</value>
@@ -172,15 +202,72 @@
     <value>Password</value>
   </data>
   <data name="PhoneNumber" xml:space="preserve">
-    <value>Phone Number</value>
+    <value>PhoneNumber</value>
+  </data>
+  <data name="RegisteredSuccessfully" xml:space="preserve">
+    <value>Registered Successfully.</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Remember Me</value>
   </data>
   <data name="RequiredErrorMessage" xml:space="preserve">
-    <value>"{0} is required."</value>
+    <value>{0} is required.</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="SeoAuthor" xml:space="preserve">
+    <value>Seo Author</value>
+  </data>
+  <data name="SeoDescription" xml:space="preserve">
+    <value>Seo Description</value>
+  </data>
+  <data name="SeoTags" xml:space="preserve">
+    <value>Seo Tags</value>
+  </data>
+  <data name="Thumbnail" xml:space="preserve">
+    <value>Thumbnail</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="Unauthorized" xml:space="preserve">
+    <value>Unauthorized : 401</value>
   </data>
   <data name="UserName" xml:space="preserve">
     <value>UserName</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>FirstName</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>LastName</value>
+  </data>
+  <data name="BirthDate" xml:space="preserve">
+    <value>BirthDate</value>
+  </data>
+  <data name="TwitterLink" xml:space="preserve">
+    <value>TwitterLink</value>
+  </data>
+  <data name="FacebookLink" xml:space="preserve">
+    <value>FacebookLink</value>
+  </data>
+  <data name="InstagramLink" xml:space="preserve">
+    <value>InstagramLink</value>
+  </data>
+  <data name="LinkedinLink" xml:space="preserve">
+    <value>LinkedinLink</value>
+  </data>
+  <data name="GithubLink" xml:space="preserve">
+    <value>GithubLink</value>
+  </data>
+  <data name="WebsiteLink" xml:space="preserve">
+    <value>WebsiteLink</value>
+  </data>
+  <data name="YoutubeLink" xml:space="preserve">
+    <value>YoutubeLink</value>
+  </data>
+  <data name="AboutMe" xml:space="preserve">
+    <value>About Me</value>
   </data>
 </root>

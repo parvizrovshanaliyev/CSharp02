@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Blog.Shared.Entities.Abstract;
+using System;
 using System.Collections.Generic;
-using Blog.Shared.Entities.Abstract;
 
 namespace Blog.Entities.Concrete
 {

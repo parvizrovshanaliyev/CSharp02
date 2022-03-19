@@ -66,7 +66,18 @@ namespace Blog.Services.Concrete
             var outputDto = _mapper.Map<IList<CategoryDto>>(entities);
             return Ok(outputDto);
         }
+        #region CountAsync
 
+        public async Task<IResult<int>> CountAsync(bool isDeleted = false)
+        {
+            var count = await _unitOfWork.Categories.CountAsync(c => c.IsDeleted == isDeleted);
+
+            return count > -1
+                ? Ok(count)
+                : NotFound<int>(BaseLocalization.NoDataAvailableOnRequest);
+        }
+
+        #endregion
         public async Task<IResult<CategoryDto>> AddAsync(CategoryAddDto dto, string createdByName)
         {
             var entity = _mapper.Map<Category>(dto);

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Blog.Entities.Dtos;
+﻿using Blog.Entities.Dtos;
 using Blog.Shared.Utilities.Results.Abstract;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Blog.Services.Abstract
 {
@@ -15,5 +15,6 @@ namespace Blog.Services.Abstract
         Task<IResult<CategoryDto>> UpdateAsync(CategoryUpdateDto dto, string createdByName);
         Task<IResult<CategoryDto>> DeleteAsync(int id, string modifiedByName);
         Task<IResult<bool>> HardDeleteAsync(int id);
+        Task<IResult<int>> CountAsync(bool isDeleted = false);
     }
 }

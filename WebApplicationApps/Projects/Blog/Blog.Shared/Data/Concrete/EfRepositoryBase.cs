@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Blog.Shared.Data.Abstract;
+using Blog.Shared.Entities.Abstract;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Blog.Shared.Data.Abstract;
-using Blog.Shared.Entities.Abstract;
-using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Shared.Data.Concrete
 {
@@ -64,9 +64,9 @@ namespace Blog.Shared.Data.Concrete
             return await _dbSet.AnyAsync(predicate);
         }
 
-        public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate)
+        public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate = null)
         {
-            return await _dbSet.CountAsync(predicate);
+            return await (predicate is null ? _dbSet.CountAsync() : _dbSet.CountAsync(predicate));
         }
 
         public async Task<TEntity> AddAsync(TEntity entity)

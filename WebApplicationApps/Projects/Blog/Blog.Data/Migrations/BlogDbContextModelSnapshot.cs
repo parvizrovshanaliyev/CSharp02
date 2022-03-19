@@ -72,6 +72,11 @@ namespace Blog.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
                     b.Property<string>("CreatedByName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -99,14 +104,14 @@ namespace Blog.Data.Migrations
                     b.Property<int>("PostId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Comments");
                 });
@@ -227,21 +232,21 @@ namespace Blog.Data.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "e0edcc2c-9431-4f53-86c1-4b5658c8e5ca",
+                            ConcurrencyStamp = "ec8c31e7-8d43-4c0d-8cd7-fb4d74ed089a",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "e7b40318-a7e8-47df-bd20-ef1f47e24014",
+                            ConcurrencyStamp = "b572a989-1c23-455b-8619-fbd361f4d409",
                             Name = "Editor",
                             NormalizedName = "EDITOR"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "3ba48d26-2a63-44c3-8cca-b3ec5d6beeab",
+                            ConcurrencyStamp = "172a0ab1-eca7-4b38-98a4-ee80f1f82330",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         });
@@ -347,16 +352,16 @@ namespace Blog.Data.Migrations
                             Id = 1,
                             AccessFailedCount = 0,
                             Avatar = "Users/defaultUser.png",
-                            ConcurrencyStamp = "033c2698-ff0f-4c65-b752-89c96c5d53b3",
+                            ConcurrencyStamp = "b7ee3f8a-8aa9-49da-8fdc-041c2fc7e46f",
                             Email = "adminUser@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMINUSER@GMAIL.COM",
                             NormalizedUserName = "ADMINUSER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEF3of0cf6WFowXIk7AqOoggZ6xk4muiH8eLN66H9BrsK+/ALGN8bkR73ioDsrxIkEg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFSOQAfvuF63xauew/fMVUy+MXJ2jrO8dRiNFDE0fURvMEpE5HmDire5vMee+2MyaA==",
                             PhoneNumber = "+9949999999",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "72c4a899-4ca0-4fb6-acb6-01faa05b2958",
+                            SecurityStamp = "763a281a-7c58-45cf-976a-66b6d9830ca5",
                             TwoFactorEnabled = false,
                             UserName = "adminUser"
                         },
@@ -365,16 +370,16 @@ namespace Blog.Data.Migrations
                             Id = 2,
                             AccessFailedCount = 0,
                             Avatar = "Users/defaultUser.png",
-                            ConcurrencyStamp = "744d9fe5-f9a4-4904-8e3f-727c0a0bc65e",
+                            ConcurrencyStamp = "dce60ac4-3a7d-4bff-a85b-84597c8a4813",
                             Email = "editorUser@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "EDITORUSER@GMAIL.COM",
                             NormalizedUserName = "EDITORUSER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAaNs7Kfp/ysj+UU8zOo5mMIMSL3BkUDq1AmbPy0ePpKnothsQzFWB0i/udY+UPKpA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAcLfPlQO3nEG+G4u6qzwE7tdwS8HAJ0u7czXhoKPwqUzFjW8LQAYUzMBP5hWeE8Gw==",
                             PhoneNumber = "+9949999999",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "3e750cb9-7191-4254-9efc-a3ad7784dabb",
+                            SecurityStamp = "9974319c-e60f-454f-8e12-c481c3a30efc",
                             TwoFactorEnabled = false,
                             UserName = "editorUser"
                         },
@@ -383,16 +388,16 @@ namespace Blog.Data.Migrations
                             Id = 3,
                             AccessFailedCount = 0,
                             Avatar = "Users/defaultUser.png",
-                            ConcurrencyStamp = "70e8153b-d747-4b89-9671-a8f45a262c71",
+                            ConcurrencyStamp = "14f7e8d3-1dd3-4fd3-ab45-82422b5f2b98",
                             Email = "memberUser@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MEMBERUSER@GMAIL.COM",
                             NormalizedUserName = "MEMBERUSER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJe61goOiUzw24jmY7d6PFIPWrlr8HKFy40GnSxAlnaUIrCvkM6TlSYH2MZVMeCH1A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJz/7zYS2ZFym2PcnesUKK6byDeQ2z9a+ZkHGX0Vm4NZnDhMA+EKzyXgHiyONPXg3g==",
                             PhoneNumber = "+9949999999",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "d2b9c897-386e-40cb-a006-a776e4eb9e7f",
+                            SecurityStamp = "7ab599f4-113c-48e4-8817-bb6a4060b765",
                             TwoFactorEnabled = false,
                             UserName = "memberUser"
                         });
@@ -502,10 +507,18 @@ namespace Blog.Data.Migrations
                     b.HasOne("Blog.Entities.Concrete.Post", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Blog.Entities.Concrete.User", "User")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Post");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Blog.Entities.Concrete.Post", b =>
@@ -590,6 +603,8 @@ namespace Blog.Data.Migrations
 
             modelBuilder.Entity("Blog.Entities.Concrete.User", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618

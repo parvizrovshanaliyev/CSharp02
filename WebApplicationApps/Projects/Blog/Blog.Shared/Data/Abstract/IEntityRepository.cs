@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Blog.Shared.Entities.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Blog.Shared.Entities.Abstract;
 
 namespace Blog.Shared.Data.Abstract
 {
@@ -15,7 +15,7 @@ namespace Blog.Shared.Data.Abstract
             params Expression<Func<T, object>>[] includeProperties);
 
         Task<bool> AnyAsync(Expression<Func<T, bool>> predicate);
-        Task<int> CountAsync(Expression<Func<T, bool>> predicate);
+        Task<int> CountAsync(Expression<Func<T, bool>> predicate = null);
 
         // crud
         Task<T> AddAsync(T entity);

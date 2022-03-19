@@ -1,5 +1,3 @@
-using System;
-using System.Text.Json.Serialization;
 using Blog.Services.AutoMapper.Profiles;
 using Blog.Services.Extensions;
 using Blog.Shared.Extensions;
@@ -11,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System;
+using System.Text.Json.Serialization;
 
 namespace Blog.WebAPP.CORE.MVC
 {
@@ -46,7 +46,7 @@ namespace Blog.WebAPP.CORE.MVC
             services.AddSession();
             services.LoadServices();
             services.LoadSharedServices();
-            services.AddAutoMapper(typeof(CategoryProfile), typeof(PostProfile), typeof(UserProfile));
+            services.AddAutoMapper(typeof(CategoryProfile), typeof(PostProfile), typeof(UserProfile), typeof(CommentProfile));
 
             services.ConfigureApplicationCookie(options =>
             {

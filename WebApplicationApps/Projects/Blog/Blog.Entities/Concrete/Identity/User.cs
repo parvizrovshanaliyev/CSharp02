@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Blog.Shared.Entities.Abstract;
+﻿using Blog.Shared.Entities.Abstract;
 using Blog.Shared.Extensions;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace Blog.Entities.Concrete
 {
@@ -11,6 +11,7 @@ namespace Blog.Entities.Concrete
 
         // relations 
         public ICollection<Post> Posts { get; set; }
+        public ICollection<Comment> Comments { get; set; }
 
         // methods
         public void SetPassword(string password)

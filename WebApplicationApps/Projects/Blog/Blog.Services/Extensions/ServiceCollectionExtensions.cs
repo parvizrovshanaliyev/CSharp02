@@ -36,6 +36,7 @@ namespace Blog.Services.Extensions
             services.AddScoped<IPostService, PostManager>();
             services.AddScoped<IUserService, UserManager>();
             services.AddScoped<IAuthService, AuthManager>();
+            services.AddScoped<ICommentService, CommentManager>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             return services;

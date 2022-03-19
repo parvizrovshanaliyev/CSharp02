@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Blog.Entities.Dtos.User;
+﻿using Blog.Entities.Dtos.User;
 using Blog.Shared.Utilities.Results.Abstract;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Blog.Services.Abstract
 {
@@ -13,5 +13,6 @@ namespace Blog.Services.Abstract
         Task<IResult<UserDto>> UpdateAsync(UserUpdateDto dto, string modifiedByName);
         Task<IResult<bool>> ChangePasswordAsync(UserChangePasswordDto dto);
         Task<IResult<UserDto>> DeleteAsync(int id, string modifiedByName);
+        Task<IResult<int>> CountAsync(bool isDeleted = false);
     }
 }

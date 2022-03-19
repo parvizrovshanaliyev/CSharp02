@@ -76,6 +76,17 @@ namespace Blog.Services.Concrete
 
         #endregion
 
+        #region CountAsync
+
+        public async Task<IResult<int>> CountAsync(bool isDeleted = false)
+        {
+            int count = await _unitOfWork.Users.CountAsync();
+
+            return count > -1 ? Ok(count) : NotFound<int>(BaseLocalization.NoDataAvailableOnRequest);
+        }
+
+        #endregion
+
         #endregion
 
         #region CRUD

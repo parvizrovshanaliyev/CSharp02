@@ -1,36 +1,39 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Blog.Data.Abstract;
 using Blog.Entities.Concrete;
 using Blog.Entities.Dtos;
 using Blog.Services.Abstract;
 using Blog.Shared.Localizations;
 using Blog.Shared.Utilities.Results.Abstract;
-using Blog.Shared.Utilities.Results.Concrete;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Blog.Services.Concrete
 {
-    public class CategoryManager: BaseServiceResult,ICategoryService
+    public class CategoryManager : BaseServiceResult, ICategoryService
     {
-        #region fields
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IMapper _mapper;
-        #endregion
-
         #region ctor
+
         public CategoryManager(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
+
+        #endregion
+
+        #region fields
+
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
+
         #endregion
 
         #region methods
 
         public async Task<IResult<CategoryDto>> GetAsync(int id)
         {
-            var entity=  await _unitOfWork.Categories.GetAsync(i=>i.Id==id);
+            var entity = await _unitOfWork.Categories.GetAsync(i => i.Id == id);
             if (entity is null)
                 return NotFound<CategoryDto>(BaseLocalization.NotFoundCodeGeneralMessage);
             var outputDto = _mapper.Map<CategoryDto>(entity);
@@ -57,18 +60,18 @@ namespace Blog.Services.Concrete
 
         public async Task<IResult<IList<CategoryDto>>> GetAllByNonDeletedAsync()
         {
-            var entities = await _unitOfWork.Categories.GetAllAsync(i=>!i.IsDeleted);
+            var entities = await _unitOfWork.Categories.GetAllAsync(i => !i.IsDeleted);
             if (entities is null)
                 return NotFound<IList<CategoryDto>>(BaseLocalization.NoDataAvailableOnRequest);
             var outputDto = _mapper.Map<IList<CategoryDto>>(entities);
             return Ok(outputDto);
         }
-        
+
         public async Task<IResult<CategoryDto>> AddAsync(CategoryAddDto dto, string createdByName)
         {
             var entity = _mapper.Map<Category>(dto);
             entity.SetCreatedByName(createdByName);
-            var createdEntity=await _unitOfWork.Categories.AddAsync(entity);
+            var createdEntity = await _unitOfWork.Categories.AddAsync(entity);
             await _unitOfWork.SaveChangesAsync();
             var outputDto = _mapper.Map<CategoryDto>(createdEntity);
             return Created(outputDto);
@@ -79,8 +82,8 @@ namespace Blog.Services.Concrete
             var foundedEntity = await _unitOfWork.Categories.GetAsync(c => c.Id == dto.Id);
             if (foundedEntity is null)
                 return NotFound<CategoryDto>(BaseLocalization.NotFoundCodeGeneralMessage);
-            var entity = _mapper.Map<CategoryUpdateDto,Category>(dto,foundedEntity);
-            var updatedEntity= await _unitOfWork.Categories.UpdateAsync(entity);
+            var entity = _mapper.Map(dto, foundedEntity);
+            var updatedEntity = await _unitOfWork.Categories.UpdateAsync(entity);
             await _unitOfWork.SaveChangesAsync();
             var outputDto = _mapper.Map<CategoryDto>(updatedEntity);
             return Updated(outputDto);

@@ -4,7 +4,6 @@ using Blog.Services.Abstract;
 using Blog.Shared.Attributes;
 using Blog.Shared.Constants;
 using Blog.Shared.Extensions;
-using Blog.Shared.Utilities.Results.ComplexTypes;
 using Blog.WebAPP.CORE.MVC.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,8 +30,8 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
         #region methods
 
-
         #region loadData
+
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -51,6 +50,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         #endregion
 
         #region create
+
         [HttpGet]
         public IActionResult Create()
         {
@@ -67,7 +67,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
                 if (result.IsSuccess)
                 {
-                    var successViewModel = new CategoryCreateAjaxViewModel()
+                    var successViewModel = new CategoryCreateAjaxViewModel
                     {
                         Result = result,
                         Partial = await this.RenderViewToStringAsync("_CreatePartial", request)
@@ -75,7 +75,8 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
                     return Json(successViewModel);
                 }
             }
-            var errorViewModel = new CategoryCreateAjaxViewModel()
+
+            var errorViewModel = new CategoryCreateAjaxViewModel
             {
                 AddDto = request,
                 Partial = await this.RenderViewToStringAsync("_CreatePartial", request)
@@ -83,9 +84,11 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
             return Json(errorViewModel);
         }
+
         #endregion
 
         #region update
+
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
@@ -104,7 +107,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
                 if (result.IsSuccess)
                 {
-                    var successViewModel = new CategoryUpdateAjaxViewModel()
+                    var successViewModel = new CategoryUpdateAjaxViewModel
                     {
                         Result = result,
                         Partial = await this.RenderViewToStringAsync("_UpdatePartial", request)
@@ -113,7 +116,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
                 }
             }
 
-            var errorViewModel = new CategoryUpdateAjaxViewModel()
+            var errorViewModel = new CategoryUpdateAjaxViewModel
             {
                 Partial = await this.RenderViewToStringAsync("_UpdatePartial", request)
             };
@@ -121,16 +124,17 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
             return Json(errorViewModel);
         }
 
-
         #endregion
 
         #region delete
+
         [HttpPost]
         public async Task<JsonResult> Delete(int id)
         {
             var result = await _service.DeleteAsync(id, "Admin");
             return Json(result);
         }
+
         #endregion
 
         #endregion

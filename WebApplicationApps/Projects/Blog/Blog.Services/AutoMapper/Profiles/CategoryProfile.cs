@@ -4,7 +4,7 @@ using Blog.Entities.Dtos;
 
 namespace Blog.Services.AutoMapper.Profiles
 {
-    public class CategoryProfile :Profile
+    public class CategoryProfile : Profile
     {
         public CategoryProfile()
         {

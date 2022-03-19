@@ -10,6 +10,5 @@ namespace Blog.Shared.Extensions
             services.AddSingleton<IFileHelper, FileHelper>();
             return services;
         }
-
     }
 }

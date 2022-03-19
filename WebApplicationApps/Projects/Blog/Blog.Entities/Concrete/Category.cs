@@ -7,17 +7,18 @@ namespace Blog.Entities.Concrete
     {
         public Category()
         {
-
         }
+
         public Category(string name, string description) : this()
         {
-            this.Name = name;
-            this.Description = description;
+            Name = name;
+            Description = description;
         }
+
         public Category(string name, string description, string note) : base(note)
         {
-            this.Name = name;
-            this.Description = description;
+            Name = name;
+            Description = description;
         }
 
         public string Name { get; set; }

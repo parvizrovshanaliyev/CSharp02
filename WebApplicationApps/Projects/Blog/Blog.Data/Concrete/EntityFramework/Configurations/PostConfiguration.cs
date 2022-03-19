@@ -1,5 +1,4 @@
-﻿using System;
-using Blog.Entities.Concrete;
+﻿using Blog.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,8 +10,8 @@ namespace Blog.Data.Concrete.EntityFramework.Configurations
         {
             builder.ToTable("Posts");
 
-            builder.HasKey(a => a.Id);// primary key
-            builder.Property(a => a.Id).ValueGeneratedOnAdd();// auto incremented
+            builder.HasKey(a => a.Id); // primary key
+            builder.Property(a => a.Id).ValueGeneratedOnAdd(); // auto incremented
             builder.Property(a => a.Title)
                 .HasMaxLength(100)
                 .IsRequired();
@@ -41,15 +40,15 @@ namespace Blog.Data.Concrete.EntityFramework.Configurations
 
             // relations
             builder
-                .HasOne<Category>(i => i.Category)
+                .HasOne(i => i.Category)
                 .WithMany(i => i.Posts)
                 .HasForeignKey(i => i.CategoryId);
-            
+
             builder
-                .HasOne<User>(i => i.User)
+                .HasOne(i => i.User)
                 .WithMany(i => i.Posts)
                 .HasForeignKey(i => i.UserId);
-            
+
             // seed
             //var entity = new Post()
             //{

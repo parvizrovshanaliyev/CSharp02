@@ -18,19 +18,10 @@ namespace Blog.Services.Concrete
 {
     public class UserManager : BaseServiceResult, IUserService
     {
-        #region fields
-        private readonly UserManager<User> _identityUserManager;
-        private readonly IMapper _mapper;
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly IFileHelper _fileHelper;
-        private const string DefaultUserAvatarFileName = "Users/defaultUser.png";
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly SignInManager<User> _signInManager;
-        #endregion
-
         #region ctor
 
-        public UserManager(UserManager<User> identityUserManager, IMapper mapper, IUnitOfWork unitOfWork, IFileHelper fileHelper,
+        public UserManager(UserManager<User> identityUserManager, IMapper mapper, IUnitOfWork unitOfWork,
+            IFileHelper fileHelper,
             IHttpContextAccessor httpContextAccessor, SignInManager<User> signInManager)
         {
             _identityUserManager = identityUserManager;
@@ -43,11 +34,24 @@ namespace Blog.Services.Concrete
 
         #endregion
 
+        #region fields
 
-        #region Implementation of IUserService
+        private readonly UserManager<User> _identityUserManager;
+        private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IFileHelper _fileHelper;
+        private const string DefaultUserAvatarFileName = "Users/defaultUser.png";
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly SignInManager<User> _signInManager;
+
+        #endregion
+
+        #region methods
 
         #region QUERY
+
         #region GetAllAsync
+
         public async Task<IResult<IList<UserDto>>> GetAllAsync()
         {
             var entities = await _identityUserManager.Users.ToListAsync();
@@ -56,9 +60,11 @@ namespace Blog.Services.Concrete
             var outputDto = _mapper.Map<IList<UserDto>>(entities);
             return Ok(outputDto);
         }
+
         #endregion
 
         #region GetUpdateDtoAsync
+
         public async Task<IResult<UserUpdateDto>> GetUpdateDtoAsync(int id)
         {
             var entity = await _identityUserManager.FindByIdAsync(id.ToString());
@@ -67,30 +73,30 @@ namespace Blog.Services.Concrete
             var outputDto = _mapper.Map<UserUpdateDto>(entity);
             return Ok(outputDto);
         }
+
         #endregion
+
         #endregion
+
         #region CRUD
 
         #region Add
+
         public async Task<IResult<UserDto>> AddAsync(UserAddDto dto, string createdByName)
         {
-            bool isAlreadyRegister = await _unitOfWork.Users.AnyAsync(i => i.NormalizedEmail == dto.Email.ToUpper()
-                                                                               || i.PhoneNumber == dto.PhoneNumber
-                                                                               || i.NormalizedUserName == dto.UserName.ToUpper());
-            if (isAlreadyRegister)
-            {
-                return Error<UserDto>(BaseLocalization.AlreadyExistUser);
-            }
+            var isAlreadyRegister = await _unitOfWork.Users.AnyAsync(i => i.NormalizedEmail == dto.Email.ToUpper()
+                                                                          || i.PhoneNumber == dto.PhoneNumber
+                                                                          || i.NormalizedUserName ==
+                                                                          dto.UserName.ToUpper());
+            if (isAlreadyRegister) return Error<UserDto>(BaseLocalization.AlreadyExistUser);
 
             var entity = _mapper.Map<User>(dto);
 
             if (dto.File is not null)
             {
-                var uploadedResult = await _fileHelper.UploadImageAsync(dto.File, ImageSubDirectoryEnum.User, otherName: dto.UserName);
-                if (!uploadedResult.IsSuccess)
-                {
-                    return Error<UserDto>(uploadedResult.Errors.ToArray());
-                }
+                var uploadedResult =
+                    await _fileHelper.UploadImageAsync(dto.File, ImageSubDirectoryEnum.User, otherName: dto.UserName);
+                if (!uploadedResult.IsSuccess) return Error<UserDto>(uploadedResult.Errors.ToArray());
 
                 entity.Avatar = uploadedResult.Data.FullName;
             }
@@ -116,6 +122,7 @@ namespace Blog.Services.Concrete
         #endregion
 
         #region Update
+
         public async Task<IResult<UserDto>> UpdateAsync(UserUpdateDto dto, string modifiedByName)
         {
             var foundedEntity = await _identityUserManager.FindByIdAsync(dto.Id.ToString());
@@ -124,33 +131,27 @@ namespace Blog.Services.Concrete
             // id 2         id 3 
             // admin
             // dto.admin    entity.y
-            bool isAlreadyExistUser = await _unitOfWork.Users.AnyAsync(i => i.Id != foundedEntity.Id && i.NormalizedEmail == dto.Email.ToUpper()
-                                                                            || i.Id != foundedEntity.Id && i.PhoneNumber == dto.PhoneNumber
-                                                                            || i.Id != foundedEntity.Id && i.NormalizedUserName == dto.UserName.ToUpper());
+            var isAlreadyExistUser = await _unitOfWork.Users.AnyAsync(i =>
+                i.Id != foundedEntity.Id && i.NormalizedEmail == dto.Email.ToUpper()
+                || i.Id != foundedEntity.Id && i.PhoneNumber == dto.PhoneNumber
+                || i.Id != foundedEntity.Id && i.NormalizedUserName == dto.UserName.ToUpper());
 
-            if (isAlreadyExistUser)
-            {
-                return Error<UserDto>(BaseLocalization.AlreadyExistUser);
-            }
+            if (isAlreadyExistUser) return Error<UserDto>(BaseLocalization.AlreadyExistUser);
 
             var oldFileName = foundedEntity.Avatar;
-            bool isNewFileUploaded = false;
+            var isNewFileUploaded = false;
 
             if (dto.File is not null)
             {
-                var uploadedResult = await _fileHelper.UploadImageAsync(dto.File, ImageSubDirectoryEnum.User, otherName: dto.UserName);
+                var uploadedResult =
+                    await _fileHelper.UploadImageAsync(dto.File, ImageSubDirectoryEnum.User, otherName: dto.UserName);
 
-                if (!uploadedResult.IsSuccess)
-                {
-                    return Error<UserDto>(uploadedResult.Errors.ToArray());
-                }
+                if (!uploadedResult.IsSuccess) return Error<UserDto>(uploadedResult.Errors.ToArray());
 
                 dto.Avatar = uploadedResult.Data.FullName;
-                if (!string.Equals(oldFileName, DefaultUserAvatarFileName))
-                {
-                    isNewFileUploaded = true;
-                }
+                if (!string.Equals(oldFileName, DefaultUserAvatarFileName)) isNewFileUploaded = true;
             }
+
             var updatedEntity = _mapper.Map(dto, foundedEntity);
             var identityResult = await _identityUserManager.UpdateAsync(updatedEntity);
 
@@ -160,16 +161,11 @@ namespace Blog.Services.Concrete
                 return Error<UserDto>(identityErrors);
             }
 
-            if (isNewFileUploaded)
-            {
-                _fileHelper.DeleteImage(oldFileName);
-            }
+            if (isNewFileUploaded) _fileHelper.DeleteImage(oldFileName);
 
             var outputDto = _mapper.Map<UserDto>(updatedEntity);
             return Updated(outputDto);
         }
-
-
 
         #endregion
 
@@ -177,7 +173,6 @@ namespace Blog.Services.Concrete
 
         public async Task<IResult<UserDto>> DeleteAsync(int id, string modifiedByName)
         {
-
             var entity = await _identityUserManager.FindByIdAsync(id.ToString());
             if (entity is null)
                 return NotFound<UserDto>(BaseLocalization.NotFoundCodeGeneralMessage);
@@ -188,6 +183,7 @@ namespace Blog.Services.Concrete
                 var identityErrors = identityResult.Errors.Select(i => i.Description).ToArray();
                 return Error<UserDto>(identityErrors);
             }
+
             var outputDto = _mapper.Map<UserDto>(entity);
             return Deleted(outputDto);
         }
@@ -195,6 +191,7 @@ namespace Blog.Services.Concrete
         #endregion
 
         #region ChangePasswordAsync
+
         public async Task<IResult<bool>> ChangePasswordAsync(UserChangePasswordDto dto)
         {
             var user = await _identityUserManager.GetUserAsync(_httpContextAccessor.HttpContext?.User);
@@ -219,8 +216,11 @@ namespace Blog.Services.Concrete
             await _signInManager.PasswordSignInAsync(user, dto.NewPassword, true, false);
             return Updated(true, BaseLocalization.ChangePasswordSuccessfully);
         }
+
         #endregion
+
         #endregion
+
         #endregion
     }
 }

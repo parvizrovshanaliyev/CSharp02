@@ -4,7 +4,7 @@ using Blog.Shared.Utilities.Results.ComplexTypes;
 
 namespace Blog.Shared.Utilities.Results.Abstract
 {
-    public interface IResult<out T> 
+    public interface IResult<out T>
     {
         public T Data { get; }
         public ServiceResultCode ServiceResultCode { get; }

@@ -29,7 +29,6 @@ namespace Blog.Services.Extensions
                 options.User.AllowedUserNameCharacters =
                     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = true;
-
             }).AddEntityFrameworkStores<BlogDbContext>(); // elave edilmesi zeruridir.
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -41,6 +40,5 @@ namespace Blog.Services.Extensions
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             return services;
         }
-
     }
 }

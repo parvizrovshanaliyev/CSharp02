@@ -37,29 +37,26 @@ namespace Blog.Data.Concrete.EntityFramework.Configurations
 
 
             builder.HasData(
-                new Role()
+                new Role
                 {
                     Id = 1,
                     Name = "Admin",
                     NormalizedName = "ADMIN",
-                    ConcurrencyStamp = Guid.NewGuid().ToString(),
-
+                    ConcurrencyStamp = Guid.NewGuid().ToString()
                 },
-                new Role()
+                new Role
                 {
                     Id = 2,
                     Name = "Editor",
                     NormalizedName = "EDITOR",
-                    ConcurrencyStamp = Guid.NewGuid().ToString(),
-
+                    ConcurrencyStamp = Guid.NewGuid().ToString()
                 },
-                new Role()
+                new Role
                 {
                     Id = 3,
                     Name = "Member",
                     NormalizedName = "MEMBER",
-                    ConcurrencyStamp = Guid.NewGuid().ToString(),
-
+                    ConcurrencyStamp = Guid.NewGuid().ToString()
                 });
         }
     }

@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using Blog.Entities.Concrete;
-using Blog.Shared.Entities.Abstract;
-
-namespace Blog.Entities.Dtos
+﻿namespace Blog.Entities.Dtos
 {
     public class CategoryDto : BaseDto
     {

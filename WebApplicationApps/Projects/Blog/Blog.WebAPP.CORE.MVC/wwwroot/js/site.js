@@ -3,6 +3,6 @@
 }
 
 function convertToShortDate(dateString) {
-    const shortDate = new Date(dateString).toLocaleDateString('en-US');
+    const shortDate = new Date(dateString).toLocaleDateString("en-US");
     return shortDate;
 }

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -14,24 +11,27 @@ namespace Blog.Shared.Extensions
     public static class ControllerExtensions
     {
         /// <summary>
-        /// Render a partial view to string.
+        ///     Render a partial view to string.
         /// </summary>
         /// <typeparam name="TModel"></typeparam>
         /// <param name="controller"></param>
         /// <param name="viewNamePath"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static async Task<string> RenderViewToStringAsync<TModel>(this Controller controller, string viewNamePath, TModel model)
+        public static async Task<string> RenderViewToStringAsync<TModel>(this Controller controller,
+            string viewNamePath, TModel model)
         {
             if (string.IsNullOrEmpty(viewNamePath))
                 viewNamePath = controller.ControllerContext.ActionDescriptor.ActionName;
 
             controller.ViewData.Model = model;
 
-            await using StringWriter writer = new StringWriter();
+            await using var writer = new StringWriter();
             try
             {
-                IViewEngine viewEngine = controller.HttpContext.RequestServices.GetService(typeof(ICompositeViewEngine)) as ICompositeViewEngine;
+                IViewEngine viewEngine =
+                    controller.HttpContext.RequestServices.GetService(typeof(ICompositeViewEngine)) as
+                        ICompositeViewEngine;
 
                 ViewEngineResult viewResult = null;
 
@@ -43,7 +43,7 @@ namespace Blog.Shared.Extensions
                 if (!viewResult.Success)
                     return $"A view with the name '{viewNamePath}' could not be found";
 
-                ViewContext viewContext = new ViewContext(
+                var viewContext = new ViewContext(
                     controller.ControllerContext,
                     viewResult.View,
                     controller.ViewData,
@@ -63,7 +63,7 @@ namespace Blog.Shared.Extensions
         }
 
         /// <summary>
-        /// Render a partial view to string, without a model present.
+        ///     Render a partial view to string, without a model present.
         /// </summary>
         /// <typeparam name="TModel"></typeparam>
         /// <param name="controller"></param>
@@ -74,10 +74,12 @@ namespace Blog.Shared.Extensions
             if (string.IsNullOrEmpty(viewNamePath))
                 viewNamePath = controller.ControllerContext.ActionDescriptor.ActionName;
 
-            await using StringWriter writer = new StringWriter();
+            await using var writer = new StringWriter();
             try
             {
-                IViewEngine viewEngine = controller.HttpContext.RequestServices.GetService(typeof(ICompositeViewEngine)) as ICompositeViewEngine;
+                IViewEngine viewEngine =
+                    controller.HttpContext.RequestServices.GetService(typeof(ICompositeViewEngine)) as
+                        ICompositeViewEngine;
 
                 ViewEngineResult viewResult = null;
 
@@ -89,7 +91,7 @@ namespace Blog.Shared.Extensions
                 if (!viewResult.Success)
                     return $"A view with the name '{viewNamePath}' could not be found";
 
-                ViewContext viewContext = new ViewContext(
+                var viewContext = new ViewContext(
                     controller.ControllerContext,
                     viewResult.View,
                     controller.ViewData,
@@ -107,6 +109,5 @@ namespace Blog.Shared.Extensions
                 return $"Failed - {exc.Message}";
             }
         }
-
     }
 }

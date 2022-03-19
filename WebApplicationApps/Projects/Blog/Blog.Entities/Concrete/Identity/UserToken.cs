@@ -4,6 +4,5 @@ namespace Blog.Entities.Concrete
 {
     public class UserToken : IdentityUserToken<int>
     {
-
     }
 }

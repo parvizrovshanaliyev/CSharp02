@@ -26,7 +26,7 @@ namespace Blog.Entities.Concrete
         // methods
         public void SetViewCount()
         {
-            this.ViewsCount += 1;
+            ViewsCount += 1;
         }
     }
 }

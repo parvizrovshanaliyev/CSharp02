@@ -13,6 +13,6 @@
         License = 204,
         Error = 300,
         Redirect = 205,
-        Unauthorized = 401,
+        Unauthorized = 401
     }
 }

@@ -10,15 +10,15 @@ namespace Blog.Data.Concrete.EntityFramework.Configurations
         {
             builder.ToTable("Comments");
 
-            builder.HasKey(a => a.Id);// primary key
-            builder.Property(a => a.Id).ValueGeneratedOnAdd();// auto incremented
+            builder.HasKey(a => a.Id); // primary key
+            builder.Property(a => a.Id).ValueGeneratedOnAdd(); // auto incremented
             builder.Property(a => a.Text)
                 .HasMaxLength(1000)
                 .IsRequired();
-            
+
             // relations
             builder
-                .HasOne<Post>(i => i.Post)
+                .HasOne(i => i.Post)
                 .WithMany(i => i.Comments)
                 .HasForeignKey(i => i.PostId);
 

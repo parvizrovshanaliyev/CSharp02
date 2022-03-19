@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Blog.Entities.Concrete;
+﻿using Blog.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -13,7 +12,7 @@ namespace Blog.Data.Concrete.EntityFramework.Configurations
         {
             builder.ToTable("Categories");
 
-            builder.HasKey(i=>i.Id); // primary key
+            builder.HasKey(i => i.Id); // primary key
             builder.Property(i => i.Id).ValueGeneratedOnAdd(); // auto increment
 
             builder.Property(i => i.Name)

@@ -8,10 +8,10 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.ViewComponents
 {
     public class LeftSideBarViewComponent : ViewComponent
     {
-
         #region fields
 
         private readonly UserManager<User> _userManager;
+
         #endregion
 
         #region ctor
@@ -20,6 +20,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.ViewComponents
         {
             _userManager = userManager;
         }
+
         #endregion
 
         public async Task<IViewComponentResult> InvokeAsync()

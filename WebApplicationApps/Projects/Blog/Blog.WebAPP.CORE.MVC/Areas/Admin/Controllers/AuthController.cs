@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Blog.Entities.Concrete;
-using Microsoft.AspNetCore.Mvc;
 using Blog.Entities.Dtos.Auth;
 using Blog.Services.Abstract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 {
@@ -13,22 +13,36 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
     [AllowAnonymous]
     public class AuthController : Controller
     {
-        #region fields
-        private readonly IAuthService _authService;
-        private readonly SignInManager<User> _signInManager;
-        #endregion
-
-
         #region ctor
+
         public AuthController(IAuthService authService, SignInManager<User> signInManager)
         {
             _authService = authService;
             _signInManager = signInManager;
         }
+
+        #endregion
+
+        #region access denied
+
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
+        #endregion
+
+        #region fields
+
+        private readonly IAuthService _authService;
+        private readonly SignInManager<User> _signInManager;
+
         #endregion
 
 
         #region login logout
+
         [HttpGet]
         public IActionResult Login()
         {
@@ -48,12 +62,8 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
                 return RedirectToAction("Index", "Home");
 
             if (result.Errors.Any())
-            {
                 foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError("",error);
-                }
-            }
+                    ModelState.AddModelError("", error);
 
             return View(request);
         }
@@ -68,15 +78,5 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         }
 
         #endregion
-
-        #region access denied
-        [HttpGet]
-        public IActionResult AccessDenied()
-        {
-            return View();
-        }
-        #endregion
-
-
     }
 }

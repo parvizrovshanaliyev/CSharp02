@@ -6,10 +6,11 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Models
     public class UserCreateAjaxViewModel
     {
         /// <summary>
-        /// Action : true
-        /// Create
+        ///     Action : true
+        ///     Create
         /// </summary>
-        public bool Action { get; private set; } = true;
+        public bool Action { get; } = true;
+
         public UserAddDto AddDto { get; set; }
         public string Partial { get; set; }
         public IResult<UserDto> Result { get; set; }
@@ -19,10 +20,11 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Models
     public class UserUpdateAjaxViewModel
     {
         /// <summary>
-        /// Action : false
-        /// Update
+        ///     Action : false
+        ///     Update
         /// </summary>
-        public bool Action { get; private set; } = false;
+        public bool Action { get; } = false;
+
         public UserUpdateDto UpdateDto { get; set; }
         public string Partial { get; set; }
         public IResult<UserDto> Result { get; set; }

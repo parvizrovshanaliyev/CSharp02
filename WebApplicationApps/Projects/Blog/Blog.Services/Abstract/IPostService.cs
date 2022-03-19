@@ -1,7 +1,7 @@
-﻿using Blog.Entities.Dtos.Post;
-using Blog.Shared.Utilities.Results.Abstract;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Blog.Entities.Dtos.Post;
+using Blog.Shared.Utilities.Results.Abstract;
 
 namespace Blog.Services.Abstract
 {

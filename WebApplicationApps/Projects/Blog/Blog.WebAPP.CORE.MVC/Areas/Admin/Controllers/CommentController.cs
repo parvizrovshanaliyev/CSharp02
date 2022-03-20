@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    public class CommentController : Controller
+
+    public class CommentController : BaseController
     {
         #region fields
 
@@ -21,13 +21,15 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
         #region ctor
 
-        public CommentController(ICommentService service, IPostService postService)
+        public CommentController(ICommentService service, IPostService postService)// : base(service)
         {
             _service = service;
             _postService = postService;
         }
 
         #endregion
+
+        #region methods
 
         #region loadData
 
@@ -40,7 +42,14 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
             return View(result);
         }
 
-        // TODO: DeletedComments
+        [HttpGet]
+        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Read)]
+        public async Task<IActionResult> DeletedComments()
+        {
+            var result = await _service.GetAllByDeletedAsync();
+
+            return View(result);
+        }
 
         [HttpGet]
         //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Read)]
@@ -95,7 +104,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
         #endregion
 
-        #region Update
+        #region update
 
         [HttpGet]
         //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Update)]
@@ -145,9 +154,23 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
             return Json(result);
         }
 
-        // TODO : UndoDelete
+        [HttpPost]
+        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Update)]
+        public async Task<JsonResult> UndoDelete([FromRoute] int id)
+        {
+            var result = await _service.UndoDeleteAsync(id);
+            return Json(result);
+        }
 
-        // TODO : HardDelete
+        [HttpPost]
+        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Delete)]
+        public async Task<JsonResult> HardDelete([FromRoute] int id)
+        {
+            var result = await _service.HardDeleteAsync(id);
+            return Json(result);
+        }
+
+        #endregion
 
         #endregion
 

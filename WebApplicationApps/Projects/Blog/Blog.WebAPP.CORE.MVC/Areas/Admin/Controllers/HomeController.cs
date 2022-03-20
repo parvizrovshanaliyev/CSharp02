@@ -1,15 +1,11 @@
 ﻿using Blog.Services.Abstract;
-using Blog.Shared.Attributes;
-using Blog.Shared.Constants;
 using Blog.WebAPP.CORE.MVC.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [AuthorizeRoles(RoleConstant.Admin, RoleConstant.Editor)]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         #region fields
 

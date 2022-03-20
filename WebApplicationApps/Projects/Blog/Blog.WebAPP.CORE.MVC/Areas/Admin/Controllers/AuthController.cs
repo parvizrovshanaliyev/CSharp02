@@ -1,17 +1,15 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Blog.Entities.Concrete;
+﻿using Blog.Entities.Concrete;
 using Blog.Entities.Dtos.Auth;
 using Blog.Services.Abstract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [AllowAnonymous]
-    public class AuthController : Controller
+    public class AuthController : BaseController
     {
         #region ctor
 
@@ -23,15 +21,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
         #endregion
 
-        #region access denied
 
-        [HttpGet]
-        public IActionResult AccessDenied()
-        {
-            return View();
-        }
-
-        #endregion
 
         #region fields
 
@@ -44,12 +34,14 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         #region login logout
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginDto request, string ReturnUrl)
         {
@@ -75,6 +67,16 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
             await _signInManager.SignOutAsync();
 
             return RedirectToAction("Login", "Auth");
+        }
+
+        #endregion
+        #region access denied
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
 
         #endregion

@@ -1,28 +1,27 @@
 ﻿@model IResult<IList<PostDto>>;
 @{
-    ViewBag.Title = "Posts";
+    ViewData["Title"] = "Deleted Posts";
     Layout = "_Layout";
 }
-<ol class="breadcrumb mt-4 mb-4">
-    <li class="breadcrumb-item">
-        <a asp-area="Admin" asp-controller="Home" asp-action="Index">Dashboard</a>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item ">
+        <a asp-area="Admin" asp-controller="Home" asp-action="Index">
+            Admin
+        </a>
     </li>
     <li class="breadcrumb-item active">
-        <a asp-area="Admin" asp-controller="Post" asp-action="Index">@ViewBag.Title</a>
+        <a asp-area="Admin" asp-controller="Post" asp-action="DeletedPosts">
+            Posts
+        </a>
     </li>
 </ol>
 @if (Model is { IsSuccess: true })
 {
-    <div class=" card mb-2 mt-2">
-        <div class="card-header">
-            <div style="display: flex" class="justify-content-end">
-                <a asp-area="Admin" asp-controller="Post" asp-action="Create" class="btn btn-primary">Create</a>
-            </div>
-        </div>
+    <div class="card mt-2 mb-2">
         <div class="card-body">
             <div class="single-table">
                 <div class="table-responsive">
-                    <table id="dataTable" style="width: 100%" class=" table table-hover text-center">
+                    <table id="dataTable" style="width:100%" class="table table-hover progress-table text-center">
                         <thead>
                         <tr>
                             <th>Actions</th>
@@ -41,12 +40,12 @@
                         {
                             @foreach (var item in Model.Data)
                             {
-                                <tr name="@item.Id">
+                                <tr role="row" name="@item.Id">
                                     <td>
-                                        <a class='btn text-primary btn-sm btn-update' data-id="@item.Id" asp-area="Admin" asp-controller="Post" asp-action="Update" asp-route-id="@item.Id">
-                                            <i class='fa fa-edit'></i>
+                                        <a class='btn text-warning btn-sm btn-update' onclick="jQueryAjaxDeleteAndUndoDelete(this,'UndoDelete/@item.Id')" data-id="@item.Id">
+                                            <i class='fa fa-undo'></i>
                                         </a>
-                                        <a class="btn text-danger btn-sm btn-delete" onclick="jQueryAjaxDelete(this)" data-id="@item.Id">
+                                        <a class="btn text-danger btn-sm btn-delete" onclick="jQueryAjaxDeleteAndUndoDelete(this,'HardDelete/@item.Id')" data-id="@item.Id">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </td>
@@ -86,5 +85,5 @@ else
 }
 
 @section Scripts{
-    <script src="~/js/admin/post-delete.js" asp-append-version="true"></script>
+    <script src="~/js/admin/entity-delete.js" asp-append-version="true"></script>
 }

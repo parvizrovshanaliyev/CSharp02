@@ -1,7 +1,5 @@
 ﻿using Blog.Entities.Dtos.Post;
 using Blog.Services.Abstract;
-using Blog.Shared.Attributes;
-using Blog.Shared.Constants;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NToastNotify;
@@ -10,10 +8,16 @@ using System.Threading.Tasks;
 
 namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [AuthorizeRoles(RoleConstant.Admin, RoleConstant.Editor)]
-    public class PostController : Controller
+    public class PostController : BaseController
     {
+        #region fields
+
+        private readonly IPostService _service;
+        private readonly ICategoryService _categoryService;
+        private readonly IToastNotification _toastNotification;
+
+        #endregion
+
         #region ctor
 
         public PostController(IPostService service, ICategoryService categoryService,
@@ -26,6 +30,8 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
         #endregion
 
+        #region methods
+
         #region loadData
 
         [HttpGet]
@@ -34,9 +40,15 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
             var result = await _service.GetAllByNonDeletedAsync();
             return View(result);
         }
+        [HttpGet]
+        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Post_Read)]
+        public async Task<IActionResult> DeletedPosts()
+        {
+            var result = await _service.GetAllByDeletedAsync();
 
+            return View(result);
+        }
         #endregion
-
 
         #region delete
 
@@ -46,7 +58,21 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
             var result = await _service.DeleteAsync(id);
             return Json(result);
         }
+        [HttpPost]
+        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Post_Update)]
+        public async Task<JsonResult> UndoDelete([FromRoute] int id)
+        {
+            var result = await _service.UndoDeleteAsync(id);
+            return Json(result);
+        }
 
+        [HttpPost]
+        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Post_Delete)]
+        public async Task<JsonResult> HardDelete([FromRoute] int id)
+        {
+            var result = await _service.HardDeleteAsync(id);
+            return Json(result);
+        }
         #endregion
 
         #region helper
@@ -63,14 +89,6 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
             ViewBag.Categories = categorySelectList;
         }
-
-        #endregion
-
-        #region fields
-
-        private readonly IPostService _service;
-        private readonly ICategoryService _categoryService;
-        private readonly IToastNotification _toastNotification;
 
         #endregion
 
@@ -117,8 +135,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
         #endregion
 
-
-        #region Update
+        #region update
 
         [HttpGet]
         public async Task<IActionResult> Update([FromRoute] int id)
@@ -150,6 +167,8 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
             _toastNotification.AddSuccessToastMessage(result.Message);
             return View(request);
         }
+
+        #endregion
 
         #endregion
     }

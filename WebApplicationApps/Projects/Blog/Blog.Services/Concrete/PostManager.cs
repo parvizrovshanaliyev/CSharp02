@@ -89,6 +89,17 @@ namespace Blog.Services.Concrete
 
         #endregion
 
+        public async Task<IResult<IList<PostDto>>> GetAllByDeletedAsync()
+        {
+            var entities = await _unitOfWork.Posts.GetAllAsync(c => c.IsDeleted,
+                i => i.Category);
+
+            if (entities == null)
+                return NotFound<IList<PostDto>>(BaseLocalization.NoDataAvailableOnRequest);
+            var outputDto = _mapper.Map<IList<PostDto>>(entities);
+            return Ok(outputDto);
+        }
+
         public Task<IResult<IList<PostDto>>> GetAllByNonDeletedAndActiveAsync()
         {
             throw new NotImplementedException();
@@ -193,9 +204,29 @@ namespace Blog.Services.Concrete
             return Deleted(outputDto);
         }
 
-        Task<IResult<bool>> IPostService.HardDeleteAsync(int id)
+        public async Task<IResult<bool>> HardDeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var entity = await _unitOfWork.Posts.GetAsync(c => c.Id == id);
+            if (entity == null)
+                return NotFound<bool>(BaseLocalization.NoDataAvailableOnRequest);
+            await _unitOfWork.Posts.DeleteAsync(entity);
+            await _unitOfWork.SaveChangesAsync();
+            return Deleted(true);
+        }
+
+        public async Task<IResult<PostDto>> UndoDeleteAsync(int id)
+        {
+            if (CurrentUser is null)
+                return Unauthorized<PostDto>();
+            var entity = await _unitOfWork.Posts.GetAsync(c => c.Id == id);
+            if (entity == null)
+                return NotFound<PostDto>(BaseLocalization.NoDataAvailableOnRequest);
+            entity.SetIsDeleted(false);
+            entity.SetModifiedByName(CurrentUser.UserName);
+            var deletedEntity = await _unitOfWork.Posts.UpdateAsync(entity);
+            await _unitOfWork.SaveChangesAsync();
+            var outputDto = _mapper.Map<PostDto>(deletedEntity);
+            return UndoDeleted(outputDto);
         }
 
         #endregion

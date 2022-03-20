@@ -1,7 +1,5 @@
 ﻿using Blog.Entities.Dtos;
 using Blog.Services.Abstract;
-using Blog.Shared.Attributes;
-using Blog.Shared.Constants;
 using Blog.Shared.Extensions;
 using Blog.WebAPP.CORE.MVC.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -9,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [AuthorizeRoles(RoleConstant.Admin, RoleConstant.Editor)]
-    public class CategoryController : Controller
+    public class CategoryController : BaseController
     {
         #region .::fields::.
 
@@ -47,6 +43,15 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
             return Json(result.Data);
         }
 
+        [HttpGet]
+        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Category_Read)]
+        public async Task<IActionResult> DeletedCategories()
+        {
+            var result = await _service.GetAllByDeletedAsync();
+
+            return View(result);
+        }
+
         #endregion
 
         #region create
@@ -63,7 +68,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         {
             if (ModelState.IsValid) //== true
             {
-                var result = await _service.AddAsync(request, "Admin");
+                var result = await _service.AddAsync(request);
 
                 if (result.IsSuccess)
                 {
@@ -134,7 +139,21 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
             var result = await _service.DeleteAsync(id, "Admin");
             return Json(result);
         }
+        [HttpPost]
+        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Category_Update)]
+        public async Task<JsonResult> UndoDelete([FromRoute] int id)
+        {
+            var result = await _service.UndoDeleteAsync(id);
+            return Json(result);
+        }
 
+        [HttpPost]
+        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Category_Delete)]
+        public async Task<JsonResult> HardDelete([FromRoute] int id)
+        {
+            var result = await _service.HardDeleteAsync(id);
+            return Json(result);
+        }
         #endregion
 
         #endregion

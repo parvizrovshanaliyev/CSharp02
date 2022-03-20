@@ -1,6 +1,3 @@
-using Blog.Services.AutoMapper.Profiles;
-using Blog.Services.Extensions;
-using Blog.Shared.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -44,9 +41,10 @@ namespace Blog.WebAPP.CORE.MVC
             };
 
             services.AddSession();
-            services.LoadServices();
-            services.LoadSharedServices();
-            services.AddAutoMapper(typeof(CategoryProfile), typeof(PostProfile), typeof(UserProfile), typeof(CommentProfile));
+
+
+            services.AddBusinessServices();
+            services.AddSharedServices();
 
             services.ConfigureApplicationCookie(options =>
             {

@@ -83,6 +83,19 @@ namespace Blog.Services.Concrete
         }
 
         #endregion
+        #region  GetAllByDeletedAsync
+        public async Task<IResult<IList<CommentDto>>> GetAllByDeletedAsync()
+        {
+            var entities = await _unitOfWork.Comments.GetAllAsync(c => c.IsDeleted, c => c.Post);
+
+            if (entities == null)
+                return NotFound<IList<CommentDto>>(BaseLocalization.NoDataAvailableOnRequest);
+
+            var outputDto = _mapper.Map<IList<CommentDto>>(entities);
+
+            return Ok(outputDto);
+        }
+        #endregion
         #region     GetAllByNonDeletedAndActiveAsync
         public async Task<IResult<IList<CommentDto>>> GetAllByNonDeletedAndActiveAsync()
         {
@@ -169,7 +182,29 @@ namespace Blog.Services.Concrete
             var outputDto = _mapper.Map<CommentDto>(deletedEntity);
             return Deleted(outputDto);
         }
+        public async Task<IResult<CommentDto>> UndoDeleteAsync(int id)
+        {
+            if (CurrentUser is null) return Unauthorized<CommentDto>();
+            var entity = await _unitOfWork.Comments.GetAsync(c => c.Id == id);
+            if (entity is null)
+                return NotFound<CommentDto>(BaseLocalization.NoDataAvailableOnRequest);
+            entity.SetIsDeleted(false);
+            entity.SetModifiedByName(CurrentUser.UserName);
+            var deletedEntity = await _unitOfWork.Comments.UpdateAsync(entity);
+            await _unitOfWork.SaveChangesAsync();
+            var outputDto = _mapper.Map<CommentDto>(deletedEntity);
+            return UndoDeleted(outputDto);
+        }
 
+        public async Task<IResult<bool>> HardDeleteAsync(int id)
+        {
+            var entity = await _unitOfWork.Comments.GetAsync(c => c.Id == id);
+            if (entity == null)
+                return NotFound<bool>(BaseLocalization.NoDataAvailableOnRequest);
+            await _unitOfWork.Comments.DeleteAsync(entity);
+            await _unitOfWork.SaveChangesAsync();
+            return Deleted(true);
+        }
         #endregion
         #endregion
         #endregion

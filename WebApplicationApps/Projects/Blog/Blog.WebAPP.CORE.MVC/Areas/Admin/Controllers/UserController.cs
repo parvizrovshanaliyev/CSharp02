@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Blog.Entities.Concrete;
+﻿using Blog.Entities.Concrete;
 using Blog.Entities.Dtos.User;
 using Blog.Services.Abstract;
 using Blog.Shared.Attributes;
@@ -11,11 +9,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         #region ctor
 

@@ -1,4 +1,5 @@
-﻿@model Blog.WebAPP.CORE.MVC.Areas.Admin.Models.UserWithRolesViewModel
+﻿@using Blog.Shared.Constants
+@model Blog.WebAPP.CORE.MVC.Areas.Admin.Models.UserWithRolesViewModel
 
 <div id="layoutSidenav_nav">
     <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
@@ -31,17 +32,19 @@
                     Comments
                 </a>
 
-                @if (Model.Roles.Any(i => i.Equals("Admin")))
+                <div class="sb-sidenav-menu-heading">Users</div>
+                @if (Model.Roles.Any(i => i.Equals(RoleConstant.SuperAdmin) || i.Equals(RoleConstant.Role_Read)))
                 {
-                    <div class="sb-sidenav-menu-heading">Users</div>
-
                     <a class="nav-link" asp-area="Admin" asp-controller="Role" asp-action="Index">
                         <div class="sb-nav-link-icon">
                             <i class="fas fa-th-list"></i>
                         </div>
                         Roles
                     </a>
+                }
 
+                @if (Model.Roles.Any(i => i.Equals(RoleConstant.SuperAdmin) || i.Equals(RoleConstant.User_Read)))
+                {
                     <a class="nav-link" asp-area="Admin" asp-controller="User" asp-action="Index">
                         <div class="sb-nav-link-icon">
                             <i class="fas fa-th-list"></i>

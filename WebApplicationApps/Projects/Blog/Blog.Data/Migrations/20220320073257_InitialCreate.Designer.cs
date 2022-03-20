@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blog.Data.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    [Migration("20220319151042_InitialCreate")]
+    [Migration("20220320073257_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -234,23 +234,156 @@ namespace Blog.Data.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "ec8c31e7-8d43-4c0d-8cd7-fb4d74ed089a",
-                            Name = "Admin",
-                            NormalizedName = "ADMIN"
+                            ConcurrencyStamp = "e654aabb-22f6-44c2-ac8b-189b01d33ebc",
+                            Name = "Category_Create",
+                            NormalizedName = "CATEGORY_CREATE"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "b572a989-1c23-455b-8619-fbd361f4d409",
-                            Name = "Editor",
-                            NormalizedName = "EDITOR"
+                            ConcurrencyStamp = "e654aabb-22f6-44c2-ac8b-189b01d33ebc",
+                            Name = "Category_Read",
+                            NormalizedName = "CATEGORY_READ"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "172a0ab1-eca7-4b38-98a4-ee80f1f82330",
-                            Name = "Member",
-                            NormalizedName = "MEMBER"
+                            ConcurrencyStamp = "e654aabb-22f6-44c2-ac8b-189b01d33ebc",
+                            Name = "Category_Update",
+                            NormalizedName = "CATEGORY_UPDATE"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ConcurrencyStamp = "e654aabb-22f6-44c2-ac8b-189b01d33ebc",
+                            Name = "Category_Delete",
+                            NormalizedName = "CATEGORY_DELETE"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ConcurrencyStamp = "e654aabb-22f6-44c2-ac8b-189b01d33ebc",
+                            Name = "Post_Create",
+                            NormalizedName = "POST_CREATE"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ConcurrencyStamp = "e654aabb-22f6-44c2-ac8b-189b01d33ebc",
+                            Name = "Post_Read",
+                            NormalizedName = "POST_READ"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ConcurrencyStamp = "e654aabb-22f6-44c2-ac8b-189b01d33ebc",
+                            Name = "Post_Update",
+                            NormalizedName = "POST_UPDATE"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ConcurrencyStamp = "e654aabb-22f6-44c2-ac8b-189b01d33ebc",
+                            Name = "Post_Delete",
+                            NormalizedName = "POST_DELETE"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ConcurrencyStamp = "e654aabb-22f6-44c2-ac8b-189b01d33ebc",
+                            Name = "User_Create",
+                            NormalizedName = "USER_CREATE"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ConcurrencyStamp = "e654aabb-22f6-44c2-ac8b-189b01d33ebc",
+                            Name = "User_Read",
+                            NormalizedName = "USER_READ"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            ConcurrencyStamp = "e654aabb-22f6-44c2-ac8b-189b01d33ebc",
+                            Name = "User_Update",
+                            NormalizedName = "USER_UPDATE"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            ConcurrencyStamp = "e654aabb-22f6-44c2-ac8b-189b01d33ebc",
+                            Name = "User_Delete",
+                            NormalizedName = "USER_DELETE"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            ConcurrencyStamp = "e654aabb-22f6-44c2-ac8b-189b01d33ebc",
+                            Name = "Role_Create",
+                            NormalizedName = "ROLE_CREATE"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            ConcurrencyStamp = "e654aabb-22f6-44c2-ac8b-189b01d33ebc",
+                            Name = "Role_Read",
+                            NormalizedName = "ROLE_READ"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            ConcurrencyStamp = "e654aabb-22f6-44c2-ac8b-189b01d33ebc",
+                            Name = "Role_Update",
+                            NormalizedName = "ROLE_UPDATE"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            ConcurrencyStamp = "e654aabb-22f6-44c2-ac8b-189b01d33ebc",
+                            Name = "Role_Delete",
+                            NormalizedName = "ROLE_DELETE"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            ConcurrencyStamp = "e654aabb-22f6-44c2-ac8b-189b01d33ebc",
+                            Name = "Comment_Create",
+                            NormalizedName = "COMMENT_CREATE"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            ConcurrencyStamp = "e654aabb-22f6-44c2-ac8b-189b01d33ebc",
+                            Name = "Comment_Read",
+                            NormalizedName = "COMMENT_READ"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            ConcurrencyStamp = "e654aabb-22f6-44c2-ac8b-189b01d33ebc",
+                            Name = "Comment_Update",
+                            NormalizedName = "COMMENT_UPDATE"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            ConcurrencyStamp = "e654aabb-22f6-44c2-ac8b-189b01d33ebc",
+                            Name = "Comment_Delete",
+                            NormalizedName = "COMMENT_DELETE"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            ConcurrencyStamp = "e654aabb-22f6-44c2-ac8b-189b01d33ebc",
+                            Name = "AdminArea_Home_Read",
+                            NormalizedName = "ADMINAREA_HOME_READ"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            ConcurrencyStamp = "e654aabb-22f6-44c2-ac8b-189b01d33ebc",
+                            Name = "SuperAdmin",
+                            NormalizedName = "SUPERADMIN"
                         });
                 });
 
@@ -284,6 +417,10 @@ namespace Blog.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AboutMe")
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
@@ -302,6 +439,30 @@ namespace Blog.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FacebookLink")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("FirstName")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("GitHubLink")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("InstagramLink")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("LastName")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("LinkedInLink")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -329,12 +490,24 @@ namespace Blog.Data.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TwitterLink")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("WebsiteLink")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("YoutubeLink")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.HasKey("Id");
 
@@ -354,16 +527,18 @@ namespace Blog.Data.Migrations
                             Id = 1,
                             AccessFailedCount = 0,
                             Avatar = "Users/defaultUser.png",
-                            ConcurrencyStamp = "b7ee3f8a-8aa9-49da-8fdc-041c2fc7e46f",
+                            ConcurrencyStamp = "bcce8cf9-2b60-4c75-b050-24ad490bf5de",
                             Email = "adminUser@gmail.com",
                             EmailConfirmed = true,
+                            FirstName = "Super Admin",
+                            LastName = "User",
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMINUSER@GMAIL.COM",
                             NormalizedUserName = "ADMINUSER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFSOQAfvuF63xauew/fMVUy+MXJ2jrO8dRiNFDE0fURvMEpE5HmDire5vMee+2MyaA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDFclzZKfSNnDTReNYKJPS+c05Mcbe4vPKjoE5oUzuEd5bM7m1Lel6iJqE3IKuVA9g==",
                             PhoneNumber = "+9949999999",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "763a281a-7c58-45cf-976a-66b6d9830ca5",
+                            SecurityStamp = "3317689B-4358-4F80-874E-D8B6EAEF0AE4",
                             TwoFactorEnabled = false,
                             UserName = "adminUser"
                         },
@@ -372,16 +547,18 @@ namespace Blog.Data.Migrations
                             Id = 2,
                             AccessFailedCount = 0,
                             Avatar = "Users/defaultUser.png",
-                            ConcurrencyStamp = "dce60ac4-3a7d-4bff-a85b-84597c8a4813",
+                            ConcurrencyStamp = "20d75ec2-f7e7-4727-87e7-16e4714f61af",
                             Email = "editorUser@gmail.com",
                             EmailConfirmed = true,
+                            FirstName = "Editor",
+                            LastName = "User",
                             LockoutEnabled = false,
                             NormalizedEmail = "EDITORUSER@GMAIL.COM",
                             NormalizedUserName = "EDITORUSER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAcLfPlQO3nEG+G4u6qzwE7tdwS8HAJ0u7czXhoKPwqUzFjW8LQAYUzMBP5hWeE8Gw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGU7CIBz+czMirQI9q4fYjbHpvFT/0++nzhc5zO4tuza6sJVptrrVoRWv7me/MLjlg==",
                             PhoneNumber = "+9949999999",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "9974319c-e60f-454f-8e12-c481c3a30efc",
+                            SecurityStamp = "3FFDA2C7-A349-4902-AC11-6FFAB9969424",
                             TwoFactorEnabled = false,
                             UserName = "editorUser"
                         },
@@ -390,16 +567,18 @@ namespace Blog.Data.Migrations
                             Id = 3,
                             AccessFailedCount = 0,
                             Avatar = "Users/defaultUser.png",
-                            ConcurrencyStamp = "14f7e8d3-1dd3-4fd3-ab45-82422b5f2b98",
+                            ConcurrencyStamp = "c1db50c7-2bc7-4344-a7a1-a4a71f00aa66",
                             Email = "memberUser@gmail.com",
                             EmailConfirmed = true,
+                            FirstName = "Member",
+                            LastName = "User",
                             LockoutEnabled = false,
                             NormalizedEmail = "MEMBERUSER@GMAIL.COM",
                             NormalizedUserName = "MEMBERUSER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJz/7zYS2ZFym2PcnesUKK6byDeQ2z9a+ZkHGX0Vm4NZnDhMA+EKzyXgHiyONPXg3g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHa3x9gFBUdFOwes6VSEr9juKoxl7mm6boNsBYEeQ+gzFBCz/+1+Os301XZEcKthwA==",
                             PhoneNumber = "+9949999999",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "7ab599f4-113c-48e4-8817-bb6a4060b765",
+                            SecurityStamp = "075E56DF-300D-4AF1-952E-951A18322EE1",
                             TwoFactorEnabled = false,
                             UserName = "memberUser"
                         });
@@ -473,13 +652,173 @@ namespace Blog.Data.Migrations
                         },
                         new
                         {
+                            UserId = 1,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 3
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 4
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 5
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 6
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 7
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 8
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 9
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 10
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 11
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 12
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 13
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 14
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 15
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 16
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 17
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 18
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 19
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 20
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 21
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 22
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 1
+                        },
+                        new
+                        {
                             UserId = 2,
                             RoleId = 2
                         },
                         new
                         {
-                            UserId = 3,
+                            UserId = 2,
                             RoleId = 3
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 4
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 5
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 6
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 7
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 8
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 17
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 18
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 19
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 20
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 21
                         });
                 });
 

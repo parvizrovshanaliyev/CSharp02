@@ -1,5 +1,4 @@
-﻿using System;
-using Blog.Data.Concrete.EntityFramework.Context;
+﻿using Blog.Data.Concrete.EntityFramework.Context;
 using Blog.Entities.Concrete;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +33,20 @@ namespace Blog.Data.Concrete.EntityFramework.Configurations
                 .HasMaxLength(250)
                 .IsRequired();
 
+
+            // Social Media Links
+            builder.Property(u => u.YoutubeLink).HasMaxLength(250);
+            builder.Property(u => u.TwitterLink).HasMaxLength(250);
+            builder.Property(u => u.InstagramLink).HasMaxLength(250);
+            builder.Property(u => u.FacebookLink).HasMaxLength(250);
+            builder.Property(u => u.LinkedInLink).HasMaxLength(250);
+            builder.Property(u => u.GitHubLink).HasMaxLength(250);
+            builder.Property(u => u.WebsiteLink).HasMaxLength(250);
+            // About
+            builder.Property(u => u.FirstName).HasMaxLength(30);
+            builder.Property(u => u.LastName).HasMaxLength(30);
+            builder.Property(u => u.AboutMe).HasMaxLength(1000);
+
             // The relationships between User and other entity types
             // Note that these relationships are configured with no navigation properties
 
@@ -49,11 +62,13 @@ namespace Blog.Data.Concrete.EntityFramework.Configurations
             // Each User can have many entries in the UserRole join table
             builder.HasMany<UserRole>().WithOne().HasForeignKey(ur => ur.UserId).IsRequired();
 
-            // seed 
-            var admin = new User
+            // seed
+            var admin = new User()
             {
                 Id = 1,
                 UserName = "adminUser",
+                FirstName = "Super Admin",
+                LastName = "User",
                 NormalizedUserName = "ADMINUSER",
                 Email = "adminUser@gmail.com",
                 NormalizedEmail = "ADMINUSER@GMAIL.COM",
@@ -61,16 +76,16 @@ namespace Blog.Data.Concrete.EntityFramework.Configurations
                 Avatar = "Users/defaultUser.png",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
-                SecurityStamp = Guid.NewGuid().ToString()
+                SecurityStamp = "3317689B-4358-4F80-874E-D8B6EAEF0AE4",
             };
-
             admin.PasswordHash = CreatePasswordHash(admin, "Admin123!User");
 
-
-            var editor = new User
+            var editor = new User()
             {
                 Id = 2,
                 UserName = "editorUser",
+                FirstName = "Editor",
+                LastName = "User",
                 NormalizedUserName = "EDITORUSER",
                 Email = "editorUser@gmail.com",
                 NormalizedEmail = "EDITORUSER@GMAIL.COM",
@@ -78,14 +93,16 @@ namespace Blog.Data.Concrete.EntityFramework.Configurations
                 Avatar = "Users/defaultUser.png",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
-                SecurityStamp = Guid.NewGuid().ToString()
+                SecurityStamp = "3FFDA2C7-A349-4902-AC11-6FFAB9969424",
             };
             editor.PasswordHash = CreatePasswordHash(editor, "Editor123!User");
 
-            var member = new User
+            var member = new User()
             {
                 Id = 3,
                 UserName = "memberUser",
+                FirstName = "Member",
+                LastName = "User",
                 NormalizedUserName = "MEMBERUSER",
                 Email = "memberUser@gmail.com",
                 NormalizedEmail = "MEMBERUSER@GMAIL.COM",
@@ -93,10 +110,10 @@ namespace Blog.Data.Concrete.EntityFramework.Configurations
                 Avatar = "Users/defaultUser.png",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
-                SecurityStamp = Guid.NewGuid().ToString()
-            };
-            member.PasswordHash = CreatePasswordHash(editor, "Member123!User");
+                SecurityStamp = "075E56DF-300D-4AF1-952E-951A18322EE1",
 
+            };
+            member.PasswordHash = CreatePasswordHash(member, "Member123!User");
             builder.HasData(admin, editor, member);
         }
 

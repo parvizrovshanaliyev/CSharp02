@@ -46,6 +46,12 @@
                                         <a class="btn text-danger btn-sm btn-delete" onclick="jQueryAjaxDelete(this)" data-id="@item.Id">
                                             <i class="fa fa-trash"></i>
                                         </a>
+                                        <a class='btn text-primary btn-sm btn-detail' onclick="showInPopup('User/Detail/@item.Id', 'Detail')" data-id="@item.Id">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                        <a class='btn text-primary btn-sm btn-assign' onclick="showInPopup('Role/Assign/@item.Id', 'Assigning a role to user')" data-id="@item.Id">
+                                            <i class="fa fa-user-shield"></i>
+                                        </a>
                                     </td>
                                     <td>@item.Id</td>
                                     <td>@item.UserName</td>
@@ -79,7 +85,7 @@ else
     </div>
 }
 <div id="form-modal" class="modal fade" role="dialog" aria-hidden="true" tabindex="-1">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title"></h5>

@@ -49,7 +49,19 @@ namespace Blog.Services.Concrete
         #region methods
 
         #region QUERY
+        #region GetAsync
 
+        public async Task<IResult<UserDto>> GetAsync(int id)
+        {
+            var entity = await _unitOfWork.Users.GetAsync(i => i.Id == id);
+            if (entity is null)
+                return NotFound<UserDto>(BaseLocalization.NotFoundCodeGeneralMessage);
+            var outputDto = _mapper.Map<UserDto>(entity);
+            return Ok(outputDto);
+        }
+
+
+        #endregion
         #region GetAllAsync
 
         public async Task<IResult<IList<UserDto>>> GetAllAsync()

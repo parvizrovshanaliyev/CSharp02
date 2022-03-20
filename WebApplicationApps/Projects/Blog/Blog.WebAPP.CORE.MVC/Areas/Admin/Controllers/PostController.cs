@@ -1,5 +1,7 @@
 ﻿using Blog.Entities.Dtos.Post;
 using Blog.Services.Abstract;
+using Blog.Shared.Attributes;
+using Blog.Shared.Constants;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NToastNotify;
@@ -35,13 +37,14 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         #region loadData
 
         [HttpGet]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Post_Read)]
         public async Task<IActionResult> Index()
         {
             var result = await _service.GetAllByNonDeletedAsync();
             return View(result);
         }
         [HttpGet]
-        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Post_Read)]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Post_Read)]
         public async Task<IActionResult> DeletedPosts()
         {
             var result = await _service.GetAllByDeletedAsync();
@@ -53,13 +56,14 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         #region delete
 
         [HttpPost]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Post_Delete)]
         public async Task<JsonResult> Delete([FromRoute] int id)
         {
             var result = await _service.DeleteAsync(id);
             return Json(result);
         }
         [HttpPost]
-        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Post_Update)]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Post_Update)]
         public async Task<JsonResult> UndoDelete([FromRoute] int id)
         {
             var result = await _service.UndoDeleteAsync(id);
@@ -67,7 +71,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Post_Delete)]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Post_Delete)]
         public async Task<JsonResult> HardDelete([FromRoute] int id)
         {
             var result = await _service.HardDeleteAsync(id);
@@ -95,6 +99,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         #region create
 
         [HttpGet]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Post_Create)]
         public async Task<IActionResult> Create()
         {
             // v1 
@@ -111,6 +116,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
 
         [HttpPost]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Post_Create)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(PostAddDto request)
         {
@@ -138,6 +144,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         #region update
 
         [HttpGet]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Post_Update)]
         public async Task<IActionResult> Update([FromRoute] int id)
         {
             var result = await _service.GetUpdateDtoAsync(id);
@@ -146,6 +153,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Post_Update)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(PostUpdateDto request)
         {

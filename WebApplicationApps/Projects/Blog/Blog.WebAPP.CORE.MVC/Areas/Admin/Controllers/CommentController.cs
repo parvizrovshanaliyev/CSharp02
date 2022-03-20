@@ -1,5 +1,7 @@
 ﻿using Blog.Entities.Dtos.Comment;
 using Blog.Services.Abstract;
+using Blog.Shared.Attributes;
+using Blog.Shared.Constants;
 using Blog.Shared.Extensions;
 using Blog.WebAPP.CORE.MVC.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -34,7 +36,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         #region loadData
 
         [HttpGet]
-        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Read)]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Read)]
         public async Task<IActionResult> Index()
         {
             var result = await _service.GetAllByNonDeletedAsync();
@@ -43,7 +45,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Read)]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Read)]
         public async Task<IActionResult> DeletedComments()
         {
             var result = await _service.GetAllByDeletedAsync();
@@ -52,7 +54,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Read)]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Read)]
         public async Task<IActionResult> Detail([FromRoute] int id)
         {
             var result = await _service.GetAsync(id);
@@ -65,7 +67,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         #region create
 
         [HttpGet]
-        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Create)]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Create)]
         public async Task<IActionResult> Create()
         {
             await FillSelectBox();
@@ -74,7 +76,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Create)]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Create)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CommentAddDto request)
         {
@@ -107,7 +109,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         #region update
 
         [HttpGet]
-        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Update)]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Update)]
         public async Task<IActionResult> Update([FromRoute] int id)
         {
             var result = await _service.GetUpdateDtoAsync(id);
@@ -115,7 +117,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Update)]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Update)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(CommentUpdateDto request)
         {
@@ -147,7 +149,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         #region delete
 
         [HttpPost]
-        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Delete)]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Delete)]
         public async Task<JsonResult> Delete([FromRoute] int id)
         {
             var result = await _service.DeleteAsync(id);
@@ -155,7 +157,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Update)]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Update)]
         public async Task<JsonResult> UndoDelete([FromRoute] int id)
         {
             var result = await _service.UndoDeleteAsync(id);
@@ -163,7 +165,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Delete)]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Comment_Delete)]
         public async Task<JsonResult> HardDelete([FromRoute] int id)
         {
             var result = await _service.HardDeleteAsync(id);

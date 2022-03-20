@@ -1,6 +1,8 @@
 ﻿using Blog.Entities.Concrete;
 using Blog.Entities.Dtos.User;
 using Blog.Services.Abstract;
+using Blog.Shared.Attributes;
+using Blog.Shared.Constants;
 using Blog.Shared.Extensions;
 using Blog.WebAPP.CORE.MVC.Areas.Admin.Models;
 using Microsoft.AspNetCore.Identity;
@@ -37,6 +39,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         #region loadData
 
         [HttpGet]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.User_Read)]
         public async Task<IActionResult> Index()
         {
             var result = await _service.GetAllAsync();
@@ -44,7 +47,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
             return View(result);
         }
         [HttpGet]
-        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.User_Read)]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.User_Read)]
         public async Task<IActionResult> Detail([FromRoute] int id)
         {
             var result = await _service.GetAsync(id);
@@ -62,6 +65,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.User_Create)]
         [ValidateAntiForgeryToken] // CSRF
         public async Task<IActionResult> Create(UserAddDto request)
         {
@@ -98,6 +102,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         #region update
 
         [HttpGet]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.User_Update)]
         public async Task<IActionResult> Update(int id)
         {
             var result = await _service.GetUpdateDtoAsync(id);
@@ -105,6 +110,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.User_Update)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(UserUpdateDto request)
         {
@@ -141,7 +147,6 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         #region update profile
 
         [HttpGet]
-        //[AuthorizeRoles(RoleConstant.Admin, RoleConstant.Editor)]
         public async Task<IActionResult> UpdateProfile()
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
@@ -152,7 +157,6 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
 
         [HttpPost]
-        //[AuthorizeRoles(RoleConstant.Admin, RoleConstant.Editor)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateProfile(UserUpdateDto request)
         {
@@ -175,7 +179,6 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         #region change password
 
         [HttpGet]
-        //[AuthorizeRoles(RoleConstant.Admin, RoleConstant.Editor)]
         public IActionResult ChangePassword()
         {
             return View();
@@ -183,7 +186,6 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
 
         [HttpPost]
-        //[AuthorizeRoles(RoleConstant.Admin, RoleConstant.Editor)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(UserChangePasswordDto request)
         {
@@ -205,6 +207,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         #region delete
 
         [HttpPost]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.User_Delete)]
         public async Task<JsonResult> Delete(int id)
         {
             var result = await _service.DeleteAsync(id, "Admin");

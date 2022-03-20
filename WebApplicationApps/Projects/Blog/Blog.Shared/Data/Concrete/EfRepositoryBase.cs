@@ -1,21 +1,16 @@
-﻿using System;
+﻿using Blog.Shared.Data.Abstract;
+using Blog.Shared.Entities.Abstract;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Blog.Shared.Data.Abstract;
-using Blog.Shared.Entities.Abstract;
-using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Shared.Data.Concrete
 {
-    public class EfRepositoryBase<TEntity>: IEntityRepository<TEntity> where TEntity : class, IEntity, new()
+    public class EfRepositoryBase<TEntity> : IEntityRepository<TEntity> where TEntity : class, IEntity, new()
     {
-        #region fields
-
-        private readonly DbContext _context;
-        private readonly DbSet<TEntity> _dbSet;
-        #endregion
         #region ctor
 
         public EfRepositoryBase(DbContext context)
@@ -23,46 +18,42 @@ namespace Blog.Shared.Data.Concrete
             _context = context;
             _dbSet = context.Set<TEntity>();
         }
+
         #endregion
+
+        #region fields
+
+        private readonly DbContext _context;
+        private readonly DbSet<TEntity> _dbSet;
+
+        #endregion
+
         #region Implementation of IEntityRepository<TEntity>
 
-        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties)
+        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate,
+            params Expression<Func<TEntity, object>>[] includeProperties)
         {
             IQueryable<TEntity> query = _dbSet;
 
-            if (predicate is not null)
-            {
-                query = query.Where(predicate);
-
-            }
+            if (predicate is not null) query = query.Where(predicate);
 
             if (includeProperties is not null)
-            {
                 foreach (var includeProperty in includeProperties)
-                {
                     query = query.Include(includeProperty);
-                }
-            }
 
             return await query.SingleOrDefaultAsync();
         }
 
-        public async Task<IList<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate = null, params Expression<Func<TEntity, object>>[] includeProperties)
+        public async Task<IList<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate = null,
+            params Expression<Func<TEntity, object>>[] includeProperties)
         {
             IQueryable<TEntity> query = _dbSet;
             // where 
-            if (predicate is not null)
-            {
-                query = query.Where(predicate);
-            }
+            if (predicate is not null) query = query.Where(predicate);
             // left join
             if (includeProperties is not null)
-            {
                 foreach (var includeProperty in includeProperties)
-                {
                     query = query.Include(includeProperty);
-                }
-            }
 
 
             return await query.ToListAsync();
@@ -73,9 +64,9 @@ namespace Blog.Shared.Data.Concrete
             return await _dbSet.AnyAsync(predicate);
         }
 
-        public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate)
+        public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate = null)
         {
-            return await _dbSet.CountAsync(predicate);
+            return await (predicate is null ? _dbSet.CountAsync() : _dbSet.CountAsync(predicate));
         }
 
         public async Task<TEntity> AddAsync(TEntity entity)
@@ -86,7 +77,7 @@ namespace Blog.Shared.Data.Concrete
 
         public async Task<TEntity> UpdateAsync(TEntity entity)
         {
-            await Task.Run(() => { _dbSet.Update(entity);});
+            await Task.Run(() => { _dbSet.Update(entity); });
             return entity;
         }
 

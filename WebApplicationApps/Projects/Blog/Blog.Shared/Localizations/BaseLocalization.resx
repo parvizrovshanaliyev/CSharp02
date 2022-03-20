@@ -270,4 +270,7 @@
   <data name="AboutMe" xml:space="preserve">
     <value>About Me</value>
   </data>
+  <data name="UndoDeletedSuccessfully" xml:space="preserve">
+    <value>UNDO DELETE :Retrieved from archive</value>
+  </data>
 </root>

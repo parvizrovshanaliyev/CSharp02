@@ -25,7 +25,7 @@ namespace Blog.Data.Concrete.EntityFramework.Configurations
             builder.Property(u => u.ConcurrencyStamp).IsConcurrencyToken();
 
             // Limit the size of columns to use efficient database types
-            builder.Property(u => u.UserName).HasMaxLength(50); 
+            builder.Property(u => u.UserName).HasMaxLength(50);
             builder.Property(u => u.NormalizedUserName).HasMaxLength(50);
             builder.Property(u => u.Email).HasMaxLength(50);
             builder.Property(u => u.NormalizedEmail).HasMaxLength(50);
@@ -50,7 +50,7 @@ namespace Blog.Data.Concrete.EntityFramework.Configurations
             builder.HasMany<UserRole>().WithOne().HasForeignKey(ur => ur.UserId).IsRequired();
 
             // seed 
-            var admin = new User()
+            var admin = new User
             {
                 Id = 1,
                 UserName = "adminUser",
@@ -61,13 +61,13 @@ namespace Blog.Data.Concrete.EntityFramework.Configurations
                 Avatar = "Users/defaultUser.png",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
-                SecurityStamp = Guid.NewGuid().ToString(),
+                SecurityStamp = Guid.NewGuid().ToString()
             };
 
             admin.PasswordHash = CreatePasswordHash(admin, "Admin123!User");
 
 
-            var editor = new User()
+            var editor = new User
             {
                 Id = 2,
                 UserName = "editorUser",
@@ -78,12 +78,11 @@ namespace Blog.Data.Concrete.EntityFramework.Configurations
                 Avatar = "Users/defaultUser.png",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
-                SecurityStamp = Guid.NewGuid().ToString(),
-
+                SecurityStamp = Guid.NewGuid().ToString()
             };
             editor.PasswordHash = CreatePasswordHash(editor, "Editor123!User");
 
-            var member = new User()
+            var member = new User
             {
                 Id = 3,
                 UserName = "memberUser",
@@ -94,8 +93,7 @@ namespace Blog.Data.Concrete.EntityFramework.Configurations
                 Avatar = "Users/defaultUser.png",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
-                SecurityStamp = Guid.NewGuid().ToString(),
-
+                SecurityStamp = Guid.NewGuid().ToString()
             };
             member.PasswordHash = CreatePasswordHash(editor, "Member123!User");
 

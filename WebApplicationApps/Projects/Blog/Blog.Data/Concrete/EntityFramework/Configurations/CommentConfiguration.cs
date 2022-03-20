@@ -8,30 +8,32 @@ namespace Blog.Data.Concrete.EntityFramework.Configurations
     {
         public void Configure(EntityTypeBuilder<Comment> builder)
         {
+
             builder.ToTable("Comments");
 
             builder.HasKey(a => a.Id);// primary key
             builder.Property(a => a.Id).ValueGeneratedOnAdd();// auto incremented
-            builder.Property(a => a.Text)
+            builder.Property(a => a.Content)
                 .HasMaxLength(1000)
                 .IsRequired();
-            
+
+            builder.Property(a => a.UserId)
+                .IsRequired();
+
+            builder.Property(a => a.PostId)
+                .IsRequired();
+
             // relations
             builder
-                .HasOne<Post>(i => i.Post)
+                .HasOne(i => i.Post)
                 .WithMany(i => i.Comments)
-                .HasForeignKey(i => i.PostId);
-
-            //seed
-            //var entity = new Comment()
-            //{
-            //    Id = 1,
-            //    PostId = 1,
-            //    Text = "lorem ipsum sit amet sasj"
-            //};
-            //entity.SetCreatedByName("InitialCreate");
-            //entity.SetModifiedByName("InitialCreate");
-            //builder.HasData(entity);
+                .HasForeignKey(i => i.PostId)
+                .OnDelete(DeleteBehavior.Restrict);
+            builder
+                .HasOne(i => i.User)
+                .WithMany(i => i.Comments)
+                .HasForeignKey(i => i.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

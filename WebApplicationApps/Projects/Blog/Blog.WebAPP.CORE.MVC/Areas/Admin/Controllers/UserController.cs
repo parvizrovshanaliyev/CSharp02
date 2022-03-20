@@ -14,26 +14,31 @@ using System.Threading.Tasks;
 
 namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    public class UserController : Controller
+    public class UserController : BaseController
     {
-        #region fields
-
-        private readonly IUserService _service;
-        private readonly UserManager<User> _userManager;
-        private readonly IToastNotification _toastNotification;
-        #endregion
         #region ctor
+
         public UserController(IUserService service, UserManager<User> userManager, IToastNotification toastNotification)
         {
             _service = service;
             _userManager = userManager;
             _toastNotification = toastNotification;
         }
+
+        #endregion
+
+        #region fields
+
+        private readonly IUserService _service;
+        private readonly UserManager<User> _userManager;
+        private readonly IToastNotification _toastNotification;
+
         #endregion
 
         #region methods
+
         #region loadData
+
         [HttpGet]
         [Authorize(Roles = RoleConstant.Admin)]
         public async Task<IActionResult> Index()
@@ -42,7 +47,9 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
             return View(result);
         }
+
         #endregion
+
         #region create
 
         [HttpGet]
@@ -62,16 +69,12 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
                 var result = await _service.AddAsync(request, "Admin");
 
                 if (result.Errors.Any())
-                {
                     foreach (var error in result.Errors)
-                    {
                         ModelState.AddModelError("", error);
-                    }
-                }
 
                 if (result.IsSuccess)
                 {
-                    var successViewModel = new UserCreateAjaxViewModel()
+                    var successViewModel = new UserCreateAjaxViewModel
                     {
                         Result = result,
                         Partial = await this.RenderViewToStringAsync("_CreatePartial", request)
@@ -79,7 +82,8 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
                     return Json(successViewModel);
                 }
             }
-            var errorViewModel = new UserCreateAjaxViewModel()
+
+            var errorViewModel = new UserCreateAjaxViewModel
             {
                 AddDto = request,
                 Partial = await this.RenderViewToStringAsync("_CreatePartial", request)
@@ -87,8 +91,11 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
             return Json(errorViewModel);
         }
+
         #endregion
+
         #region update
+
         [HttpGet]
         [Authorize(Roles = RoleConstant.Admin)]
         public async Task<IActionResult> Update(int id)
@@ -107,16 +114,12 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
                 var result = await _service.UpdateAsync(request, "Admin");
 
                 if (result.Errors.Any())
-                {
                     foreach (var error in result.Errors)
-                    {
                         ModelState.AddModelError("", error);
-                    }
-                }
 
                 if (result.IsSuccess)
                 {
-                    var successViewModel = new UserUpdateAjaxViewModel()
+                    var successViewModel = new UserUpdateAjaxViewModel
                     {
                         Result = result,
                         Partial = await this.RenderViewToStringAsync("_UpdatePartial", request)
@@ -124,7 +127,8 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
                     return Json(successViewModel);
                 }
             }
-            var errorViewModel = new UserUpdateAjaxViewModel()
+
+            var errorViewModel = new UserUpdateAjaxViewModel
             {
                 UpdateDto = request,
                 Partial = await this.RenderViewToStringAsync("_UpdatePartial", request)
@@ -132,9 +136,11 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
             return Json(errorViewModel);
         }
+
         #endregion
 
         #region update profile
+
         [HttpGet]
         [AuthorizeRoles(RoleConstant.Admin, RoleConstant.Editor)]
         public async Task<IActionResult> UpdateProfile()
@@ -156,18 +162,15 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
             var result = await _service.UpdateAsync(request, "Admin");
 
             if (result.Errors.Any())
-            {
                 foreach (var error in result.Errors)
-                {
                     ModelState.AddModelError("", error);
-                }
-            }
 
             if (!result.IsSuccess) return View(request);
 
             _toastNotification.AddSuccessToastMessage(result.Message);
             return View(request);
         }
+
         #endregion
 
         #region change password
@@ -180,7 +183,6 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         }
 
 
-
         [HttpPost]
         [AuthorizeRoles(RoleConstant.Admin, RoleConstant.Editor)]
         [ValidateAntiForgeryToken]
@@ -190,21 +192,19 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
             var result = await _service.ChangePasswordAsync(request);
 
             if (result.Errors.Any())
-            {
                 foreach (var error in result.Errors)
-                {
                     ModelState.AddModelError("", error);
-                }
-            }
 
             if (!result.IsSuccess) return View(request);
 
             _toastNotification.AddSuccessToastMessage(result.Message);
             return View(request);
         }
+
         #endregion
 
         #region delete
+
         [HttpPost]
         [Authorize(Roles = RoleConstant.Admin)]
         public async Task<JsonResult> Delete(int id)
@@ -212,8 +212,9 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
             var result = await _service.DeleteAsync(id, "Admin");
             return Json(result);
         }
-        #endregion
+
         #endregion
 
+        #endregion
     }
 }

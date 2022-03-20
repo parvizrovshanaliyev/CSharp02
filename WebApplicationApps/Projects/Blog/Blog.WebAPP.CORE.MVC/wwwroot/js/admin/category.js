@@ -1,26 +1,26 @@
-﻿$(document).ready(function () {
+﻿$(document).ready(function() {
 
     //#region datatable
-    const dataTable = $('#entitiesDataTable').DataTable({
-        destroy:true,
+    const dataTable = $("#entitiesDataTable").DataTable({
+        destroy: true,
         dom:
             "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
-            "<'row'<'col-sm-12'tr>>" +
-            "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
         buttons: [
             {
-                text: 'Create',
+                text: "Create",
                 attr: {
                     id: "btnCreate"
                 },
-                className: 'btn',
-                action: function (e, dt, node, config) {
+                className: "btn",
+                action: function(e, dt, node, config) {
                 }
             },
             {
-                text: 'Refresh',
-                className: 'btn btn-warning',
-                action: function (e, dt, node, config) {
+                text: "Refresh",
+                className: "btn btn-warning",
+                action: function(e, dt, node, config) {
                     refreshData();
                 }
             }
@@ -29,49 +29,49 @@
     //#endregion datatable
 
     //#region create modal
-    $(function () {
-        const url = 'Category/Create';
-        const modalPlaceHolderDiv = $('#modalPlaceHolder');
-        $('#btnCreate').unbind().click(function () {
+    $(function() {
+        const url = "Category/Create";
+        const modalPlaceHolderDiv = $("#modalPlaceHolder");
+        $("#btnCreate").unbind().click(function() {
 
             // ajax. getting partial view
-            $.get(url).done(function (response) {
+            $.get(url).done(function(response) {
                 modalPlaceHolderDiv.html(response);
-                modalPlaceHolderDiv.find('.modal').modal('show');
+                modalPlaceHolderDiv.find(".modal").modal("show");
             });
         });
         //#region create : ajax. post
-        modalPlaceHolderDiv.unbind().on('click',
-            '#btnSave',
-            function (event) {
+        modalPlaceHolderDiv.unbind().on("click",
+            "#btnSave",
+            function(event) {
                 event.preventDefault();
-                const form = $('#form');
-                const actionUrl = form.attr('action');
+                const form = $("#form");
+                const actionUrl = form.attr("action");
                 const data = form.serialize();
                 $.post({
                     url: actionUrl,
-                    type: 'POST',
+                    type: "POST",
                     data: data,
-                    success: function (response) {
-                        const formBody = $('.modal-body', response.partial);
-                        modalPlaceHolderDiv.find('.modal-body').replaceWith(formBody);
-                        const isValid = formBody.find('[name="IsValid"]').val() === 'True';
+                    success: function(response) {
+                        const formBody = $(".modal-body", response.partial);
+                        modalPlaceHolderDiv.find(".modal-body").replaceWith(formBody);
+                        const isValid = formBody.find('[name="IsValid"]').val() === "True";
                         if (isValid) {
-                            modalPlaceHolderDiv.find('.modal').modal('hide');
+                            modalPlaceHolderDiv.find(".modal").modal("hide");
                             const entity = response.result.data;
                             insertedRowToDataTable(entity);
-                            toastr.success(`${response.result.message}`, 'Success');
+                            toastr.success(`${response.result.message}`, "Success");
                         } else {
-                            let summaryText = '';
-                            $('#validationSummary > ul > li').each(function () {
-                                let text = $(this).text();
+                            let summaryText = "";
+                            $("#validationSummary > ul > li").each(function() {
+                                const text = $(this).text();
                                 summaryText = `* ${text}\n`;
                             });
                             toastr.warning(summaryText);
                         }
                     },
-                    error: function (error) {
-                        toastr.error(error.responseText, 'Fail!');
+                    error: function(error) {
+                        toastr.error(error.responseText, "Fail!");
                     }
                 });
             });
@@ -80,44 +80,45 @@
     //#endregion create modal
 
     //#region deleted 
-    $(document).unbind().on('click', '.btn-delete',
-        function () {
+    $(document).unbind().on("click",
+        ".btn-delete",
+        function() {
             event.preventDefault();
-            const id = $(this).attr('data-id');
+            const id = $(this).attr("data-id");
             const tableRow = $(`[name=${id}]`);
             Swal.fire({
-                title: 'Are you sure?',
+                title: "Are you sure?",
                 text: "You won't be able to revert this!",
-                icon: 'warning',
+                icon: "warning",
                 showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        type: 'POST',
-                        dataType: 'json',
+                        type: "POST",
+                        dataType: "json",
                         data: { id: id },
-                        url: 'Category/Delete',
-                        success: function (response) {
+                        url: "Category/Delete",
+                        success: function(response) {
                             if (response.isSuccess) {
                                 Swal.fire(
-                                    'Deleted!',
+                                    "Deleted!",
                                     `${response.message}`,
-                                    'success'
+                                    "success"
                                 );
                                 dataTable.row(tableRow).remove().draw();
                             } else {
                                 Swal.fire({
-                                    icon: 'error',
-                                    title: 'Error!',
+                                    icon: "error",
+                                    title: "Error!",
                                     text: `${response.message}`
                                 });
                             }
                         },
-                        error: function (error) {
-                            toastr.error(error.responseText, 'Fail!');
+                        error: function(error) {
+                            toastr.error(error.responseText, "Fail!");
                         }
                     });
 
@@ -129,81 +130,84 @@
     //#region refresh load data
     function refreshData() {
         $.ajax({
-            type: 'GET',
-            url: 'Category/GetAll',
-            contentType: 'application/json',
-            beforeSend: function () {
-                $('#entitiesDataTable').hide();
-                $('.spinner-border').show(1000);
+            type: "GET",
+            url: "Category/GetAll",
+            contentType: "application/json",
+            beforeSend: function() {
+                $("#entitiesDataTable").hide();
+                $(".spinner-border").show(1000);
             },
-            success: function (response) {
+            success: function(response) {
                 if (response.isSuccess) {
                     refreshDataTable(response.data);
-                    $('.spinner-border').hide();
-                    $('#entitiesDataTable').fadeIn(1400);
+                    $(".spinner-border").hide();
+                    $("#entitiesDataTable").fadeIn(1400);
                 } else {
-                    toastr.error(response.errors.join(), 'Fail!');
+                    toastr.error(response.errors.join(), "Fail!");
                 }
             },
-            error: function (error) {
-                $('.spinner-border').hide();
-                $('#entitiesDataTable').fadeIn(1000);
-                toastr.error(error.responseText, 'Fail!');
+            error: function(error) {
+                $(".spinner-border").hide();
+                $("#entitiesDataTable").fadeIn(1000);
+                toastr.error(error.responseText, "Fail!");
             }
         });
     }
     //#endregion refresh load data
 
     //#region update
-    $(function () {
-        const url = 'Category/Update';
-        const modalPlaceHolderDiv = $('#modalPlaceHolder');
-        $(document).unbind().on('click', '.btn-update', function (event) {
-            event.preventDefault();
-            const id = $(this).attr('data-id');
-            // ajax. getting partial view
-            $.get(url, { id: id })
-                .done(function (response) {
-                    modalPlaceHolderDiv.html(response);
-                    modalPlaceHolderDiv.find('.modal').modal('show');
-                })
-                .fail(function () {
-                    toastr.error('Error!');
-                });
-        });
-        //#region update : ajax. post
-        modalPlaceHolderDiv.unbind().on('click',
-            '#btnUpdate',
-            function (event) {
+    $(function() {
+        const url = "Category/Update";
+        const modalPlaceHolderDiv = $("#modalPlaceHolder");
+        $(document).unbind().on("click",
+            ".btn-update",
+            function(event) {
                 event.preventDefault();
-                const form = $('#form');
-                const actionUrl = form.attr('action');
+                const id = $(this).attr("data-id");
+                // ajax. getting partial view
+                $.get(url, { id: id })
+                    .done(function(response) {
+                        modalPlaceHolderDiv.html(response);
+                        modalPlaceHolderDiv.find(".modal").modal("show");
+                    })
+                    .fail(function() {
+                        toastr.error("Error!");
+                    });
+            });
+        //#region update : ajax. post
+        modalPlaceHolderDiv.unbind().on("click",
+            "#btnUpdate",
+            function(event) {
+                event.preventDefault();
+                const form = $("#form");
+                const actionUrl = form.attr("action");
                 const data = form.serialize();
                 $.ajax({
                     url: actionUrl,
-                    type: 'POST',
+                    type: "POST",
                     data: data,
-                    success: function (response) {
-                        const formBody = $('.modal-body', response.partial);
-                        modalPlaceHolderDiv.find('.modal-body').replaceWith(formBody);
-                        const isValid = formBody.find('[name="IsValid"]').val() === 'True';
+                    success: function(response) {
+                        const formBody = $(".modal-body", response.partial);
+                        modalPlaceHolderDiv.find(".modal-body").replaceWith(formBody);
+                        const isValid = formBody.find('[name="IsValid"]').val() === "True";
                         if (isValid) {
-                            modalPlaceHolderDiv.find('.modal').modal('hide');
+                            modalPlaceHolderDiv.find(".modal").modal("hide");
                             const entity = response.result.data;
                             const currentRow = $(`[name="${entity.id}"]`);
                             updatedDataTableRow(entity, currentRow);
                             console.log(response);
-                            toastr.success(`${response.result.message}`, 'Success');
+                            toastr.success(`${response.result.message}`, "Success");
                         } else {
-                            let summaryText = '';
-                            $('#validationSummary > ul > li').each(function () {
-                                let text = $(this).text();
+                            let summaryText = "";
+                            $("#validationSummary > ul > li").each(function() {
+                                const text = $(this).text();
                                 summaryText = `* ${text}\n`;
                             });
                             toastr.warning(summaryText);
                         }
-                    }, error: function (error) {
-                        toastr.error(error.responseText, 'Fail!');
+                    },
+                    error: function(error) {
+                        toastr.error(error.responseText, "Fail!");
                     }
                 });
             });
@@ -216,7 +220,7 @@
 
         const row = dataTable.row.add(makeDataTableRowObj(entity)).node();
         const rowObj = $(row);
-        rowObj.attr('name', `${entity.id}`);
+        rowObj.attr("name", `${entity.id}`);
         dataTable.row(rowObj).draw();
     }
 
@@ -232,10 +236,10 @@
         dataTable.clear();
 
         $.each(entities,
-            function (index, entity) {
+            function(index, entity) {
                 const row = dataTable.row.add(makeDataTableRowObj(entity)).node();
                 const rowObj = $(row);
-                rowObj.attr('name', `${entity.id}`);
+                rowObj.attr("name", `${entity.id}`);
             });
 
         dataTable.draw();
@@ -528,4 +532,3 @@
 //        return newTableRowString;
 //    }
 //    //#endregion helper
-

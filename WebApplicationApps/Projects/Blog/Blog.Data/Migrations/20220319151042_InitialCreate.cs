@@ -242,7 +242,8 @@ namespace Blog.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PostId = table.Column<int>(type: "int", nullable: false),
-                    Text = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -255,11 +256,18 @@ namespace Blog.Data.Migrations
                 {
                     table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Comments_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalSchema: "Identity",
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Comments_Posts_PostId",
                         column: x => x.PostId,
                         principalTable: "Posts",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -268,9 +276,9 @@ namespace Blog.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "e0edcc2c-9431-4f53-86c1-4b5658c8e5ca", "Admin", "ADMIN" },
-                    { 2, "e7b40318-a7e8-47df-bd20-ef1f47e24014", "Editor", "EDITOR" },
-                    { 3, "3ba48d26-2a63-44c3-8cca-b3ec5d6beeab", "Member", "MEMBER" }
+                    { 1, "ec8c31e7-8d43-4c0d-8cd7-fb4d74ed089a", "Admin", "ADMIN" },
+                    { 2, "b572a989-1c23-455b-8619-fbd361f4d409", "Editor", "EDITOR" },
+                    { 3, "172a0ab1-eca7-4b38-98a4-ee80f1f82330", "Member", "MEMBER" }
                 });
 
             migrationBuilder.InsertData(
@@ -279,9 +287,9 @@ namespace Blog.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Avatar", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "Users/defaultUser.png", "033c2698-ff0f-4c65-b752-89c96c5d53b3", "adminUser@gmail.com", true, false, null, "ADMINUSER@GMAIL.COM", "ADMINUSER", "AQAAAAEAACcQAAAAEF3of0cf6WFowXIk7AqOoggZ6xk4muiH8eLN66H9BrsK+/ALGN8bkR73ioDsrxIkEg==", "+9949999999", true, "72c4a899-4ca0-4fb6-acb6-01faa05b2958", false, "adminUser" },
-                    { 2, 0, "Users/defaultUser.png", "744d9fe5-f9a4-4904-8e3f-727c0a0bc65e", "editorUser@gmail.com", true, false, null, "EDITORUSER@GMAIL.COM", "EDITORUSER", "AQAAAAEAACcQAAAAEAaNs7Kfp/ysj+UU8zOo5mMIMSL3BkUDq1AmbPy0ePpKnothsQzFWB0i/udY+UPKpA==", "+9949999999", true, "3e750cb9-7191-4254-9efc-a3ad7784dabb", false, "editorUser" },
-                    { 3, 0, "Users/defaultUser.png", "70e8153b-d747-4b89-9671-a8f45a262c71", "memberUser@gmail.com", true, false, null, "MEMBERUSER@GMAIL.COM", "MEMBERUSER", "AQAAAAEAACcQAAAAEJe61goOiUzw24jmY7d6PFIPWrlr8HKFy40GnSxAlnaUIrCvkM6TlSYH2MZVMeCH1A==", "+9949999999", true, "d2b9c897-386e-40cb-a006-a776e4eb9e7f", false, "memberUser" }
+                    { 1, 0, "Users/defaultUser.png", "b7ee3f8a-8aa9-49da-8fdc-041c2fc7e46f", "adminUser@gmail.com", true, false, null, "ADMINUSER@GMAIL.COM", "ADMINUSER", "AQAAAAEAACcQAAAAEFSOQAfvuF63xauew/fMVUy+MXJ2jrO8dRiNFDE0fURvMEpE5HmDire5vMee+2MyaA==", "+9949999999", true, "763a281a-7c58-45cf-976a-66b6d9830ca5", false, "adminUser" },
+                    { 2, 0, "Users/defaultUser.png", "dce60ac4-3a7d-4bff-a85b-84597c8a4813", "editorUser@gmail.com", true, false, null, "EDITORUSER@GMAIL.COM", "EDITORUSER", "AQAAAAEAACcQAAAAEAcLfPlQO3nEG+G4u6qzwE7tdwS8HAJ0u7czXhoKPwqUzFjW8LQAYUzMBP5hWeE8Gw==", "+9949999999", true, "9974319c-e60f-454f-8e12-c481c3a30efc", false, "editorUser" },
+                    { 3, 0, "Users/defaultUser.png", "14f7e8d3-1dd3-4fd3-ab45-82422b5f2b98", "memberUser@gmail.com", true, false, null, "MEMBERUSER@GMAIL.COM", "MEMBERUSER", "AQAAAAEAACcQAAAAEJz/7zYS2ZFym2PcnesUKK6byDeQ2z9a+ZkHGX0Vm4NZnDhMA+EKzyXgHiyONPXg3g==", "+9949999999", true, "7ab599f4-113c-48e4-8817-bb6a4060b765", false, "memberUser" }
                 });
 
             migrationBuilder.InsertData(
@@ -352,6 +360,11 @@ namespace Blog.Data.Migrations
                 name: "IX_Comments_PostId",
                 table: "Comments",
                 column: "PostId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Comments_UserId",
+                table: "Comments",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Posts_CategoryId",

@@ -704,3 +704,84 @@ Developing a Project with N-Tier Architecture
            _toastNotification.AddSuccessToast(result.Message);~~~~
          
           ```
+14. Let's complete the missing parts on Backend and Admin Area
+    * Comment Module CRUD
+      ******** Refactoring Comment entity, Configuration and add migration then database update
+        *
+        * Let's Create
+        * ICommentService Interface, CommentManager Class
+            * Dependency Injection : services.AddScoped<ICommentService, CommentManager>();
+        * CommentProfile Class
+            * Services / Extensions
+                - Install AutoMapper.Extensions.Microsoft.DependencyInjection :
+                  services.AddAutoMapper(typeof(CategoryProfile),typeof(CommentProfile), typeof(PostProfile), typeof(UserProfile));
+            * CommentDto, CommentAddDto, CommentUpdateDto
+        * Let's Create Our CommentController, Index View and comment-crud.js File
+
+
+        TASK :GET ALL By Deleted, UNDO Delete , HARD Delete ,
+
+15. Let's Improve Our User Classes and Pages, Add New Migration
+    * Update User entity and dtos, Configuration and add migration then database update
+        - FirstName required,
+        - LastName required,
+        - YoutubeLink,
+        - FacebookLink,
+        - TwitterLink,
+        - InstagramLink,
+        - WebsiteLink,
+        - LinkedinLink,
+        - AboutMe,
+        - HasData : FirstName , LastName
+    * Update Role
+        - Configuration HasData :
+        - RoleConstant :
+    * Update UserRole
+        - Configuration HasData :
+    * dotnet cli
+        - remove database and migrations
+        - Blog.Data> dotnet ef --startup-project ../Blog.UI.MVC migrations add InitialCreate
+        - Blog.Data> dotnet ef --startup-project ../Blog.UI.MVC database update
+    * UserController
+        - Details Action
+    * Let's Implement Our New Role Management System
+        - Refactoring LeftSideBar Default.cshtml
+        - Refactoring all controllers AuthorizeRoles Attribute
+    * Let's Create Necessary Action, View and Js Files with RoleController
+        - RoleDto
+        - IRoleService Interface, RoleManager Class
+        - Dependency Injection : services.AddScoped<IRoleService, RoleManager>();
+        - GetAllAsync Method
+        - RoleProfile Class
+    * Let's Create Our UserRoleAssignDto and RoleAssignDto Classes
+        - UserRoleAssignDto
+        - RoleAssignDto
+        - RoleController Assign Action
+        - RoleManager GetUserRoles Method
+    * Let's Create Our _RoleAssignPartial (Role Assignment) Page
+        - RoleAssignPartial.cshtml
+    * Let's Complete Our Role Assignment Process
+        - RoleManager AssignRoles Method
+        - UserRoleAssignAjaxViewModel
+    * Let's Make a Small But Important Addition About Our Role Assignments
+        - AssignRoles Method
+          - await _userManager.UpdateSecurityStampAsync(user);
+        - Services/Extensions
+          ```css 
+          services.Configure<SecurityStampValidatorOptions>(options =>
+          {   
+          // enables immediate logout, after updating the user's security stamp.: https://docs.asp.net/en/latest/security/anti-request-forgery.html#immediate-logout
+          options.ValidationInterval = TimeSpan.Zero;
+          // recommended for persistent sites (30 min) : https://docs.asp.net/en/latest/security/anti-request-forgery.html#immediate-logout    
+          // options.ValidationInterval = TimeSpan.FromMinutes(30);
+          });
+          ```
+
+    * Let's Improve Our User Deletion Processes
+        - Delete User Avatar file
+    * Let's Add GetAllByDeletedAsync and UndoDeleteAsync Operations to Our Services  (CategoryService , PostService ,
+      CommentService)
+        - GetAllByDeletedAsync Method
+        - UndoDeleteAsync Method
+        - HardDelete Method
+    * Let's Make Our Final Edits About Admin Area

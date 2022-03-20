@@ -493,6 +493,15 @@ namespace Blog.Shared.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to UNDO DELETE :Retrieved from archive.
+        /// </summary>
+        public static string UndoDeletedSuccessfully {
+            get {
+                return ResourceManager.GetString("UndoDeletedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to UserName.
         /// </summary>
         public static string UserName {

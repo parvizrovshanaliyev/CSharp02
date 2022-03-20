@@ -1,32 +1,36 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Blog Project  Dashboard | @ViewBag.Title</title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Blog Project Dashboard | @ViewBag.Title</title>
     @await Html.PartialAsync("_StylesPartial")
     @await RenderSectionAsync("Styles", false)
-    <link href="~/css/site.css" rel="stylesheet" />
+    <link href="~/css/site.css" rel="stylesheet"/>
 </head>
 <body class="sb-nav-fixed">
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Blog App</a>
-        <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
-        <!-- Navbar Search-->
-        <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-            <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="button"><i class="fas fa-search"></i></button>
-                </div>
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Blog App</a>
+    <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#">
+        <i class="fas fa-bars"></i>
+    </button>
+    <!-- Navbar Search-->
+    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <div class="input-group">
+            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2"/>
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                    <i class="fas fa-search"></i>
+                </button>
             </div>
-        </form>
-        <!-- Navbar-->
-        @await Component.InvokeAsync("DashboardUserTopBar")
-    </nav>
+        </div>
+    </form>
+    <!-- Navbar-->
+    @await Component.InvokeAsync("DashboardUserTopBar")
+</nav>
 <div id="layoutSidenav">
     <div id="layoutSidenav_content">
         @await Component.InvokeAsync("LeftSideBar")
@@ -49,9 +53,8 @@
         </footer>
     </div>
 </div>
-    @await Html.PartialAsync("_ScriptsPartial")
-    @await Component.InvokeAsync("NToastNotify")
-    @await RenderSectionAsync("Scripts", false)
+@await Html.PartialAsync("_ScriptsPartial")
+@await Component.InvokeAsync("NToastNotify")
+@await RenderSectionAsync("Scripts", false)
 </body>
 </html>
-

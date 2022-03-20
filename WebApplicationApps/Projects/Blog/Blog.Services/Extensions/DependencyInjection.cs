@@ -3,16 +3,19 @@ using Blog.Data.Concrete;
 using Blog.Data.Concrete.EntityFramework.Context;
 using Blog.Entities.Concrete;
 using Blog.Services.Abstract;
+using Blog.Services.AutoMapper.Profiles;
 using Blog.Services.Concrete;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace Blog.Services.Extensions
+namespace Microsoft.Extensions.DependencyInjection
 {
-    public static class ServiceCollectionExtensions
+    public static class DependencyInjection
     {
-        public static IServiceCollection LoadServices(this IServiceCollection services)
+        public static IServiceCollection AddBusinessServices(this IServiceCollection services)
         {
+
+            services.AddAutoMapper(typeof(CategoryProfile));
+
             services.AddDbContext<BlogDbContext>();
 
             services.AddIdentity<User, Role>(options =>
@@ -29,7 +32,6 @@ namespace Blog.Services.Extensions
                 options.User.AllowedUserNameCharacters =
                     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 options.User.RequireUniqueEmail = true;
-
             }).AddEntityFrameworkStores<BlogDbContext>(); // elave edilmesi zeruridir.
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -37,10 +39,10 @@ namespace Blog.Services.Extensions
             services.AddScoped<IPostService, PostManager>();
             services.AddScoped<IUserService, UserManager>();
             services.AddScoped<IAuthService, AuthManager>();
+            services.AddScoped<ICommentService, CommentManager>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             return services;
         }
-
     }
 }

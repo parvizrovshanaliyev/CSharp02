@@ -1,6 +1,3 @@
-using Blog.Services.AutoMapper.Profiles;
-using Blog.Services.Extensions;
-using Blog.Shared.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -9,7 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System;
 using System.Text.Json.Serialization;
+
 namespace Blog.WebAPP.CORE.MVC
 {
     public class Startup
@@ -24,7 +23,6 @@ namespace Blog.WebAPP.CORE.MVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation()
                 .AddNewtonsoftJson(options =>
@@ -43,9 +41,10 @@ namespace Blog.WebAPP.CORE.MVC
             };
 
             services.AddSession();
-            services.LoadServices();
-            services.LoadSharedServices();
-            services.AddAutoMapper(typeof(CategoryProfile), typeof(PostProfile), typeof(UserProfile));
+
+
+            services.AddBusinessServices();
+            services.AddSharedServices();
 
             services.ConfigureApplicationCookie(options =>
             {
@@ -53,7 +52,7 @@ namespace Blog.WebAPP.CORE.MVC
                 options.LogoutPath = new PathString("/Admin/Auth/Logout");
                 options.AccessDeniedPath = new PathString("/Admin/Auth/AccessDenied");
 
-                options.Cookie = new CookieBuilder()
+                options.Cookie = new CookieBuilder
                 {
                     Name = "BlogProject",
 
@@ -80,15 +79,13 @@ namespace Blog.WebAPP.CORE.MVC
                      * sameAsRequest hem http hem https requestleri qebul edir .
                      * Duzgun yeni productionda olan app-da  CookieSecurePolicy.Always olmalidir. her zaman https request.
                      */
-                    SecurePolicy = CookieSecurePolicy.SameAsRequest, // Always
+                    SecurePolicy = CookieSecurePolicy.SameAsRequest // Always
                 };
 
 
                 options.SlidingExpiration = true;
-                options.ExpireTimeSpan = System.TimeSpan.FromDays(7);
+                options.ExpireTimeSpan = TimeSpan.FromDays(7);
             });
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -120,9 +117,9 @@ namespace Blog.WebAPP.CORE.MVC
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapAreaControllerRoute(
-                    name: "Admin",
-                    areaName: "Admin",
-                    pattern: "Admin/{controller}/{action=Index}/{id?}");
+                    "Admin",
+                    "Admin",
+                    "Admin/{controller}/{action=Index}/{id?}");
 
                 endpoints.MapDefaultControllerRoute();
             });

@@ -1,49 +1,49 @@
 ﻿$(document).ready(function() {
 
     //#region initialize editor trumbowyg
-    $('#text-editor').trumbowyg({
+    $("#text-editor").trumbowyg({
         btns: [
-            ['viewHTML'],
-            ['undo', 'redo'], // Only supported in Blink browsers
-            ['formatting'],
-            ['strong', 'em', 'del'],
-            ['superscript', 'subscript'],
-            ['link'],
-            ['insertImage'],
-            ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
-            ['unorderedList', 'orderedList'],
-            ['horizontalRule'],
-            ['removeformat'],
-            ['fullscreen'],
-            ['foreColor', 'backColor'],
-            ['emoji'],
-            ['fontfamily'],
-            ['fontsize']
+            ["viewHTML"],
+            ["undo", "redo"], // Only supported in Blink browsers
+            ["formatting"],
+            ["strong", "em", "del"],
+            ["superscript", "subscript"],
+            ["link"],
+            ["insertImage"],
+            ["justifyLeft", "justifyCenter", "justifyRight", "justifyFull"],
+            ["unorderedList", "orderedList"],
+            ["horizontalRule"],
+            ["removeformat"],
+            ["fullscreen"],
+            ["foreColor", "backColor"],
+            ["emoji"],
+            ["fontfamily"],
+            ["fontsize"]
         ],
         plugins: {
             fontsize: {
                 sizeList: [
-                    '12px',
-                    '14px',
-                    '16px'
+                    "12px",
+                    "14px",
+                    "16px"
                 ]
             }
         }
     });
 
     //#endregion initialize editor trumbowyg
-    
+
     //#region initialize select2
-    $('.single-select-boxes').select2({
+    $(".single-select-boxes").select2({
         theme: "bootstrap4",
         allowClear: true,
-        placeholder: 'Select a category',
+        placeholder: "Select a category",
     });
     //#endregion initialize select2
 
     //#region initialize date-picker
-    $('#date-picker').datepicker({
-        dateFormat: 'yy-mm-dd',
+    $("#date-picker").datepicker({
+        dateFormat: "yy-mm-dd",
         autoclose: true
     });
     //#endregion initialize date-picker
@@ -51,57 +51,19 @@
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 jqueryAjaxPost = form => {
     try {
         const $form = $(form);
         if ($form.valid()) {
             $.ajax({
-                type: 'POST',
+                type: "POST",
                 url: form.action,
                 data: new FormData(form),
                 contentType: false,
                 processData: false,
-                success: function (response) {
-                    $('#form-modal .modal-body').html(response.partial);
-                    const isValid = $('#form-modal .modal-body').find('[name="IsValid"]').val() === 'True';
+                success: function(response) {
+                    $("#form-modal .modal-body").html(response.partial);
+                    const isValid = $("#form-modal .modal-body").find('[name="IsValid"]').val() === "True";
                     if (isValid) {
                         clearModal();
                         const entity = response.result.data;
@@ -114,16 +76,16 @@ jqueryAjaxPost = form => {
                             const currentRow = $(`[name="${entity.id}"]`);
                             updateDataTableRow(entity, currentRow, makeDataTableRowObj(entity));
                         }
-                        toastr.success(`${response.result.message}`, 'Success');
+                        toastr.success(`${response.result.message}`, "Success");
                     } else {
                         validationSummary();
                     }
                 },
-                error: function (error) {
-                    toastr.error(error.responseText, 'Fail!');
+                error: function(error) {
+                    toastr.error(error.responseText, "Fail!");
                 }
             });
-        } 
+        }
         // to prevent default form submit event
         return false;
     } catch (e) {
@@ -131,47 +93,47 @@ jqueryAjaxPost = form => {
     }
     // to prevent default form submit event
     return false;
-}
+};
 
 
 jQueryAjaxDelete = currentRow => {
     event.preventDefault();
     Swal.fire({
-        title: 'Are you sure?',
+        title: "Are you sure?",
         text: "You won't be able to revert this!",
-        icon: 'warning',
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
     }).then((result) => {
         if (result.isConfirmed) {
             try {
-                const id = $(currentRow).attr('data-id');
+                const id = $(currentRow).attr("data-id");
                 const deletedRow = $(`[name=${id}]`);
                 $.ajax({
-                    type: 'POST',
-                    dataType: 'json',
+                    type: "POST",
+                    dataType: "json",
                     data: { id: id },
-                    url: 'Category/Delete',
-                    success: function (response) {
+                    url: "Category/Delete",
+                    success: function(response) {
                         if (response.isSuccess) {
                             Swal.fire(
-                                'Deleted!',
+                                "Deleted!",
                                 `${response.message}`,
-                                'success'
+                                "success"
                             );
                             deletedRow.fadeOut(3000);
                         } else {
                             Swal.fire({
-                                icon: 'error',
-                                title: 'Error!',
+                                icon: "error",
+                                title: "Error!",
                                 text: `${response.message}`
                             });
                         }
                     },
-                    error: function (error) {
-                        toastr.error(error.responseText, 'Fail!');
+                    error: function(error) {
+                        toastr.error(error.responseText, "Fail!");
                     }
                 });
             } catch (e) {
@@ -179,15 +141,17 @@ jQueryAjaxDelete = currentRow => {
             }
         }
     });
-}
+};
 
 
 //#region heplers
 function makeDataTableRowObj(entity) {
     return [
         `
-             <a class='btn text-primary btn-sm btn-update' onclick="showInPopup('Category/Update?id=${entity.id}','Update')" data-id="${entity.id}"><i class='fa fa-edit'></i></a>
-             <a class='btn text-danger btn-sm btn-delete' onclick="jQueryAjaxDelete(this)" data-id="${entity.id}"><i class="fa fa-trash"></i></a>
+             <a class='btn text-primary btn-sm btn-update' onclick="showInPopup('Category/Update?id=${entity.id
+        }','Update')" data-id="${entity.id}"><i class='fa fa-edit'></i></a>
+             <a class='btn text-danger btn-sm btn-delete' onclick="jQueryAjaxDelete(this)" data-id="${entity.id
+        }"><i class="fa fa-trash"></i></a>
              `,
         entity.id,
         entity.name,
@@ -202,9 +166,9 @@ function makeDataTableRowObj(entity) {
 }
 
 function validationSummary() {
-    let summaryText = '';
-    $('#validationSummary > ul > li').each(function () {
-        let text = $(this).text();
+    let summaryText = "";
+    $("#validationSummary > ul > li").each(function() {
+        const text = $(this).text();
         summaryText += `*${text} \n`;
     });
     toastr.warning(summaryText);

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Blog.Entities.Dtos;
+﻿using Blog.Entities.Dtos;
 using Blog.Shared.Utilities.Results.Abstract;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Blog.Services.Abstract
 {
@@ -11,9 +11,12 @@ namespace Blog.Services.Abstract
         Task<IResult<CategoryUpdateDto>> GetUpdateDtoAsync(int id);
         Task<IResult<IList<CategoryDto>>> GetAllAsync();
         Task<IResult<IList<CategoryDto>>> GetAllByNonDeletedAsync();
-        Task<IResult<CategoryDto>> AddAsync(CategoryAddDto dto, string createdByName);
+        Task<IResult<IList<CategoryDto>>> GetAllByDeletedAsync();
+        Task<IResult<CategoryDto>> AddAsync(CategoryAddDto dto);
         Task<IResult<CategoryDto>> UpdateAsync(CategoryUpdateDto dto, string createdByName);
         Task<IResult<CategoryDto>> DeleteAsync(int id, string modifiedByName);
+        Task<IResult<CategoryDto>> UndoDeleteAsync(int id);
         Task<IResult<bool>> HardDeleteAsync(int id);
+        Task<IResult<int>> CountAsync(bool isDeleted = false);
     }
 }

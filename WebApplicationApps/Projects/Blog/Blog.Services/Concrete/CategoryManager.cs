@@ -1,36 +1,47 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Blog.Data.Abstract;
 using Blog.Entities.Concrete;
 using Blog.Entities.Dtos;
 using Blog.Services.Abstract;
 using Blog.Shared.Localizations;
 using Blog.Shared.Utilities.Results.Abstract;
-using Blog.Shared.Utilities.Results.Concrete;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Blog.Services.Concrete
 {
-    public class CategoryManager: BaseServiceResult,ICategoryService
+    public class CategoryManager : BaseServiceResult, ICategoryService
     {
         #region fields
+
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly UserManager<User> _userManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private User CurrentUser =>
+            _userManager.GetUserAsync(_httpContextAccessor.HttpContext?.User)
+                .Result;
         #endregion
 
         #region ctor
-        public CategoryManager(IUnitOfWork unitOfWork, IMapper mapper)
+
+        public CategoryManager(IUnitOfWork unitOfWork, IMapper mapper, UserManager<User> userManager, IHttpContextAccessor httpContextAccessor)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _userManager = userManager;
+            _httpContextAccessor = httpContextAccessor;
         }
+
         #endregion
 
         #region methods
 
         public async Task<IResult<CategoryDto>> GetAsync(int id)
         {
-            var entity=  await _unitOfWork.Categories.GetAsync(i=>i.Id==id);
+            var entity = await _unitOfWork.Categories.GetAsync(i => i.Id == id);
             if (entity is null)
                 return NotFound<CategoryDto>(BaseLocalization.NotFoundCodeGeneralMessage);
             var outputDto = _mapper.Map<CategoryDto>(entity);
@@ -57,18 +68,40 @@ namespace Blog.Services.Concrete
 
         public async Task<IResult<IList<CategoryDto>>> GetAllByNonDeletedAsync()
         {
-            var entities = await _unitOfWork.Categories.GetAllAsync(i=>!i.IsDeleted);
+            var entities = await _unitOfWork.Categories.GetAllAsync(i => !i.IsDeleted);
             if (entities is null)
                 return NotFound<IList<CategoryDto>>(BaseLocalization.NoDataAvailableOnRequest);
             var outputDto = _mapper.Map<IList<CategoryDto>>(entities);
             return Ok(outputDto);
         }
-        
-        public async Task<IResult<CategoryDto>> AddAsync(CategoryAddDto dto, string createdByName)
+
+        public async Task<IResult<IList<CategoryDto>>> GetAllByDeletedAsync()
         {
+            var entities = await _unitOfWork.Categories.GetAllAsync(c => c.IsDeleted);
+            if (entities == null)
+                return NotFound<IList<CategoryDto>>(BaseLocalization.NoDataAvailableOnRequest);
+            var outputDto = _mapper.Map<IList<CategoryDto>>(entities);
+            return Ok(outputDto);
+        }
+        #region CountAsync
+
+        public async Task<IResult<int>> CountAsync(bool isDeleted = false)
+        {
+            var count = await _unitOfWork.Categories.CountAsync(c => c.IsDeleted == isDeleted);
+
+            return count > -1
+                ? Ok(count)
+                : NotFound<int>(BaseLocalization.NoDataAvailableOnRequest);
+        }
+
+        #endregion
+        public async Task<IResult<CategoryDto>> AddAsync(CategoryAddDto dto)
+        {
+            if (CurrentUser is null)
+                return Unauthorized<CategoryDto>();
             var entity = _mapper.Map<Category>(dto);
-            entity.SetCreatedByName(createdByName);
-            var createdEntity=await _unitOfWork.Categories.AddAsync(entity);
+            entity.SetCreatedByName(CurrentUser.UserName);
+            var createdEntity = await _unitOfWork.Categories.AddAsync(entity);
             await _unitOfWork.SaveChangesAsync();
             var outputDto = _mapper.Map<CategoryDto>(createdEntity);
             return Created(outputDto);
@@ -79,8 +112,8 @@ namespace Blog.Services.Concrete
             var foundedEntity = await _unitOfWork.Categories.GetAsync(c => c.Id == dto.Id);
             if (foundedEntity is null)
                 return NotFound<CategoryDto>(BaseLocalization.NotFoundCodeGeneralMessage);
-            var entity = _mapper.Map<CategoryUpdateDto,Category>(dto,foundedEntity);
-            var updatedEntity= await _unitOfWork.Categories.UpdateAsync(entity);
+            var entity = _mapper.Map(dto, foundedEntity);
+            var updatedEntity = await _unitOfWork.Categories.UpdateAsync(entity);
             await _unitOfWork.SaveChangesAsync();
             var outputDto = _mapper.Map<CategoryDto>(updatedEntity);
             return Updated(outputDto);
@@ -99,6 +132,23 @@ namespace Blog.Services.Concrete
             return Deleted(outputDto);
         }
 
+        public async Task<IResult<CategoryDto>> UndoDeleteAsync(int id)
+        {
+            if (CurrentUser is null)
+                return Unauthorized<CategoryDto>();
+            var entity = await _unitOfWork.Categories.GetAsync(c => c.Id == id);
+            if (entity == null)
+                return NotFound<CategoryDto>(BaseLocalization.NoDataAvailableOnRequest);
+            entity.SetIsDeleted(false);
+            entity.SetModifiedByName(CurrentUser.UserName);
+            var deletedEntity = await _unitOfWork.Categories.UpdateAsync(entity);
+            await _unitOfWork.SaveChangesAsync();
+            var outputDto = _mapper.Map<CategoryDto>(deletedEntity);
+            return UndoDeleted(outputDto);
+        }
+
+        #region HardDeleteAsync
+
         public async Task<IResult<bool>> HardDeleteAsync(int id)
         {
             var entity = await _unitOfWork.Categories.GetAsync(c => c.Id == id);
@@ -108,6 +158,8 @@ namespace Blog.Services.Concrete
             await _unitOfWork.SaveChangesAsync();
             return Deleted(true);
         }
+
+        #endregion
 
         #endregion
     }

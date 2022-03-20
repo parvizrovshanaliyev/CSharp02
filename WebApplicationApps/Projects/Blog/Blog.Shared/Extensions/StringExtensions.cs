@@ -5,7 +5,7 @@ namespace Blog.Shared.Extensions
     public static class StringExtensions
     {
         // <summary>
-        ///  Remove invalid chars , white space and replace white space with _ underscore
+        /// Remove invalid chars , white space and replace white space with _ underscore
         /// </summary>
         /// <param name="txt"></param>
         /// <returns></returns>

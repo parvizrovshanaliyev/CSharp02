@@ -1,4 +1,4 @@
-﻿jqueryAjaxPost = form => {
+﻿jQueryAjaxPost = form => {
     try {
         const $form = $(form);
         if ($form.valid()) {
@@ -18,12 +18,13 @@
                         if (response.action) // create
                         {
                             insertedRowToDataTable(entity, makeDataTableRowObj(entity));
-                        } else // update
+                        } else if(response.action===false) // update
                         {
                             const currentRow = $(`[name="${entity.id}"]`);
                             updateDataTableRow(entity, currentRow, makeDataTableRowObj(entity));
                         }
-                        toastr.success(`${response.result.message}`, "Success");
+                        response.result.message ??= 'Success';
+                        toastr.success(`${response.result.message}`, 'Success');
                     } else {
                         validationSummary();
                     }
@@ -95,11 +96,11 @@ jQueryAjaxDelete = currentRow => {
 function makeDataTableRowObj(entity) {
     return [
         `
-             <a class='btn text-primary btn-sm btn-update'  onclick="showInPopup('User/Update?id=${entity.id
-        }','Update')" data-id="${entity.id}"><i class='fa fa-edit'></i></a>
-             <a class="btn text-danger btn-sm btn-delete"  onclick="jQueryAjaxDelete(this)" data-id="${entity.id
-        }"><i class="fa fa-trash"></i></a>
-             `,
+             <a class='btn text-primary btn-sm btn-update'  onclick="showInPopup('User/Update?id=${entity.id}','Update')" data-id="${entity.id}"><i class='fa fa-edit'></i></a>
+             <a class="btn text-danger btn-sm btn-delete"  onclick="jQueryAjaxDelete(this)" data-id="${entity.id}"><i class="fa fa-trash"></i></a>
+             <a class='btn text-primary btn-sm btn-detail' onclick="showInPopup('User/Detail/${entity.id}', 'Detail')" data-id="${entity.id}"><i class="fa fa-eye"></i></a>
+             <a class='btn text-primary btn-sm btn-assign' onclick="showInPopup('Role/Assign/${entity.id}', 'Assigning a role to user')" data-id="${entity.id}"><i class="fa fa-user-shield"></i></a>
+`,
         entity.id,
         entity.userName,
         entity.email,

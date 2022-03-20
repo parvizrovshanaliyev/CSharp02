@@ -6,6 +6,8 @@ using Blog.Services.Abstract;
 using Blog.Services.AutoMapper.Profiles;
 using Blog.Services.Concrete;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using System;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -17,6 +19,9 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddAutoMapper(typeof(CategoryProfile));
 
             services.AddDbContext<BlogDbContext>();
+
+            services.Configure<SecurityStampValidatorOptions>(options =>
+                options.ValidationInterval = TimeSpan.FromMinutes(5));
 
             services.AddIdentity<User, Role>(options =>
             {
@@ -40,6 +45,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<IUserService, UserManager>();
             services.AddScoped<IAuthService, AuthManager>();
             services.AddScoped<ICommentService, CommentManager>();
+            services.AddScoped<IRoleService, RoleManager>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             return services;

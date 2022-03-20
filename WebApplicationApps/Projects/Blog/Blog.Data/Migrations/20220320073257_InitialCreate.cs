@@ -34,6 +34,16 @@ namespace Blog.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Avatar = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    AboutMe = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    YoutubeLink = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    TwitterLink = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    InstagramLink = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    FacebookLink = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    LinkedInLink = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    GitHubLink = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    WebsiteLink = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
@@ -276,39 +286,83 @@ namespace Blog.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "ec8c31e7-8d43-4c0d-8cd7-fb4d74ed089a", "Admin", "ADMIN" },
-                    { 2, "b572a989-1c23-455b-8619-fbd361f4d409", "Editor", "EDITOR" },
-                    { 3, "172a0ab1-eca7-4b38-98a4-ee80f1f82330", "Member", "MEMBER" }
+                    { 1, "e654aabb-22f6-44c2-ac8b-189b01d33ebc", "Category_Create", "CATEGORY_CREATE" },
+                    { 22, "e654aabb-22f6-44c2-ac8b-189b01d33ebc", "SuperAdmin", "SUPERADMIN" },
+                    { 21, "e654aabb-22f6-44c2-ac8b-189b01d33ebc", "AdminArea_Home_Read", "ADMINAREA_HOME_READ" },
+                    { 20, "e654aabb-22f6-44c2-ac8b-189b01d33ebc", "Comment_Delete", "COMMENT_DELETE" },
+                    { 19, "e654aabb-22f6-44c2-ac8b-189b01d33ebc", "Comment_Update", "COMMENT_UPDATE" },
+                    { 18, "e654aabb-22f6-44c2-ac8b-189b01d33ebc", "Comment_Read", "COMMENT_READ" },
+                    { 17, "e654aabb-22f6-44c2-ac8b-189b01d33ebc", "Comment_Create", "COMMENT_CREATE" },
+                    { 16, "e654aabb-22f6-44c2-ac8b-189b01d33ebc", "Role_Delete", "ROLE_DELETE" },
+                    { 15, "e654aabb-22f6-44c2-ac8b-189b01d33ebc", "Role_Update", "ROLE_UPDATE" },
+                    { 14, "e654aabb-22f6-44c2-ac8b-189b01d33ebc", "Role_Read", "ROLE_READ" },
+                    { 12, "e654aabb-22f6-44c2-ac8b-189b01d33ebc", "User_Delete", "USER_DELETE" },
+                    { 13, "e654aabb-22f6-44c2-ac8b-189b01d33ebc", "Role_Create", "ROLE_CREATE" },
+                    { 10, "e654aabb-22f6-44c2-ac8b-189b01d33ebc", "User_Read", "USER_READ" },
+                    { 9, "e654aabb-22f6-44c2-ac8b-189b01d33ebc", "User_Create", "USER_CREATE" },
+                    { 8, "e654aabb-22f6-44c2-ac8b-189b01d33ebc", "Post_Delete", "POST_DELETE" },
+                    { 7, "e654aabb-22f6-44c2-ac8b-189b01d33ebc", "Post_Update", "POST_UPDATE" },
+                    { 6, "e654aabb-22f6-44c2-ac8b-189b01d33ebc", "Post_Read", "POST_READ" },
+                    { 5, "e654aabb-22f6-44c2-ac8b-189b01d33ebc", "Post_Create", "POST_CREATE" },
+                    { 4, "e654aabb-22f6-44c2-ac8b-189b01d33ebc", "Category_Delete", "CATEGORY_DELETE" },
+                    { 3, "e654aabb-22f6-44c2-ac8b-189b01d33ebc", "Category_Update", "CATEGORY_UPDATE" },
+                    { 2, "e654aabb-22f6-44c2-ac8b-189b01d33ebc", "Category_Read", "CATEGORY_READ" },
+                    { 11, "e654aabb-22f6-44c2-ac8b-189b01d33ebc", "User_Update", "USER_UPDATE" }
                 });
 
             migrationBuilder.InsertData(
                 schema: "Identity",
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "Avatar", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                columns: new[] { "Id", "AboutMe", "AccessFailedCount", "Avatar", "ConcurrencyStamp", "Email", "EmailConfirmed", "FacebookLink", "FirstName", "GitHubLink", "InstagramLink", "LastName", "LinkedInLink", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwitterLink", "TwoFactorEnabled", "UserName", "WebsiteLink", "YoutubeLink" },
                 values: new object[,]
                 {
-                    { 1, 0, "Users/defaultUser.png", "b7ee3f8a-8aa9-49da-8fdc-041c2fc7e46f", "adminUser@gmail.com", true, false, null, "ADMINUSER@GMAIL.COM", "ADMINUSER", "AQAAAAEAACcQAAAAEFSOQAfvuF63xauew/fMVUy+MXJ2jrO8dRiNFDE0fURvMEpE5HmDire5vMee+2MyaA==", "+9949999999", true, "763a281a-7c58-45cf-976a-66b6d9830ca5", false, "adminUser" },
-                    { 2, 0, "Users/defaultUser.png", "dce60ac4-3a7d-4bff-a85b-84597c8a4813", "editorUser@gmail.com", true, false, null, "EDITORUSER@GMAIL.COM", "EDITORUSER", "AQAAAAEAACcQAAAAEAcLfPlQO3nEG+G4u6qzwE7tdwS8HAJ0u7czXhoKPwqUzFjW8LQAYUzMBP5hWeE8Gw==", "+9949999999", true, "9974319c-e60f-454f-8e12-c481c3a30efc", false, "editorUser" },
-                    { 3, 0, "Users/defaultUser.png", "14f7e8d3-1dd3-4fd3-ab45-82422b5f2b98", "memberUser@gmail.com", true, false, null, "MEMBERUSER@GMAIL.COM", "MEMBERUSER", "AQAAAAEAACcQAAAAEJz/7zYS2ZFym2PcnesUKK6byDeQ2z9a+ZkHGX0Vm4NZnDhMA+EKzyXgHiyONPXg3g==", "+9949999999", true, "7ab599f4-113c-48e4-8817-bb6a4060b765", false, "memberUser" }
+                    { 2, null, 0, "Users/defaultUser.png", "20d75ec2-f7e7-4727-87e7-16e4714f61af", "editorUser@gmail.com", true, null, "Editor", null, null, "User", null, false, null, "EDITORUSER@GMAIL.COM", "EDITORUSER", "AQAAAAEAACcQAAAAEGU7CIBz+czMirQI9q4fYjbHpvFT/0++nzhc5zO4tuza6sJVptrrVoRWv7me/MLjlg==", "+9949999999", true, "3FFDA2C7-A349-4902-AC11-6FFAB9969424", null, false, "editorUser", null, null },
+                    { 1, null, 0, "Users/defaultUser.png", "bcce8cf9-2b60-4c75-b050-24ad490bf5de", "adminUser@gmail.com", true, null, "Super Admin", null, null, "User", null, false, null, "ADMINUSER@GMAIL.COM", "ADMINUSER", "AQAAAAEAACcQAAAAEDFclzZKfSNnDTReNYKJPS+c05Mcbe4vPKjoE5oUzuEd5bM7m1Lel6iJqE3IKuVA9g==", "+9949999999", true, "3317689B-4358-4F80-874E-D8B6EAEF0AE4", null, false, "adminUser", null, null },
+                    { 3, null, 0, "Users/defaultUser.png", "c1db50c7-2bc7-4344-a7a1-a4a71f00aa66", "memberUser@gmail.com", true, null, "Member", null, null, "User", null, false, null, "MEMBERUSER@GMAIL.COM", "MEMBERUSER", "AQAAAAEAACcQAAAAEHa3x9gFBUdFOwes6VSEr9juKoxl7mm6boNsBYEeQ+gzFBCz/+1+Os301XZEcKthwA==", "+9949999999", true, "075E56DF-300D-4AF1-952E-951A18322EE1", null, false, "memberUser", null, null }
                 });
 
             migrationBuilder.InsertData(
                 schema: "Identity",
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { 1, 1 });
-
-            migrationBuilder.InsertData(
-                schema: "Identity",
-                table: "AspNetUserRoles",
-                columns: new[] { "RoleId", "UserId" },
-                values: new object[] { 2, 2 });
-
-            migrationBuilder.InsertData(
-                schema: "Identity",
-                table: "AspNetUserRoles",
-                columns: new[] { "RoleId", "UserId" },
-                values: new object[] { 3, 3 });
+                values: new object[,]
+                {
+                    { 1, 1 },
+                    { 20, 1 },
+                    { 21, 1 },
+                    { 22, 1 },
+                    { 1, 2 },
+                    { 2, 2 },
+                    { 3, 2 },
+                    { 19, 1 },
+                    { 4, 2 },
+                    { 6, 2 },
+                    { 7, 2 },
+                    { 8, 2 },
+                    { 17, 2 },
+                    { 18, 2 },
+                    { 19, 2 },
+                    { 5, 2 },
+                    { 20, 2 },
+                    { 18, 1 },
+                    { 16, 1 },
+                    { 2, 1 },
+                    { 3, 1 },
+                    { 4, 1 },
+                    { 5, 1 },
+                    { 6, 1 },
+                    { 7, 1 },
+                    { 17, 1 },
+                    { 8, 1 },
+                    { 10, 1 },
+                    { 11, 1 },
+                    { 12, 1 },
+                    { 13, 1 },
+                    { 14, 1 },
+                    { 15, 1 },
+                    { 9, 1 },
+                    { 21, 2 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

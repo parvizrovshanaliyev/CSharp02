@@ -1,4 +1,5 @@
-﻿using Blog.Entities.Dtos.User;
+﻿using Blog.Entities.Dtos.Role;
+using Blog.Entities.Dtos.User;
 using Blog.Shared.Utilities.Results.Abstract;
 
 namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Models
@@ -28,5 +29,13 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Models
         public UserUpdateDto UpdateDto { get; set; }
         public string Partial { get; set; }
         public IResult<UserDto> Result { get; set; }
+    }
+
+
+    public class UserRoleAssignAjaxViewModel
+    {
+        public UserRoleAssignDto UserRoleAssignDto { get; set; }
+        public string Partial { get; set; }
+        public IResult<bool> Result { get; set; }
     }
 }

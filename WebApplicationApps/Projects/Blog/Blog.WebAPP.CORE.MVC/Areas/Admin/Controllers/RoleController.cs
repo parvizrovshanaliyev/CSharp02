@@ -1,5 +1,7 @@
 ﻿using Blog.Entities.Dtos.Role;
 using Blog.Services.Abstract;
+using Blog.Shared.Attributes;
+using Blog.Shared.Constants;
 using Blog.Shared.Extensions;
 using Blog.WebAPP.CORE.MVC.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +33,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         #region loadData
 
         [HttpGet]
-        // [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Role_Read)]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Role_Read)]
         public async Task<IActionResult> Index()
         {
             var result = await _roleService.GetAllAsync();
@@ -43,7 +45,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         #region assignPermission
 
         [HttpGet]
-        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.User_Update)]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.User_Update)]
         public async Task<IActionResult> Assign([FromRoute] int id)
         {
             var result = await _roleService.GetUserRolesAsync(id);
@@ -51,7 +53,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.User_Update)]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.User_Update)]
         public async Task<IActionResult> Assign(UserRoleAssignDto request)
         {
             if (ModelState.IsValid)

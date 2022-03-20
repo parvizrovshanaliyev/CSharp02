@@ -1,4 +1,6 @@
 ﻿using Blog.Services.Abstract;
+using Blog.Shared.Attributes;
+using Blog.Shared.Constants;
 using Blog.WebAPP.CORE.MVC.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -26,6 +28,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         #endregion
         // GET
         [HttpGet]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.AdminArea_Home_Read)]
         public async Task<IActionResult> Index()
         {
             var viewModel = new DashboardViewModel();

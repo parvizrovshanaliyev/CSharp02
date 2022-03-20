@@ -1,5 +1,7 @@
 ﻿using Blog.Entities.Dtos;
 using Blog.Services.Abstract;
+using Blog.Shared.Attributes;
+using Blog.Shared.Constants;
 using Blog.Shared.Extensions;
 using Blog.WebAPP.CORE.MVC.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -29,6 +31,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         #region loadData
 
         [HttpGet]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Category_Read)]
         public async Task<IActionResult> Index()
         {
             var result = await _service.GetAllByNonDeletedAsync();
@@ -36,6 +39,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         }
 
         [HttpGet]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Category_Read)]
         public async Task<JsonResult> GetAll()
         {
             var result = await _service.GetAllByNonDeletedAsync();
@@ -44,7 +48,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Category_Read)]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Category_Read)]
         public async Task<IActionResult> DeletedCategories()
         {
             var result = await _service.GetAllByDeletedAsync();
@@ -57,12 +61,14 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         #region create
 
         [HttpGet]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Category_Create)]
         public IActionResult Create()
         {
             return PartialView("_CreatePartial");
         }
 
         [HttpPost]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Category_Create)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CategoryAddDto request)
         {
@@ -95,6 +101,8 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         #region update
 
         [HttpGet]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Category_Delete)]
+
         public async Task<IActionResult> Update(int id)
         {
             var result = await _service.GetUpdateDtoAsync(id);
@@ -103,6 +111,8 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
 
         [HttpPost]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Category_Delete)]
+
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(CategoryUpdateDto request)
         {
@@ -140,7 +150,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
             return Json(result);
         }
         [HttpPost]
-        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Category_Update)]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Category_Update)]
         public async Task<JsonResult> UndoDelete([FromRoute] int id)
         {
             var result = await _service.UndoDeleteAsync(id);
@@ -148,7 +158,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        //[AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Category_Delete)]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Category_Delete)]
         public async Task<JsonResult> HardDelete([FromRoute] int id)
         {
             var result = await _service.HardDeleteAsync(id);

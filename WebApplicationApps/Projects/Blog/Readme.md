@@ -785,3 +785,26 @@ Developing a Project with N-Tier Architecture
         - UndoDeleteAsync Method
         - HardDelete Method
     * Let's Make Our Final Edits About Admin Area
+
+    16. Blog Module
+    * Let's Integrate Our Theme, Blog Home, into our Project
+      - Blog Home Page
+      - Blog Home Controller
+      - Layout.cshtml
+    * Let's Create Our Index Page and List Our Articles
+      - StringExtensions.cs
+        -RemoveHtmlTags Method for String (Post.Content)
+    * Let's Create Our RightSideBarViewComponent and RightSideBarViewModel Classes
+          - RightSideBarViewComponent
+          - RightSideBarViewModel
+            - Most Read Articles 
+            - Categories
+      - IEntityRepository Interface, EntityRepository Class
+        - Query Method
+      - IPostService Interface, PostService Class
+          - GetAllByViewCountAsync Method
+      - ICategoryService Interface, CategoryService Class
+          - GetAllByNotDeletedAndActiveAsync Method
+    * Let's Create Our Detail Action with PostController
+      - Detail.cshtml 
+      - _PostLayout.cshtml

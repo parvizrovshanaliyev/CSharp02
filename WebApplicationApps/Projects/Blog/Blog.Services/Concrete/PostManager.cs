@@ -9,10 +9,12 @@ using Blog.Shared.Localizations;
 using Blog.Shared.Utilities.Results.Abstract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Blog.Services.Concrete
@@ -50,6 +52,15 @@ namespace Blog.Services.Concrete
         public async Task<IResult<PostDto>> GetAsync(int id)
         {
             var entity = await _unitOfWork.Posts.GetAsync(i => i.Id == id);
+            if (entity is null)
+                return NotFound<PostDto>(BaseLocalization.NotFoundCodeGeneralMessage);
+            var outputDto = _mapper.Map<PostDto>(entity);
+            return Ok(outputDto);
+        }
+
+        public async Task<IResult<PostDto>> GetAsync(Expression<Func<Post, bool>> predicate, params Expression<Func<Post, object>>[] includeProperties)
+        {
+            var entity = await _unitOfWork.Posts.GetAsync(predicate, includeProperties);
             if (entity is null)
                 return NotFound<PostDto>(BaseLocalization.NotFoundCodeGeneralMessage);
             var outputDto = _mapper.Map<PostDto>(entity);
@@ -100,14 +111,45 @@ namespace Blog.Services.Concrete
             return Ok(outputDto);
         }
 
-        public Task<IResult<IList<PostDto>>> GetAllByNonDeletedAndActiveAsync()
+        public async Task<IResult<IList<PostDto>>> GetAllByNonDeletedAndActiveAsync()
         {
-            throw new NotImplementedException();
+            var entities = await _unitOfWork.Posts.GetAllAsync(c => !c.IsDeleted && c.IsActive,
+                i => i.Category);
+
+            if (entities == null)
+                return NotFound<IList<PostDto>>(BaseLocalization.NoDataAvailableOnRequest);
+            var outputDto = _mapper.Map<IList<PostDto>>(entities);
+            return Ok(outputDto);
         }
 
-        public Task<IResult<IList<PostDto>>> GetAllByCategoryAsync(int categoryId)
+        public async Task<IResult<IList<PostDto>>> GetAllByCategoryAsync(int categoryId)
         {
-            throw new NotImplementedException();
+            var entities = await _unitOfWork.Posts.GetAllAsync(c =>
+                    !c.IsDeleted && c.IsActive && c.CategoryId == categoryId,
+                i => i.Category);
+
+            if (entities == null)
+                return NotFound<IList<PostDto>>(BaseLocalization.NoDataAvailableOnRequest);
+            var outputDto = _mapper.Map<IList<PostDto>>(entities);
+            return Ok(outputDto);
+        }
+
+        public async Task<IResult<IList<PostDto>>> GetAllByViewCountAsync(bool isAscending, int? take)
+        {
+            var query = _unitOfWork.Posts.Query(i => !i.IsDeleted && i.IsActive,
+                i => isAscending ? i.OrderBy(c => c.ViewsCount) : i.OrderByDescending(c => c.ViewsCount),
+                false,
+                i => i.Category,
+                i => i.User);
+
+            if (take.HasValue)
+                query = query.Take(take.Value);
+
+            var entities = await query.ToListAsync();
+            if (entities == null)
+                return NotFound<IList<PostDto>>(BaseLocalization.NoDataAvailableOnRequest);
+            var outputDto = _mapper.Map<IList<PostDto>>(entities);
+            return Ok(outputDto);
         }
 
         #region CountAsync

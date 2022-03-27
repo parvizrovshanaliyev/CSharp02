@@ -7,9 +7,5 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
     [Authorize]
     public class BaseController : Controller
     {
-        public BaseController()
-        {
-
-        }
     }
 }

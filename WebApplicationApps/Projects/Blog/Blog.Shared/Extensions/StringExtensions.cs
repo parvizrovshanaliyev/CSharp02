@@ -13,5 +13,17 @@ namespace Blog.Shared.Extensions
         {
             return Regex.Replace(txt, @"[^a-zA-Z0-9_]", "").Replace(" ", "_");
         }
+
+
+        /// <summary>
+        ///  Remove html tags from a string
+        ///  ("<[^>]*>")
+        /// </summary>
+        /// <param name="html"></param>
+        /// <returns></returns>
+        public static string RemoveHtmlTags(this string html)
+        {
+            return Regex.Replace(html, "<.*?>", string.Empty);
+        }
     }
 }

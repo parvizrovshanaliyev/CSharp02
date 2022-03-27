@@ -30,6 +30,31 @@ namespace Blog.Shared.Data.Concrete
 
         #region Implementation of IEntityRepository<TEntity>
 
+        public IQueryable<TEntity> Query(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, bool isTracking = false,
+            params Expression<Func<TEntity, object>>[] includeProperties)
+        {
+            IQueryable<TEntity> query = _dbSet;
+
+            query = isTracking ? query : query.AsNoTracking();
+
+            if (predicate is not null)
+                query = query.Where(predicate);
+
+            if (orderBy is not null)
+                query = orderBy(query);
+
+            if (includeProperties is not null)
+            {
+                includeProperties.ToList().ForEach(include =>
+                {
+                    if (include != null)
+                        query = query.Include(include);
+                });
+            }
+
+            return query;
+        }
+
         public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate,
             params Expression<Func<TEntity, object>>[] includeProperties)
         {

@@ -808,3 +808,8 @@ Developing a Project with N-Tier Architecture
     * Let's Create Our Detail Action with PostController
       - Detail.cshtml 
       - _PostLayout.cshtml
+
+    * Let's Add Pagination Functionality for Our Homepage
+        - Shared/ Utility/ PagedResult.cs
+        - Shared/ Extensions/IQueryableExtensions.cs
+            - GetManyAndPaginate Method

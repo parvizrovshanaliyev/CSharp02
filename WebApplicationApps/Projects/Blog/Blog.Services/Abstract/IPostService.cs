@@ -1,6 +1,7 @@
 ﻿using Blog.Entities.Concrete;
 using Blog.Entities.Dtos.Post;
 using Blog.Shared.Utilities.Results.Abstract;
+using Blog.Shared.Utilities.Results.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -15,6 +16,7 @@ namespace Blog.Services.Abstract
 
         Task<IResult<PostUpdateDto>> GetUpdateDtoAsync(int id);
         Task<IResult<IList<PostDto>>> GetAllAsync();
+        Task<IResult<PagedResult<PostDto>>> GetAllByPagingAsync(int? categoryId, int? currentPage, int? pageSize, bool isAscending = false);
         Task<IResult<IList<PostDto>>> GetAllByNonDeletedAsync();
         Task<IResult<IList<PostDto>>> GetAllByDeletedAsync();
         Task<IResult<IList<PostDto>>> GetAllByNonDeletedAndActiveAsync();

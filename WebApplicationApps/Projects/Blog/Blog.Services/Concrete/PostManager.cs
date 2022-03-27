@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Blog.Data.Abstract;
 using Blog.Entities.Concrete;
 using Blog.Entities.Dtos.Post;
 using Blog.Services.Abstract;
 using Blog.Shared.Enums;
+using Blog.Shared.Extensions;
 using Blog.Shared.Helpers;
 using Blog.Shared.Localizations;
 using Blog.Shared.Utilities.Results.Abstract;
+using Blog.Shared.Utilities.Results.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -84,6 +87,29 @@ namespace Blog.Services.Concrete
                 return NotFound<IList<PostDto>>(BaseLocalization.NoDataAvailableOnRequest);
             var outputDto = _mapper.Map<IList<PostDto>>(entities);
             return Ok(outputDto);
+        }
+
+        public async Task<IResult<PagedResult<PostDto>>> GetAllByPagingAsync(int? categoryId, int? currentPage, int? pageSize, bool isAscending = false)
+        {
+            var query = _unitOfWork.Posts.Query(i => !i.IsDeleted && i.IsActive,
+                null,
+                false,
+                i => i.Category,
+                i => i.User).ProjectTo<PostDto>(_mapper.ConfigurationProvider);
+
+            if (categoryId.HasValue)
+                query = query.Where(i => i.CategoryId == categoryId);
+
+            query = isAscending ? query.OrderBy(i => i.Date) : query.OrderByDescending(i => i.Date);
+
+            var pagedResult = currentPage.HasValue && pageSize.HasValue
+                ? await query.GetManyAndPaginate(currentPage.Value, pageSize.Value)
+                : await query.GetManyAndPaginate();
+
+            if (pagedResult == null)
+                return NotFound<PagedResult<PostDto>>(BaseLocalization.NoDataAvailableOnRequest);
+
+            return Ok(pagedResult);
         }
 
         #region GetAllByNonDeletedAsync

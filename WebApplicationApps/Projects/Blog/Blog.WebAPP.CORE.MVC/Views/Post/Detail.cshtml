@@ -1,0 +1,64 @@
+﻿@model Blog.Entities.Dtos.Post.PostDto
+@{
+    Layout = "_PostLayout";
+    ViewBag.Title = Model.Title;
+    ViewBag.Tags=Model.SeoTags;
+    ViewBag.Description = Model.SeoDescription;
+    ViewBag.Author =Model.SeoAuthor;
+}
+<div class="col-lg-8">
+
+    <!-- Title -->
+    <h1 class="mt-4">@Model.Title</h1>
+    <hr>
+
+    <!-- Date/Time -->
+    <p class="lead badge">Posted on <span class="badge">@Model.Date.ToString("d")</span>  by @Model.CreatedByName</p>
+
+    <hr>
+
+    <!-- Preview Image -->
+    <div class="text-center">
+        <img class="img-fluid rounded" src="~/img/@Model.Thumbnail" alt="@Model.Title">
+    </div>
+
+    <hr>
+    <p class="text-center"> <span class="badge"><i class="fa fa-eye"></i> @Model.ViewsCount</span><span class="badge"><i class="fa fa-comment"></i> @Model.CommentsCount</span> </p>
+    <!-- Post Content -->
+    @Html.Raw(Model.Content)
+    <!-- Post Content -->
+    <hr>
+   
+    <!-- Comments Form -->
+    <div class="card my-4">
+        <h5 class="card-header">Add a comment:</h5>
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                    <textarea class="form-control" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+        </div>
+    </div>
+
+    @foreach (var comment in Model.Comments)
+    {
+        <!-- Single Comment -->
+        <div class="media mb-4">
+            <img class="d-flex mr-3 rounded-circle" src="https://randomuser.me/api/portraits/men/34.jpg" alt="">
+            <div class="media-body">
+                <h5 class="mt-0">@comment.CreatedByName</h5>
+                @comment.Content
+            </div>
+        </div>
+    }
+
+</div>
+
+@section Styles
+{
+    <style>
+    
+        </style>
+}

@@ -8,6 +8,7 @@
 		<Folder Include="wwwroot\img\Posts\" />
 		<Folder Include="wwwroot\img\Users\" />
 		<Folder Include="wwwroot\js\ui\" />
+		<Folder Include="wwwroot\ui\js\" />
 	</ItemGroup>
 
 	<ItemGroup>

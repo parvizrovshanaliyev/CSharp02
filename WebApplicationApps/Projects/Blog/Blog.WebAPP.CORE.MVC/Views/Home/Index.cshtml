@@ -1,4 +1,87 @@
-﻿@model CategoryAddDto
+﻿@using Blog.Shared.Extensions
+@model Blog.Shared.Utilities.Results.Abstract.IResult<IList<Blog.Entities.Dtos.Post.PostDto>>;
+@{
+    ViewBag.Title = "Home Page";
+}
+<div class="col-md-8">
 
-<h1>Home controller : Client UI</h1>
-<a asp-area="Admin" asp-controller="Home" asp-action="Index"> go to admin area home controller</a>
+    <h1 class="my-4">
+        Recently <small>Shared Articles</small>
+    </h1>
+
+    <div class="card-columns" style=" column-count: 2;">
+        @foreach (var post in Model.Data)
+        {
+            <!-- Blog post-->
+            <div class="card">
+                
+                <a asp-controller="Post" asp-action="Detail" asp-route-id="@post.Id">
+                    <img alt="@post.Title" class="card-img-top img-fluid" src="~/img/@post.Thumbnail">
+                </a>
+                <div class="p-3 card-block">
+                    <h4 class="card-title">
+                        <a asp-controller="Post" asp-action="Detail" asp-route-id="@post.Id">
+                            @post.Title
+                        </a>
+                    </h4>
+                    <p class="card-text">
+                        @{
+                            post.Content = post.Content.RemoveHtmlTags();
+                        }
+                        @(post.Content.Length > 150 ? post.Content.Substring(0, 150) + "..." : post.Content)
+                    </p>
+                    <div class="small text-muted">Posted on @post.Date.ToString("d") by <a href="#">@post.CreatedByName</a>  <small><i class="fa fa-eye"></i> @post.ViewsCount</small></div>
+                </div>
+            </div>
+           
+        }
+    </div>
+    <nav aria-label="Pagination">
+        <hr class="my-0">
+        <ul class="pagination justify-content-center my-4">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Newer</a>
+            </li>
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="#!">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#!">2</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#!">3</a>
+            </li>
+            <li class="page-item disabled">
+                <a class="page-link" href="#!">...</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#!">15</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#!">Older</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+@section Styles
+{
+    <style>
+        .card-columns .card{
+            border-radius: 4px;
+            background: #fff;
+            box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+            transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+            /*padding: 14px 80px 18px 36px;*/
+            cursor: pointer;
+        }
+
+        .card-columns .card:hover{
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+        }
+        .card-title a {
+            color: black;
+            text-decoration: none;
+        }
+    </style>
+}

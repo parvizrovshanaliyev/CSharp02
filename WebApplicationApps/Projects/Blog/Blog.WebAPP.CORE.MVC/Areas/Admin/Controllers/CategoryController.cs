@@ -101,7 +101,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         #region update
 
         [HttpGet]
-        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Category_Delete)]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Category_Update)]
 
         public async Task<IActionResult> Update(int id)
         {
@@ -111,7 +111,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
 
 
         [HttpPost]
-        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Category_Delete)]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Category_Update)]
 
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(CategoryUpdateDto request)
@@ -144,6 +144,7 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         #region delete
 
         [HttpPost]
+        [AuthorizeRoles(RoleConstant.SuperAdmin, RoleConstant.Category_Delete)]
         public async Task<JsonResult> Delete(int id)
         {
             var result = await _service.DeleteAsync(id, "Admin");

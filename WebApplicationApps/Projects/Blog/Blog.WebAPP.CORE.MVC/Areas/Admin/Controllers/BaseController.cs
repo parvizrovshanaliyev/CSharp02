@@ -7,17 +7,9 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
     [Authorize]
     public class BaseController : Controller
     {
-        //protected readonly ICommentService CommentService;
-
-
         public BaseController()
         {
 
         }
-
-        //public BaseController(ICommentService commentService) : this()
-        //{
-        //    CommentService = commentService;
-        //}
     }
 }

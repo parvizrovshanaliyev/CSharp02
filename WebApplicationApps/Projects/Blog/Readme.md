@@ -813,3 +813,9 @@ Developing a Project with N-Tier Architecture
         - Shared/ Utility/ PagedResult.cs
         - Shared/ Extensions/IQueryableExtensions.cs
             - GetManyAndPaginate Method
+	
+	* Let's Add Sorting Functionality for Our Homepage 
+	    - BaseFilterDto
+        - PostFilterDto
+		- Dynamic Page Size : PostManager pageSize > 18 ? 18 : pageSize (validation)
+		- IsAsc Ordering : Older and Newer Posts		

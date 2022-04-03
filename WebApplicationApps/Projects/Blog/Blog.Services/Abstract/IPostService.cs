@@ -16,7 +16,7 @@ namespace Blog.Services.Abstract
 
         Task<IResult<PostUpdateDto>> GetUpdateDtoAsync(int id);
         Task<IResult<IList<PostDto>>> GetAllAsync();
-        Task<IResult<PagedResult<PostDto>>> GetAllByPagingAsync(int? categoryId, int? currentPage, int? pageSize, bool isAscending = false);
+        Task<IResult<PagedResult<PostDto>>> GetAllByPagingAsync(PostFilterDto filter);
         Task<IResult<IList<PostDto>>> GetAllByNonDeletedAsync();
         Task<IResult<IList<PostDto>>> GetAllByDeletedAsync();
         Task<IResult<IList<PostDto>>> GetAllByNonDeletedAndActiveAsync();

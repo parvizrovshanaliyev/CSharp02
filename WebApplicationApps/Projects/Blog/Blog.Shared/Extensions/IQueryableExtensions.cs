@@ -10,13 +10,12 @@ namespace Blog.Shared.Extensions
     {
         public static async Task<PagedResult<T>> GetManyAndPaginate<T>(
             this IQueryable<T> query,
-            int currentPage = 1,
-            int pageSize = 50,
-            bool getAll = false) where T : class
+            int currentPage = default,
+            int pageSize = default) where T : class
         {
             var result = new PagedResult<T>();
 
-            if (!getAll)
+            if (currentPage > 0 && pageSize > 0)
             {
                 result.CurrentPage = currentPage;
                 result.PageSize = pageSize;

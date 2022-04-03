@@ -89,7 +89,7 @@ namespace Blog.Services.Concrete
             return Ok(outputDto);
         }
 
-        public async Task<IResult<PagedResult<PostDto>>> GetAllByPagingAsync(int? categoryId, int? currentPage, int? pageSize, bool isAscending = false)
+        public async Task<IResult<PagedResult<PostDto>>> GetAllByPagingAsync(PostFilterDto filter)
         {
             var query = _unitOfWork.Posts.Query(i => !i.IsDeleted && i.IsActive,
                 null,
@@ -97,13 +97,15 @@ namespace Blog.Services.Concrete
                 i => i.Category,
                 i => i.User).ProjectTo<PostDto>(_mapper.ConfigurationProvider);
 
-            if (categoryId.HasValue)
-                query = query.Where(i => i.CategoryId == categoryId);
+            if (filter.CategoryId.HasValue)
+                query = query.Where(i => i.CategoryId == filter.CategoryId);
 
-            query = isAscending ? query.OrderBy(i => i.Date) : query.OrderByDescending(i => i.Date);
+            query = filter.IsAsc ? query.OrderBy(i => i.Date) : query.OrderByDescending(i => i.Date);
 
-            var pagedResult = currentPage.HasValue && pageSize.HasValue
-                ? await query.GetManyAndPaginate(currentPage.Value, pageSize.Value)
+
+
+            var pagedResult = filter.CurrentPage.HasValue && filter.PageSize.HasValue
+                ? await query.GetManyAndPaginate(filter.CurrentPage.Value, filter.PageSize.Value > 18 ? 18 : filter.PageSize.Value)
                 : await query.GetManyAndPaginate();
 
             if (pagedResult == null)

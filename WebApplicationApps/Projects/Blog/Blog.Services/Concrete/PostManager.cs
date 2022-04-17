@@ -10,6 +10,7 @@ using Blog.Shared.Helpers;
 using Blog.Shared.Localizations;
 using Blog.Shared.Utilities.Results.Abstract;
 using Blog.Shared.Utilities.Results.Concrete;
+using LinqKit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -91,16 +92,34 @@ namespace Blog.Services.Concrete
 
         public async Task<IResult<PagedResult<PostDto>>> GetAllByPagingAsync(PostFilterDto filter)
         {
-            var query = _unitOfWork.Posts.Query(i => !i.IsDeleted && i.IsActive,
+
+            // v2 LinqKit package
+            var predicate = PredicateBuilder.New<Post>(true);
+
+            predicate = predicate.And(i => i.IsDeleted == false && i.IsActive == true);
+
+            if (filter.CategoryId.HasValue)
+                predicate = predicate.And(i => i.CategoryId == filter.CategoryId);
+
+            if (!string.IsNullOrEmpty(filter.Keyword))
+            {
+                predicate = predicate.And(i => i.Title.Contains(filter.Keyword)
+                                               || i.Content.Contains(filter.Keyword)
+                                               || i.Category.Name.Contains(filter.Keyword)
+                                               || i.SeoDescription.Contains(filter.Keyword)
+                                               || i.SeoTags.Contains(filter.Keyword)
+                                               || i.SeoAuthor.Contains(filter.Keyword));
+            }
+
+            var query = _unitOfWork.Posts.Query(predicate,
                 null,
                 false,
                 i => i.Category,
                 i => i.User).ProjectTo<PostDto>(_mapper.ConfigurationProvider);
 
-            if (filter.CategoryId.HasValue)
-                query = query.Where(i => i.CategoryId == filter.CategoryId);
-
-            query = filter.IsAsc ? query.OrderBy(i => i.Date) : query.OrderByDescending(i => i.Date);
+            query = filter.IsAsc
+                ? query.OrderBy(i => i.Date)
+                : query.OrderByDescending(i => i.Date);
 
 
 

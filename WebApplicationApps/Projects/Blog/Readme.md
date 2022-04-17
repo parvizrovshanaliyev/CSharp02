@@ -817,5 +817,13 @@ Developing a Project with N-Tier Architecture
 	* Let's Add Sorting Functionality for Our Homepage 
 	    - BaseFilterDto
         - PostFilterDto
-		- Dynamic Page Size : PostManager pageSize > 18 ? 18 : pageSize (validation)
-		- IsAsc Ordering : Older and Newer Posts		
+		- Dynamic Page Size : PostManager pageSize > 24 ? 24 : pageSize (validation)
+		- IsAsc Ordering : Older and Newer Posts
+		
+    * Let's Add Search Functionality for Our Homepage
+	    - Added Keyword prop to BaseFilterDto
+		- Check if keyword is null or empty : GetAll method
+		- install LinqKit.Microsoft.EntityFrameworkCore  v - 5.1.2
+		- Refactoring GetAll Method in PostManager and used LinqKit.Microsoft.EntityFrameworkCore predicateBuilder
+	* Let's Complete Our Post Search Process
+	    - Edit RightSideBar : Search		

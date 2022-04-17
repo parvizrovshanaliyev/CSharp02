@@ -1,16 +1,21 @@
 ﻿@using Blog.Shared.Extensions
-@model Blog.Shared.Utilities.Results.Abstract.IResult<Blog.Shared.Utilities.Results.Concrete.PagedResult<Blog.Entities.Dtos.Post.PostDto>>;
+@model (PostFilterDto request,IResult<PagedResult<PostDto>> result)
 @{
     ViewBag.Title = "Home Page";
-    var currentPage = Model.Data.CurrentPage;
-    var pageCount = Model.Data.PageCount;
-    var pageSize = Model.Data.PageSize;
-    var hasPreviousPage = Model.Data.HasPreviousPage;
-    var hasNextPage = Model.Data.HasNextPage;
+    var filter = Model.request;
+    var categoryId = filter.CategoryId;
+    var isAsc = filter.IsAsc;
+    var keyword = filter.Keyword;
+
+    var pagedResultData = Model.result.Data;
+    var currentPage = pagedResultData.CurrentPage;
+    var pageCount = pagedResultData.PageCount;
+    var pageSize = pagedResultData.PageSize;
+    var totalRowCount = pagedResultData.TotalRowCount;
+    var hasPreviousPage = pagedResultData.HasPreviousPage;
+    var hasNextPage = pagedResultData.HasNextPage;
     var startIndex = Math.Max(currentPage - 5, 1);
     var finishIndex = Math.Min(currentPage + 5, pageCount);
-    var categoryId = ViewBag.CategoryId;
-    var isAsc = ViewBag.IsAsc;
 }
 <div class="col-md-8">
 
@@ -22,6 +27,7 @@
         <div class="form-row">
             <input type="hidden" id="category-id" value="@categoryId" />
             <input type="hidden" id="current-page" value="@currentPage" />
+            <input type="hidden" id="keyword" value="@keyword" />
             <div class="form-group col-md-10">
                 <label for="select-page-size">
                     Show
@@ -43,7 +49,7 @@
     </form>
     <!-- Page size and Sorting-->
     <div class="card-columns" style=" column-count: 2;">
-        @foreach (var post in Model.Data.Results)
+        @foreach (var post in pagedResultData.Results)
         {
             <!-- Blog post-->
             <div class="card">
@@ -74,8 +80,9 @@
         <ul class="pagination justify-content-center my-4">
             @if(hasPreviousPage)
             {
+                filter.CurrentPage = currentPage - 1;
                 <li class="page-item">
-                    <a class="page-link" href="@Url.Action("Index", "Home", new {categoryId = categoryId, currentPage = currentPage - 1, pageSize=pageSize , isAsc=isAsc })">Previous</a>
+                    <a class="page-link" href="@Url.Action("Index", "Home", filter)">Previous</a>
                 </li>
             }
             else
@@ -87,14 +94,16 @@
             
             @for (var i = startIndex; i <= finishIndex; i++)
             {
+                filter.CurrentPage = i;
                 <li class="page-item @(currentPage == i ? "active" : "")">
-                    <a class="page-link" href="@Url.Action("Index", "Home", new { categoryId = categoryId, currentPage = i,pageSize=pageSize , isAsc=isAsc  })">@i</a>
+                    <a class="page-link" href="@Url.Action("Index", "Home", filter)">@i</a>
                 </li>
             }
             @if(hasNextPage)
             {
+                filter.CurrentPage = currentPage + 1;
                 <li class="page-item">
-                    <a class="page-link" href="@Url.Action("Index", "Home", new { categoryId = categoryId, currentPage = currentPage + 1,pageSize=pageSize , isAsc=isAsc  })">Next</a>
+                    <a class="page-link" href="@Url.Action("Index", "Home", filter)">Next</a>
                 </li>
             }
             else
@@ -151,9 +160,11 @@
         const selectIsAscending = $('#select-is-ascending');
         const categoryId = $('#category-id').val();
         const currentPage = $('#current-page').val();
+        const keyword = $('#keyword').val();
+        
+        const searchQuery=keyword ? `?keyword=${keyword}` : '';
         const categoryQuery = categoryId ? `&categoryId=${categoryId}` : '';
-        const filterQueryString = `/?currentPage=${currentPage}&pageSize=${selectPageSize.val()}&isAsc=${selectIsAscending.val()}${categoryQuery}`;
-
+        const filterQueryString = `/?currentPage=${currentPage}&pageSize=${selectPageSize.val()}&isAsc=${selectIsAscending.val()}${categoryQuery}${searchQuery}`;
         window.location = filterQueryString;
     }
 </script>

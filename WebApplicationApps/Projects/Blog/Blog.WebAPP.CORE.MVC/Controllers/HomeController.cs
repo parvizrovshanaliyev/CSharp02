@@ -28,9 +28,8 @@ namespace Blog.WebAPP.CORE.MVC.Controllers
         public async Task<IActionResult> Index(PostFilterDto request)
         {
             var result = await _postService.GetAllByPagingAsync(request);
-            ViewBag.CategoryId = request.CategoryId;
-            ViewBag.IsAsc = request.IsAsc;
-            return View(result);
+
+            return View((request, result));
         }
 
         #endregion

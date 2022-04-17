@@ -826,4 +826,13 @@ Developing a Project with N-Tier Architecture
 		- install LinqKit.Microsoft.EntityFrameworkCore  v - 5.1.2
 		- Refactoring GetAll Method in PostManager and used LinqKit.Microsoft.EntityFrameworkCore predicateBuilder
 	* Let's Complete Our Post Search Process
-	    - Edit RightSideBar : Search		
+	    - Edit RightSideBar : Search
+        
+
+	* Let's Edit Our CommentManager Class : Increasing and decreasing the number of comments
+	    - Create Comment
+	    - UndoDelete Comment
+	    - Delete Comment
+	    - Update Comment
+	* Let's Create Backend Parts of Our Commenting Process
+	    - CommentAddAjaxViewModel

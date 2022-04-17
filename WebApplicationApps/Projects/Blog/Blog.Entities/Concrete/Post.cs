@@ -24,9 +24,24 @@ namespace Blog.Entities.Concrete
         public ICollection<Comment> Comments { get; set; }
 
         // methods
-        public void SetViewCount()
+        public void IncreaseViewCount()
         {
-            ViewsCount += 1;
+            this.ViewsCount += 1;
+        }
+
+        public void DecreaseViewCount()
+        {
+            this.ViewsCount -= 1;
+        }
+
+        public void IncreaseCommentCount()
+        {
+            this.CommentCount += 1;
+        }
+
+        public void DecreaseCommentCount()
+        {
+            this.CommentCount -= 1;
         }
     }
 }

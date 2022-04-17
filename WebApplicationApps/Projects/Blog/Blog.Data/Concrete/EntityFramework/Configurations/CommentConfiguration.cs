@@ -18,7 +18,7 @@ namespace Blog.Data.Concrete.EntityFramework.Configurations
                 .IsRequired();
 
             builder.Property(a => a.UserId)
-                .IsRequired();
+                .IsRequired(false);
 
             builder.Property(a => a.PostId)
                 .IsRequired();

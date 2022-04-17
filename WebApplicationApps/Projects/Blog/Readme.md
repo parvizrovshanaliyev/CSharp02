@@ -813,3 +813,26 @@ Developing a Project with N-Tier Architecture
         - Shared/ Utility/ PagedResult.cs
         - Shared/ Extensions/IQueryableExtensions.cs
             - GetManyAndPaginate Method
+	
+	* Let's Add Sorting Functionality for Our Homepage 
+	    - BaseFilterDto
+        - PostFilterDto
+		- Dynamic Page Size : PostManager pageSize > 24 ? 24 : pageSize (validation)
+		- IsAsc Ordering : Older and Newer Posts
+		
+    * Let's Add Search Functionality for Our Homepage
+	    - Added Keyword prop to BaseFilterDto
+		- Check if keyword is null or empty : GetAll method
+		- install LinqKit.Microsoft.EntityFrameworkCore  v - 5.1.2
+		- Refactoring GetAll Method in PostManager and used LinqKit.Microsoft.EntityFrameworkCore predicateBuilder
+	* Let's Complete Our Post Search Process
+	    - Edit RightSideBar : Search
+        
+
+	* Let's Edit Our CommentManager Class : Increasing and decreasing the number of comments
+	    - Create Comment
+	    - UndoDelete Comment
+	    - Delete Comment
+	    - Update Comment
+	* Let's Create Backend Parts of Our Commenting Process
+	    - CommentAddAjaxViewModel

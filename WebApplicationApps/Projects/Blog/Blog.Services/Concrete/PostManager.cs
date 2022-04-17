@@ -10,6 +10,7 @@ using Blog.Shared.Helpers;
 using Blog.Shared.Localizations;
 using Blog.Shared.Utilities.Results.Abstract;
 using Blog.Shared.Utilities.Results.Concrete;
+using LinqKit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -89,21 +90,43 @@ namespace Blog.Services.Concrete
             return Ok(outputDto);
         }
 
-        public async Task<IResult<PagedResult<PostDto>>> GetAllByPagingAsync(int? categoryId, int? currentPage, int? pageSize, bool isAscending = false)
+        public async Task<IResult<PagedResult<PostDto>>> GetAllByPagingAsync(PostFilterDto filter)
         {
-            var query = _unitOfWork.Posts.Query(i => !i.IsDeleted && i.IsActive,
+
+            // v2 LinqKit package
+            var predicate = PredicateBuilder.New<Post>(true);
+
+            predicate = predicate.And(i => i.IsDeleted == false && i.IsActive == true);
+
+            if (filter.CategoryId.HasValue)
+                predicate = predicate.And(i => i.CategoryId == filter.CategoryId);
+
+            if (!string.IsNullOrEmpty(filter.Keyword))
+            {
+                var keyword = filter.Keyword.ToLower();
+
+                predicate = predicate.And(i => i.Title.ToLower().Contains(keyword)
+                                               || i.Content.ToLower().Contains(keyword)
+                                               || i.Category.Name.ToLower().Contains(keyword)
+                                               || i.SeoDescription.ToLower().Contains(keyword)
+                                               || i.SeoTags.ToLower().Contains(keyword)
+                                               || i.SeoAuthor.ToLower().Contains(keyword));
+            }
+
+            var query = _unitOfWork.Posts.Query(predicate,
                 null,
                 false,
                 i => i.Category,
                 i => i.User).ProjectTo<PostDto>(_mapper.ConfigurationProvider);
 
-            if (categoryId.HasValue)
-                query = query.Where(i => i.CategoryId == categoryId);
+            query = filter.IsAsc
+                ? query.OrderBy(i => i.Date)
+                : query.OrderByDescending(i => i.Date);
 
-            query = isAscending ? query.OrderBy(i => i.Date) : query.OrderByDescending(i => i.Date);
 
-            var pagedResult = currentPage.HasValue && pageSize.HasValue
-                ? await query.GetManyAndPaginate(currentPage.Value, pageSize.Value)
+
+            var pagedResult = filter.CurrentPage.HasValue && filter.PageSize.HasValue
+                ? await query.GetManyAndPaginate(filter.CurrentPage.Value, filter.PageSize.Value > 18 ? 18 : filter.PageSize.Value)
                 : await query.GetManyAndPaginate();
 
             if (pagedResult == null)

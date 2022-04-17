@@ -140,11 +140,30 @@ namespace Blog.Services.Concrete
 
         public async Task<IResult<CommentDto>> AddAsync(CommentAddDto dto)
         {
-            if (CurrentUser is null) return Unauthorized<CommentDto>();
+
+
+            var post = await _unitOfWork.Posts.GetAsync(i => i.Id == dto.PostId);
+
+            if (post is null)
+                return NotFound<CommentDto>(BaseLocalization.NotFoundCodeGeneralMessage);
+
             var entity = _mapper.Map<Comment>(dto);
-            entity.SetCreatedByName(CurrentUser.UserName);
-            entity.UserId = CurrentUser.Id;
+
+            if (CurrentUser is not null)
+            {
+                entity.SetCreatedByName(CurrentUser.UserName);
+                entity.UserId = CurrentUser.Id;
+            }
+            else if (!string.IsNullOrEmpty(dto.CreatedBy))
+            {
+                entity.SetCreatedByName(dto.CreatedBy);
+            }
+
             var createdEntity = await _unitOfWork.Comments.AddAsync(entity);
+
+            post.IncreaseCommentCount();
+            await _unitOfWork.Posts.UpdateAsync(post);
+
             await _unitOfWork.SaveChangesAsync();
             var outputDto = _mapper.Map<CommentDto>(createdEntity);
             return Created(outputDto);
@@ -172,12 +191,14 @@ namespace Blog.Services.Concrete
         public async Task<IResult<CommentDto>> DeleteAsync(int id)
         {
             if (CurrentUser is null) return Unauthorized<CommentDto>();
-            var entity = await _unitOfWork.Comments.GetAsync(c => c.Id == id);
+            var entity = await _unitOfWork.Comments.GetAsync(c => c.Id == id, includeProperties: c => c.Post);
             if (entity is null)
                 return NotFound<CommentDto>(BaseLocalization.NoDataAvailableOnRequest);
+            var post = entity.Post;
             entity.SetIsDeleted(true);
             entity.SetModifiedByName(CurrentUser.UserName);
             var deletedEntity = await _unitOfWork.Comments.UpdateAsync(entity);
+            post.IncreaseCommentCount();
             await _unitOfWork.SaveChangesAsync();
             var outputDto = _mapper.Map<CommentDto>(deletedEntity);
             return Deleted(outputDto);
@@ -185,12 +206,16 @@ namespace Blog.Services.Concrete
         public async Task<IResult<CommentDto>> UndoDeleteAsync(int id)
         {
             if (CurrentUser is null) return Unauthorized<CommentDto>();
-            var entity = await _unitOfWork.Comments.GetAsync(c => c.Id == id);
+            var entity = await _unitOfWork.Comments.GetAsync(c => c.Id == id, c => c.Post);
+
             if (entity is null)
                 return NotFound<CommentDto>(BaseLocalization.NoDataAvailableOnRequest);
+            var post = entity.Post;
             entity.SetIsDeleted(false);
             entity.SetModifiedByName(CurrentUser.UserName);
             var deletedEntity = await _unitOfWork.Comments.UpdateAsync(entity);
+            post.IncreaseCommentCount();
+            await _unitOfWork.Posts.UpdateAsync(post);
             await _unitOfWork.SaveChangesAsync();
             var outputDto = _mapper.Map<CommentDto>(deletedEntity);
             return UndoDeleted(outputDto);
@@ -198,9 +223,13 @@ namespace Blog.Services.Concrete
 
         public async Task<IResult<bool>> HardDeleteAsync(int id)
         {
-            var entity = await _unitOfWork.Comments.GetAsync(c => c.Id == id);
+            var entity = await _unitOfWork.Comments.GetAsync(c => c.Id == id, includeProperties: c => c.Post);
+
             if (entity == null)
                 return NotFound<bool>(BaseLocalization.NoDataAvailableOnRequest);
+            var post = entity.Post;
+            post.CommentCount = await _unitOfWork.Comments.CountAsync(c => c.PostId == post.Id && !c.IsDeleted && c.IsActive);
+            await _unitOfWork.Posts.UpdateAsync(post);
             await _unitOfWork.Comments.DeleteAsync(entity);
             await _unitOfWork.SaveChangesAsync();
             return Deleted(true);

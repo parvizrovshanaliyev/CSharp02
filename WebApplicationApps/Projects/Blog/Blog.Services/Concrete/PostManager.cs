@@ -103,12 +103,14 @@ namespace Blog.Services.Concrete
 
             if (!string.IsNullOrEmpty(filter.Keyword))
             {
-                predicate = predicate.And(i => i.Title.Contains(filter.Keyword)
-                                               || i.Content.Contains(filter.Keyword)
-                                               || i.Category.Name.Contains(filter.Keyword)
-                                               || i.SeoDescription.Contains(filter.Keyword)
-                                               || i.SeoTags.Contains(filter.Keyword)
-                                               || i.SeoAuthor.Contains(filter.Keyword));
+                var keyword = filter.Keyword.ToLower();
+
+                predicate = predicate.And(i => i.Title.ToLower().Contains(keyword)
+                                               || i.Content.ToLower().Contains(keyword)
+                                               || i.Category.Name.ToLower().Contains(keyword)
+                                               || i.SeoDescription.ToLower().Contains(keyword)
+                                               || i.SeoTags.ToLower().Contains(keyword)
+                                               || i.SeoAuthor.ToLower().Contains(keyword));
             }
 
             var query = _unitOfWork.Posts.Query(predicate,

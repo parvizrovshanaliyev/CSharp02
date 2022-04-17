@@ -5,12 +5,14 @@
     <div class="card my-4">
         <h5 class="card-header">Search</h5>
         <div class="card-body">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Enter search term ...">
-                <span class="input-group-append">
-                    <button class="btn btn-secondary" type="button">Go!</button>
-                </span>
-            </div>
+            <form asp-controller="Home" asp-action="Index" method="get">
+                <div class="input-group">
+                    <input type="text" name="keyword" class="form-control" placeholder="Enter search term ...">
+                    <span class="input-group-append">
+                        <button class="btn btn-secondary" type="submit">Search!</button>
+                    </span>
+                </div>
+            </form>
         </div>
     </div>
 

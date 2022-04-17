@@ -16,6 +16,11 @@ namespace Blog.Entities.Dtos.Comment
 
         [Display(ResourceType = typeof(BaseLocalization), Name = nameof(BaseLocalization.IsActive))]
         public bool IsActive { get; set; } = true;
+
+        [MaxLength(15, ErrorMessageResourceType = typeof(BaseLocalization), ErrorMessageResourceName = nameof(BaseLocalization.MaxLengthErrorMessage))]
+        [MinLength(2, ErrorMessageResourceType = typeof(BaseLocalization), ErrorMessageResourceName = nameof(BaseLocalization.MinLengthErrorMessage))]
+        public string CreatedBy { get; set; }
+
     }
 }
 

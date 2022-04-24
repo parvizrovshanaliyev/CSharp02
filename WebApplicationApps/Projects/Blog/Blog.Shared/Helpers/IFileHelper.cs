@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-using Blog.Shared.Enums;
+﻿using Blog.Shared.Enums;
 using Blog.Shared.Extensions;
 using Blog.Shared.Localizations;
 using Blog.Shared.Utilities.Results.Abstract;
@@ -9,6 +6,9 @@ using Blog.Shared.Utilities.Results.ComplexTypes;
 using Blog.Shared.Utilities.Results.Concrete;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Blog.Shared.Helpers
 {

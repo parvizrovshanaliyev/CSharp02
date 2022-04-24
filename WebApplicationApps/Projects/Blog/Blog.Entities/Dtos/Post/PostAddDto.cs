@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Blog.Shared.Localizations;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Blog.Shared.Localizations;
-using Microsoft.AspNetCore.Http;
 
 namespace Blog.Entities.Dtos.Post
 {

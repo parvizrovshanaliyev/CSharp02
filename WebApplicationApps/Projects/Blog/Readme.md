@@ -842,3 +842,10 @@ Developing a Project with N-Tier Architecture
 	* Let's Create Our Enum Values named FilterBy and OrderBy
 	  * 
 	* Let's Create Our AboutUsPageInfo Class and Our About Page
+	  * 
+    * Let's Create Our WebsiteInfo Class and Inject it on Our _Layout
+	  *
+	* Let's Create Our Contact Page and EmailSendDto Class
+	* Let's Create Our SmtpSettings Class and Add it on Appsettings.json
+	  *
+    * Let's Create Our _MainMenuPartial Page

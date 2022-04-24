@@ -9,11 +9,11 @@
     <title>Programmer Blog | @ViewBag.Title</title>
     <!-- Bootstrap core CSS -->
     <link href="~/ui/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" crossorigin="anonymous"/>
 
     <!-- Custom styles for this template -->
     <link href="~/ui/css/blog-home.css" rel="stylesheet">
+    <link href="~/ui/css/contact-page.css" rel="stylesheet">
     @await RenderSectionAsync("Styles", false);
 </head>
 
@@ -23,36 +23,22 @@
 <partial name="_MainMenuPartial" />
 
 <!-- Page Content -->
-<div class="container">
+<div class="container-fluid">
 
     <div class="row">
 
         <!-- Blog Entries Column -->
         @RenderBody()
-
-        <!-- Sidebar Widgets Column -->
-        @*@await Component.InvokeAsync("RightSideBar")*@
-
     </div>
     <!-- /.row -->
 
 </div>
 <!-- /.container -->
-
-<!-- Footer -->
-<footer class="py-5 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white">Blog Application; Your Website 2021</p>
-    </div>
-    <!-- /.container -->
-</footer>
-
 <!-- Bootstrap core JavaScript -->
 <script src="~/ui/vendor/jquery/jquery.min.js"></script>
 <script src="~/ui/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" crossorigin="anonymous"></script>
-
 @await RenderSectionAsync("Scripts",false);
+@await Component.InvokeAsync("NToastNotify")
 </body>
-
 </html>

@@ -273,4 +273,7 @@
   <data name="UndoDeletedSuccessfully" xml:space="preserve">
     <value>UNDO DELETE :Retrieved from archive</value>
   </data>
+  <data name="FullName" xml:space="preserve">
+    <value>FullName</value>
+  </data>
 </root>

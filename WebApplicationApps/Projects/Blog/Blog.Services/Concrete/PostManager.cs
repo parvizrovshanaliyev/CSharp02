@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Blog.Data.Abstract;
+using Blog.Entities.ComplexTypes;
 using Blog.Entities.Concrete;
 using Blog.Entities.Dtos.Post;
 using Blog.Services.Abstract;
@@ -92,14 +93,73 @@ namespace Blog.Services.Concrete
 
         public async Task<IResult<PagedResult<PostDto>>> GetAllByPagingAsync(PostFilterDto filter)
         {
+            var predicate = ExpressionStarter(filter);
 
-            // v2 LinqKit package
+            var query = _unitOfWork.Posts.Query(predicate,
+                null,
+                false,
+                i => i.Category,
+                i => i.User).ProjectTo<PostDto>(_mapper.ConfigurationProvider);
+
+            query = OrderByQuery(filter, query);
+
+            var pagedResult = filter.CurrentPage.HasValue && filter.PageSize.HasValue
+                ? await query.GetManyAndPaginate(filter.CurrentPage.Value, filter.PageSize.Value > 18 ? 18 : filter.PageSize.Value)
+                : await query.GetManyAndPaginate();
+
+            if (pagedResult == null)
+                return NotFound<PagedResult<PostDto>>(BaseLocalization.NoDataAvailableOnRequest);
+
+            return Ok(pagedResult);
+        }
+
+        private static IQueryable<PostDto> OrderByQuery(PostFilterDto filter, IQueryable<PostDto> query)
+        {
+            // check filter.OrderBy.has value
+            if (filter.OrderBy.HasValue)
+            {
+
+                query = filter.OrderBy.Value switch
+                {
+                    OrderBy.Date => filter.IsAsc
+                        ? query.OrderBy(i => i.Date)
+                        : query.OrderByDescending(i => i.Date),
+                    OrderBy.ViewCount => filter.IsAsc
+                        ? query.OrderBy(i => i.ViewsCount)
+                        : query.OrderByDescending(i => i.ViewsCount),
+                    OrderBy.CommentCount => filter.IsAsc
+                        ? query.OrderBy(i => i.CommentsCount)
+                        : query.OrderByDescending(i => i.CommentsCount),
+                    _ => filter.IsAsc
+                        ? query.OrderBy(i => i.Date)
+                        : query.OrderByDescending(i => i.Date)
+                };
+            }
+            return query;
+        }
+
+        private static ExpressionStarter<Post> ExpressionStarter(PostFilterDto filter)
+        {
             var predicate = PredicateBuilder.New<Post>(true);
 
             predicate = predicate.And(i => i.IsDeleted == false && i.IsActive == true);
 
             if (filter.CategoryId.HasValue)
-                predicate = predicate.And(i => i.CategoryId == filter.CategoryId);
+                predicate = predicate.And(i => i.CategoryId == filter.CategoryId.Value);
+            if (filter.UserId.HasValue)
+                predicate = predicate.And(i => i.UserId == filter.UserId.Value);
+            if (filter.FromDate.HasValue)
+                predicate = predicate.And(i => i.CreatedDate >= filter.FromDate.Value);
+            if (filter.ToDate.HasValue)
+                predicate = predicate.And(i => i.CreatedDate <= filter.ToDate.Value);
+            if (filter.MinViewCount.HasValue)
+                predicate = predicate.And(i => i.ViewsCount >= filter.MinCommentCount.Value);
+            if (filter.MaxViewCount.HasValue)
+                predicate = predicate.And(i => i.ViewsCount <= filter.MaxViewCount.Value);
+            if (filter.MinCommentCount.HasValue)
+                predicate = predicate.And(i => i.CommentCount >= filter.MinCommentCount.Value);
+            if (filter.MaxCommentCount.HasValue)
+                predicate = predicate.And(i => i.CommentCount <= filter.MaxCommentCount.Value);
 
             if (!string.IsNullOrEmpty(filter.Keyword))
             {
@@ -113,26 +173,7 @@ namespace Blog.Services.Concrete
                                                || i.SeoAuthor.ToLower().Contains(keyword));
             }
 
-            var query = _unitOfWork.Posts.Query(predicate,
-                null,
-                false,
-                i => i.Category,
-                i => i.User).ProjectTo<PostDto>(_mapper.ConfigurationProvider);
-
-            query = filter.IsAsc
-                ? query.OrderBy(i => i.Date)
-                : query.OrderByDescending(i => i.Date);
-
-
-
-            var pagedResult = filter.CurrentPage.HasValue && filter.PageSize.HasValue
-                ? await query.GetManyAndPaginate(filter.CurrentPage.Value, filter.PageSize.Value > 18 ? 18 : filter.PageSize.Value)
-                : await query.GetManyAndPaginate();
-
-            if (pagedResult == null)
-                return NotFound<PagedResult<PostDto>>(BaseLocalization.NoDataAvailableOnRequest);
-
-            return Ok(pagedResult);
+            return predicate;
         }
 
         #region GetAllByNonDeletedAsync
@@ -207,6 +248,17 @@ namespace Blog.Services.Concrete
         {
             var count = await _unitOfWork.Posts.CountAsync(c => c.IsDeleted == isDeleted);
             return count > -1 ? Ok(count) : NotFound<int>(BaseLocalization.NoDataAvailableOnRequest);
+        }
+
+        public async Task<IResult<int>> IncreaseViewCountAsync(int id)
+        {
+            var entity = await _unitOfWork.Posts.GetAsync(i => i.Id == id);
+            if (entity is null)
+                return NotFound<int>(BaseLocalization.NotFoundCodeGeneralMessage);
+            entity.IncreaseViewCount();
+            await _unitOfWork.Posts.UpdateAsync(entity);
+            await _unitOfWork.SaveChangesAsync();
+            return Updated(entity.ViewsCount);
         }
 
         #endregion

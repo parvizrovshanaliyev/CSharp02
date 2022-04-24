@@ -140,15 +140,9 @@ namespace Blog.Services.Concrete
 
         public async Task<IResult<CommentDto>> AddAsync(CommentAddDto dto)
         {
-
-
             var post = await _unitOfWork.Posts.GetAsync(i => i.Id == dto.PostId);
-
-            if (post is null)
-                return NotFound<CommentDto>(BaseLocalization.NotFoundCodeGeneralMessage);
-
+            if (post is null) return NotFound<CommentDto>(BaseLocalization.NotFoundCodeGeneralMessage);
             var entity = _mapper.Map<Comment>(dto);
-
             if (CurrentUser is not null)
             {
                 entity.SetCreatedByName(CurrentUser.UserName);
@@ -160,10 +154,8 @@ namespace Blog.Services.Concrete
             }
 
             var createdEntity = await _unitOfWork.Comments.AddAsync(entity);
-
             post.IncreaseCommentCount();
             await _unitOfWork.Posts.UpdateAsync(post);
-
             await _unitOfWork.SaveChangesAsync();
             var outputDto = _mapper.Map<CommentDto>(createdEntity);
             return Created(outputDto);
@@ -198,7 +190,7 @@ namespace Blog.Services.Concrete
             entity.SetIsDeleted(true);
             entity.SetModifiedByName(CurrentUser.UserName);
             var deletedEntity = await _unitOfWork.Comments.UpdateAsync(entity);
-            post.IncreaseCommentCount();
+            post.DecreaseViewCount();
             await _unitOfWork.SaveChangesAsync();
             var outputDto = _mapper.Map<CommentDto>(deletedEntity);
             return Deleted(outputDto);

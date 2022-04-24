@@ -24,7 +24,6 @@ namespace Blog.WebAPP.CORE.MVC.Controllers
 
         #endregion
 
-
         #region methods
         [HttpPost]
         [ValidateAntiForgeryToken]

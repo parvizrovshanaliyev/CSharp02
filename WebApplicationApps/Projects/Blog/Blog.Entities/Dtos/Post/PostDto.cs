@@ -1,4 +1,5 @@
 ﻿using Blog.Entities.Dtos.Comment;
+using Blog.Entities.Dtos.User;
 using System;
 using System.Collections.Generic;
 
@@ -18,9 +19,7 @@ namespace Blog.Entities.Dtos.Post
         public string SeoAuthor { get; set; }
         public string SeoDescription { get; set; }
         public string SeoTags { get; set; }
-
         public IList<CommentDto> Comments { get; set; } = new List<CommentDto>();
-
-
+        public UserDto User { get; set; }
     }
 }

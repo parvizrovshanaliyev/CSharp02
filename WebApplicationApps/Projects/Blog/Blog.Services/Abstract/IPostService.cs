@@ -13,7 +13,6 @@ namespace Blog.Services.Abstract
     {
         Task<IResult<PostDto>> GetAsync(int id);
         Task<IResult<PostDto>> GetAsync(Expression<Func<Post, bool>> predicate, params Expression<Func<Post, object>>[] includeProperties);
-
         Task<IResult<PostUpdateDto>> GetUpdateDtoAsync(int id);
         Task<IResult<IList<PostDto>>> GetAllAsync();
         Task<IResult<PagedResult<PostDto>>> GetAllByPagingAsync(PostFilterDto filter);
@@ -28,5 +27,6 @@ namespace Blog.Services.Abstract
         Task<IResult<PostDto>> UndoDeleteAsync(int id);
         Task<IResult<bool>> HardDeleteAsync(int id);
         Task<IResult<int>> CountAsync(bool isDeleted = false);
+        Task<IResult<int>> IncreaseViewCountAsync(int id);
     }
 }

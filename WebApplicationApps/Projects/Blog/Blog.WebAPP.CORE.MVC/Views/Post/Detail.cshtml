@@ -1,60 +1,75 @@
 ﻿@using Blog.Entities.Dtos.Comment
-@model PostDto
+@model (PostDto postDetail, Blog.WebAPP.CORE.MVC.Models.PostDetailRightSideBarViewModel postDetailRightSideBarViewModel)
 @{
     Layout = "_PostLayout";
-    ViewBag.Title = Model.Title;
-    ViewBag.Tags=Model.SeoTags;
-    ViewBag.Description = Model.SeoDescription;
-    ViewBag.Author =Model.SeoAuthor;
+    var postDetail = Model.postDetail;
+    ViewBag.Title = postDetail.Title;
+    ViewBag.Tags = postDetail.SeoTags;
+    ViewBag.Description = postDetail.SeoDescription;
+    ViewBag.Author = postDetail.SeoAuthor;
 }
 <div class="col-lg-8">
 
     <!-- Title -->
-    <h1 class="mt-4">@Model.Title</h1>
+    <h1 class="mt-4">@postDetail.Title</h1>
     <hr>
 
     <!-- Date/Time -->
-    <p class="lead badge">Posted on <span class="badge">@Model.Date.ToString("d")</span>  by @Model.CreatedByName</p>
+    <p class="lead badge">Posted on <span class="badge">@postDetail.Date.ToString("d")</span>  by @postDetail.CreatedByName</p>
 
     <hr>
 
     <!-- Preview Image -->
     <div class="text-center">
-        <img class="img-fluid rounded" src="~/img/@Model.Thumbnail" alt="@Model.Title">
+        <img class="img-fluid rounded" src="~/img/@postDetail.Thumbnail" alt="@postDetail.Title">
     </div>
 
     <hr>
-    <p class="text-center"> <span class="badge"><i class="fa fa-eye"></i> @Model.ViewsCount</span><span class="badge"><i class="fa fa-comment"></i> @Model.CommentsCount</span> </p>
+    <p class="text-center"> <span class="badge"><i class="fa fa-eye"></i> @postDetail.ViewsCount</span><span class="badge"><i class="fa fa-comment"></i> @postDetail.CommentsCount</span> </p>
     <!-- Post Content -->
-    @Html.Raw(Model.Content)
+    @Html.Raw(postDetail.Content)
     <!-- Post Content -->
     <hr>
-   
-   
+
+
     <!-- Create Comment -->
-    <partial name="~/Views/Comment/_CreatePartial.cshtml"  model="new CommentAddDto(){PostId = Model.Id}"/>
-    
+    <partial name="~/Views/Comment/_CreatePartial.cshtml" model="new CommentAddDto(){PostId = postDetail.Id}" />
+
     <div class="comments-list">
-    @foreach (var comment in Model.Comments)
-    {
-        <!-- Single Comment -->
-        <div class="media mb-4">
-            <img class="d-flex mr-3 rounded-circle" src="https://randomuser.me/api/portraits/men/34.jpg" alt="">
-            <div class="media-body">
-                <h5 class="mt-0">@comment.CreatedByName</h5>
-                @comment.Content
+        @foreach (var comment in postDetail.Comments)
+        {
+            <!-- Single Comment -->
+            <div class="media mb-4">
+                <img class="d-flex mr-3 rounded-circle" src="https://randomuser.me/api/portraits/men/34.jpg" alt="">
+                <div class="media-body">
+                    <h5 class="mt-0">@comment.CreatedByName</h5>
+                    @comment.Content
+                </div>
             </div>
-        </div>
-    }
+        }
     </div>
 </div>
 
+<partial name="_DetailRightSideBarPartial" model="Model.postDetailRightSideBarViewModel" />
+
 @section Styles
 {
+<style>
+    .image-thumbnail {
+        border: 2px solid #f6f6f6;
+        border-radius: 15px;
+        padding: 5px;
+        margin: auto;
+        max-width: 100px;
+        max-height: 100px;
+    }
+</style>
 }
 
 @section Scripts
 {
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-    <script src="~/ui/js/comment-create.js" asp-append-version="true"></script>
+    @{
+       await Html.RenderPartialAsync("_ValidationScriptsPartial");
+     }
+<script src="~/ui/js/comment-create.js" asp-append-version="true"></script>
 }

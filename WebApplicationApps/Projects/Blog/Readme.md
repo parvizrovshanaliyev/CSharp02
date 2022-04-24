@@ -835,4 +835,10 @@ Developing a Project with N-Tier Architecture
 	    - Delete Comment
 	    - Update Comment
 	* Let's Create Backend Parts of Our Commenting Process
-	    - CommentAddAjaxViewModel
+	  *
+	* Let's Create Our IncreaseViewCountAsync() Operation For Our Posts
+	* Let's Create Our ViewCountFilterAttribute Class for Post Read Counts
+	  * 
+	* Let's Create Our Enum Values named FilterBy and OrderBy
+	  * 
+	* Let's Create Our AboutUsPageInfo Class and Our About Page

@@ -1,0 +1,87 @@
+﻿@model Blog.WebAPP.CORE.MVC.Models.PostDetailRightSideBarViewModel
+@{
+    var author = Model.Author;
+    var relatedPosts = Model.RelatedPosts;
+}
+<div class="col-md-4">
+    <!-- author widget -->
+    <div class="card my-4">
+        <img src="~/img/@author.Avatar" class="card-img-top text-center image-thumbnail mt-1 mb-1" alt="@author.FullName"/>  
+        <h5 class="card-header text-center">@author.FullName</h5>
+        <div class="card-body">
+            <p class="card-text text-center">@author.AboutMe</p>
+            <div class="card-footer text-center">
+                <p>Socials</p>
+                @if (author.LinkedInLink != null)
+                {
+                    <a href="@author.LinkedInLink">
+                        <span class="fab fa-linkedin"></span>
+                    </a>
+                }
+
+                @if (author.GitHubLink != null)
+                {
+                    <a href="@author.GitHubLink">
+                        <span class="fab fa-github-square"></span>
+                    </a>
+                }
+
+                @if (author.TwitterLink != null)
+                {
+                    <a href="@author.TwitterLink">
+                        <span class="fab fa-twitter-square"></span>
+                    </a>
+                }
+
+                @if (author.FacebookLink != null)
+                {
+                    <a href="@author.FacebookLink">
+                        <span class="fab fa-facebook-square"></span>
+                    </a>
+                }
+
+                @if (author.InstagramLink != null)
+                {
+                    <a href="@author.InstagramLink">
+                        <span class="fab fa-instagram-square"></span>
+                    </a>
+                }
+
+                @if (author.YoutubeLink != null)
+                {
+                    <a href="@author.YoutubeLink">
+                        <span class="fab fa-youtube-square"></span>
+                    </a>
+                }
+
+                @if (author.WebsiteLink != null)
+                {
+                    <a href="@author.WebsiteLink">
+                        <span class="fab fa-home"></span>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Side Widget -->
+    <div class="card my-4">
+        <h5 class="card-header">@Model.Header</h5>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-group mb-0">
+                        @foreach (var post in relatedPosts)
+                        {
+                            <li class="list-group-item">
+                                <a asp-controller="Post" asp-action="Detail" asp-route-id="@post.Id">@post.Title</a>
+                                <div class="small text-muted">Posted on @post.Date.ToString("d") by <a href="#">@post.CreatedByName</a>  <small><i class="fa fa-eye"></i> @post.ViewsCount</small></div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -3,66 +3,77 @@ using System;
 using Blog.Data.Concrete.EntityFramework.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Blog.Data.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    [Migration("20220320073257_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220912101549_initial-project")]
+    partial class initialproject
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.12")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
             modelBuilder.Entity("Blog.Entities.Concrete.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasColumnName("id")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("CreatedByName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text")
+                        .HasColumnName("created_by_name");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("created_date");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("description");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_active");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_deleted");
 
                     b.Property<string>("ModifiedByName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text")
+                        .HasColumnName("modified_by_name");
 
                     b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("modified_date");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
+                        .HasColumnType("character varying(70)")
+                        .HasColumnName("name");
 
                     b.Property<string>("Note")
                         .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("note");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_categories");
 
                     b.ToTable("Categories");
                 });
@@ -71,49 +82,63 @@ namespace Blog.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasColumnName("id")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnName("content");
 
                     b.Property<string>("CreatedByName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text")
+                        .HasColumnName("created_by_name");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("created_date");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_active");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_deleted");
 
                     b.Property<string>("ModifiedByName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text")
+                        .HasColumnName("modified_by_name");
 
                     b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("modified_date");
 
                     b.Property<string>("Note")
                         .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("note");
 
                     b.Property<int>("PostId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer")
+                        .HasColumnName("post_id");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<int?>("UserId")
+                        .HasColumnType("integer")
+                        .HasColumnName("user_id");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_comments");
 
-                    b.HasIndex("PostId");
+                    b.HasIndex("PostId")
+                        .HasDatabaseName("ix_comments_post_id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("ix_comments_user_id");
 
                     b.ToTable("Comments");
                 });
@@ -122,82 +147,104 @@ namespace Blog.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasColumnName("id")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer")
+                        .HasColumnName("category_id");
 
                     b.Property<int>("CommentCount")
-                        .HasColumnType("int");
+                        .HasColumnType("integer")
+                        .HasColumnName("comment_count");
 
                     b.Property<string>("Content")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR(MAX)");
+                        .HasColumnType("text")
+                        .HasColumnName("content");
 
                     b.Property<string>("CreatedByName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text")
+                        .HasColumnName("created_by_name");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("created_date");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("date");
 
                     b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_active");
 
                     b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean")
+                        .HasColumnName("is_deleted");
 
                     b.Property<string>("ModifiedByName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text")
+                        .HasColumnName("modified_by_name");
 
                     b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("modified_date");
 
                     b.Property<string>("Note")
                         .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasColumnType("character varying(500)")
+                        .HasColumnName("note");
 
                     b.Property<string>("SeoAuthor")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("seo_author");
 
                     b.Property<string>("SeoDescription")
                         .IsRequired()
                         .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("seo_description");
 
                     b.Property<string>("SeoTags")
                         .IsRequired()
                         .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
+                        .HasColumnType("character varying(70)")
+                        .HasColumnName("seo_tags");
 
                     b.Property<string>("Thumbnail")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasColumnType("character varying(250)")
+                        .HasColumnName("thumbnail");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("title");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer")
+                        .HasColumnName("user_id");
 
                     b.Property<int>("ViewsCount")
-                        .HasColumnType("int");
+                        .HasColumnType("integer")
+                        .HasColumnName("views_count");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_posts");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("CategoryId")
+                        .HasDatabaseName("ix_posts_category_id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("ix_posts_user_id");
 
                     b.ToTable("Posts");
                 });
@@ -206,27 +253,31 @@ namespace Blog.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasColumnName("id")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text")
+                        .HasColumnName("concurrency_stamp");
 
                     b.Property<string>("Name")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("name");
 
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("normalized_name");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_asp_net_roles");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", "Identity");
 
@@ -391,21 +442,27 @@ namespace Blog.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasColumnName("id")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text")
+                        .HasColumnName("claim_type");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text")
+                        .HasColumnName("claim_value");
 
                     b.Property<int>("RoleId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer")
+                        .HasColumnName("role_id");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_asp_net_role_claims");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("RoleId")
+                        .HasDatabaseName("ix_asp_net_role_claims_role_id");
 
                     b.ToTable("AspNetRoleClaims", "Identity");
                 });
@@ -414,110 +471,136 @@ namespace Blog.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasColumnName("id")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("AboutMe")
                         .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
+                        .HasColumnType("character varying(1000)")
+                        .HasColumnName("about_me");
 
                     b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
+                        .HasColumnType("integer")
+                        .HasColumnName("access_failed_count");
 
                     b.Property<string>("Avatar")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasColumnType("character varying(250)")
+                        .HasColumnName("avatar");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text")
+                        .HasColumnName("concurrency_stamp");
 
                     b.Property<string>("Email")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("email");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean")
+                        .HasColumnName("email_confirmed");
 
                     b.Property<string>("FacebookLink")
                         .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasColumnType("character varying(250)")
+                        .HasColumnName("facebook_link");
 
                     b.Property<string>("FirstName")
                         .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("character varying(30)")
+                        .HasColumnName("first_name");
 
                     b.Property<string>("GitHubLink")
                         .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasColumnType("character varying(250)")
+                        .HasColumnName("git_hub_link");
 
                     b.Property<string>("InstagramLink")
                         .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasColumnType("character varying(250)")
+                        .HasColumnName("instagram_link");
 
                     b.Property<string>("LastName")
                         .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
+                        .HasColumnType("character varying(30)")
+                        .HasColumnName("last_name");
 
                     b.Property<string>("LinkedInLink")
                         .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasColumnType("character varying(250)")
+                        .HasColumnName("linked_in_link");
 
                     b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean")
+                        .HasColumnName("lockout_enabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("lockout_end");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("normalized_email");
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("normalized_user_name");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text")
+                        .HasColumnName("password_hash");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text")
+                        .HasColumnName("phone_number");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean")
+                        .HasColumnName("phone_number_confirmed");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text")
+                        .HasColumnName("security_stamp");
 
                     b.Property<string>("TwitterLink")
                         .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasColumnType("character varying(250)")
+                        .HasColumnName("twitter_link");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean")
+                        .HasColumnName("two_factor_enabled");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("user_name");
 
                     b.Property<string>("WebsiteLink")
                         .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasColumnType("character varying(250)")
+                        .HasColumnName("website_link");
 
                     b.Property<string>("YoutubeLink")
                         .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
+                        .HasColumnType("character varying(250)")
+                        .HasColumnName("youtube_link");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_asp_net_users");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", "Identity");
 
@@ -527,7 +610,7 @@ namespace Blog.Data.Migrations
                             Id = 1,
                             AccessFailedCount = 0,
                             Avatar = "Users/defaultUser.png",
-                            ConcurrencyStamp = "bcce8cf9-2b60-4c75-b050-24ad490bf5de",
+                            ConcurrencyStamp = "c6480f99-28db-420a-8705-d73984f5a321",
                             Email = "adminUser@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Super Admin",
@@ -535,7 +618,7 @@ namespace Blog.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMINUSER@GMAIL.COM",
                             NormalizedUserName = "ADMINUSER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDFclzZKfSNnDTReNYKJPS+c05Mcbe4vPKjoE5oUzuEd5bM7m1Lel6iJqE3IKuVA9g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECZ3evZybc2+jwI/rgLZcXLksi70+f95fAFk1btLRTeflu3VRJiZSwRavydlxFEM4w==",
                             PhoneNumber = "+9949999999",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "3317689B-4358-4F80-874E-D8B6EAEF0AE4",
@@ -547,7 +630,7 @@ namespace Blog.Data.Migrations
                             Id = 2,
                             AccessFailedCount = 0,
                             Avatar = "Users/defaultUser.png",
-                            ConcurrencyStamp = "20d75ec2-f7e7-4727-87e7-16e4714f61af",
+                            ConcurrencyStamp = "a171912d-6895-4bf2-bbc1-5855160d9dde",
                             Email = "editorUser@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Editor",
@@ -555,7 +638,7 @@ namespace Blog.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "EDITORUSER@GMAIL.COM",
                             NormalizedUserName = "EDITORUSER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGU7CIBz+czMirQI9q4fYjbHpvFT/0++nzhc5zO4tuza6sJVptrrVoRWv7me/MLjlg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAIrXFhINk5oelO9lMZdlQsBPGBQ3m0H2xRcMg25TZoCRLKIOA+BGjL/rQCINCyPGw==",
                             PhoneNumber = "+9949999999",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "3FFDA2C7-A349-4902-AC11-6FFAB9969424",
@@ -567,7 +650,7 @@ namespace Blog.Data.Migrations
                             Id = 3,
                             AccessFailedCount = 0,
                             Avatar = "Users/defaultUser.png",
-                            ConcurrencyStamp = "c1db50c7-2bc7-4344-a7a1-a4a71f00aa66",
+                            ConcurrencyStamp = "2684fb06-4389-4e22-b936-c3c359c585a7",
                             Email = "memberUser@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Member",
@@ -575,7 +658,7 @@ namespace Blog.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MEMBERUSER@GMAIL.COM",
                             NormalizedUserName = "MEMBERUSER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHa3x9gFBUdFOwes6VSEr9juKoxl7mm6boNsBYEeQ+gzFBCz/+1+Os301XZEcKthwA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKObRemZ3RdV7kc3K0hpWYmyF2qWSK5plh9i4/xHJcS452PfBCDtIsg5WuooqxGAKQ==",
                             PhoneNumber = "+9949999999",
                             PhoneNumberConfirmed = true,
                             SecurityStamp = "075E56DF-300D-4AF1-952E-951A18322EE1",
@@ -588,21 +671,27 @@ namespace Blog.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("integer")
+                        .HasColumnName("id")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text")
+                        .HasColumnName("claim_type");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text")
+                        .HasColumnName("claim_value");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer")
+                        .HasColumnName("user_id");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_asp_net_user_claims");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("ix_asp_net_user_claims_user_id");
 
                     b.ToTable("AspNetUserClaims", "Identity");
                 });
@@ -611,21 +700,27 @@ namespace Blog.Data.Migrations
                 {
                     b.Property<string>("LoginProvider")
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("character varying(128)")
+                        .HasColumnName("login_provider");
 
                     b.Property<string>("ProviderKey")
                         .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("character varying(128)")
+                        .HasColumnName("provider_key");
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text")
+                        .HasColumnName("provider_display_name");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer")
+                        .HasColumnName("user_id");
 
-                    b.HasKey("LoginProvider", "ProviderKey");
+                    b.HasKey("LoginProvider", "ProviderKey")
+                        .HasName("pk_asp_net_user_logins");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("ix_asp_net_user_logins_user_id");
 
                     b.ToTable("AspNetUserLogins", "Identity");
                 });
@@ -633,14 +728,18 @@ namespace Blog.Data.Migrations
             modelBuilder.Entity("Blog.Entities.Concrete.UserRole", b =>
                 {
                     b.Property<int>("UserId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer")
+                        .HasColumnName("user_id");
 
                     b.Property<int>("RoleId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer")
+                        .HasColumnName("role_id");
 
-                    b.HasKey("UserId", "RoleId");
+                    b.HasKey("UserId", "RoleId")
+                        .HasName("pk_asp_net_user_roles");
 
-                    b.HasIndex("RoleId");
+                    b.HasIndex("RoleId")
+                        .HasDatabaseName("ix_asp_net_user_roles_role_id");
 
                     b.ToTable("AspNetUserRoles", "Identity");
 
@@ -825,20 +924,25 @@ namespace Blog.Data.Migrations
             modelBuilder.Entity("Blog.Entities.Concrete.UserToken", b =>
                 {
                     b.Property<int>("UserId")
-                        .HasColumnType("int");
+                        .HasColumnType("integer")
+                        .HasColumnName("user_id");
 
                     b.Property<string>("LoginProvider")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("login_provider");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("name");
 
                     b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text")
+                        .HasColumnName("value");
 
-                    b.HasKey("UserId", "LoginProvider", "Name");
+                    b.HasKey("UserId", "LoginProvider", "Name")
+                        .HasName("pk_asp_net_user_tokens");
 
                     b.ToTable("AspNetUserTokens", "Identity");
                 });
@@ -848,14 +952,15 @@ namespace Blog.Data.Migrations
                     b.HasOne("Blog.Entities.Concrete.Post", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostId")
+                        .HasConstraintName("fk_comments_posts_post_id")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Blog.Entities.Concrete.User", "User")
                         .WithMany("Comments")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasConstraintName("fk_comments_asp_net_users_user_id")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Post");
 
@@ -867,12 +972,14 @@ namespace Blog.Data.Migrations
                     b.HasOne("Blog.Entities.Concrete.Category", "Category")
                         .WithMany("Posts")
                         .HasForeignKey("CategoryId")
+                        .HasConstraintName("fk_posts_categories_category_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Blog.Entities.Concrete.User", "User")
                         .WithMany("Posts")
                         .HasForeignKey("UserId")
+                        .HasConstraintName("fk_posts_asp_net_users_user_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -886,6 +993,7 @@ namespace Blog.Data.Migrations
                     b.HasOne("Blog.Entities.Concrete.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
+                        .HasConstraintName("fk_asp_net_role_claims_asp_net_roles_role_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -895,6 +1003,7 @@ namespace Blog.Data.Migrations
                     b.HasOne("Blog.Entities.Concrete.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .HasConstraintName("fk_asp_net_user_claims_asp_net_users_user_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -904,6 +1013,7 @@ namespace Blog.Data.Migrations
                     b.HasOne("Blog.Entities.Concrete.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .HasConstraintName("fk_asp_net_user_logins_asp_net_users_user_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -913,12 +1023,14 @@ namespace Blog.Data.Migrations
                     b.HasOne("Blog.Entities.Concrete.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
+                        .HasConstraintName("fk_asp_net_user_roles_asp_net_roles_role_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Blog.Entities.Concrete.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .HasConstraintName("fk_asp_net_user_roles_asp_net_users_user_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -928,6 +1040,7 @@ namespace Blog.Data.Migrations
                     b.HasOne("Blog.Entities.Concrete.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .HasConstraintName("fk_asp_net_user_tokens_asp_net_users_user_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -3,6 +3,9 @@ using Blog.Data.Concrete.EntityFramework.Configurations.Identity;
 using Blog.Entities.Concrete;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal;
 
 namespace Blog.Data.Concrete.EntityFramework.Context
 {
@@ -24,8 +27,14 @@ namespace Blog.Data.Concrete.EntityFramework.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(
-                @"Server=.;Database=BlogProject;Trusted_Connection=True;Connect Timeout=30;MultipleActiveResultSets=True;");
+            //optionsBuilder.UseSqlServer(
+            //    @"Server=.;Database=BlogProject;Trusted_Connection=True;Connect Timeout=30;MultipleActiveResultSets=True;");
+            var connectionString = "Host=localhost;Port=5432;Database=BlogProject;Username=postgres;Password=Maykradexla2019;";
+            optionsBuilder
+                .UseNpgsql(connectionString,
+                    x => x.MigrationsHistoryTable("__efmigrationshistory", "public"))
+                .ReplaceService<IHistoryRepository, LoweredCaseMigrationHistoryRepository>()
+                .UseSnakeCaseNamingConvention();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -48,5 +57,18 @@ namespace Blog.Data.Concrete.EntityFramework.Context
         }
 
         #endregion
+    }
+
+    public class LoweredCaseMigrationHistoryRepository : NpgsqlHistoryRepository
+    {
+        public LoweredCaseMigrationHistoryRepository(HistoryRepositoryDependencies dependencies) : base(dependencies)
+        {
+        }
+        protected override void ConfigureTable(EntityTypeBuilder<HistoryRow> history)
+        {
+            base.ConfigureTable(history);
+            history.Property(h => h.MigrationId).HasColumnName("migrationid");
+            history.Property(h => h.ProductVersion).HasColumnName("productversion");
+        }
     }
 }

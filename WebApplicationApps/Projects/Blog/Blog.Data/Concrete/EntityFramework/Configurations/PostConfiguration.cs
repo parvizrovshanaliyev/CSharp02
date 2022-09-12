@@ -16,7 +16,7 @@ namespace Blog.Data.Concrete.EntityFramework.Configurations
                 .HasMaxLength(100)
                 .IsRequired();
             builder.Property(a => a.Content)
-                .HasColumnType("NVARCHAR(MAX)")
+                //.HasColumnType("NVARCHAR(MAX)")
                 .IsRequired();
             builder.Property(a => a.Date)
                 .IsRequired();

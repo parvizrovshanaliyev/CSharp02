@@ -1,0 +1,60 @@
+﻿@using Blog.Entities.Dtos.Comment
+@model PostDto
+@{
+    Layout = "_PostLayout";
+    ViewBag.Title = Model.Title;
+    ViewBag.Tags=Model.SeoTags;
+    ViewBag.Description = Model.SeoDescription;
+    ViewBag.Author =Model.SeoAuthor;
+}
+<div class="col-lg-8">
+
+    <!-- Title -->
+    <h1 class="mt-4">@Model.Title</h1>
+    <hr>
+
+    <!-- Date/Time -->
+    <p class="lead badge">Posted on <span class="badge">@Model.Date.ToString("d")</span>  by @Model.CreatedByName</p>
+
+    <hr>
+
+    <!-- Preview Image -->
+    <div class="text-center">
+        <img class="img-fluid rounded" src="~/img/@Model.Thumbnail" alt="@Model.Title">
+    </div>
+
+    <hr>
+    <p class="text-center"> <span class="badge"><i class="fa fa-eye"></i> @Model.ViewsCount</span><span class="badge"><i class="fa fa-comment"></i> @Model.CommentsCount</span> </p>
+    <!-- Post Content -->
+    @Html.Raw(Model.Content)
+    <!-- Post Content -->
+    <hr>
+   
+   
+    <!-- Create Comment -->
+    <partial name="~/Views/Comment/_CreatePartial.cshtml"  model="new CommentAddDto(){PostId = Model.Id}"/>
+    
+    <div class="comments-list">
+    @foreach (var comment in Model.Comments)
+    {
+        <!-- Single Comment -->
+        <div class="media mb-4">
+            <img class="d-flex mr-3 rounded-circle" src="https://randomuser.me/api/portraits/men/34.jpg" alt="">
+            <div class="media-body">
+                <h5 class="mt-0">@comment.CreatedByName</h5>
+                @comment.Content
+            </div>
+        </div>
+    }
+    </div>
+</div>
+
+@section Styles
+{
+}
+
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script src="~/ui/js/comment-create.js" asp-append-version="true"></script>
+}

@@ -64,7 +64,6 @@ namespace PhoneBook.Core.Context
 
         #endregion
 
-
         #region EnsureOrCreateDatabaseV2
         public static List<T> Deserialize<T>(string SerializedJSONString)
         {
@@ -167,7 +166,6 @@ namespace PhoneBook.Core.Context
 
         #endregion
 
-
         #region GetGenericListProperties
 
         private IEnumerable<PropertyInfo> GetGenericListProperties(object model)
@@ -188,6 +186,7 @@ namespace PhoneBook.Core.Context
             var user = new User { Username = "admin", Password = "admin123!" };
             _users.Add(user);
             var fileName = user.GetType().Name + ".json";
+
             SerializeObjToJson(fileName, _users);
         }
 

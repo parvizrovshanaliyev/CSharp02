@@ -1,0 +1,66 @@
+﻿@model IResult<IList<Blog.Entities.Dtos.Role.RoleDto>>;
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Roles";
+}
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item ">
+        <a asp-area="Admin" asp-controller="Home" asp-action="Index">
+            Admin
+        </a>
+    </li>
+    <li class="breadcrumb-item active">
+        <a asp-area="Admin" asp-controller="Role" asp-action="Index">
+            @ViewBag.Title
+        </a>
+    </li>
+</ol>
+@if (Model is { IsSuccess: true })
+{
+    <div class="card mt-2 mb-2">
+        <div class="card-body">
+            <div class="single-table">
+                <div class="table-responsive">
+                    <table id="dataTable" style="width:100%" class="table table-hover progress-table text-center">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if (Model.Data.Any())
+                        {
+                            @foreach (var item in Model.Data)
+                            {
+                                <tr role="row" name="@item.Id">
+                                    <td>@item.Id</td>
+                                    <td>@item.Name</td>
+                                </tr>
+                            }
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-danger mt-4">
+        @if (Model is not null && Model.Errors.Any())
+        {
+            foreach (var error in Model.Errors)
+            {
+                @($"{error}")
+                <br/>
+            }
+        }
+        <a class="alert-link" asp-area="Admin" asp-controller="Home" asp-action="Index">Go to Home</a>
+    </div>
+}
+
+@section Scripts{
+    
+}

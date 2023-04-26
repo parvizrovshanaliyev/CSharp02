@@ -1,0 +1,171 @@
+﻿@using Blog.Shared.Extensions
+@model (PostFilterDto request,IResult<PagedResult<PostDto>> result)
+@{
+    ViewBag.Title = "Home Page";
+    var filter = Model.request;
+    var categoryId = filter.CategoryId;
+    var isAsc = filter.IsAsc;
+    var keyword = filter.Keyword;
+
+    var pagedResultData = Model.result.Data;
+    var currentPage = pagedResultData.CurrentPage;
+    var pageCount = pagedResultData.PageCount;
+    var pageSize = pagedResultData.PageSize;
+    var totalRowCount = pagedResultData.TotalRowCount;
+    var hasPreviousPage = pagedResultData.HasPreviousPage;
+    var hasNextPage = pagedResultData.HasNextPage;
+    var startIndex = Math.Max(currentPage - 5, 1);
+    var finishIndex = Math.Min(currentPage + 5, pageCount);
+}
+<div class="col-md-8">
+
+    <h1 class="my-4">
+        Recently <small>Shared Articles</small>
+    </h1>
+    <!-- Page size and Sorting-->
+    <form>
+        <div class="form-row">
+            <input type="hidden" id="category-id" value="@categoryId" />
+            <input type="hidden" id="current-page" value="@currentPage" />
+            <input type="hidden" id="keyword" value="@keyword" />
+            <div class="form-group col-md-10">
+                <label for="select-page-size">
+                    Show
+                    <select onchange="filter();" id="select-page-size">
+                        <option selected="@(pageSize == 6 ? "selected" : null)" value="6">6</option>
+                        <option selected="@(pageSize == 12 ? "selected" : null)" value="12">12</option>
+                        <option selected="@(pageSize == 18 ? "selected" : null)" value="18">18</option>
+                    </select>
+                    Entries
+                </label>
+            </div>
+            <div class="form-group col-md-2">
+                <select onchange="filter();" class="form-control" id="select-is-ascending">
+                    <option selected="@(isAsc == false ? "selected" : null)" value="false">Newer</option>
+                    <option selected="@(isAsc ? "selected" : null)" value="true">Older</option>
+                </select>
+            </div>
+        </div>
+    </form>
+    <!-- Page size and Sorting-->
+    <div class="card-columns" style=" column-count: 2;">
+        @foreach (var post in pagedResultData.Results)
+        {
+            <!-- Blog post-->
+            <div class="card">
+                
+                <a asp-controller="Post" asp-action="Detail" asp-route-id="@post.Id">
+                    <img alt="@post.Title" class="card-img-top img-fluid" src="~/img/@post.Thumbnail">
+                </a>
+                <div class="p-3 card-block">
+                    <h4 class="card-title">
+                        <a asp-controller="Post" asp-action="Detail" asp-route-id="@post.Id">
+                            @post.Title
+                        </a>
+                    </h4>
+                    <p class="card-text">
+                        @{
+                            post.Content = post.Content.RemoveHtmlTags();
+                        }
+                        @(post.Content.Length > 150 ? post.Content.Substring(0, 150) + "..." : post.Content)
+                    </p>
+                    <div class="small text-muted">Posted on @post.Date.ToString("d") by <a href="#">@post.CreatedByName</a>  <small><i class="fa fa-eye"></i> @post.ViewsCount</small></div>
+                </div>
+            </div>
+           
+        }
+    </div>
+    <nav aria-label="Pagination">
+        <hr class="my-0">
+        <ul class="pagination justify-content-center my-4">
+            @if(hasPreviousPage)
+            {
+                filter.CurrentPage = currentPage - 1;
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index", "Home", filter)">Previous</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+            }
+            
+            @for (var i = startIndex; i <= finishIndex; i++)
+            {
+                filter.CurrentPage = i;
+                <li class="page-item @(currentPage == i ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", "Home", filter)">@i</a>
+                </li>
+            }
+            @if(hasNextPage)
+            {
+                filter.CurrentPage = currentPage + 1;
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index", "Home", filter)">Next</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+@section Styles
+{
+    <style>
+        .card-columns .card{
+            border-radius: 4px;
+            background: #fff;
+            box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+            transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+            /*padding: 14px 80px 18px 36px;*/
+            cursor: pointer;
+        }
+
+        .card-columns .card:hover{
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+        }
+        .card-title a {
+            color: black;
+            text-decoration: none;
+        }
+        #select-page-size {
+            border: 1px solid #aaa;
+            border-radius: 3px;
+            padding: 5px;
+            background-color: transparent;
+            padding: 4px;
+        }
+
+        #select-is-ascending {
+            border: 1px solid #aaa;
+            border-radius: 3px;
+            padding: 5px;
+            background-color: transparent;
+            padding: 4px;
+        }
+    </style>
+}
+
+@section Scripts{
+<script>
+    filter = () => {
+        const selectPageSize = $('#select-page-size');
+        const selectIsAscending = $('#select-is-ascending');
+        const categoryId = $('#category-id').val();
+        const currentPage = $('#current-page').val();
+        const keyword = $('#keyword').val();
+        
+        const searchQuery=keyword ? `?keyword=${keyword}` : '';
+        const categoryQuery = categoryId ? `&categoryId=${categoryId}` : '';
+        const filterQueryString = `/?currentPage=${currentPage}&pageSize=${selectPageSize.val()}&isAsc=${selectIsAscending.val()}${categoryQuery}${searchQuery}`;
+        window.location = filterQueryString;
+    }
+</script>
+}

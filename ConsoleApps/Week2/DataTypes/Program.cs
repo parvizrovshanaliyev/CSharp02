@@ -7,7 +7,7 @@ namespace DataTypes
     {
         static void Main(string[] args)
         {
-            
+
             #region int  byte double float decimal
 
             //int intMinVal, a, b;
@@ -28,9 +28,10 @@ namespace DataTypes
 
 
             //// tuple
-            //(int a, int b) c= (5, 10);
-            //Console.WriteLine(c.a);
-            //Console.WriteLine(c.b);
+            (int a, int b) c = (5, 10);
+
+            Console.WriteLine(c.a);
+            Console.WriteLine(c.b);
 
             //// c# 7.o literals
             //ulong num1= 18_446_744_073_709_551_615;

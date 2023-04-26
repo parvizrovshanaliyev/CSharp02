@@ -1,0 +1,30 @@
+﻿@model Blog.Entities.Dtos.Comment.CommentAddDto
+
+<form id="form" asp-action="Create" onsubmit="return jQueryAjaxPost(this);">
+    <input type="hidden" name="IsValid" value="@ViewData.ModelState.IsValid.ToString()"/>
+    <div asp-validation-summary="All" id="validationSummary" class="text-danger" aria-hidden="true" style="display:none;"></div>
+
+    <div class="form-group">
+        <label asp-for="PostId"></label>
+        <select asp-for="PostId" asp-items="@ViewBag.Posts" class="form-control single-select-boxes" required="required">
+            <option disabled="disabled">Please select ...</option>
+        </select>
+        <span asp-validation-for="PostId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Content"></label>
+        <textarea asp-for="Content" cols="30" rows="10" class="form-control"></textarea>
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+    <div class="form-group form-check">
+        <input asp-for="IsActive" class="form-check-input" type="checkbox"/>
+        <label asp-for="IsActive" class="form-check-label"></label>
+        <span asp-validation-for="IsActive" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <div class="col-md-6 offset-md-3">
+            <input type="submit" value="Submit" class="btn btn-primary btn-block"/>
+        </div>
+    </div>
+</form>

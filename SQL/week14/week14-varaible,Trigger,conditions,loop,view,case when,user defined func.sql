@@ -330,4 +330,89 @@ insert into Customer values(3,'Resad','Fidan','Elcan',23)
 insert into Customer values(4,'Resad','Fidan','Elcan',19)
 ---------------------------------------------------------------
 
+USE tempdb;  
+GO  
+CREATE TABLE ValueTable ([value] INT);  
+GO 
+
+DECLARE @TransactionName VARCHAR(20) = 'Transaction1';  
+  
+BEGIN TRAN @TransactionName  
+       INSERT INTO ValueTable VALUES(1), (2);  
+ROLLBACK TRAN @TransactionName;  
+  
+INSERT INTO ValueTable VALUES(3),(4);  
+  
+SELECT [value] FROM ValueTable;  
+
+IF OBJECT_ID(N'TestTran',N'U') IS NOT NULL  
+    DROP TABLE TestTran;  
+GO  
+CREATE TABLE TestTran (Cola INT PRIMARY KEY, Colb CHAR(3));  
+GO  
+-- This statement sets @@TRANCOUNT to 1.  
+BEGIN TRANSACTION OuterTran;  
+  
+PRINT N'Transaction count after BEGIN OuterTran = '  
+    + CAST(@@TRANCOUNT AS NVARCHAR(10));  
+ 
+INSERT INTO TestTran VALUES (1, 'aaa');  
+ 
+-- This statement sets @@TRANCOUNT to 2.  
+BEGIN TRANSACTION Inner1;  
+ 
+PRINT N'Transaction count after BEGIN Inner1 = '  
+    + CAST(@@TRANCOUNT AS NVARCHAR(10));  
+  
+INSERT INTO TestTran VALUES (2, 'bbb');  
+  
+-- This statement sets @@TRANCOUNT to 3.  
+BEGIN TRANSACTION Inner2;  
+  
+PRINT N'Transaction count after BEGIN Inner2 = '  
+    + CAST(@@TRANCOUNT AS NVARCHAR(10));  
+  
+INSERT INTO TestTran VALUES (3, 'ccc');  
+  
+-- This statement decrements @@TRANCOUNT to 2.  
+-- Nothing is committed.  
+COMMIT TRANSACTION Inner2;  
+ 
+PRINT N'Transaction count after COMMIT Inner2 = '  
+    + CAST(@@TRANCOUNT AS NVARCHAR(10));  
+ 
+-- This statement decrements @@TRANCOUNT to 1.  
+-- Nothing is committed.  
+COMMIT TRANSACTION Inner1;  
+ 
+PRINT N'Transaction count after COMMIT Inner1 = '  
+    + CAST(@@TRANCOUNT AS NVARCHAR(10));  
+  
+-- This statement decrements @@TRANCOUNT to 0 and  
+-- commits outer transaction OuterTran.  
+COMMIT TRANSACTION OuterTran;  
+  
+PRINT N'Transaction count after COMMIT OuterTran = '  
+    + CAST(@@TRANCOUNT AS NVARCHAR(10));  
+
+
+--Transaction count after BEGIN OuterTran = 1
+
+--(1 row affected)
+--Transaction count after BEGIN Inner1 = 2
+
+--(1 row affected)
+--Transaction count after BEGIN Inner2 = 3
+
+--(1 row affected)
+--Transaction count after COMMIT Inner2 = 2
+--Transaction count after COMMIT Inner1 = 1
+--Transaction count after COMMIT OuterTran = 0
+
+--Completion time: 2021-10-26T12:11:24.6868102+04:00
+
+SELECT TOP (1000) [Cola]
+      ,[Colb]
+  FROM [tempdb].[dbo].[TestTran]
+
 

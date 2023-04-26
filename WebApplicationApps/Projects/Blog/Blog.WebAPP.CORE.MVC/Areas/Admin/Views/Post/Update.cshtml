@@ -1,0 +1,136 @@
+﻿@model PostUpdateDto
+@{
+    ViewBag.Title = "Update Post";
+}
+
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item ">
+        <a asp-area="Admin" asp-controller="Home" asp-action="Index">
+            Admin
+        </a>
+    </li>
+    <li class="breadcrumb-item active">
+        <a asp-area="Admin" asp-controller="Post" asp-action="Index">
+            Posts
+        </a>
+    </li>
+    <li class="breadcrumb-item active">
+        <a asp-area="Admin" asp-controller="Post" asp-action="Update">
+            @ViewBag.Title
+        </a>
+    </li>
+</ol>
+
+<form asp-controller="Post" asp-action="Update" method="post" enctype="multipart/form-data">
+    <div class="row mt-1">
+        <div asp-validation-summary="All" id="validationSummary" class="text-danger col-md-12"></div>
+        <input type="hidden" asp-for="Id"/>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <input type="text" asp-for="Title" class="form-control" placeholder="Title"/>
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="text-editor" asp-for="Content"></textarea>
+                        <span asp-validation-for="Content" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Basic Configurations
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label asp-for="CategoryId"></label>
+                        <select asp-for="CategoryId" asp-items="@ViewBag.Categories" class="form-control single-select-boxes" required="required">
+                            <option disabled="disabled">Please select ...</option>
+                        </select>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Date"></label>
+                        <input type="text" id="date-picker" asp-for="Date" class="form-control" value="@DateTime.Now.ToShortDateString()"/>
+                        <span asp-validation-for="Date" class="text-danger"></span>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Thumbnail"></label>
+                                <input type="hidden" asp-for="Thumbnail"/>
+                                <img src="~/img/@Model.Thumbnail" alt="@Model.Title" class="image"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="ThumbnailFile">Upload</label>
+                                <input asp-for="ThumbnailFile" type="file" accept="image/*" class="form-control-file" autocomplete="off"/>
+                                <span asp-validation-for="ThumbnailFile" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" asp-for="IsActive" class="form-check-input"/>
+                        <label asp-for="IsActive" class="form-check-label"></label>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block mt-4">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 mt-2">
+            <div class="card">
+                <div class="card-header">
+                    SEO Optimization
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label asp-for="SeoAuthor"></label>
+                            <input type="text" asp-for="SeoAuthor" class="form-control"/>
+                            <span asp-validation-for="SeoAuthor" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label asp-for="SeoTags"></label>
+                            <input type="text" asp-for="SeoTags" class="form-control"/>
+                            <span asp-validation-for="SeoTags" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label asp-for="SeoDescription"></label>
+                            <textarea asp-for="SeoDescription" class="form-control"></textarea>
+                            <span asp-validation-for="SeoDescription" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/trumbowyg.min.js" integrity="sha512-t4CFex/T+ioTF5y0QZnCY9r5fkE8bMf9uoNH2HNSwsiTaMQMO0C9KbKPMvwWNdVaEO51nDL3pAzg4ydjWXaqbg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/plugins/colors/trumbowyg.colors.min.js" integrity="sha512-4QranVVhd9HLb3yDUL6q+zlHc5mEIcUrR5pfhdyyGzsqcH9vSROL0BgN8wW47mZ1tZ44tUvFkk/JXvhfNlzvHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/plugins/emoji/trumbowyg.emoji.min.js" integrity="sha512-PPEK09bmt7tQg/qdNokvbckNVB4EqXTu+qi4X/j9XoFag6YspjU5xO/FXXCEjBxo1+Z41oOFvIyz5QkjSuTNsQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/plugins/fontfamily/trumbowyg.fontfamily.min.js" integrity="sha512-ha/jXUX4sZMHEvpHLtYOIvMDK8/a8ncRhAPSmQVUx/to+04w+zUBWWZHaPQMPt6qjx94V/lbE9ZEsTsb7F+sTw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/plugins/fontsize/trumbowyg.fontsize.min.js" integrity="sha512-eYBhHjpFi6wk8wWyuXYYu54CRcXA3bCFSkcrco4SR1nGtGSedgAXbMbm3l5X4IVEWD8U7Pur9yNjzYu8n4aIMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/js/admin/post-create-update.js" asp-append-version="true"></script>
+}
+
+@section Styles{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/ui/trumbowyg.min.css" integrity="sha512-nwpMzLYxfwDnu68Rt9PqLqgVtHkIJxEPrlu3PfTfLQKVgBAlTKDmim1JvCGNyNRtyvCx1nNIVBfYm8UZotWd4Q==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/plugins/colors/ui/trumbowyg.colors.min.css" integrity="sha512-aE073TwNBnCl/Y99fSlH/29MS7CzKgrliM9rTVDURKiiGvapXN+hTmept74zsbcadVEzJ2RtfcyEyzySiYeJuA==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Trumbowyg/2.25.1/plugins/emoji/ui/trumbowyg.emoji.min.css" integrity="sha512-xpR3G7LZbpAnoUgES2Xu2Z/mK8NwejLjJpNHQtmdU36yGP2AS5kgpflPwv6vEurEeruDcghOtHkWNsOkwVx2ig==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@ttskch/select2-bootstrap4-theme@x.x.x/dist/select2-bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/flick/jquery-ui.min.css" integrity="sha512-Yx7L3AmO2yN7qIM1uM0Mqx6ld35SZj7oyG/gZ668QNvBzJsvoQebhFpsl1zEYVR6jtYCpXcCmewCuhvHrjDhog==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/flick/theme.min.css" integrity="sha512-VWoNiZ/8gXnhL2bMWHGku9Oy67OJa3bjHMgx82nBMJMBhS+ZTGxRdyonqW3K92FuhUIn+VR4rMTyuhJ9JhUmow==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+}

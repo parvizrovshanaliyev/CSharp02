@@ -1,31 +1,20 @@
 # CSharp_02
 CSharp-02 , start  06/03/21
 
-###
-
-|week1 - week10|
-| Gün  | Saat |
-| ------------- | ------------- |
-| Şənbə  | 10:30-14:30  | 
-| Bazar  | 10:30-14:30  |
-
-
-|week11 - todo|
-| Gün  | Saat |
-| ------------- | ------------- |
-| Şənbə  | 18:00-22:00  | 
-| Bazar  |  18:00-22:00  |
-
-21/08/21
-|week12 - todo|
-| Gün  | Saat |
-| ------------- | ------------- |
-| Şənbə  | 18:00-22:00  |
-
 ### Student list
 - [Fidan Xanlarova](https://github.com/fidan-xanlarovaa/PragmatechCsharpProject)
 - [Elcan Seyidov](https://github.com/Elcan-code/PragmatechCsharpProject.git)
 - [Rəşad Məmmədov](https://github.com/rashadmemmedov/PragmatechCsharpProject.git)
+
+
+
+###                 
+* [Week01-Day01 06/03/21](#week01-day01-060321)
+* [Week01-Day02 06/03/22](#week01-day02-060322)
+* [Week02-Day01 13/03/22](#week02-day01-130322)
+
+
+
 
 
 # Week01-Day01 06/03/21
@@ -707,11 +696,8 @@ CSharp-02 , start  06/03/21
     - Csv
     - - What is csv?
 
-
 ### Tasks
    - [week 15 task](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/ConsoleApps/week15/tasks/week15Tasks.txt)
-
-
 
 # Week16  03/10/21
 ### Topics
@@ -729,7 +715,661 @@ CSharp-02 , start  06/03/21
 
 # Week17  10/10/21
 ### Topics
-    - 
+    - Phonebook application
+    - - Create,Update,Delete
+    - - Get All Contacts
+    - - Export : CSV,JSON, XML
+    - - v2 Reflection Example : 'creation of json files linked to entities in phonebook app'.
 ### Tasks
    - [week 17 task](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/ConsoleApps/week15/tasks/week15Tasks.txt)
+   - Reflection
+   - SOLID principles
+ 
+ 
+# Week18  17/10/21
+### Topics
+    - SOLID principles
+    - ADO.NET Overview 
+    - How to Connect to a Database using ADO.NET 
+    - - ADO.NET data provider : SqlClient (System.Data.SqlClient)
+    - - SqlCommand Class
+    - - - ExecuteNonQuery
+    - - - ExecuteScalar
+    - - SqlParameter Class
+    - - SqlConnection Class
+    - - - Connection string
+    - - SqlDataReader Class
+    - Changing database with ado.net for phone book app
 
+### Resources
+   - [Basics of ADO.NET](https://www.c-sharpcorner.com/UploadFile/18fc30/understanding-the-basics-of-ado-net/)
+   - [ADO.NET code examples](https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/ado-net-code-examples)
+   - [ADO.NET Introduction](https://www.javatpoint.com/ado-net-introduction)
+   - [ADO.NET Introduction](https://dotnettutorials.net/lesson/what-is-ado-net/)
+
+
+
+# Week19  24/10/21
+### Topics
+    - Introduction to ASP.NET Core
+    - - Project Creation and File Structure (MVC)
+    - - Program.cs
+    - - Startup.cs
+    - - - Service Container
+    - - - PipeLine - middleware
+    - - appsettings.json
+    - - Properties
+        -launchsettings.json
+    - - Dependencies
+
+### Resources
+- [Choose an ASP.NET Core web UI](https://docs.microsoft.com/en-us/aspnet/core/tutorials/choose-web-ui?view=aspnetcore-5.0)
+- [Introduction to ASP.NET Core Framework](https://dotnettutorials.net/lesson/introduction-to-asp-net-core/)
+- [ASP.NET Core Tutorial](https://www.tutorialspoint.com/asp.net_core/index.htm)
+
+# Week20  31/10/21
+### Topics
+    - Controller : Action Types
+    - - - IActionResult
+    - - - ActionResult
+    - - - ViewResult
+    - - - PartialViewResult
+    - - - JsonResult
+    - - - EmptyResult
+    - - - ContentResult
+    - - - ContentResult
+    - - NonAction & NonController Attribute
+    - Controller : Scaffolding
+    - Controller <--> View Data Migration
+    - - - ViewData
+    - - - ViewBag
+    - - - TemData
+    - - - Tuple
+    - - - ViewModel
+    - Razor View
+    - - Create View : Scaffolding
+    - - operator : @
+    - - if , ternary operator
+    - - loop
+    - - scope
+              
+
+### Resources
+- [first-mvc-app/start-mvc](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc?view=aspnetcore-5.0&tabs=visual-studio)
+- [model-binding](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/model-binding?view=aspnetcore-5.0)
+
+
+
+
+# Week21  07/11/21
+### Topics
+        * Heplers
+            -UrlHelper
+                - Action
+                - ActionLink
+                - Content
+                - RouteUrl
+                - prop: ActionContext
+            -HtmlHelper
+                methods:
+                - Html.Partial
+                - Html.RenderPartial
+                - Html.ActionLink
+                - Html Form
+                    @Html.BeginForm()
+                    @Html.CheckBox("checkBox")
+                    @Html.TextBox("textBox")
+                    @Html.Display("display")
+                    @Html.Password("password")
+                    @Html.TextArea("area")
+                    @Html.ValidationMessage("validationMessage")
+                properties:
+                - ViewContext
+                - TemData
+                - ViewData
+                - ViewBag
+            -TagHelper
+                
+                @addTagHelper * ,Microsoft.AspNetCore.MVC.TagHelpers
+                -asp-action
+                -asp-controller
+                -asp-for
+                -asp-append-version="true"
+                -partial
+            
+        *Model Binding
+               -Form
+               -QueryString
+                   Request.QueryString
+                   Request.Query
+               -Route
+                   Request.RouteValues
+                   Tag Helper : asp-route
+               -Header
+                   Request.Headers
+               -Ajax
+
+### Resources
+-[tag helpers](https://dotnettutorials.net/lesson/tag-helpers-in-asp-net-core-mvc/)
+<br>
+-[html helpers](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.htmlhelper?view=aspnetcore-6.0)
+<br>
+-[custom html helpers](https://www.youtube.com/watch?v=69k9sVVs1WU&list=PLQVXoXFVVtp33KHoTkWklAo72l5bcjPVL&index=21)
+<br>
+-[custom tag helpers](https://www.youtube.com/watch?v=I08ukyY5zLk&list=PLQVXoXFVVtp33KHoTkWklAo72l5bcjPVL&index=23)
+<br>
+-[model binding](https://www.yogihosting.com/aspnet-core-model-binding/)
+<br>
+
+
+
+# Week22  14/11/21
+### Topics
+    - Blog application : 
+      -Project structure . Developing a Project with N-Tier Architecture
+          * Data
+          * Entities
+          * Services
+          * Shared
+          * Web UI MVC (Asp.Net Core MVC)
+      * Shared
+         - Data 
+            - Generic Repository Design Pattern
+              * IEntityRepository<T>
+                  - GetAllAsync
+                  - GetAsync
+                  - AddAsync
+                  - UpdateAsync
+                  - DeleteAsync
+                  - AnyAsync
+                  - CountAsync
+                  - Entities
+              * EfRepository<TEntity>
+                  - DbContext
+                  - DbSet<T>
+                  - Implementation of IEntityRepository<TEntity>
+              * install Microsoft.EntityFrameworkCore 
+         - Entities
+            - EntityBase abstract
+            - IEntity interface
+         - Extensions 
+            - PasswordHasher : HashPassword Extension method 
+      * Entities
+          * User,
+          * Role,
+          * Post,
+          * Category,
+          * Comment
+
+
+### Resources
+-[What is an N-tier architecture?](https://docs.microsoft.com/en-us/learn/modules/n-tier-architecture/2-what-is-n-tier-architecture)
+<br>
+-[Entity Framework Core](https://www.entityframeworktutorial.net/efcore/entity-framework-core.aspx)
+<br>
+-[Extension Methods (C# Programming Guide)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/extension-methods)
+<br>
+-[Generic Repository Pattern in C#](https://dotnettutorials.net/lesson/generic-repository-pattern-csharp-mvc/)
+<br>
+-[Asynchronous programming](https://docs.microsoft.com/en-us/dotnet/csharp/async)
+<br>
+-[Async and Await In C#](https://www.c-sharpcorner.com/article/async-and-await-in-c-sharp/)
+<br>
+-[Asenkron (Asynchronous) Programlama Nedir?](https://atarikguney.medium.com/asenkron-asynchronous-programlama-nedir-296230121f9d)
+
+
+
+# Week23  05/12/21
+### Topics
+    - Asynchronous Programming   
+        - Process
+        - Thread
+        - Process vs Thread
+        - Paralellism
+        - Concurrency
+        - User Thread , Kernel Thread
+    - Blog application :
+        - 3. `Data`
+                * Abstract : Repositories
+                    * IUserRepository,
+                    * IRoleRepository,
+                    * IPostRepository,
+                    * ICategoryRepository,
+                    * ICommentRepository
+  
+                * Concrete : Repositories
+                  * UserRepository,
+                  * RoleRepository,
+                  * PostRepository,
+                  * CategoryRepository,
+                  * CommentRepository
+
+                * DbContext
+                  * install Microsoft.EntityFrameworkCore
+                  * install Microsoft.EntityFrameworkCore.SqlServer
+                  * install Microsoft.EntityFrameworkCore.Design
+                  * BlogContext
+                    * DbSet
+                    * override OnConfiguring()
+                      * connectionString: optionsBuilder.UseSqlServer(@"connectionString")
+                    * override OnModelCreating()
+                      * modelBuilder.ApplyConfiguration(new UserConfiguration());
+    
+                4. * `FluentApi - Mapping  `
+                   * IEntityTypeConfiguration
+                     * UserConfiguration,
+                       * builder.HasData -> Seed
+                     * RoleConfiguration,
+                       * builder.HasData -> Seed
+                     * PostConfiguration,
+                       * builder.HasData -> Seed
+                     * CategoryConfiguration,
+                       * builder.HasData -> Seed
+                     * CommentConfiguration
+                       * builder.HasData -> Seed
+
+
+                5. * UnitOfWork design pattern
+                    * IUnitOfWork
+                    * UnitOfWork
+       
+                6. * `EF CORE CLI` 
+                   * Powershell : `dotnet tool install --global dotnet-ef --version 5.0.0-preview.7.20365.15`
+                   * Powershell last version : `dotnet tool install --global dotnet-ef`
+                   * 
+                   * create initial migration 
+                     * `dotnet ef migrations add InitialCreate`
+                     * `dotnet ef database update`
+                   * `Package Manager Console : visual studio` 
+                   * install : `Microsoft.EntityFrameworkCore.Tools`
+                   * 
+                   * create initial migration 
+                     * `Add-Migration InitialCreate`
+                     * `Update-Database`
+ 
+        7. * `Result` : Shared/Utilities/Results
+             * IResult 
+             * Result 
+             * IDataResult<out T> 
+
+        8.  * `Services `
+             * Abstract 
+               * ICategoryService
+                 * GetAsync
+                 * GetAllAsync
+                 * GetAllByNonDeletedAsync
+                 * AddAsync
+                 * UpdateAsync
+                 * DeleteAsync
+                 * HardAsync
+               * IPostService
+                 * GetAsync
+                 * GetAllAsync
+                 * GetAllByNonDeletedAsync
+                 * GetAllByNonDeletedAndActiveAsync
+                 * GetAllByCategoryAsync
+                 * AddAsync
+                 * UpdateAsync
+                 * DeleteAsync
+                 * HardAsync
+             * Concrete
+               * CategoryManager
+               * PostManager
+     
+        * `Shared` / Entities / Abstract
+           * GetBaseDto 
+        * `Entities`
+          * Dtos : 
+            * AddDto
+            * UpdateDto
+            * ListDto
+            * DataAnnotations : using System.ComponentModel.DataAnnotations;
+            * [Required(ErrorMessage = "{0 is required")]
+            * [DisplayName("Category Name")]
+            * [MaxLength(70,ErrorMessage = "{0} should not be larger than {1} characters. ")]
+            * [MinLength(3,ErrorMessage = "{0} must not be less than {1} characters.")]
+            * [DisplayFormat(ApplyFormatInEditMode = true)]
+            * [DisplayFormat(ApplyFormatInEditMode = true,DataFormatString = "{0:dd/MM/yyyy}")]
+
+
+### Tasks
+    * `Services `
+     * Abstract
+       * IPostService
+         * GetAsync
+         * GetAllAsync
+         * GetAllByNonDeletedAsync
+         * GetAllByNonDeletedAndActiveAsync
+         * GetAllByCategoryAsync
+         * AddAsync
+         * UpdateAsync
+         * DeleteAsync
+         * HardAsync
+     * Concrete
+       * PostManager
+
+### Resources
+-[Entity Framework Core: DbContext](https://www.entityframeworktutorial.net/efcore/entity-framework-core-dbcontext.aspx)
+<br>
+-[First EF Core Console Application : migrations](https://www.entityframeworktutorial.net/efcore/entity-framework-core-console-application.aspx)
+<br>
+-[One-to-Many Relationship Conventions in Entity Framework Core](https://www.entityframeworktutorial.net/efcore/one-to-many-conventions-entity-framework-core.aspx)
+<br>
+-[Configurations in Entity Framework Core](https://www.entityframeworktutorial.net/efcore/configuration-in-entity-framework-core.aspx)
+<br>
+-[Fluent API in Entity Framework Core](https://www.entityframeworktutorial.net/efcore/fluent-api-in-entity-framework-core.aspx)
+<br>
+[resource: Asynchronous Programming](https://github.com/parvizrovshanaliyev/CSharp02/blob/main/WindowsFormsApps/Week23/Readme.md)
+<br>
+
+# Week24  12/12/21
+### Topics
+    - Blog application :
+        - 8.  * `Services `
+                * Extensions
+                  * ServiceCollectionExtensions
+                    * method : LoadMyServices
+                      *  services.AddDbContext<BlogContext>();
+                      *  services.AddScoped<IUnitOfWork, UnitOfWork>();
+                      *  services.AddScoped<ICategoryService, CategoryManager>();
+        - 9.  * `MVC`
+                * add reference Service layer
+                * `install  AutoMapper.Extensions.Microsoft.DependencyInjection`
+                * `install  Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation 5.0.12`
+                * `Startup`
+                  * `ContainerService`
+                    * method: ConfigureService
+                      * `services.LoadMyService();`
+                      * `services.AddControllersWithViews().AddRazorRuntimeCompilation();`
+                  * `Pipeline`
+                    * method : `Configure`
+                      * app.UseEndpoints
+                        * `endpoints.MapAreaControllerRoute(
+                          name:"Admin",
+                          areaName:"Admin",
+                          pattern:"Admin/{controller}/{action=Index}/{id?}");`
+                        * 
+                        * endpoints.MapDefaultControllerRoute();
+                      * `env.IsDevelopment()`
+                        * `app.UseStatusCodePages();`
+                      * `app.UseStaticFiles();` 
+                      *
+                * `Controllers `
+                  * HomeController
+                * `Views`
+                  * Home
+                    * Index.cshtml
+                  * Shared
+                    * Add Razor Layout : `_Layout.cshtml`
+                  * Razor View Start : `_ViewStart.cshtml`
+                    * `@{
+                      Layout = "_Layout";
+                      }`
+                  * Razor View Import :` _ViewImports.cshtml`
+                    * `@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers`
+                * `Areas  / Admin`
+                  * `Controllers` - attr : `[Area("Admin")]`
+                    * HomeController
+                    * CategoryController
+                  * `Views`
+                    * Home
+                        * Index.cshtml
+                    * Category
+                        * Index.cshtml : 
+                      
+                          * template - datatable `https://datatables.net/`
+                          * DataTables Custom Button: `https://datatables.net/extensions/buttons/examples/initialisation/custom.html`
+                          * DataTables Bootstrap 4 Button: `https://datatables.net/extensions/buttons/examples/styling/bootstrap4.html`
+                          * Custom Button Configurations : 
+                          
+                                        ` $(document).ready(function() {
+                                                $('#entitiesDataTable').DataTable( {
+                                                    dom:
+                                                        "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+                                                        "<'row'<'col-sm-12'tr>>" +
+                                                        "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+                                                            buttons: [
+                                                                {
+                                                                    text: 'Create',
+                                                                    className:'btn',
+                                                                    action: function ( e, dt, node, config ) {
+                                                                        alert( 'Button create' );
+                                                                    }
+                                                                },
+                                                                {
+                                                                    text: 'Refresh',
+                                                                    className:'btn btn-warning',
+                                                                    action: function ( e, dt, node, config ) {
+                                                                        alert( 'Button refresh' );
+                                                                    }
+                                                                }
+                                                            ] 
+                                                    } );
+                                                } );`
+                             scripts :
+                              
+                             `<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>`
+                             `<script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>`
+
+                             styles :
+
+                             `<link href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous"/>`
+                             `<link href="https://cdn.datatables.net/buttons/2.1.0/css/buttons.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous"/>`
+                          
+                          * Error result : 
+                    * `Shared`
+                        * Add Razor Layout : _Layout.cshtml
+                          * Let's Add Our Theme for Admin Area and Integrate it on Layout 
+                          * [Template resource ](https://drive.google.com/file/d/1zIWs6U0uvrnpFVWXiOG8oXZmaI19HAk5/view?usp=sharing)
+                          * Let's Add Required PartialView and RenderSection Sections on Admin Layout
+                            * `@await Html.PartialAsync("_LayoutScriptsPartial");`
+                            *` @await Html.PartialAsync("_LayoutStylesPartial");`
+                            * `<partial name="_LayoutLeftSideBarNavPartial" />`
+                              * NavBar Icons:
+                                * Categories : `fas fa-th-list`
+                                * Posts : `fas fa-file-alt`
+                                * Comments : `fas fa-comments`
+                                * Roles : `fas fa-user-shield`
+                                * Users : `fas fa-users`
+                              
+                                * [icons ](https://fontawesome.com/v5.15/icons?d=gallery&p=2&s=solid&m=free)
+                              * [how-to-render-a-partial-view-in-asp-net-core](https://nitishkaushik.com/how-to-render-a-partial-view-in-asp-net-core/)
+                            * `@await RenderSectionAsync("Scripts",false);`
+                        * Razor View Start : _ViewStart.cshtml
+                            * `@{
+                              Layout = "_Layout";
+                              }`
+                        * Razor View Import : _ViewImports.cshtml
+                            *` @addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers`
+                  * `wwwroot` : static files
+                    * assets
+                    * js
+                    * css
+### Tasks
+    * `Services `
+        * Abstract
+          * IPostService
+            * GetAsync
+            * GetAllAsync
+            * GetAllByNonDeletedAsync
+            * GetAllByNonDeletedAndActiveAsync
+            * GetAllByCategoryAsync
+            * AddAsync
+            * UpdateAsync
+            * DeleteAsync
+            * HardAsync
+        * Concrete
+          * PostManager
+    * `MVC`
+        * Controllers
+            * PostController
+        * Views    
+            * Post/Index.cshtml 
+    * Category service uygun olaraq Post service yazilmasi ve UI -da db-da olan postlarin gosterilmesi.        
+
+### Resources
+-[Dependency injection in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-6.0)
+<br>
+-[ASP.NET Core - Dependency Injection](https://www.tutorialsteacher.com/core/dependency-injection-in-aspnet-core)
+<br>
+-[Layout in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/layout?view=aspnetcore-6.0)
+<br>
+-[Razor file compilation in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/view-compilation?view=aspnetcore-6.0&tabs=visual-studio)
+<br>
+-[ASP.NET CORE DEPENDENCY INJECTION: WHAT IS THE ISERVICECOLLECTION?](https://www.stevejgordon.co.uk/aspnet-core-dependency-injection-what-is-the-iservicecollection)
+<br>
+
+
+# Week25  19/12/21
+### Topics
+    - Blog application :
+       * `Services 
+         * Refactoring :
+          * IEntityRepository   
+            * return : Task<T> , add, update, delete
+            * `CategoryManager`
+                * `public async Task<IDataResult<CategoryDto>> AddAsync(CategoryAddDto dto, string createdByName)`
+                * `public async Task<IDataResult<CategoryDto>> UpdateAsync(CategoryUpdateDto dto, string modifiedByName)`
+                * `public async Task<IDataResult<CategoryDto>> DeleteAsync(int id, string modifiedByName)`
+         * inject automapper to categoryManager
+          * Dependencies
+            * install AutoMapper lib
+          * AutoMapper / Profiles
+            * Profile
+              * CreateMap<>
+       * `MVC`
+          * `install  AutoMapper.Extensions.Microsoft.DependencyInjection`
+          * `Startup`
+              * `ContainerService`
+                * method: ConfigureService
+                  * `services.AddAutoMapper(typeof(CategoryProfile));`
+                  * `AddNewtonsoftJson`
+                    * Install-Package Microsoft.AspNetCore.Mvc.NewtonsoftJson
+                  * `AddJsonOptions
+
+       * `Insert, Refresh, Update and Delete with Ajax and JQuery
+        * `admin`: CategoryController : Actions
+            * Index
+            * Refresh
+            * Create
+            * Update
+            * Delete
+        * `admin`: Views : Actions
+            * Category
+                * _CreatePartial
+                * _UpdatePartial
+                * Modal :`https://getbootstrap.com/docs/4.5/components/modal/`
+        * `Ajax` :
+             * `toastr https://github.com/CodeSeven/toastr`        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" crossorigin="anonymous"></script>
+             * `sweetalert package https://sweetalert2.github.io/  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>`
+             * DataTable
+             * Create
+             * Update
+             * Refresh
+             * Delete                     
+             * helper method
+
+### Resources
+-[Using Auto-Mapper In An ASP.NET Core MVC Application](https://www.c-sharpcorner.com/article/using-auto-mapper-in-an-asp-net-core-mvc-application/)
+<br>
+-[Using Newtonsoft.Json In .NET](https://dotnetcoretutorials.com/2019/12/19/using-newtonsoft-json-in-net-core-3-projects/)
+<br>
+-[ASP.NET Core – How to make the controllers use Newtonsoft](https://makolyte.com/aspdotnet-how-to-make-the-controllers-use-newtonsoft/)
+<br>
+-[Fixing JSON Self Referencing Loop Exceptions](https://dotnetcoretutorials.com/2020/03/15/fixing-json-self-referencing-loop-exceptions/)
+<br>
+-[JavaScript Tutorial](https://www.w3schools.com/js/default.asp)
+<br>
+-[jQuery Tutorial](https://www.w3schools.com/jquery/default.asp)
+<br>
+-[jQuery - AJAX Introduction](https://www.w3schools.com/jquery/default.asp)
+<br>
+-[jQuery ajax() Method](https://www.tutorialsteacher.com/jquery/jquery-ajax-method)
+<br>
+-[jQuery.ajax()](https://api.jquery.com/jquery.ajax/)
+<br>
+-[jQuery Ajax CRUD in ASP.NET Core MVC using Popup Dialog](https://www.youtube.com/watch?v=3r6RfShv8m8)
+<br>
+-[jQuery Ajax CRUD in ASP.NET Core MVC with Modal Popup](https://www.codaffection.com/asp-net-core-article/jquery-ajax-crud-in-asp-net-core-mvc/#Add_Loading_Spinner)
+<br>
+
+
+# Week27  13/02/22
+### Topics
+    - Blog application :
+      * `Identity` :
+        * Customize the model
+          * `IdentityUser`
+          * `IdentityRole`
+          * `IdentityUserRole`
+          * `IdentityUserClaim`
+          * `IdentityUserLogin`
+          * `IdentityRoleClaim`
+          * `IdentityUserToken`
+        * Entity type relationships
+        * Change the primary key type
+        * Default model configuration
+          - This configuration is done using the EF Core Code First Fluent API in the OnModelCreating method of the context class.
+        *  Remove migrationa and create new migration
+        *  BlogDbContext :  Inheriting from the Identity Context class
+        
+      
+
+### Resources
+-[Identity model customization in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/customize-identity-model?view=aspnetcore-6.0)
+<br>
+
+# Week28  13/02/22
+### Topics
+    - Blog application :
+      * `Identity` :
+      * Services Containers
+        * Session
+        * Identity options
+          - Password options
+          - Email options
+          - Expiring
+        * ConfigureApplicationCookie
+      * Midlewares
+        - Authentication
+        - Authorization
+        - Session
+      * `Controllers` :
+        * UserController
+          - Index
+          - Create
+          - Update   
+          - Delete   
+      * IFileHelper > FileHelper
+        - UploadImage
+        - DeleteImage
+      * DateTimeExtensions
+        - GetFullDateWithUnderscore
+
+
+### Resources
+-[Identity model customization in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/customize-identity-model?view=aspnetcore-6.0)
+<br>
+-[Identity-configuration](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity-configuration?view=aspnetcore-5.0)
+<br>
+
+
+# Week29  19/02/22
+### Topics
+    - Git basics
+    - Blog application :
+      * Seed Data : User , Role , UserRole
+      * AuthController
+        * Login
+        * Access Denied
+      * ViewComponents
+        * LeftSideBarViewComponent
+### Resources
+-[Data Seeding](https://docs.microsoft.com/en-us/ef/core/modeling/data-seeding)
+<br>
+-[View components in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/view-components?view=aspnetcore-5.0)
+<br>
+
+### Tasks
+- AuthContoller : Logout
+- UserContoller : UpdateProfile and ChangePassword

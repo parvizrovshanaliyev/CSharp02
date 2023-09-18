@@ -20,17 +20,12 @@ namespace Blog.WebAPP.CORE.MVC.Areas.Admin.Controllers
         }
 
         #endregion
-
-
-
         #region fields
 
         private readonly IAuthService _authService;
         private readonly SignInManager<User> _signInManager;
 
         #endregion
-
-
         #region login logout
 
         [HttpGet]
